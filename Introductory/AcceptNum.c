@@ -1,0 +1,25 @@
+///////////////////////////////////////////////////////////
+//
+//  Program to accept a number and prinf that number
+//
+///////////////////////////////////////////////////////////
+
+// Headers
+#include<stdio.h>
+
+// Entry Point
+int main()
+{
+    int iNum = 0;
+    printf("Enter the Number\n");
+    scanf("%d", &iNum);
+    printf("You've Entered %5d", iNum);
+    return 0;
+}
+
+/////////////////////////////////////////////
+//  Output:
+//  Enter the Number
+//  789
+//  You've Entered   789
+/////////////////////////////////////////////
