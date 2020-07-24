@@ -29,7 +29,3 @@ int main()
     printf("Division is %lf", dRet);
     return 0;
 }
-
-/*
-Output:
- */
