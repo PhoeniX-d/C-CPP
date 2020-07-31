@@ -1,9 +1,9 @@
-/* Program to print 2nd max of N numbers */
+/* Program to print 2nd Min of N numbers */
 
 #include<stdio.h>
 #include<stdlib.h>
 
-int Display2ndMax(int[], int);
+int Display2ndMin(int[], int);
 	
 int main()
 {
@@ -31,8 +31,8 @@ int main()
 		scanf("%d", &iArr[i]);
 	}
 
-	iRet = Display2ndMax(iArr, iNo);
-	printf("Second Maximum is %d\n", iRet);
+	iRet = Display2ndMin(iArr, iNo);
+	printf("Second Minimum is %d\n", iRet);
 
 	free(iArr);
 	return 0;
@@ -40,26 +40,26 @@ int main()
 
 ////////////////////////////////////////////////////////////////
 //	
-//	Name		:Display2ndMax
+//	Name		:Display2ndMin
 //	Input		:int[], int
 //	Returns		:void
-//	Description	:Prints 2nd highest Maximum of N Numbers
+//	Description	:Prints 2nd last Minimum of N Numbers
 //
 ////////////////////////////////////////////////////////////////
-int Display2ndMax(
+int Display2ndMin(
                		int iArr[],
                		int iNo
                )
 {
-	int i = 0, iMax1 = iArr[0],iMax2 = 0;
+	int i = 0, iMin1 = iArr[0],iMin2 = 0;
 
 	for(i = 1; i < iNo; i++)
 	{
-		if(iMax1 < iArr[i])
+		if(iMin1 > iArr[i])
 		{
-			iMax2 = iMax1;
-			iMax1 = iArr[i];
+			iMin2 = iMin1;
+			iMin1 = iArr[i];
 		}
 	}
-	return iMax2;
+	return iMin2;
 }
