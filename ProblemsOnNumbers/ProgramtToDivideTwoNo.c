@@ -1,6 +1,8 @@
 /* Progran to divide two numbers */
+
 #include<stdio.h>
 ///////////////////////////////////////////////////////////
+//
 //  Name        : Divide
 //  Input       : int, int
 //  Returns     : double
