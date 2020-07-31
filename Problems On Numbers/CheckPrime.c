@@ -1,5 +1,5 @@
-/* Program to check given number is perfect or not 
- * Perfect Number is such a number whose summation of factor is original number 
+/* Program to check given number is Prime or not 
+ * Prime Number is such a number who is divisible by 1 and itself
  */
 
 #include<stdio.h>
@@ -8,7 +8,7 @@
 typedef int BOOL;
 
 
-BOOL ChkPerfect(int);
+BOOL ChkPrime(int);
 
 int main()
 {
@@ -16,42 +16,42 @@ int main()
 	BOOL bRet = FALSE;
 	printf("Enter the number\n");
 	scanf("%d", &iNo);
-	bRet = ChkPerfect(iNo);
+	bRet = ChkPrime(iNo);
 	
 	if(bRet == TRUE)
-		printf("%d is Perfect Number\n", iNo);
+		printf("%d is Prime Number\n", iNo);
 	else
-		printf("%d is Not a Perfect Number\n", iNo);
+		printf("%d is Not a Prime Number\n", iNo);
 
 	return 0;
 }
 
 //////////////////////////////////////////////////////////
 //
-//	Name		:ChkPerfect
+//	Name		:ChkPrime
 //	Input		:int
 //	Returns		:BOOL
-//	Description	:Checks given number us perfect or not
+//	Description	:Checks given number us Prime or not
 //
 //////////////////////////////////////////////////////////
-BOOL ChkPerfect(
+BOOL ChkPrime(
                 	int iNo		//Given Num
                 )
 {
-	int iSum = 0, i = 0;
+	int i = 0;
 	
 	//	updater
 	if(iNo < 0)
 		iNo = -iNo;
 
-	for(i = 1; i <= iNo/2; i++)
+	for(i = iNo / 2; i > 1; i--)
 	{
 		if(iNo % i == 0)
 		{
-			iSum = iSum + i;
+			break;
 		}
 	}
-	if(iSum == iNo)
+	if(i == 1)
 	{
 		return TRUE;
 	}
