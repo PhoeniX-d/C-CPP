@@ -1,43 +1,45 @@
-/* Program to print Even numbers upto N numbers */
+/* Program to print N Even numbers */
 
 #include<stdio.h>
 
-void DisplayEvenN(int);
+void DisplayNEven(int);
 	
 int main()
 {
 	int iNo = 0;
 	printf("Enter the N numbers\n");
 	scanf("%d", &iNo);
-	DisplayEvenN(iNo);
+	DisplayNEven(iNo);
 	return 0;
 }
 
 ////////////////////////////////////////////////////////////////
 //	
-//	Name		:DisplayEvenN
+//	Name		:DisplayNEven
 //	Input		:int
 //	Returns		:void
-//	Description	:Prints even numbers upto N
+//	Description	:Prints N even numbers
 //	Author		:Pranav Choudhary
-//	Date		:30 July 2020
-
+//	Date		:2 August 2020
+//
 ////////////////////////////////////////////////////////////////
-void DisplayEvenN(
+void DisplayNEven(
                   	int iMax
                   )
 {
-	int i = 0;
+	int i = 0, iNum = 1;
+	if (iMax == 0) return;
 	if(iMax < 0)
 	{
 		iMax = -iMax;
 	}
 
-	for(i = 1; i <= iMax; i++)
+	for(i = 1; i <= iMax; iNum++)
 	{
-		if(i % 2 == 0)
+		if(iNum % 2 == 0)
 		{
-			printf("%d ", i);
+			printf("%d ", iNum);
+			i++;
 		}
 	}
 }
