@@ -1,4 +1,4 @@
-/* Program to check input character id vowel or not */
+/* Program to check input character is vowel or not */
 
 #include<stdio.h>
 #define TRUE     1
@@ -11,7 +11,7 @@ int main()
 {
 	char cCh = '\0';
     BOOL bRet = FALSE;
-	printf("Enter the character\n");
+    printf("Enter the character\n");
 	scanf("%c", &cCh);
     bRet = ChkVowel(cCh);
     (bRet == TRUE) ? printf("Its a Vowel\n"):printf("Its not a Vowel\n");
