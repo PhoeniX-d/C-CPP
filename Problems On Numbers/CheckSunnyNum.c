@@ -44,8 +44,8 @@ BOOL ChkSunny(
                 )
 {
 	iNum = (iNum < 0) ? -iNum : iNum;
-	double ldTemp = sqrt(iNum + 1);
-	if(ldTemp - floor(ldTemp) == 0)
+	double dTemp = sqrt(iNum + 1);
+	if(dTemp - floor(dTemp) == 0)
 		return TRUE;
 	else
 		return FALSE;
