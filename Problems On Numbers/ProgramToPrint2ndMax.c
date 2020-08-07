@@ -60,6 +60,10 @@ int Display2ndMax(
 			iMax2 = iMax1;
 			iMax1 = iArr[i];
 		}
+		else if(iMax2 < iArr[i])
+		{
+			iMax2 = iArr[i];
+		}
 	}
 	return iMax2;
 }

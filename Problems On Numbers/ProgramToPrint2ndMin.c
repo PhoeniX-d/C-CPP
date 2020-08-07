@@ -53,12 +53,17 @@ int Display2ndMin(
 {
 	int i = 0, iMin1 = iArr[0],iMin2 = 0;
 
-	for(i = 1; i < iNo; i++)
+	for(i = 0; i < iNo; i++)
 	{
 		if(iMin1 > iArr[i])
 		{
 			iMin2 = iMin1;
 			iMin1 = iArr[i];
+		}
+		else if(iMin2 > iArr[i] || iMin2 < iMin1)
+		{
+			if(iArr[i] != iMin1)
+				iMin2 = iArr[i];
 		}
 	}
 	return iMin2;
