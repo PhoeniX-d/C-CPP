@@ -43,7 +43,6 @@ BOOL ChkPrime(
 	//	updater
 	if(iNo < 0)
 		iNo = -iNo;
-
 	for(i = iNo / 2; i > 1; i--)
 	{
 		if(iNo % i == 0)
@@ -59,4 +58,8 @@ BOOL ChkPrime(
 	{
 		return FALSE;
 	}
+	/* Alternate Way
+	for (i = iNo / 2; i > 1 && iNo % i != 0; i--);
+	return (i == 1);
+	*/
 }

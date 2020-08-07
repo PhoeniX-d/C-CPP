@@ -37,14 +37,12 @@ void DisplayPerfect(
 	iEnd = (iEnd < 0) ? -iEnd : iEnd;
 	// filter
 	if(iEnd <= iStart || iEnd == iStart == 0)
-	{
 		return;
-	}
 	printf("Perfect Numbers in range are\n");
 	for(i = iStart; i <= iEnd; i++)
 	{
 		iSum = 0;
-		for(iFactor = 1; iFactor <= i/2; iFactor++)
+		for(iFactor = 1; iFactor <= i/2 && iSum < i; iFactor++)
 		{
 			if(i % iFactor == 0)
 			{

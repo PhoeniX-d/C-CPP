@@ -43,8 +43,12 @@ BOOL ChkPerfect(
 	//	updater
 	if(iNo < 0)
 		iNo = -iNo;
-
-	for(i = 1; i <= iNo/2; i++)
+	// adjustment
+	if(iNo == 1)
+		return TRUE;
+	if(iNo == 0)
+		return FALSE;
+	for(i = 1; i <= iNo/2 && iSum <= iNo; i++)
 	{
 		if(iNo % i == 0)
 		{

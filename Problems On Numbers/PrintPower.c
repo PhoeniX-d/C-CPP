@@ -34,7 +34,6 @@ double Power(
 {
     int i = 0;
     double dPow = 1;
-    iBase = (iBase < 0) ? -iBase : iBase;
     if(iRaised > 0)
     {
         for (i = 1; i <= iRaised; i++)
@@ -49,5 +48,16 @@ double Power(
             dPow = dPow / iBase;
         }
     }
+
+    /* alternate way
+    for(i = 1; i <= abs(iRaised); i++)
+    {
+        dPow = dPow * iBase;
+    }
+    if(iRaised < 0)
+    {
+        dPow= 1 / dPow;
+    }
+    */
     return dPow;
 }
