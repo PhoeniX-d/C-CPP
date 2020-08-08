@@ -28,10 +28,12 @@ int CountDig(
              )
 {
 	int i = 0, iCnt = 0;	
+	// filter
+	if(iNo == 0)
+		return 1;
 	//	updater
 	if(iNo < 0)
 		iNo = -iNo;
-
 	while(iNo > 0)
 	{
         iNo = iNo / 10;
