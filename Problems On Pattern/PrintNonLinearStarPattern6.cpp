@@ -9,11 +9,17 @@ class Pattern
 {
     private:
         int iRow;
+      	char* cStr;
     
     public:
         Pattern(int iRows)
         {
             iRow = iRows;
+        }
+        Pattern(string s)
+        {
+        	cStr = (char*)malloc(sizeof(char) * strlen(s));
+        	cStr = s;
         }
         void Updater(int);
         void PrintPattern1();
@@ -60,15 +66,15 @@ void Pattern::Updater(int iRow)
 ////////////////////////////////////////////////////////////////////////
 void Pattern::PrintPattern1()
 {
-    int i = 0, j = 0;
+    int i = 0, j = 0, iRange = iRow * 2 - 1;
     Updater(this->iRow);
     for (i = 1; i <= this->iRow; i++)
     {
-        for (j = 1; j <= iRow; j++)
+        for (j = 1; j <= iRange; j++)
         {
-            if(j == iRow || i == iRow || j == iRow - i + 1)
+            if(j == iRow || i == iRow || j == iRow - i + 1 || j == iRow + i - 1)
                 cout << "1 ";
-            else if(j > iRow - i + 1)
+            else if(j > iRow - i + 1 && j < iRow || j < iRow + i - 1 && j > iRow)
                 cout << "0 ";
             else
                 cout << "  ";
@@ -83,27 +89,26 @@ void Pattern::PrintPattern1()
 //	Input		:void
 //	Returns		:void
 //	Description	:print given pattern
-//                  1
-//                  1 0
-//                  1 0 3
-//                  1 0 3 0
-//                  1 0 3 0 5
+//					0
+//					1  1
+//					2  3  5
+//					8 13 21 34
 //	Author		:Pranav Choudhary
 //	Date		:16 August 2020
 //
 ////////////////////////////////////////////////////////////////////////
 void Pattern::PrintPattern2()
 {
-    int i = 0, j = 0;
+    int i = 0, j = 0,iF = 0, iS = 1, iT = 0;
     Updater(this->iRow);
     for (i = 1; i <= this->iRow; i++)
     {
         for (j = 1; j <= i; j++)
         {
-            if(j % 2 != 0)
-                cout << setw(2) << j << " ";
-            else
-                cout << " 0 ";
+            cout << setw(4) << iF;
+            iT = iF + iS;
+            iF = iS;
+            iS = iT;
         }
         cout << endl;
     }
@@ -115,28 +120,34 @@ void Pattern::PrintPattern2()
 //	Input		:void
 //	Returns		:void
 //	Description	:print given pattern
-//                1
-//                1 2
-//                1 0 3
-//                1 0 0 4
-//                1 0 0 0 5
+//					1
+//					1 1
+//					1 2 3
+//					1 2 3 6
+//					1 2 3 4 10
 //	Author		:Pranav Choudhary
 //	Date		:16 August 2020
 //
 ////////////////////////////////////////////////////////////////////////
 void Pattern::PrintPattern3()
 {
-    int i = 0, j = 0;
+    int i = 0, j = 0, iSum = 1;
     Updater(this->iRow);
     for (i = 1; i <= this->iRow; i++)
     {
         for (j = 1; j <= i; j++)
         {
-            if(i == j || j == 1)
-                cout << setw(2) << j << " ";
+            if(i == j)
+            {
+                cout << setw(3) << iSum;
+            }
             else
-                cout << " 0 ";
+            {
+            	cout << setw(3) << j;
+            	iSum = iSum + j;
+            }
         }
+        iSum = 0;
         cout << endl;
     }
 }
@@ -147,27 +158,27 @@ void Pattern::PrintPattern3()
 //	Input		:void
 //	Returns		:void
 //	Description	:print given pattern
-//                1
-//                1 1
-//                1 0 1
-//                1 0 0 1
-//                1 0 0 0 1
+//					1
+//					1 2
+//					1 2 3
+//					1 2 3 4
+//					4 6 6 4 0
 //	Author		:Pranav Choudhary
 //	Date		:16 August 2020
 //
 ////////////////////////////////////////////////////////////////////////
 void Pattern::PrintPattern4()
 {
-    int i = 0, j = 0;
+    int i = 0, j = 0, iSum = 0;
     Updater(this->iRow);
     for (i = 1; i <= this->iRow; i++)
     {
         for (j = 1; j <= i; j++)
         {
-            if(i == j || j == 1)
-                cout << " 1 ";
+            if(i == iRow)
+                cout << setw(3) << (i - j) * j;
             else
-                cout << " 0 ";
+                cout << setw(3) << j;
         }
         cout << endl;
     }
@@ -179,11 +190,7 @@ void Pattern::PrintPattern4()
 //	Input		:void
 //	Returns		:void
 //	Description	:print given pattern
-//                1
-//                2 2
-//                3 3 3
-//                4 4 4 4
-//                5 5 5 5 5
+//
 //	Author		:Pranav Choudhary
 //	Date		:16 August 2020
 //
@@ -296,13 +303,13 @@ int main()
     Pattern pObj(iValue1);
     cout << "\n-----Pattern 1-----\n";
     pObj.PrintPattern1();
-    /*cout << "\n-----Pattern 2-----\n";
+    cout << "\n-----Pattern 2-----\n";
     pObj.PrintPattern2();
     cout << "\n-----Pattern 3-----\n";
     pObj.PrintPattern3();
     cout << "\n-----Pattern 4-----\n";
     pObj.PrintPattern4();    
-    cout << "\n-----Pattern 5-----\n";
+   /* cout << "\n-----Pattern 5-----\n";
     pObj.PrintPattern5();
     cout << "\n-----Pattern 6-----\n";
     pObj.PrintPattern6();
