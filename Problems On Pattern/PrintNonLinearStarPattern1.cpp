@@ -26,7 +26,7 @@ class Pattern
 ////////////////////////////////////////////////////////////////////////
 //
 //	Name		:Updater
-//	Input		:int, int
+//	Input		:void
 //	Returns		:void
 //	Description	:Updates Wrong inputs
 //	Author		:Pranav Choudhary
@@ -44,7 +44,7 @@ void Pattern::Updater(int iRow, int iCol)
 ////////////////////////////////////////////////////////////////////////
 //
 //	Name		:PrintPattern1
-//	Input		:int, int
+//	Input		:void
 //	Returns		:void
 //	Description	:print given pattern
 //                 * # # #
@@ -75,7 +75,7 @@ void Pattern::PrintPattern1()
 ////////////////////////////////////////////////////////////////////////
 //
 //	Name		:PrintPattern1
-//	Input		:int, int
+//	Input		:void
 //	Returns		:void
 //	Description	:print given pattern
 //                 * * * *
@@ -121,7 +121,7 @@ void Pattern::PrintPattern2()
 ////////////////////////////////////////////////////////////////////////
 //
 //	Name		:PrintPattern1
-//	Input		:int, int
+//	Input		:void
 //	Returns		:void
 //	Description	:print given pattern
 //                 $ * * * *
@@ -153,7 +153,7 @@ void Pattern::PrintPattern3()
 ////////////////////////////////////////////////////////////////////////
 //
 //	Name		:PrintPattern1
-//	Input		:int, int
+//	Input		:void
 //	Returns		:void
 //	Description	:print given pattern
 //                 * * * * *
@@ -186,7 +186,7 @@ void Pattern::PrintPattern4()
 ////////////////////////////////////////////////////////////////////////
 //
 //	Name		:PrintPattern1
-//	Input		:int, int
+//	Input		:void
 //	Returns		:void
 //	Description	:print given pattern
 //               1 2 3 4
