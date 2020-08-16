@@ -2,6 +2,8 @@
 *   Program to print designated star patterns
 */
 #include<iostream>
+#include<iomanip>
+
 using namespace std;
 class Pattern
 {
@@ -47,26 +49,26 @@ void Pattern::Updater(int iRow, int iCol)
 //	Input		:void
 //	Returns		:void
 //	Description	:print given pattern
-//                 * * * #
-//                 * * # *
-//                 * # * *
-//                 # * * *
+//                 1  2  3  4
+//                 5  0  0  6
+//                 7  0  0  8
+//                 9 10 11 12
 //	Author		:Pranav Choudhary
 //	Date		:16 August 2020
 //
 ////////////////////////////////////////////////////////////////////////
 void Pattern::PrintPattern1()
 {
-    int i = 0, j = 0;
+    int i = 0, j = 0, iNum = 1;
     Updater(this->iRow, this->iCol);
     for (i = 1; i <= this->iRow; i++)
     {
         for (j = 1; j <= iCol; j++)
         {
-            if(j == iRow - i + 1)
-                cout << "# ";
+            if(j == 1 || i == 1 || j == iCol || i == iRow)
+                cout << setw(2) << iNum++ << " ";
             else
-                cout << "* ";
+                cout << " 0 ";
         }
         cout << endl;
     }
@@ -78,10 +80,11 @@ void Pattern::PrintPattern1()
 //	Input		:void
 //	Returns		:void
 //	Description	:print given pattern
-//                 * * * #
-//                 * * # @
-//                 * # @ @
-//                 # @ @ @
+//                 *
+//                 * *
+//                 *   *
+//                 *     *
+//                 *       *
 //	Author		:Pranav Choudhary
 //	Date		:16 August 2020
 //
@@ -92,14 +95,12 @@ void Pattern::PrintPattern2()
     Updater(this->iRow, this->iCol);
     for (i = 1; i <= this->iRow; i++)
     {
-        for (j = 1; j <= iCol; j++)
+        for (j = 1; j <= i; j++)
         {
-            if(j == iRow - i + 1)
-                cout << "# ";
-            else if(j < iRow - i + 1)
+            if(j == 1 || j == i)
                 cout << "* ";
             else
-                cout << "@ ";
+                cout << "  ";
         }
         cout << endl;
     }
@@ -112,10 +113,10 @@ void Pattern::PrintPattern2()
 //	Returns		:void
 //	Description	:print given pattern
 //                 * * * * *
-//                 *     * *
-//                 *   *   *
-//                 * *     *
-//                 * * * * *
+//                   * * * *
+//                     * * *
+//                       * *
+//                         *
 //	Author		:Pranav Choudhary
 //	Date		:16 August 2020
 //
@@ -126,9 +127,9 @@ void Pattern::PrintPattern3()
     Updater(this->iRow, this->iCol);
     for (i = 1; i <= this->iRow; i++)
     {
-        for (j = 1; j <= this->iCol; j++)
+        for (j = 1; j <= iCol; j++)
         {
-            if(j == 1 || i == 1 || i == iRow || j == iCol || j == iRow - i + 1)
+            if(i <= j)
                 cout << "* ";
             else
                 cout << "  ";
@@ -143,11 +144,11 @@ void Pattern::PrintPattern3()
 //	Input		:void
 //	Returns		:void
 //	Description	:print given pattern
-//                 * * * * *
-//                 * # # * *
-//                 * # * $ *
-//                 * * $ $ *
-//                 * * * * *
+//                 1
+//                 1 2
+//                 1 2 3
+//                 1 2 3 4
+//                 1 2 3 4 5
 //	Author		:Pranav Choudhary
 //	Date		:16 August 2020
 //
@@ -158,14 +159,9 @@ void Pattern::PrintPattern4()
     Updater(this->iRow, this->iCol);
     for (i = 1; i <= this->iRow; i++)
     {
-        for (j = 1; j <= this->iCol; j++)
+        for (j = 1; j <= i; j++)
         {
-            if(j == 1 || i == 1 || i == iRow || j == iCol || j == iRow - i + 1)
-                cout << "* ";
-            else if(j < iRow - i + 1)
-                cout << "# ";
-            else
-                cout << "$ ";
+            cout << j << " ";
         }
         cout << endl;
     }
@@ -177,27 +173,36 @@ void Pattern::PrintPattern4()
 //	Input		:void
 //	Returns		:void
 //	Description	:print given pattern
-//               1 2 3 4 5
-//               1 2     5
-//               1   3   5
-//               1     4 5
-//               1 2 3 4 5
+//                 1
+//                 1 2
+//                 1 2 3
+//                 1 2 3 4
+//                 1 2 3
+//                 1 2
+//                 1 
 //	Author		:Pranav Choudhary
-//	Date		:15 August 2020
+//	Date		:16 August 2020
 //
 ////////////////////////////////////////////////////////////////////////
 void Pattern::PrintPattern5()
 {
-    int i = 0, j = 0;
+    int i = 0, j = 0, iRows = iRow * 2 - 1;
     Updater(this->iRow, this->iCol);
-    for (i = 1; i <= this->iRow; i++)
+    for (i = 1; i <= iRows; i++)
     {
-        for (j = 1; j <= this->iCol; j++)
+        if(i <= iRow)
         {
-            if(j == 1 || i == 1 || i == iRow || j == iCol || j == i)
+            for (j = 1; j <= i; j++)
+            {
                 cout << j << " ";
-            else
-                cout << "  ";
+            }
+        }
+        else if(i > iRow)
+        {
+            for (j = 1; j <= iRows - i + 1; j++)
+            {
+                cout << j << " ";
+            }
         }
         cout << endl;
     }
