@@ -1,9 +1,9 @@
 /* 
 *   Program to print pattern like 
 *
-*   * # * #   
-*   * # * # 
-*   * # * #
+*    1 1 1 1 
+*    2 2 2 2 
+*    3 3 3 3  
 *
 *   if iRow = 3 and iCol = 4 
 */

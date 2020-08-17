@@ -1,10 +1,10 @@
 /* 
 *   Program to print pattern like 
 *
-*   a b c d e  
-*   1 2 3 4 5  
-*   a b c d e
-*   1 2 3 4 5
+*    1  2  3  4
+*    2  3  4  5
+*    3  4  5  6
+*    4  5  6  7
 *
 *   if iRow = 4 and iCol = 4
 */

@@ -45,16 +45,19 @@ void PrintPattern(
         iCol = -iCol;
     for (i = 1; i <= iRow; i++)
     {
-        for (j = 1, ch = 'A'; j <= iCol; j++, ch++)
+        if(i % 2 != 0)
         {
-            if(i % 2 == 0)
+            for (j = 1, ch = 'A'; j <= iCol; j++, ch++)
             {
-               printf("%c ", ch + 32);
+                printf("%c ", ch + 32);
             }
-            else
+        }
+        else
+        {
+            for (j = 1, ch = 'A'; j <= iCol; j++, ch++)
             {
                 printf("%c ", ch);
-            } 
+            }
         }
         printf("\x0A");
     }
