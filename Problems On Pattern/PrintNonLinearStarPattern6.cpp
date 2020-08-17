@@ -28,7 +28,10 @@ class Pattern
         void PrintPattern6(char*);
         void PrintPattern7(char*);
         void PrintPattern8(char*);
+<<<<<<< HEAD
         void PrintPattern9(char*);
+=======
+>>>>>>> 0d4bd01a4602f259c4e0e5c50c084da67fb0ddc1
 };
 
 ////////////////////////////////////////////////////////////////////////
@@ -374,6 +377,7 @@ void Pattern::PrintPattern9(char *str)
 int main()
 {
     int iValue1 = 0, iValue2 = 0;
+<<<<<<< HEAD
     char cStr[30] = {'\0'};
 
     cout << "Enter the number of rows\n";
@@ -381,6 +385,14 @@ int main()
 
     cout << "\nEnter the string\n";
     scanf(" %[^\n]", cStr);
+=======
+    char cStr[10];
+    cout << "Enter the number of rows\n";
+    cin >> iValue1;
+
+    cout << "Enter the string\n";
+    cin >> cStr;
+>>>>>>> 0d4bd01a4602f259c4e0e5c50c084da67fb0ddc1
 
     Pattern pObj(iValue1);
     cout << "\n-----Pattern 1-----\n";
@@ -397,10 +409,16 @@ int main()
     pObj.PrintPattern6(cStr);
     cout << "\n-----Pattern 7-----\n";
     pObj.PrintPattern7(cStr);
+<<<<<<< HEAD
     cout << "\n-----Pattern 8-----\n";
     pObj.PrintPattern8(cStr);
     cout << "\n-----Pattern 9-----\n";
     pObj.PrintPattern9(cStr);
     
+=======
+    /*cout << "\n-----Pattern 8-----\n";
+    pObj.PrintPattern8();*/
+
+>>>>>>> 0d4bd01a4602f259c4e0e5c50c084da67fb0ddc1
     return 0;
 }
