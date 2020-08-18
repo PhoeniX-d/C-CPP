@@ -15,7 +15,7 @@ class Pattern
             iRow = iRows;
             iCol = iCols;
         }
-        bool Updater(int, int);
+        void Updater(int, int);
         void PrintPattern1();
         void PrintPattern2();
         void PrintPattern3();
@@ -26,25 +26,19 @@ class Pattern
 ////////////////////////////////////////////////////////////////////////
 //
 //	Name		:Updater
-//	Input		:int, int
-//	Returns		:bool
+//	Input		:void
+//	Returns		:void
 //	Description	:Updates Wrong inputs
 //	Author		:Pranav Choudhary
-//	Date		:16 August 2020
+//	Date		:15 August 2020
 //
 ////////////////////////////////////////////////////////////////////////
-bool Pattern::Updater(int iRow, int iCol)
+void Pattern::Updater(int iRow, int iCol)
 {
     if(this->iRow < 0)
         this->iRow = -this->iRow;
     if(this->iCol < 0)
-        this->iCol = -this->iCol; 
-    if(this->iRow != this->iCol)
-    {
-        cout << "Enter Same rows and columns\n";
-        return false;
-    }
-    return true;
+        this->iCol = -this->iCol;    
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -53,27 +47,26 @@ bool Pattern::Updater(int iRow, int iCol)
 //	Input		:void
 //	Returns		:void
 //	Description	:print given pattern
-//                 * * * #
-//                 * * # *
-//                 * # * *
-//                 # * * *
+//              * * * * *
+//              *       *
+//              *       *
+//              * * * * *
 //	Author		:Pranav Choudhary
-//	Date		:16 August 2020
+//	Date		:15 August 2020
 //
 ////////////////////////////////////////////////////////////////////////
 void Pattern::PrintPattern1()
 {
     int i = 0, j = 0;
-    if(Updater(this->iRow, this->iCol) == false)
-        return;
+    Updater(this->iRow, this->iCol);
     for (i = 1; i <= this->iRow; i++)
     {
-        for (j = 1; j <= iCol; j++)
+        for (j = 1; j <= this->iCol; j++)
         {
-            if(j == iRow - i + 1)
-                cout << "# ";
-            else
+            if(j == 1 || i == 1 || j == iCol || i == iRow)
                 cout << "* ";
+            else
+                cout << "  ";
         }
         cout << endl;
     }
@@ -85,57 +78,35 @@ void Pattern::PrintPattern1()
 //	Input		:void
 //	Returns		:void
 //	Description	:print given pattern
-//                 * * * #
-//                 * * # @
-//                 * # @ @
-//                 # @ @ @
+//                *       * * * * *
+//                *       *
+//                *       *
+//                *       *
+//                * * * * * * * * *
+//                        *       *
+//                        *       *
+//                        *       *
+//                * * * * *       *
 //	Author		:Pranav Choudhary
-//	Date		:16 August 2020
+//	Date		:15 August 2020
 //
 ////////////////////////////////////////////////////////////////////////
 void Pattern::PrintPattern2()
 {
-    int i = 0, j = 0;
-    if(Updater(this->iRow, this->iCol) == false) return;
-    for (i = 1; i <= this->iRow; i++)
+    int i = 0, j = 0, iRange = 0;
+    Updater(this->iRow, this->iCol);
+    /* way 1 */
+    iRange = (iRow * 2) + 1;
+    for (i = 1; i <= iRange; i++)
     {
-        for (j = 1; j <= iCol; j++)
+        for (j = 1; j <= iRange; j++)
         {
-            if(j == iRow - i + 1)
-                cout << "# ";
-            else if(j < iRow - i + 1)
-                cout << "* ";
-            else
-                cout << "@ ";
-        }
-        cout << endl;
-    }
-}
-
-////////////////////////////////////////////////////////////////////////
-//
-//	Name		:PrintPattern3
-//	Input		:void
-//	Returns		:void
-//	Description	:print given pattern
-//                 * * * * *
-//                 *     * *
-//                 *   *   *
-//                 * *     *
-//                 * * * * *
-//	Author		:Pranav Choudhary
-//	Date		:16 August 2020
-//
-////////////////////////////////////////////////////////////////////////
-void Pattern::PrintPattern3()
-{
-    int i = 0, j = 0;
-    if(Updater(this->iRow, this->iCol) == false) return;
-    for (i = 1; i <= this->iRow; i++)
-    {
-        for (j = 1; j <= this->iCol; j++)
-        {
-            if(j == 1 || i == 1 || i == iRow || j == iCol || j == iRow - i + 1)
+            if(i == iRow + 1 || j == iCol + 1 || 
+                i <= iRow + 1 && j == 1 || 
+                j >= iCol + 1 && i == 1 ||
+                i == iRange && j <= iCol + 1||
+                j == iRange && i >= iRow + 1                
+                )
                 cout << "* ";
             else
                 cout << "  ";
@@ -146,34 +117,31 @@ void Pattern::PrintPattern3()
 
 ////////////////////////////////////////////////////////////////////////
 //
-//	Name		:PrintPattern4
+//	Name		:PrintPattern1
 //	Input		:void
 //	Returns		:void
 //	Description	:print given pattern
-//                 * * * * *
-//                 * # # * *
-//                 * # * $ *
-//                 * * $ $ *
-//                 * * * * *
+//               * * * * *
+//               *     * 
+//               *   * 
+//               * *  
+//               *  
 //	Author		:Pranav Choudhary
-//	Date		:16 August 2020
+//	Date		:15 August 2020
 //
 ////////////////////////////////////////////////////////////////////////
-void Pattern::PrintPattern4()
+void Pattern::PrintPattern3()
 {
     int i = 0, j = 0;
-    if(Updater(this->iRow, this->iCol) == false) 
-        return;
+    Updater(this->iRow, this->iCol);
     for (i = 1; i <= this->iRow; i++)
     {
         for (j = 1; j <= this->iCol; j++)
         {
-            if(j == 1 || i == 1 || i == iRow || j == iCol || j == iRow - i + 1)
+            if(j + i == iRow + 1 || i == 1 || j == 1)
                 cout << "* ";
-            else if(j < iRow - i + 1)
-                cout << "# ";
             else
-                cout << "$ ";
+                cout << "  ";
         }
         cout << endl;
     }
@@ -181,15 +149,48 @@ void Pattern::PrintPattern4()
 
 ////////////////////////////////////////////////////////////////////////
 //
-//	Name		:PrintPattern5
+//	Name		:PrintPattern1
 //	Input		:void
 //	Returns		:void
 //	Description	:print given pattern
-//               1 2 3 4 5
-//               1 2     5
-//               1   3   5
-//               1     4 5
-//               1 2 3 4 5
+//                       *
+//                     * * *
+//                   * * * * *
+//                 * * * * * * *
+//               * * * * * * * * *
+//	Author		:Pranav Choudhary
+//	Date		:15 August 2020
+//
+////////////////////////////////////////////////////////////////////////
+void Pattern::PrintPattern4()
+{
+    int i = 0, j = 0, iRange = 0;
+    Updater(this->iRow, this->iCol);
+    iRange = (iCol * 2) - 1;
+    for (i = 1; i <= this->iRow; i++)
+    {
+        for (j = 1; j <= iRange; j++)
+        {
+            if(j == iCol|| i == iCol || j >= iCol - i + 1 && j <= iCol + i - 1)
+                cout << "* ";
+            else
+                cout << "  ";
+        }
+        cout << endl;
+    }
+}
+
+////////////////////////////////////////////////////////////////////////
+//
+//	Name		:PrintPattern1
+//	Input		:void
+//	Returns		:void
+//	Description	:print given pattern
+//              * * * * * * * * *
+//                * * * * * * *
+//                  * * * * *
+//                    * * *
+//                      *
 //	Author		:Pranav Choudhary
 //	Date		:15 August 2020
 //
@@ -197,15 +198,15 @@ void Pattern::PrintPattern4()
 void Pattern::PrintPattern5()
 {
     int i = 0, j = 0;
-    if(Updater(this->iRow, this->iCol) == false) return;
+    Updater(this->iRow, this->iCol);
     for (i = 1; i <= this->iRow; i++)
     {
         for (j = 1; j <= this->iCol; j++)
         {
-            if(j == 1 || i == 1 || i == iRow || j == iCol || j + i == iRow + 1)
+            if(j == 1 || i == 1 || i == iRow || j == iCol)
                 cout << j << " ";
             else
-                cout << "  ";
+                cout << "* ";
         }
         cout << endl;
     }
@@ -228,7 +229,7 @@ int main()
     pObj.PrintPattern3();
     cout << "\n-----Pattern 4-----\n";
     pObj.PrintPattern4();    
-    cout << "\n-----Pattern 5-----\n";
-    pObj.PrintPattern5();
+    /*cout << "\n-----Pattern 5-----\n";
+    pObj.PrintPattern5(); */
     return 0;
 }
