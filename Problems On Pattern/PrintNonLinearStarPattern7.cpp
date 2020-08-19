@@ -22,6 +22,8 @@ class Pattern
         void PrintPattern4();
         void PrintPattern5();
         void PrintPattern6();
+        void PrintPattern7();
+        void PrintPattern8();
 };
 
 ////////////////////////////////////////////////////////////////////////
@@ -53,7 +55,7 @@ void Pattern::Updater(int iRow, int iCol)
 //              *       *
 //              * * * * *
 //	Author		:Pranav Choudhary
-//	Date		:17 August 2020
+//	Date		:18 August 2020
 //
 ////////////////////////////////////////////////////////////////////////
 void Pattern::PrintPattern1()
@@ -89,7 +91,7 @@ void Pattern::PrintPattern1()
 //                        *       *
 //                * * * * *       *
 //	Author		:Pranav Choudhary
-//	Date		:17 August 2020
+//	Date		:18 August 2020
 //
 ////////////////////////////////////////////////////////////////////////
 void Pattern::PrintPattern2()
@@ -128,7 +130,7 @@ void Pattern::PrintPattern2()
 //               * *  
 //               *  
 //	Author		:Pranav Choudhary
-//	Date		:17 August 2020
+//	Date		:18 August 2020
 //
 ////////////////////////////////////////////////////////////////////////
 void Pattern::PrintPattern3()
@@ -160,7 +162,7 @@ void Pattern::PrintPattern3()
 //                 * * * * * * *
 //               * * * * * * * * *
 //	Author		:Pranav Choudhary
-//	Date		:18 August 2020
+//	Date		:19 August 2020
 //
 ////////////////////////////////////////////////////////////////////////
 void Pattern::PrintPattern4()
@@ -197,7 +199,7 @@ void Pattern::PrintPattern4()
 //                    * * *
 //                      *
 //	Author		:Pranav Choudhary
-//	Date		:18 August 2020
+//	Date		:19 August 2020
 //
 ////////////////////////////////////////////////////////////////////////
 void Pattern::PrintPattern5()
@@ -234,7 +236,7 @@ void Pattern::PrintPattern5()
 //                 *           *
 //               * * * * * * * * *
 //	Author		:Pranav Choudhary
-//	Date		:18 August 2020
+//	Date		:19 August 2020
 //
 ////////////////////////////////////////////////////////////////////////
 void Pattern::PrintPattern6()
@@ -259,6 +261,98 @@ void Pattern::PrintPattern6()
     }
 }
 
+////////////////////////////////////////////////////////////////////////
+//
+//	Name		:PrintPattern7
+//	Input		:void
+//	Returns		:void
+//	Description	:print given pattern
+//						1
+//					  2 3 2
+//					3 4 5 4 3
+//				  4 5 6 7 6 5 4
+//				5 6 7 8 9 8 7 6 5
+//	Author		:Pranav Choudhary
+//	Date		:19 August 2020
+//
+////////////////////////////////////////////////////////////////////////
+void Pattern::PrintPattern7()
+{
+    int i = 0, j = 0, iRange = 0, k = 0;
+    Updater(this->iRow, this->iCol);
+    iRange = (iCol * 2) - 1;
+    for (i = 1; i <= this->iRow; i++)
+    {
+		k = i;
+		for(j = 1; j <= iRange; j++)
+		{
+			if(j >= iCol - i + 1 && j <= iCol + i - 1)
+			{
+				cout<< k << " ";
+				if(j < iCol)
+				{
+					k++;
+				}
+				else if(j >= iCol)
+				{
+					--k;
+				}
+			}
+			else
+			{
+				cout <<"  ";
+			}
+		}
+        cout << endl;
+    }
+}
+
+////////////////////////////////////////////////////////////////////////
+//
+//	Name		:PrintPattern8
+//	Input		:void
+//	Returns		:void
+//	Description	:print given pattern
+//						1
+//					  1   2
+//					1       3
+//				  1	          4
+//				1	2   3   4   5
+//	Author		:Pranav Choudhary
+//	Date		:19 August 2020
+//
+////////////////////////////////////////////////////////////////////////
+void Pattern::PrintPattern8()
+{
+    int i = 0, j = 0, iRange = 0, k = 0;
+    Updater(this->iRow, this->iCol);
+    iRange = (iCol * 2) - 1;
+    for (i = 1; i <= this->iRow; i++)
+    {
+		k = i;
+		for(j = 1, k = 1; j <= iRange; j++)
+		{
+			if(j == iCol - i + 1)
+			{
+				cout << k << " ";
+				k++;
+			}
+			else if(j == iCol + i - 1)
+			{
+				cout << i << " ";
+			}
+			else if(i == iRow && j % 2 != 0)
+			{
+				cout << k++ << " ";
+			}
+			else
+			{
+				cout <<"  ";
+			}
+		}
+        cout << endl;
+    }
+}
 int main()
 {
     int iValue1 = 0, iValue2 = 0;
@@ -280,5 +374,9 @@ int main()
     pObj.PrintPattern5(); 
     cout << "\n-----Pattern 6-----\n";
     pObj.PrintPattern6(); 
+    cout << "\n-----Pattern 7-----\n";
+    pObj.PrintPattern7();
+    cout << "\n-----Pattern 8-----\n";
+    pObj.PrintPattern8();
     return 0;
 }
