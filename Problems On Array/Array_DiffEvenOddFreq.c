@@ -30,7 +30,10 @@ int main()
     }
 
     iRet = DiffEvenOddFreq(iArr, iNo);
-    printf("Difference  %d ", iRet);
+    if(iRet != ERROR)
+        printf("Difference  %d ", iRet);
+
+    free(iArr);
     return 0;
 }
 //////////////////////////////////////////////////////////////////////////////
@@ -46,6 +49,11 @@ int main()
 int DiffEvenOddFreq(int iArr[], int iLen)
 {
     int i = 0, iECnt = 0, iOCnt = 0;
+    if(NULL == iArr || iLen < 0)
+    {
+        printf("Invalid Inputs !!\n");
+        return ERROR;
+    }
     for (i = 0; i < iLen; i++)
     {
         if(iArr[i] % 2 == 0)

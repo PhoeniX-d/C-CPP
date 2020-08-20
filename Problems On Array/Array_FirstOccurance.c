@@ -1,54 +1,63 @@
 /*
-*   Program to accept N numbers and return frequency of even numbers
-*   and even
+*   Program to accept N numbers and finds first occurance of N number
 */
+
 #include<stdio.h>
 #include<stdlib.h>
 #define ERROR       -1
 
-int CountEvenFreq(int[], int);
+int FirstOccurance(int[], int, int);
 
 int main()
 {
-    int iNo = 0, *iArr = NULL, i = 0, iRet = 0;
+    int iNo = 0, iEl = 0, *iArr = NULL, i = 0;
+    int iRet = 0;
 
     printf("Enter the number of elements\n");
     scanf("%d", &iNo);
+
     if(iNo < 0)
     {
         iNo = -iNo;
     }
+
     if((iArr = (int *)malloc(iNo * sizeof(int))) == NULL)
     {
         printf("Memory Allocation failed!!\n");
         return ERROR;
-    }    
+    }  
+
     printf("Enter the %d elements\n", iNo);
     for(i = 0; i < iNo; i++)
     {
         scanf("%d", &iArr[i]);
     }
 
-    iRet = CountEvenFreq(iArr, iNo);
-    if(iRet != ERROR)
-        printf("Even number of elements are %d ", iRet);
+    printf("Enter element\n");
+    scanf("%d", &iEl);
+    
+    iRet = FirstOccurance(iArr, iNo, iEl);
+    if(iRet != -1)
+        printf("First Occurance of %d in array is at %d ", iEl, iRet);
+    else
+        printf("Array does not contain %d\n", iEl);
 
     free(iArr);
     return 0;
 }
 ////////////////////////////////////////////////////////////////
 //
-//	Name		:CountEvenFreq
-//	Input		:int[], int
+//	Name		:FirstOccurance
+//	Input		:int[], int, int
 //	Returns		:int
-//	Description	:return frequency of even numbers
+//	Description	:finds first occurance of N number
 //	Author		:Pranav Choudhary
 //	Date		:20 August 2020
 //
 ////////////////////////////////////////////////////////////////
-int CountEvenFreq(int iArr[], int iLen)
+int FirstOccurance(int iArr[], int iLen, int iTem)
 {
-    int i = 0, iCnt = 0;
+    int i = 0, iPos = 0;
     if(NULL == iArr || iLen < 0)
     {
         printf("Invalid Inputs !!\n");
@@ -56,10 +65,14 @@ int CountEvenFreq(int iArr[], int iLen)
     }
     for (i = 0; i < iLen; i++)
     {
-        if(iArr[i] % 2 == 0)
+        if(iArr[i] == iTem)
         {
-            iCnt++;
+            iPos = i;
+            break;
         }
     }
-    return iCnt;
+    if(i == iLen)
+        return -1;
+    else
+        return iPos;
 }

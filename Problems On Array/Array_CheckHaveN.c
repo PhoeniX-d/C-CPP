@@ -1,52 +1,62 @@
 /*
-*   Program to accept N numbers and return frequency of even numbers
-*   and even
+*   Program to accept N numbers and checks whether it contains N number or not
 */
+
 #include<stdio.h>
 #include<stdlib.h>
-#define ERROR       -1
+#define TRUE        1
+#define FALSE       0
+#define ERROR      -1
+typedef char BOOL;
 
-int CountEvenFreq(int[], int);
+BOOL CheckHaveN(int[], int, int);
 
 int main()
 {
-    int iNo = 0, *iArr = NULL, i = 0, iRet = 0;
+    int iNo = 0, iEl = 0, *iArr = NULL, i = 0;
 
     printf("Enter the number of elements\n");
     scanf("%d", &iNo);
+
     if(iNo < 0)
     {
         iNo = -iNo;
     }
+
     if((iArr = (int *)malloc(iNo * sizeof(int))) == NULL)
     {
         printf("Memory Allocation failed!!\n");
         return ERROR;
-    }    
+    }  
+
     printf("Enter the %d elements\n", iNo);
     for(i = 0; i < iNo; i++)
     {
         scanf("%d", &iArr[i]);
     }
 
-    iRet = CountEvenFreq(iArr, iNo);
-    if(iRet != ERROR)
-        printf("Even number of elements are %d ", iRet);
+    printf("Enter element\n");
+    scanf("%d", &iEl);
+    
+    if(CheckHaveN(iArr, iNo, iEl) == TRUE)
+        printf("It contains %d ", iEl);
+    else
+        printf("It does not contains %d ", iEl);
 
     free(iArr);
     return 0;
 }
 ////////////////////////////////////////////////////////////////
 //
-//	Name		:CountEvenFreq
-//	Input		:int[], int
-//	Returns		:int
-//	Description	:return frequency of even numbers
+//	Name		:CheckHaveN
+//	Input		:int[], int, int
+//	Returns		:BOOL
+//	Description	:checks whether it contains N number or not
 //	Author		:Pranav Choudhary
 //	Date		:20 August 2020
 //
 ////////////////////////////////////////////////////////////////
-int CountEvenFreq(int iArr[], int iLen)
+BOOL CheckHaveN(int iArr[], int iLen, int iTem)
 {
     int i = 0, iCnt = 0;
     if(NULL == iArr || iLen < 0)
@@ -56,10 +66,13 @@ int CountEvenFreq(int iArr[], int iLen)
     }
     for (i = 0; i < iLen; i++)
     {
-        if(iArr[i] % 2 == 0)
+        if(iArr[i] == iTem)
         {
-            iCnt++;
+            break;
         }
     }
-    return iCnt;
+    if(i == iLen)
+        return FALSE;
+    else
+        return TRUE;
 }

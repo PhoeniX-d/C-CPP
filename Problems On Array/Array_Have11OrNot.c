@@ -55,7 +55,11 @@ int main()
 BOOL Check11(int iArr[], int iLen)
 {
     int i = 0;
-    printf("Output :\n");
+    if(NULL == iArr || iLen < 0)
+    {
+        printf("Invalid Inputs !!\n");
+        return ERROR;
+    }
     for (i = 0; i < iLen; i++)
     {
         if(iArr[i] % 11 == 0)

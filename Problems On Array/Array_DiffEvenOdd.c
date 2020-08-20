@@ -30,8 +30,10 @@ int main()
     }
 
     iRet = DiffEvenOdd(iArr, iNo);
-    printf("Difference of summation of even and odd numbers = %d", iRet);
+    if(iRet != ERROR)
+        printf("Difference of summation of even and odd numbers = %d", iRet);
 
+    free(iArr);
     return 0;
 }
 ////////////////////////////////////////////////////////////////
@@ -47,6 +49,11 @@ int main()
 int DiffEvenOdd(int iArr[], int iLen)
 {
     int iEvenSum = 0, iOddSum = 0, i = 0;
+    if(NULL == iArr || iLen < 0)
+    {
+        printf("Invalid Inputs !!\n");
+        return ERROR;
+    }
     printf("Output :\n");
     for (i = 0; i < iLen; i++)
     {

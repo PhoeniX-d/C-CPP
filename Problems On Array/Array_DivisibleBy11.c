@@ -29,6 +29,8 @@ int main()
     }
 
     DivisibleBy11(iArr, iNo);
+
+    free(iArr);
     return 0;
 }
 ////////////////////////////////////////////////////////////////
@@ -44,6 +46,11 @@ int main()
 void DivisibleBy11(int iArr[], int iLen)
 {
     int i = 0;
+    if(NULL == iArr || iLen < 0)
+    {
+        printf("Invalid Inputs !!\n");
+        return;
+    }
     printf("Output :\n");
     for (i = 0; i < iLen; i++)
     {
