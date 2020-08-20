@@ -1,12 +1,12 @@
 /*
-*   Program to accept N numbers and finds first occurance of N number
+*   Program to accept N numbers and finds Last occurance of N number
 */
 
 #include<stdio.h>
 #include<stdlib.h>
 #define ERROR       -1
 
-int FirstOccurance(int[], int, int);
+int LastOccurance(int[], int, int);
 
 int main()
 {
@@ -36,9 +36,9 @@ int main()
     printf("Enter element\n");
     scanf("%d", &iEl);
     
-    iRet = FirstOccurance(iArr, iNo, iEl);
+    iRet = LastOccurance(iArr, iNo, iEl);
     if(iRet != -1)
-        printf("First Occurance of %d in array is at %d ", iEl, iRet + 1);
+        printf("Last Occurance of %d in array is at %d ", iEl, iRet + 1);
     else
         printf("Array does not contain %d\n", iEl);
 
@@ -47,15 +47,15 @@ int main()
 }
 ////////////////////////////////////////////////////////////////
 //
-//	Name		:FirstOccurance
+//	Name		:LastOccurance
 //	Input		:int[], int, int
 //	Returns		:int
-//	Description	:finds first occurance of N number
+//	Description	:finds Last occurance of N number
 //	Author		:Pranav Choudhary
 //	Date		:21 August 2020
 //
 ////////////////////////////////////////////////////////////////
-int FirstOccurance(int iArr[], int iLen, int iTem)
+int LastOccurance(int iArr[], int iLen, int iTem)
 {
     int i = 0, iPos = 0;
     if(NULL == iArr || iLen < 0)
@@ -63,7 +63,7 @@ int FirstOccurance(int iArr[], int iLen, int iTem)
         printf("Invalid Inputs !!\n");
         return ERROR;
     }
-    for (i = 0; i < iLen; i++)
+    for (i = iLen - 1; i >= 0; i--)
     {
         if(iArr[i] == iTem)
         {
@@ -71,7 +71,7 @@ int FirstOccurance(int iArr[], int iLen, int iTem)
             break;
         }
     }
-    if(i == iLen)
+    if(i == -1)
         return -1;
     else
         return iPos;

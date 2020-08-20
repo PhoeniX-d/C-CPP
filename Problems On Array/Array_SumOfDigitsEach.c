@@ -1,17 +1,16 @@
 /*
-*   Program to accept N numbers and finds first occurance of N number
+*   Program to accept N numbers and displays sum of each elements digits
 */
 
 #include<stdio.h>
 #include<stdlib.h>
 #define ERROR       -1
 
-int FirstOccurance(int[], int, int);
+void SumDigits(int[], int);
 
 int main()
 {
-    int iNo = 0, iEl = 0, *iArr = NULL, i = 0;
-    int iRet = 0;
+    int iNo = 0, *iArr = NULL, i = 0;
 
     printf("Enter the number of elements\n");
     scanf("%d", &iNo);
@@ -33,46 +32,39 @@ int main()
         scanf("%d", &iArr[i]);
     }
 
-    printf("Enter element\n");
-    scanf("%d", &iEl);
-    
-    iRet = FirstOccurance(iArr, iNo, iEl);
-    if(iRet != -1)
-        printf("First Occurance of %d in array is at %d ", iEl, iRet + 1);
-    else
-        printf("Array does not contain %d\n", iEl);
+    printf("Output :\n");
+    SumDigits(iArr, iNo);
 
     free(iArr);
     return 0;
 }
 ////////////////////////////////////////////////////////////////
 //
-//	Name		:FirstOccurance
-//	Input		:int[], int, int
-//	Returns		:int
-//	Description	:finds first occurance of N number
+//	Name		:SumDigits
+//	Input		:int[], int
+//	Returns		:void
+//	Description	:displays sum of each elements digits
 //	Author		:Pranav Choudhary
 //	Date		:21 August 2020
 //
 ////////////////////////////////////////////////////////////////
-int FirstOccurance(int iArr[], int iLen, int iTem)
+void SumDigits(int iArr[], int iLen)
 {
-    int i = 0, iPos = 0;
+    int i = 0, iTemp = 0, iSum = 0;
     if(NULL == iArr || iLen < 0)
     {
         printf("Invalid Inputs !!\n");
-        return ERROR;
+        return;
     }
     for (i = 0; i < iLen; i++)
     {
-        if(iArr[i] == iTem)
+        iTemp = iArr[i];
+        iSum = 0;
+        while(iTemp != 0)
         {
-            iPos = i;
-            break;
+            iSum = iSum + (iTemp % 10);
+            iTemp = iTemp / 10;
         }
+        printf("%d ", iSum);
     }
-    if(i == iLen)
-        return -1;
-    else
-        return iPos;
 }

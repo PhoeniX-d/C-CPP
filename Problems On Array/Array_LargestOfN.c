@@ -1,16 +1,16 @@
 /*
-*   Program to accept N numbers and finds first occurance of N number
+*   Program to accept N numbers and finds maximum of N numbers
 */
 
 #include<stdio.h>
 #include<stdlib.h>
 #define ERROR       -1
 
-int FirstOccurance(int[], int, int);
+int MaximumN(int[], int);
 
 int main()
 {
-    int iNo = 0, iEl = 0, *iArr = NULL, i = 0;
+    int iNo = 0, *iArr = NULL, i = 0;
     int iRet = 0;
 
     printf("Enter the number of elements\n");
@@ -32,47 +32,38 @@ int main()
     {
         scanf("%d", &iArr[i]);
     }
-
-    printf("Enter element\n");
-    scanf("%d", &iEl);
-    
-    iRet = FirstOccurance(iArr, iNo, iEl);
+    iRet = MaximumN(iArr, iNo);
     if(iRet != -1)
-        printf("First Occurance of %d in array is at %d ", iEl, iRet + 1);
-    else
-        printf("Array does not contain %d\n", iEl);
+        printf("Maximum is %d ", iRet);
 
     free(iArr);
     return 0;
 }
 ////////////////////////////////////////////////////////////////
 //
-//	Name		:FirstOccurance
-//	Input		:int[], int, int
+//	Name		:MaximumN
+//	Input		:int[], int
 //	Returns		:int
-//	Description	:finds first occurance of N number
+//	Description	:finds maximum of N numbers
 //	Author		:Pranav Choudhary
 //	Date		:21 August 2020
 //
 ////////////////////////////////////////////////////////////////
-int FirstOccurance(int iArr[], int iLen, int iTem)
+int MaximumN(int iArr[], int iLen)
 {
-    int i = 0, iPos = 0;
+    int i = 0, iMax = 0;
     if(NULL == iArr || iLen < 0)
     {
         printf("Invalid Inputs !!\n");
         return ERROR;
     }
+    iMax = iArr[0];
     for (i = 0; i < iLen; i++)
     {
-        if(iArr[i] == iTem)
+        if(iArr[i] > iMax)
         {
-            iPos = i;
-            break;
+            iMax = iArr[i];
         }
     }
-    if(i == iLen)
-        return -1;
-    else
-        return iPos;
+    return iMax;
 }

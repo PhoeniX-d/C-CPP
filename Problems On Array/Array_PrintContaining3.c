@@ -1,17 +1,16 @@
 /*
-*   Program to accept N numbers and finds first occurance of N number
+*   Program to accept N numbers and displays numbers which contains 3 in it
 */
 
 #include<stdio.h>
 #include<stdlib.h>
 #define ERROR       -1
 
-int FirstOccurance(int[], int, int);
+void Contains3(int[], int);
 
 int main()
 {
-    int iNo = 0, iEl = 0, *iArr = NULL, i = 0;
-    int iRet = 0;
+    int iNo = 0, *iArr = NULL, i = 0;
 
     printf("Enter the number of elements\n");
     scanf("%d", &iNo);
@@ -33,46 +32,40 @@ int main()
         scanf("%d", &iArr[i]);
     }
 
-    printf("Enter element\n");
-    scanf("%d", &iEl);
-    
-    iRet = FirstOccurance(iArr, iNo, iEl);
-    if(iRet != -1)
-        printf("First Occurance of %d in array is at %d ", iEl, iRet + 1);
-    else
-        printf("Array does not contain %d\n", iEl);
+    printf("Output :\n");
+    Contains3(iArr, iNo);
 
     free(iArr);
     return 0;
 }
 ////////////////////////////////////////////////////////////////
 //
-//	Name		:FirstOccurance
-//	Input		:int[], int, int
-//	Returns		:int
-//	Description	:finds first occurance of N number
+//	Name		:Contains3
+//	Input		:int[], int
+//	Returns		:void
+//	Description	:displays numbers which contains 3 in it
 //	Author		:Pranav Choudhary
 //	Date		:21 August 2020
 //
 ////////////////////////////////////////////////////////////////
-int FirstOccurance(int iArr[], int iLen, int iTem)
+void Contains3(int iArr[], int iLen)
 {
-    int i = 0, iPos = 0;
+    int i = 0, iTemp = 0;
     if(NULL == iArr || iLen < 0)
     {
         printf("Invalid Inputs !!\n");
-        return ERROR;
+        return;
     }
     for (i = 0; i < iLen; i++)
     {
-        if(iArr[i] == iTem)
+        iTemp = iArr[i];
+        while(iTemp != 0)
         {
-            iPos = i;
-            break;
+            if(iTemp % 10 == 3)
+            {
+                printf("%d ", iArr[i]);
+            }
+            iTemp = iTemp / 10;
         }
     }
-    if(i == iLen)
-        return -1;
-    else
-        return iPos;
 }
