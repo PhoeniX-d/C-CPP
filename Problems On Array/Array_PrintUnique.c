@@ -57,7 +57,7 @@ void DisplayUnique(int iArr[], int iLen)
         printf("Invalid Inputs\n");
         return;
     }
-
+    
     for (i = 0; i < iLen; i++)
     {
         cFlags = 0;
