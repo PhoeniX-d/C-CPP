@@ -33,11 +33,13 @@ int main()
 }
 
 ////////////////////////////////////////////////////////////////
-//	
-//	Name		:DisplaySum
+//
+//	Name		:SumDigits
 //	Input		:int[], int
 //	Returns		:void
-//	Description	:Prints summation of N Numbers
+//	Description	:displays Summation of elements
+//	Author		:Pranav Choudhary
+//	Date		:21 August 2020
 //
 ////////////////////////////////////////////////////////////////
 int DisplaySum(

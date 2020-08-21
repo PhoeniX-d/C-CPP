@@ -39,11 +39,13 @@ int main()
 }
 
 ////////////////////////////////////////////////////////////////
-//	
+//
 //	Name		:Display2ndMin
 //	Input		:int[], int
-//	Returns		:void
-//	Description	:Prints 2nd last Minimum of N Numbers
+//	Returns		:int
+//	Description	:displays Second Min of elements
+//	Author		:Pranav Choudhary
+//	Date		:21 August 2020
 //
 ////////////////////////////////////////////////////////////////
 int Display2ndMin(

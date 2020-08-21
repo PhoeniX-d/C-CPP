@@ -37,13 +37,14 @@ int main()
 	free(iArr);
 	return 0;
 }
-
 ////////////////////////////////////////////////////////////////
-//	
+//
 //	Name		:Display2ndMax
 //	Input		:int[], int
-//	Returns		:void
-//	Description	:Prints 2nd highest Maximum of N Numbers
+//	Returns		:int
+//	Description	:displays Second Max of elements
+//	Author		:Pranav Choudhary
+//	Date		:21 August 2020
 //
 ////////////////////////////////////////////////////////////////
 int Display2ndMax(
