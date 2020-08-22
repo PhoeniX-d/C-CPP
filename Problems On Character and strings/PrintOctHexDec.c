@@ -17,7 +17,7 @@ int main()
 //////////////////////////////////////////////////////////////////////
 //
 //  Name        :PrintHOD
-//  Input       :char
+//  Input       :void
 //  Returns     :void
 //  Description :Print Hex, Octal, Decimal equivalent
 //  Author      :Pranav Choudhary

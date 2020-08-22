@@ -1,5 +1,5 @@
 /*
-*   Program to compute difference between capital and lower case
+*   Program to compute difference between capital and lower case in entered string
 */
 
 #include<stdio.h>
@@ -27,6 +27,7 @@ int main()
 //  Input       :char *
 //  Returns     :int
 //  Description :compute difference between capital and lower case
+//              :in entered string
 //  Author      :Pranav Choudhary
 //  Date        :21 August 2020
 //
