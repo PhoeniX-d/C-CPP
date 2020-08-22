@@ -15,7 +15,8 @@ int main()
 
     printf("Entered String:\t%s\n", cArr);
     iRet = StrLen(cArr);
-    printf("Length of String:\t%d\n", iRet);
+    if(iRet != -1)
+        printf("Length of String:\t%d\n", iRet);
     return 0;
 }
 
@@ -31,6 +32,11 @@ int main()
 //////////////////////////////////////////////////////////////////////
 int StrLen(const char *cSrc)
 {
+    if(cSrc == NULL)
+    {
+        printf("Invalid Input\n");
+        return -1;
+    }
     int iLen = 0;
     char *cTemp = cSrc;
     while(*cTemp != '\0')

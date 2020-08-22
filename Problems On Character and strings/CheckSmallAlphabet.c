@@ -35,7 +35,7 @@ int main()
 //  Returns     :BOOL
 //  Description :check whether entered char is small alphabetor not
 //  Author      :Pranav Choudhary
-//  Date        :21 August 2020
+//  Date        :22 August 2020
 //
 //////////////////////////////////////////////////////////////////////
 BOOL IsSmallAlpha(char ch)

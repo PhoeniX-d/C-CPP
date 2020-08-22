@@ -5,7 +5,6 @@
 #define MAXLEN      30
 
 void StrRev(char *);
-int StrLen(const char *);
 
 int main()
 {
@@ -22,26 +21,6 @@ int main()
 
 //////////////////////////////////////////////////////////////////////
 //
-//  Name        :StrLen
-//  Input       :const char*
-//  Returns     :int
-//  Description :computes length of entered string
-//  Author      :Pranav Choudhary
-//  Date        :22 August 2020
-//
-//////////////////////////////////////////////////////////////////////
-int StrLen(const char *cSrc)
-{
-    int iLen = 0;
-    while(*cSrc != '\0')
-    {
-        iLen++;
-        cSrc++;
-    }
-    return iLen;
-}
-//////////////////////////////////////////////////////////////////////
-//
 //  Name        :StrRev
 //  Input       :char*
 //  Returns     :void
@@ -52,14 +31,26 @@ int StrLen(const char *cSrc)
 //////////////////////////////////////////////////////////////////////
 void StrRev(char* cSrc)
 {
-    int i = 0, j = StrLen(cSrc) - 1;
-    char cTemp = '\0';
-    while(i < j)
+    if(cSrc == NULL)
     {
-        cTemp = *(cSrc + i);
-        *(cSrc + i) = *(cSrc + j);
-        *(cSrc + j) = cTemp;
-        i++;
-        j--;
+        printf("Invalid Input\n");
+        return;
+    }
+    char cTemp = '\0';
+    char *cStart = cSrc;
+    char *cEnd = cSrc;
+
+    while(*cEnd != '\0')
+    {
+        cEnd++;
+    }
+    cEnd--;
+    while(cStart < cEnd)
+    {
+        cTemp = *cStart;
+        *cStart = *cEnd;
+        *cEnd = cTemp;
+        cEnd--;
+        cStart++;
     }
 }
