@@ -6,7 +6,7 @@
 #define MAXLEN      15
 #define ERROR       -1
 
-int CountLow(char *);
+int CountLwr(char *);
 
 int main()
 {
@@ -15,7 +15,7 @@ int main()
     printf("Enter the string\n"); 
     scanf("%[^\n]", cArr);
 
-    iRet = CountLow(cArr);
+    iRet = CountLwr(cArr);
     if(iRet != ERROR)
         printf("%d", iRet);
 
@@ -23,7 +23,7 @@ int main()
 }
 //////////////////////////////////////////////////////////////////////
 //
-//  Name        :CountLow
+//  Name        :CountLwr
 //  Input       :char *
 //  Returns     :int
 //  Description :count small letters in given string
@@ -31,7 +31,7 @@ int main()
 //  Date        :21 August 2020
 //
 //////////////////////////////////////////////////////////////////////
-int CountLow(char *cSrc)
+int CountLwr(char *cSrc)
 {
     int iCnt = 0;
     if(NULL == cSrc)

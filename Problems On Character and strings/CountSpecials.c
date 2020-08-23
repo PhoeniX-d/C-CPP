@@ -1,37 +1,38 @@
 /*
-*   Program to count capital letters in given string
+*   Program to count special characters in given string
 */
 
 #include<stdio.h>
-#define MAXLEN      15
+#define MAXLEN      20
 #define ERROR       -1
 
-int CountCap(char *);
+int CountSpecials(const char *);
 
 int main()
 {
     char cArr[MAXLEN] = {'\0'};
     int iRet = 0;
+
     printf("Enter the string\n"); 
     scanf("%[^\n]", cArr);
 
-    iRet = CountCap(cArr);
+    iRet = CountSpecials(cArr);
     if(iRet != ERROR)
-        printf("%d", iRet);
+        printf("Special characters:\t%d\n", iRet);
 
     return 0;
 }
 //////////////////////////////////////////////////////////////////////
 //
-//  Name        :CountCap
-//  Input       :char *
+//  Name        :CountSpecials
+//  Input       :const char *
 //  Returns     :int
-//  Description :count capital letters in given string
+//  Description :count special characters in given string
 //  Author      :Pranav Choudhary
 //  Date        :21 August 2020
 //
 //////////////////////////////////////////////////////////////////////
-int CountCap(char *cSrc)
+int CountSpecials(const char *cSrc)
 {
     int iCnt = 0;
     if(NULL == cSrc)
@@ -42,7 +43,9 @@ int CountCap(char *cSrc)
     
     while(*cSrc != '\0')
     {
-        if (*cSrc >= 'A' && *cSrc <= 'Z')
+        if ( !(*cSrc >= 'a' && *cSrc <= 'z') && 
+             !(*cSrc >= 'A' && *cSrc <= 'Z') && 
+             !(*cSrc >= '0' && *cSrc <= '9'))
         {
             iCnt++;
         }

@@ -1,14 +1,12 @@
 /*
-*   Program to count words in given string
+*   Program to count capital letters in given string
 */
 
 #include<stdio.h>
-#define MAXLEN      30
+#define MAXLEN      15
 #define ERROR       -1
-#define IN           1
-#define OUT          0
 
-int WordCnt(char *);
+int CountUpr(char *);
 
 int main()
 {
@@ -17,43 +15,39 @@ int main()
     printf("Enter the string\n"); 
     scanf("%[^\n]", cArr);
 
-    iRet = WordCnt(cArr);
+    iRet = CountUpr(cArr);
     if(iRet != ERROR)
-        printf("Total Words :\t%d", iRet);
+        printf("%d", iRet);
 
     return 0;
 }
 //////////////////////////////////////////////////////////////////////
 //
-//  Name        :WordCnt
+//  Name        :CountUpr
 //  Input       :char *
 //  Returns     :int
-//  Description :count words in given string
+//  Description :count capital letters in given string
 //  Author      :Pranav Choudhary
-//  Date        :22 August 2020
+//  Date        :21 August 2020
 //
 //////////////////////////////////////////////////////////////////////
-int WordCnt(const char *cSrc)
+int CountUpr(char *cSrc)
 {
     int iCnt = 0;
-    int iState = OUT;
     if(NULL == cSrc)
     {
         printf("Invalid Input\n");
         return ERROR;
     }
-    while (*cSrc != '\0')
+    
+    while(*cSrc != '\0')
     {
-        if(*cSrc == ' ' || *cSrc == '\n' || *cSrc == '\t')
-		{
-            iState = OUT;
+        if (*cSrc >= 'A' && *cSrc <= 'Z')
+        {
+            iCnt++;
         }
-		else if(iState == OUT)
-		{	
-			iState = IN;
-			iCnt++;
-		}
         cSrc++;
     }
+
     return iCnt;
 }
