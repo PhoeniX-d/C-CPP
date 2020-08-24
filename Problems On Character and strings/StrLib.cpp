@@ -5,12 +5,6 @@
 
 #include "StrLib.h"
 
-// constructor
-Strings::Strings()
-{
-    cSrc = NULL;
-}
-
 //////////////////////////////////////////////////////////////////////
 //
 //  Name        :StrLen
@@ -21,7 +15,7 @@ Strings::Strings()
 //  Date        :24 August 2020
 //
 //////////////////////////////////////////////////////////////////////
-int StrLen(const char *cSrc)
+int Strings::StrLen(const char *cSrc)
 {
     if(cSrc == NULL)
     {
@@ -47,7 +41,7 @@ int StrLen(const char *cSrc)
 //  Date        :24 August 2020
 //
 //////////////////////////////////////////////////////////////////////
-void StrLwr(char* cSrc)
+void Strings::StrLwr(char* cSrc)
 {
     if(NULL == cSrc)
     {
@@ -73,7 +67,7 @@ void StrLwr(char* cSrc)
 //  Date        :24 August 2020
 //
 //////////////////////////////////////////////////////////////////////
-void StrUpr(char* cSrc)
+void Strings::StrUpr(char* cSrc)
 {
     if(NULL == cSrc)
     {
@@ -99,7 +93,7 @@ void StrUpr(char* cSrc)
 //  Date        :24 August 2020
 //
 //////////////////////////////////////////////////////////////////////
-void StrTgl(char* cSrc)
+void Strings::StrTgl(char* cSrc)
 {
     if(NULL == cSrc)
     {
@@ -129,7 +123,7 @@ void StrTgl(char* cSrc)
 //  Date        :24 August 2020
 //
 ////////////////////////////////////////////////////////////
-void StrCat(char* cStr1, const char* cStr2)
+void Strings::StrCat(char* cStr1, const char* cStr2)
 {
     if(cStr1 == NULL || cStr2 == NULL)
     {
@@ -160,7 +154,7 @@ void StrCat(char* cStr1, const char* cStr2)
 //  Date        :24 August 2020
 //
 ////////////////////////////////////////////////////////////
-void StrNCat(char* cStr1, const char* cStr2, int iN)
+void Strings::StrNCat(char* cStr1, const char* cStr2, int iN)
 {
     if(cStr1 == NULL || cStr2 == NULL)
     {
@@ -196,7 +190,7 @@ void StrNCat(char* cStr1, const char* cStr2, int iN)
 //  Date        :24 August 2020
 //
 ////////////////////////////////////////////////////////////
-void StrCpy(const char* cSrc, char* cDest)
+void Strings::StrCpy(const char* cSrc, char* cDest)
 {
     if(cSrc == NULL || cDest == NULL)
     {
@@ -223,7 +217,7 @@ void StrCpy(const char* cSrc, char* cDest)
 //  Date        :24 August 2020
 //
 ///////////////////////////////////////////////////////////////////////
-void StrNCpy(const char* cSrc, char* cDest, int iN)
+void Strings::StrNCpy(const char* cSrc, char* cDest, int iN)
 {
     if(cSrc == NULL || cDest == NULL)
     {
@@ -254,7 +248,7 @@ void StrNCpy(const char* cSrc, char* cDest, int iN)
 //  Date        :24 August 2020
 //
 ////////////////////////////////////////////////////////////
-void StrCpyCap(const char* cSrc, char* cDest)
+void Strings::StrCpyCap(const char* cSrc, char* cDest)
 {
     if(cSrc == NULL || cDest == NULL)
     {
@@ -285,7 +279,7 @@ void StrCpyCap(const char* cSrc, char* cDest)
 //  Date        :24 August 2020
 //
 /////////////////////////////////////////////////////////////////////////////
-void StrCpyCapX(const char* cSrc, char* cDest)
+void Strings::StrCpyCapX(const char* cSrc, char* cDest)
 {
     if(cSrc == NULL || cDest == NULL)
     {
@@ -321,7 +315,7 @@ void StrCpyCapX(const char* cSrc, char* cDest)
 //  Date        :24 August 2020
 //
 ////////////////////////////////////////////////////////////
-void StrCpyLwr(const char* cSrc, char* cDest)
+void Strings::StrCpyLwr(const char* cSrc, char* cDest)
 {
     if(cSrc == NULL || cDest == NULL)
     {
@@ -352,7 +346,7 @@ void StrCpyLwr(const char* cSrc, char* cDest)
 //  Date        :24 August 2020
 //
 /////////////////////////////////////////////////////////////////////////////
-void StrCpyLwrX(const char* cSrc, char* cDest)
+void Strings::StrCpyLwrX(const char* cSrc, char* cDest)
 {
     if(cSrc == NULL || cDest == NULL)
     {
@@ -388,7 +382,7 @@ void StrCpyLwrX(const char* cSrc, char* cDest)
 //  Date        :22 August 2020
 //
 ////////////////////////////////////////////////////////////
-void StrCpyRev(const char* cSrc, char* cDest)
+void Strings::StrCpyRev(const char* cSrc, char* cDest)
 {
     if(cSrc == NULL || cDest == NULL)
     {
@@ -422,7 +416,7 @@ void StrCpyRev(const char* cSrc, char* cDest)
 //  Date        :24 August 2020
 //
 ////////////////////////////////////////////////////////////
-void StrCpySpace(const char* cSrc, char* cDest)
+void Strings::StrCpySpace(const char* cSrc, char* cDest)
 {
     if(cSrc == NULL || cDest == NULL)
     {
@@ -452,7 +446,7 @@ void StrCpySpace(const char* cSrc, char* cDest)
 //  Date        :24 August 2020
 //
 /////////////////////////////////////////////////////////////////////////////
-void StrCpyTgl(const char* cSrc, char* cDest)
+void Strings::StrCpyTgl(const char* cSrc, char* cDest)
 {
     if(cSrc == NULL || cDest == NULL)
     {
@@ -492,7 +486,7 @@ void StrCpyTgl(const char* cSrc, char* cDest)
 //  Date        :24 August 2020
 //
 //////////////////////////////////////////////////////////////////////
-void StrRev(char* cSrc)
+void Strings::StrRev(char* cSrc)
 {
     if(cSrc == NULL)
     {
@@ -529,7 +523,7 @@ void StrRev(char* cSrc)
 //  Date        :24 August 2020
 //
 //////////////////////////////////////////////////////////////////////
-void StrNRevF(char* cSrc, int iN)
+void Strings::StrNRevF(char* cSrc, int iN)
 {
     if(cSrc == NULL)
     {
@@ -576,7 +570,7 @@ void StrNRevF(char* cSrc, int iN)
 //  Date        :24 August 2020
 //
 //////////////////////////////////////////////////////////////////////
-void StrNRevL(char* cSrc, int iN)
+void Strings::StrNRevL(char* cSrc, int iN)
 {
     if(cSrc == NULL)
     {
@@ -626,7 +620,7 @@ void StrNRevL(char* cSrc, int iN)
 //  Date        :24 August 2020
 //
 //////////////////////////////////////////////////////////////////////
-void StrRangeRev(char* cSrc, int iS, int iE)
+void Strings::StrRangeRev(char* cSrc, int iS, int iE)
 {
     if(iS < 0)
     {
@@ -676,7 +670,7 @@ void StrRangeRev(char* cSrc, int iS, int iE)
 //  Date        :24 August 2020
 //
 ////////////////////////////////////////////////////////////
-int StrCmp(const char* cStr1, const char* cStr2)
+int Strings::StrCmp(const char* cStr1, const char* cStr2)
 {
     if(cStr1 == NULL || cStr2 == NULL)
     {
@@ -709,7 +703,7 @@ int StrCmp(const char* cStr1, const char* cStr2)
 //  Date        :24 August 2020
 //
 ////////////////////////////////////////////////////////////
-int StrCmpi(const char* cStr1, const char* cStr2)
+int Strings::StriCmp(const char* cStr1, const char* cStr2)
 {
     if(cStr1 == NULL || cStr2 == NULL)
     {
@@ -742,7 +736,7 @@ int StrCmpi(const char* cStr1, const char* cStr2)
 //  Date        :24 August 2020
 //
 ////////////////////////////////////////////////////////////
-int StrNCmp(const char* cStr1, const char* cStr2, int iN)
+int Strings::StrNCmp(const char* cStr1, const char* cStr2, int iN)
 {
     if(cStr1 == NULL || cStr2 == NULL)
     {
@@ -780,7 +774,7 @@ int StrNCmp(const char* cStr1, const char* cStr2, int iN)
 //  Date        :24 August 2020
 //
 //////////////////////////////////////////////////////////////////////
-void StrSet(char *cSrc, char ch)
+void Strings::StrSet(char *cSrc, char ch)
 {
     if(cSrc == NULL)
     {
@@ -805,7 +799,7 @@ void StrSet(char *cSrc, char ch)
 //  Date        :24 August 2020
 //
 //////////////////////////////////////////////////////////////////////
-void StrNSetF(char *cSrc, char ch, int iN)
+void Strings::StrNSetF(char *cSrc, char ch, int iN)
 {
     if(cSrc == NULL)
     {
@@ -835,7 +829,7 @@ void StrNSetF(char *cSrc, char ch, int iN)
 //  Date        :24 August 2020
 //
 //////////////////////////////////////////////////////////////////////
-void StrNSetL(char *cSrc, char ch, int iN)
+void Strings::StrNSetL(char *cSrc, char ch, int iN)
 {
     char *cEnd = cSrc;
     if(cSrc == NULL)
@@ -871,7 +865,7 @@ void StrNSetL(char *cSrc, char ch, int iN)
 //  Date        :24 August 2020
 //
 //////////////////////////////////////////////////////////////////////
-int WordCnt(const char *cSrc)
+int Strings::WordCnt(const char *cSrc)
 {
     int iCnt = 0;
     int iState = OUT;
@@ -906,7 +900,7 @@ int WordCnt(const char *cSrc)
 //  Date        :24 August 2020
 //
 //////////////////////////////////////////////////////////////////////
-void WordRev(char* cSrc)
+void Strings::WordRev(char* cSrc)
 {
     if(cSrc == NULL)
     {
@@ -950,7 +944,7 @@ void WordRev(char* cSrc)
 //  Date        :24 August 2020
 //
 //////////////////////////////////////////////////////////////////////
-void MaxOccur(const char *cSrc)
+void Strings::MaxOccur(const char *cSrc)
 {
     int iChars[MAX_CHAR] = {0}, i = 0, iMax = 0;
     char ch = '\0';
@@ -991,7 +985,7 @@ void MaxOccur(const char *cSrc)
 //  Date        :24 August 2020
 //
 //////////////////////////////////////////////////////////////////////
-int FirstOccur(const char *cSrc, char ch)
+int Strings::FirstOccur(const char *cSrc, char ch)
 {
     int iCnt = -1;
     while(*cSrc != '\0')
@@ -1021,7 +1015,7 @@ int FirstOccur(const char *cSrc, char ch)
 //  Date        :24 August 2020
 //
 //////////////////////////////////////////////////////////////////////
-int LastOccur(const char *cSrc, char ch)
+int Strings::LastOccur(const char *cSrc, char ch)
 {
     if(cSrc == NULL)
     {
@@ -1061,7 +1055,7 @@ int LastOccur(const char *cSrc, char ch)
 //  Date        :24 August 2020
 //
 //////////////////////////////////////////////////////////////////////
-bool IsPldrm(const char* cSrc)
+bool Strings::IsPldrm(char* cSrc)
 {
     char *cStart = NULL;
     char *cEnd = NULL;
@@ -1069,7 +1063,7 @@ bool IsPldrm(const char* cSrc)
     if(cSrc == NULL)
     {
         cout << "Invalid Input\n" ;
-        return FALSE;
+        return false;
     }
 
     cStart = cSrc;
@@ -1090,11 +1084,11 @@ bool IsPldrm(const char* cSrc)
     }
     if(cStart >= cEnd)
     {
-        return TRUE;
+        return true;
     }
     else
     {
-        return FALSE;
+        return false;
     }
 }
 
@@ -1108,7 +1102,7 @@ bool IsPldrm(const char* cSrc)
 //  Date        :24 August 2020
 //
 ///////////////////////////////////////////////////////////////////////////
-bool IsiPldrm(const char* cSrc)
+bool Strings::IsiPldrm(char* cSrc)
 {
     char *cStart = NULL;
     char *cEnd = NULL;
@@ -1116,7 +1110,7 @@ bool IsiPldrm(const char* cSrc)
     if(cSrc == NULL)
     {
         cout << "Invalid Input\n" ;
-        return FALSE;
+        return false;
     }
 
     cStart = cSrc;
@@ -1137,11 +1131,11 @@ bool IsiPldrm(const char* cSrc)
     }
     if(cStart >= cEnd)
     {
-        return TRUE;
+        return true;
     }
     else
     {
-        return FALSE;
+        return false;
     }
 }
 
@@ -1156,7 +1150,7 @@ bool IsiPldrm(const char* cSrc)
 //  Date        :24 August 2020
 //
 //////////////////////////////////////////////////////////////////////
-void CharsCnt(const char *cSrc)
+void Strings::CharsCnt(const char *cSrc)
 {
     int iA = 0, iSp = 0, iD = 0, iW = 0, iState = OUT;
     if(NULL == cSrc)
@@ -1205,7 +1199,7 @@ void CharsCnt(const char *cSrc)
 //  Date        :24 August 2020
 //
 //////////////////////////////////////////////////////////////////////
-int CountUpr(const char *cSrc)
+int Strings::CountUpr(const char *cSrc)
 {
     int iCnt = 0;
     if(NULL == cSrc)
@@ -1236,7 +1230,7 @@ int CountUpr(const char *cSrc)
 //  Date        :24 August 2020
 //
 //////////////////////////////////////////////////////////////////////
-int CountLwr(const char *cSrc)
+int Strings::CountLwr(const char *cSrc)
 {
     int iCnt = 0;
     if(NULL == cSrc)
@@ -1267,14 +1261,14 @@ int CountLwr(const char *cSrc)
 //  Date        :24 August 2020
 //
 /////////////////////////////////////////////////////////////////////////
-bool IsAgrm(const char* cStr1, const char* cStr2)
+bool Strings::IsAgrm(const char* cStr1, const char* cStr2)
 {
-    char cChars[MAX_CAHR] = {0};
+    char cChars[MAX_CHAR] = {0};
     int i = 0;
     if(cStr1 == NULL || cStr2 == NULL)
     {
         cout << "Invalid Input\n" ;
-        return ERROR;
+        return false;
     }
 
     while(*cStr1 != '\0' && *cStr2 != '\0')
@@ -1286,7 +1280,7 @@ bool IsAgrm(const char* cStr1, const char* cStr2)
     }
     if(*cStr1 == '\0' && *cStr2 == '\0' )
     {
-       for (i = 0; i < MAX_CAHR; i++)
+       for (i = 0; i < MAX_CHAR; i++)
         {
             if(cChars[i] != 0)
             {
@@ -1294,13 +1288,13 @@ bool IsAgrm(const char* cStr1, const char* cStr2)
             }
         }
     }
-    if(i == MAX_CAHR)
+    if(i == MAX_CHAR)
     {
-        return TRUE;
+        return true;
     }
     else
     {
-        return FALSE;
+        return false;
     }    
 }
 
@@ -1314,7 +1308,7 @@ bool IsAgrm(const char* cStr1, const char* cStr2)
 //  Date        :24 August 2020
 //
 //////////////////////////////////////////////////////////////////////
-int CountSpecials(const char *cSrc)
+int Strings::CountSpecials(const char *cSrc)
 {
     int iCnt = 0;
     if(NULL == cSrc)

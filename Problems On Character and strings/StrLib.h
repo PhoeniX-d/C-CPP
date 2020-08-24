@@ -1,7 +1,8 @@
 
 #include<iostream>
+#include<stdio.h>
 
-#define MAXLEN       30
+#define MAXLEN       20
 #define ERROR      -999
 #define IN            1
 #define OUT           0
@@ -12,9 +13,6 @@ using namespace std;
 class Strings
 {
     public:
-        char *cStr;
-        
-        Strings();
         int  StrLen(const char*);
         void StrLwr(char*);
         void StrUpr(char*);
@@ -45,11 +43,11 @@ class Strings
         void MaxOccur(const char*);
         int  FirstOccur(const char *, char);
         int  LastOccur(const char *, char);
-        bool IsPldrm(const char *);
-        bool IsiPldrm(const char *);
+        bool IsPldrm(char *);
+        bool IsiPldrm(char *);
         void CharsCnt(const char *);
-        int  CountLow(const char *);
-        int  CountCap(const char *);
+        int  CountLwr(const char *);
+        int  CountUpr(const char *);
         int  CountSpace(const char *);
         int  CountSpecials(const char *);
         bool IsAgrm(const char *, const char *);
