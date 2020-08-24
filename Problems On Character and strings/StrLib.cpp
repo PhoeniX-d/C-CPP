@@ -2,7 +2,7 @@
 *   Program containing all string library functions
 */
 
-#include "StringLibrary.h"
+#include "StrLib.h"
 
 // constructor
 Strings::Strings()
@@ -24,15 +24,14 @@ int StrLen(const char *cSrc)
 {
     if(cSrc == NULL)
     {
-        printf("Invalid Input\n");
+        cout << "Invalid Input\n" ;
         return -1;
     }
     int iLen = 0;
-    char *cTemp = cSrc;
-    while(*cTemp != '\0')
+    while(*cSrc != '\0')
     {
         iLen++;
-        cTemp++;
+        cSrc++;
     }
     return iLen;
 }
@@ -42,16 +41,16 @@ int StrLen(const char *cSrc)
 //  Name        :StrLow
 //  Input       :const char*
 //  Returns     :void
-//  Description :converts lower case of entered string
+//  Description :convert into lower case the entered string
 //  Author      :Pranav Choudhary
 //  Date        :24 August 2020
 //
 //////////////////////////////////////////////////////////////////////
-void StrLow(char* cSrc)
+void StrLwr(char* cSrc)
 {
     if(NULL == cSrc)
     {
-        printf("Invalid Input\n");
+        cout << "Invalid Input\n" ;
     }
     while(*cSrc !='\0')
     {
@@ -77,7 +76,7 @@ void StrUpr(char* cSrc)
 {
     if(NULL == cSrc)
     {
-        printf("Invalid Input\n");
+       cout << "Invalid Input\n" ;
     }
     while(*cSrc !='\0')
     {
@@ -103,7 +102,7 @@ void StrTgl(char* cSrc)
 {
     if(NULL == cSrc)
     {
-        printf("Invalid Input\n");
+        cout << "Invalid Input\n" ;
     }
     while(*cSrc !='\0')
     {
@@ -122,18 +121,18 @@ void StrTgl(char* cSrc)
 ////////////////////////////////////////////////////////////
 //
 //  Name        :StrCat
-//  Input       :char*, char*
+//  Input       :char*, const char*
 //  Returns     :void
 //  Description :concate two strings
 //  Author      :Pranav Choudhary
 //  Date        :24 August 2020
 //
 ////////////////////////////////////////////////////////////
-void StrCat(char* cStr1, char* cStr2)
+void StrCat(char* cStr1, const char* cStr2)
 {
     if(cStr1 == NULL || cStr2 == NULL)
     {
-        printf("Invalid Input\n");
+        cout << "Invalid Input\n" ;
         return;
     }
     while(*cStr1 != '\0')
@@ -152,7 +151,7 @@ void StrCat(char* cStr1, char* cStr2)
 ////////////////////////////////////////////////////////////
 //
 //  Name        :StrNCat
-//  Input       :char*, char*, int
+//  Input       :char*, const char*, int
 //  Returns     :void
 //  Description :append N characters of second string after
 //               first string(Implement strncat())
@@ -160,11 +159,11 @@ void StrCat(char* cStr1, char* cStr2)
 //  Date        :24 August 2020
 //
 ////////////////////////////////////////////////////////////
-void StrNCat(char* cStr1, char* cStr2, int iN)
+void StrNCat(char* cStr1, const char* cStr2, int iN)
 {
     if(cStr1 == NULL || cStr2 == NULL)
     {
-        printf("Invalid Input\n");
+        cout << "Invalid Input\n" ;
         return;
     }
     if(iN < 0)
@@ -200,7 +199,7 @@ void StrCpy(const char* cSrc, char* cDest)
 {
     if(cSrc == NULL || cDest == NULL)
     {
-        printf("Invalid Input\n");
+        cout << "Invalid Input\n" ;
         return;
     }
 
@@ -227,7 +226,7 @@ void StrNCpy(const char* cSrc, char* cDest, int iN)
 {
     if(cSrc == NULL || cDest == NULL)
     {
-        printf("Invalid Input\n");
+        cout << "Invalid Input\n" ;
         return;
     }
     if(iN < 0)
@@ -258,7 +257,7 @@ void StrCpyCap(const char* cSrc, char* cDest)
 {
     if(cSrc == NULL || cDest == NULL)
     {
-        printf("Invalid Input\n");
+        cout << "Invalid Input\n" ;
         return;
     }
 
@@ -289,7 +288,7 @@ void StrCpyCapX(const char* cSrc, char* cDest)
 {
     if(cSrc == NULL || cDest == NULL)
     {
-        printf("Invalid Input\n");
+        cout << "Invalid Input\n" ;
         return;
     }
 
@@ -325,7 +324,7 @@ void StrCpyLwr(const char* cSrc, char* cDest)
 {
     if(cSrc == NULL || cDest == NULL)
     {
-        printf("Invalid Input\n");
+        cout << "Invalid Input\n" ;
         return;
     }
 
@@ -356,7 +355,7 @@ void StrCpyLwrX(const char* cSrc, char* cDest)
 {
     if(cSrc == NULL || cDest == NULL)
     {
-        printf("Invalid Input\n");
+        cout << "Invalid Input\n" ;
         return;
     }
 
@@ -379,16 +378,16 @@ void StrCpyLwrX(const char* cSrc, char* cDest)
 
 ////////////////////////////////////////////////////////////
 //
-//  Name        :StrCpySpace
+//  Name        :StrCpyRev
 //  Input       :const char*, char*
 //  Returns     :void
 //  Description :copy source string into destination string
-//               in Spaceerse
+//               in reverse
 //  Author      :Pranav Choudhary
-//  Date        :24 August 2020
+//  Date        :22 August 2020
 //
 ////////////////////////////////////////////////////////////
-void StrCpySpace(const char* cSrc, char* cDest)
+void StrCpyRev(const char* cSrc, char* cDest)
 {
     if(cSrc == NULL || cDest == NULL)
     {
@@ -426,7 +425,7 @@ void StrCpySpace(const char* cSrc, char* cDest)
 {
     if(cSrc == NULL || cDest == NULL)
     {
-        printf("Invalid Input\n");
+        cout << "Invalid Input\n" ;
         return;
     }
 
@@ -456,7 +455,7 @@ void StrCpyTgl(const char* cSrc, char* cDest)
 {
     if(cSrc == NULL || cDest == NULL)
     {
-        printf("Invalid Input\n");
+        cout << "Invalid Input\n" ;
         return;
     }
 
@@ -496,18 +495,18 @@ void StrRev(char* cSrc)
 {
     if(cSrc == NULL)
     {
-        printf("Invalid Input\n");
+        cout << "Invalid Input\n" ;
         return;
     }
     char cTemp = '\0';
     char *cStart = cSrc;
     char *cEnd = cSrc;
 
-    while(*cEnd != '\0')
+    while(*(cEnd + 1) != '\0')
     {
         cEnd++;
     }
-    cEnd--;
+
     while(cStart < cEnd)
     {
         cTemp = *cStart;
@@ -533,7 +532,7 @@ void StrNRevF(char* cSrc, int iN)
 {
     if(cSrc == NULL)
     {
-        printf("Invalid Input\n");
+        cout << "Invalid Input\n" ;
         return;
     }
 
@@ -551,8 +550,10 @@ void StrNRevF(char* cSrc, int iN)
         iN--;
         cEnd++;
     }
+
     if(iN != 1)
         cEnd--;
+
     while(cStart < cEnd)
     {
         cTemp = *cStart;
@@ -578,7 +579,7 @@ void StrNRevL(char* cSrc, int iN)
 {
     if(cSrc == NULL)
     {
-        printf("Invalid Input\n");
+        cout << "Invalid Input\n" ;
         return;
     }
 
@@ -636,7 +637,7 @@ void StrRangeRev(char* cSrc, int iS, int iE)
     }
     if(cSrc == NULL || iS >= iE || StrLen(cSrc) < iS || StrLen(cSrc) < iE)
     {
-        printf("Invalid Input\n");
+        cout << "Invalid Input\n" ;
         return;
     }
 
@@ -678,7 +679,7 @@ int StrCmp(const char* cStr1, const char* cStr2)
 {
     if(cStr1 == NULL || cStr2 == NULL)
     {
-        printf("Invalid Input\n");
+        cout << "Invalid Input\n" ;
         return ERROR;
     }
 
@@ -711,7 +712,7 @@ int StrCmpi(const char* cStr1, const char* cStr2)
 {
     if(cStr1 == NULL || cStr2 == NULL)
     {
-        printf("Invalid Input\n");
+        cout << "Invalid Input\n" ;
         return ERROR;
     }
 
@@ -744,7 +745,7 @@ int StrNCmp(const char* cStr1, const char* cStr2, int iN)
 {
     if(cStr1 == NULL || cStr2 == NULL)
     {
-        printf("Invalid Input\n");
+        cout << "Invalid Input\n" ;
         return ERROR;
     }
     if(iN < 0)
@@ -782,7 +783,7 @@ void StrSet(char *cSrc, char ch)
 {
     if(cSrc == NULL)
     {
-        printf("Invalid Input\n");
+        cout << "Invalid Input\n" ;
         return;
     }
     while(*cSrc != '\0')
@@ -807,7 +808,7 @@ void StrNSetF(char *cSrc, char ch, int iN)
 {
     if(cSrc == NULL)
     {
-        printf("Invalid Input\n");
+        cout << "Invalid Input\n" ;
         return;
     }
     if(iN < 0)
@@ -838,7 +839,7 @@ void StrNSetL(char *cSrc, char ch, int iN)
     char *cEnd = cSrc;
     if(cSrc == NULL)
     {
-        printf("Invalid Input\n");
+        cout << "Invalid Input\n" ;
         return;
     }
     if(iN < 0)
@@ -875,7 +876,7 @@ int WordCnt(const char *cSrc)
     int iState = OUT;
     if(NULL == cSrc)
     {
-        printf("Invalid Input\n");
+        cout << "Invalid Input\n" ;
         return ERROR;
     }
     while (*cSrc != '\0')
@@ -908,7 +909,7 @@ void WordRev(char* cSrc)
 {
     if(cSrc == NULL)
     {
-        printf("Invalid Input\n");
+        cout << "Invalid Input\n" ;
         return;
     }
     char cTemp = '\0';
@@ -954,7 +955,7 @@ void MaxOccur(const char *cSrc)
     char ch = '\0';
     if(NULL == cSrc)
     {
-        printf("Invalid Input\n");
+        cout << "Invalid Input\n" ;
         return;
     }
     while (*cSrc != '\0')
@@ -975,7 +976,7 @@ void MaxOccur(const char *cSrc)
         }
     }
 
-    printf("Max occuring char \'%c\' with occurance %d\n", ch, iMax);
+    cout << "Max occuring char" << ch << " with occurance" << iMax << endl;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -1023,7 +1024,7 @@ int LastOccur(const char *cSrc, char ch)
 {
     if(cSrc == NULL)
     {
-        printf("Invalid Input\n");
+        cout << "Invalid Input\n" ;
         return -1;
     }
     int iCnt = 0;
@@ -1066,7 +1067,7 @@ bool IsPldrm(const char* cSrc)
 
     if(cSrc == NULL)
     {
-        printf("Invalid Input\n");
+        cout << "Invalid Input\n" ;
         return FALSE;
     }
 
@@ -1113,7 +1114,7 @@ bool IsiPldrm(const char* cSrc)
 
     if(cSrc == NULL)
     {
-        printf("Invalid Input\n");
+        cout << "Invalid Input\n" ;
         return FALSE;
     }
 
@@ -1159,7 +1160,7 @@ void CharsCnt(const char *cSrc)
     int iA = 0, iSp = 0, iD = 0, iW = 0, iState = OUT;
     if(NULL == cSrc)
     {
-        printf("Invalid Input\n");
+        cout << "Invalid Input\n" ;
         return;
     }
     while (*cSrc != '\0')
@@ -1187,28 +1188,28 @@ void CharsCnt(const char *cSrc)
         }       
         cSrc++;
     }
-    printf("\nTotal Alphabets:\t%d\n", iA);
-    printf("Total Digits :\t % d\n", iD);
-    printf("Total Special symbols:\t%d\n", iSp);
-    printf("Total Words:\t%d\n", iW);
+    cout << "Alphabets\t:" << iA << endl;
+    cout << "Digits\t:" << iD << endl;
+    cout << "Special\t:" << iSp << endl;
+    cout << "Words\t:" << iW << endl;
 }
 
 //////////////////////////////////////////////////////////////////////
 //
 //  Name        :CountUpr
-//  Input       :char *
+//  Input       :const char *
 //  Returns     :int
 //  Description :count capital letters in given string
 //  Author      :Pranav Choudhary
 //  Date        :24 August 2020
 //
 //////////////////////////////////////////////////////////////////////
-int CountUpr(char *cSrc)
+int CountUpr(const char *cSrc)
 {
     int iCnt = 0;
     if(NULL == cSrc)
     {
-        printf("Invalid Input\n");
+        cout << "Invalid Input\n" ;
         return ERROR;
     }
     
@@ -1227,19 +1228,19 @@ int CountUpr(char *cSrc)
 //////////////////////////////////////////////////////////////////////
 //
 //  Name        :CountLwr
-//  Input       :char *
+//  Input       :const char *
 //  Returns     :int
 //  Description :count small letters in given string
 //  Author      :Pranav Choudhary
 //  Date        :24 August 2020
 //
 //////////////////////////////////////////////////////////////////////
-int CountLwr(char *cSrc)
+int CountLwr(const char *cSrc)
 {
     int iCnt = 0;
     if(NULL == cSrc)
     {
-        printf("Invalid Input\n");
+        cout << "Invalid Input\n" ;
         return ERROR;
     }
     
@@ -1271,7 +1272,7 @@ bool IsAgrm(const char* cStr1, const char* cStr2)
     int i = 0;
     if(cStr1 == NULL || cStr2 == NULL)
     {
-        printf("Invalid Input\n");
+        cout << "Invalid Input\n" ;
         return ERROR;
     }
 
@@ -1317,7 +1318,7 @@ int CountSpecials(const char *cSrc)
     int iCnt = 0;
     if(NULL == cSrc)
     {
-        printf("Invalid Input\n");
+        cout << "Invalid Input\n" ;
         return ERROR;
     }
     

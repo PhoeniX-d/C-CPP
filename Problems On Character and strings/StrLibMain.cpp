@@ -1,4 +1,4 @@
-#include "StringLibrary.cpp"
+#include "StrLib.cpp"
 
 int main()
 {

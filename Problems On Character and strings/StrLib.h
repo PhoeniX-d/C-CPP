@@ -2,6 +2,9 @@
 
 #define MAXLEN       30
 #define ERROR      -999
+#define IN            1
+#define OUT           0
+#define MAX_CHAR    127
 
 using namespace std;
 
@@ -15,8 +18,8 @@ class Strings
         void StrLwr(char*);
         void StrUpr(char*);
         void StrTgl(char*);
-        void StrCat(char*, char*);
-        void StrNCat(char*, char*, int);
+        void StrCat(char*, const char*);
+        void StrNCat(char*, const char*, int);
         void StrCpy(const char*, char*);
         void StrNCpy(const char*, char*, int);
         void StrCpyCap(const char*, char*);
