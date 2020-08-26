@@ -16,7 +16,7 @@ using namespace std;
 class Strings
 {
     public:
-    
+        void UpdatorNL(char *);
         int  StrLen(const char*);
         void StrLwr(char*);
         void StrNLwr(char*, int, char);
@@ -44,8 +44,8 @@ class Strings
         int  StriNCmp(const char*, const char*, int, char);
         void StrSet(char*, char);
         void StrNSet(char*, char, int, char);
-        bool IsPldrm(char *);
-        bool IsiPldrm(char *);
+        bool IsPldrm(const char *);
+        bool IsiPldrm(const char *);
         bool IsAgrm(const char *, const char *);
         int  WordCnt(const char*);
         void WordRev(char*);
