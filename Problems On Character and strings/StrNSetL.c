@@ -60,11 +60,10 @@ void StrNSetL(char *cSrc, char ch, int iN)
     {
         cEnd++;
     }
-    while(cEnd != cSrc && iN != 0)
+    do
     {
         *cEnd = ch;
         cEnd--;
         iN--;
-    }
-    *cEnd = ch;
+    }while(cEnd != (cSrc - 1) && iN != 0);
 }

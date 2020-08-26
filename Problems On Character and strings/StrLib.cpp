@@ -29,14 +29,14 @@ int Strings::StrLen(const char *cSrc)
         cSrc++;
     }
     return iLen;
-}
+}// end of StrLen
 
 //////////////////////////////////////////////////////////////////////
 //
-//  Name        :StrLow
-//  Input       :const char*
+//  Name        :StrLwr
+//  Input       :char*
 //  Returns     :void
-//  Description :convert into lower case the entered string
+//  Description :converts lower case of entered string
 //  Author      :Pranav Choudhary
 //  Date        :24 August 2020
 //
@@ -44,18 +44,71 @@ int Strings::StrLen(const char *cSrc)
 void Strings::StrLwr(char* cSrc)
 {
     if(NULL == cSrc)
+	{
+		printf("Invalid Input\n");
+	}
+	while(*cSrc !='\0')
+	{
+		if((*cSrc >= 'A') && (*cSrc <= 'Z'))
+		{
+			*cSrc = *cSrc + 32;
+		}
+		cSrc++;
+	}
+}// end of StrLwr
+
+//////////////////////////////////////////////////////////////////////
+//
+//  Name        :StrNLwr
+//  Input       :const char*, int, char
+//  Returns     :void
+//  Description :convert into lower case the entered string
+//  Author      :Pranav Choudhary
+//  Date        :24 August 2020
+//
+//////////////////////////////////////////////////////////////////////
+void Strings::StrNLwr(char* cSrc, int iN, char cFlag)
+{
+    if(NULL == cSrc)
     {
         cout << "Invalid Input\n" ;
+        return;
     }
-    while(*cSrc !='\0')
+    if(iN < 0)
     {
-        if((*cSrc >= 'A') && (*cSrc <= 'Z'))
-        {
-            *cSrc = *cSrc + 32;
-        }
-        cSrc++;
+        iN = -iN;
     }
-}
+    
+    if (cFlag == FIRST)
+    {
+        while(*cSrc !='\0' && iN != 0)
+        {
+            if((*cSrc >= 'A') && (*cSrc <= 'Z'))
+            {
+                *cSrc = *cSrc + 32;
+            }
+            cSrc++;
+            iN--;
+        }
+    }
+    else if(cFlag == LAST)
+    {
+        char *cEnd = cSrc;
+        while(*(cEnd + 1) != '\0')
+        {
+            cEnd++;
+        }
+        do
+        {
+            if((*cEnd >= 'A') && (*cEnd <= 'Z'))
+            {
+                *cEnd = *cEnd + 32;
+            }
+            cEnd--;
+            iN--;
+        } while (cEnd != (cSrc - 1) && iN != 0);
+    }
+}// end of StrNLwr
 
 //////////////////////////////////////////////////////////////////////
 //
@@ -81,7 +134,58 @@ void Strings::StrUpr(char* cSrc)
         }
         cSrc++;
     }
-}
+}// end of StrUpr
+
+//////////////////////////////////////////////////////////////////////
+//
+//  Name        :StrNUpr
+//  Input       :char*, int, char
+//  Returns     :void
+//  Description :converts upper case entered string upto N
+//  Author      :Pranav Choudhary
+//  Date        :25 August 2020
+//
+//////////////////////////////////////////////////////////////////////
+void Strings::StrNUpr(char* cSrc, int iN, char cFlag)
+{
+    if(NULL == cSrc)
+	{
+		printf("Invalid Input\n");
+	}
+    if(iN < 0)
+    {
+        iN = -iN;
+    }
+    if(cFlag == FIRST)
+    {
+        while(*cSrc !='\0' && iN != 0)
+        {
+            if((*cSrc >= 'a') && (*cSrc <= 'z'))
+            {
+                *cSrc = *cSrc - 32;
+            }
+            cSrc++;
+            iN--;
+        }
+    }
+    else if(cFlag == LAST)
+    {
+        char *cEnd = cSrc;
+        while(*(cEnd + 1) != '\0')
+        {
+            cEnd++;
+        }
+        do
+        {
+            if((*cEnd >= 'a') && (*cEnd <= 'z'))
+            {
+                *cEnd = *cEnd - 32;
+            }
+            cEnd--;
+            iN--;
+        } while (cEnd != (cSrc - 1) && iN != 0);
+    }
+}// end of StrNUpr
 
 //////////////////////////////////////////////////////////////////////
 //
@@ -111,7 +215,69 @@ void Strings::StrTgl(char* cSrc)
         }
         cSrc++;
     }
-}
+
+}// end of StrTgl
+
+//////////////////////////////////////////////////////////////////////
+//
+//  Name        :StrTgl
+//  Input       :const char*
+//  Returns     :void
+//  Description :Toggle case of entered string
+//  Author      :Pranav Choudhary
+//  Date        :24 August 2020
+//
+//////////////////////////////////////////////////////////////////////
+void Strings::StrNTgl(char* cSrc, int iN, char cFlag)
+{
+    if(NULL == cSrc)
+    {
+        cout << "Invalid Input\n" ;
+    }
+    
+    if(iN < 0)
+    {
+        iN = -iN;
+    }
+
+    if(cFlag == FIRST)
+    {
+        while(*cSrc !='\0')
+        {
+            if((*cSrc >= 'A') && (*cSrc <= 'Z'))
+            {
+                *cSrc = *cSrc + 32;
+            }
+            else if((*cSrc >= 'a') && (*cSrc <= 'z'))
+            {
+                *cSrc = *cSrc - 32;
+            }
+            cSrc++;
+        }
+    }
+    else if(cFlag == LAST)
+    {
+        char *cEnd = cSrc;
+        while(*(cEnd + 1) != '\0')
+        {
+            cEnd++;
+        }
+
+        do
+        {
+            if((*cEnd >= 'A') && (*cEnd <= 'Z'))
+            {
+                *cEnd = *cEnd + 32;
+            }
+            else if((*cEnd >= 'a') && (*cEnd<= 'z'))
+            {
+                *cEnd = *cEnd - 32;
+            }
+            cEnd--;
+        } while ((cSrc - 1) != cEnd && iN != 0);
+    }
+
+}// end of StrNTgl
 
 ////////////////////////////////////////////////////////////
 //
@@ -146,15 +312,15 @@ void Strings::StrCat(char* cStr1, const char* cStr2)
 ////////////////////////////////////////////////////////////
 //
 //  Name        :StrNCat
-//  Input       :char*, const char*, int
+//  Input       :char*, char*, int, char
 //  Returns     :void
 //  Description :append N characters of second string after
 //               first string(Implement strncat())
 //  Author      :Pranav Choudhary
-//  Date        :24 August 2020
+//  Date        :25 August 2020
 //
 ////////////////////////////////////////////////////////////
-void Strings::StrNCat(char* cStr1, const char* cStr2, int iN)
+void Strings::StrNCat(char* cStr1, const char* cStr2, int iN, char cFlag)
 {
     if(cStr1 == NULL || cStr2 == NULL)
     {
@@ -165,20 +331,40 @@ void Strings::StrNCat(char* cStr1, const char* cStr2, int iN)
     {
         iN = -iN;
     }
-
     while(*cStr1 != '\0')
     {
         cStr1++;
     }
-    while(*cStr2 != '\0' && iN != 0)
+    if(cFlag == FIRST)
     {
-        *cStr1 = *cStr2;
-        cStr2++;
-        cStr1++;
-        iN--;
+        while(*cStr2 != '\0' && iN != 0)
+        {
+            *cStr1 = *cStr2;
+            cStr2++;
+            cStr1++;
+            iN--;
+        }
+        *cStr1 = '\0';
     }
-    *cStr1 = '\0';
-}
+    else if(cFlag == LAST)
+    {
+        const char *cEnd = cStr2;        
+        while(*(cEnd + 1) != '\0')
+        {
+            cEnd++;
+        }
+
+        do
+        {
+            *cStr1 = *cEnd;
+            cEnd--;
+            cStr1++;
+            iN--;
+        } while ((cStr2 - 1) != cEnd && iN != 0);
+        *cStr1 = '\0';
+    }
+
+}// end of StrNCat
 
 ////////////////////////////////////////////////////////////
 //
@@ -217,7 +403,7 @@ void Strings::StrCpy(const char* cSrc, char* cDest)
 //  Date        :24 August 2020
 //
 ///////////////////////////////////////////////////////////////////////
-void Strings::StrNCpy(const char* cSrc, char* cDest, int iN)
+void Strings::StrNCpy(const char* cSrc, char* cDest, int iN, char cFlag)
 {
     if(cSrc == NULL || cDest == NULL)
     {
@@ -227,15 +413,35 @@ void Strings::StrNCpy(const char* cSrc, char* cDest, int iN)
     if(iN < 0)
         iN = -iN;
 
-    while(*cSrc != '\0' && iN != 0)
+    if(cFlag == FIRST)
     {
-        *cDest = *cSrc;
-        cSrc++;
-        cDest++;
-        iN--;
+        while(*cSrc != '\0' && iN != 0)
+        {
+            *cDest = *cSrc;
+            cSrc++;
+            cDest++;
+            iN--;
+        }
+        *cDest = '\0';
     }
-    *cDest = '\0';
-}
+    else if(cFlag == LAST)
+    {
+        const char *cEnd = cSrc;
+        while(*(cEnd + 1) != '\0')
+        {
+            cEnd++;
+        }
+        do
+        {
+            *cDest = *cEnd;
+            cEnd--;
+            cDest++;
+            iN--;
+        } while ((cSrc - 1) != cEnd && iN != 0);
+        *cDest = '\0';
+    }
+
+}// end of StrNCpy
 
 ////////////////////////////////////////////////////////////
 //
@@ -266,7 +472,7 @@ void Strings::StrCpyCap(const char* cSrc, char* cDest)
         cSrc++;
     }
     *cDest = '\0';
-}
+}// end of StrCpyCap
 
 ////////////////////////////////////////////////////////////////////////////
 //
@@ -302,7 +508,7 @@ void Strings::StrCpyCapX(const char* cSrc, char* cDest)
         cSrc++;
     }
     *cDest = '\0';
-}
+}// end of StrCpyCapX
 
 ////////////////////////////////////////////////////////////
 //
@@ -333,7 +539,7 @@ void Strings::StrCpyLwr(const char* cSrc, char* cDest)
         cSrc++;
     }
     *cDest = '\0';
-}
+}// end of StrCpyLwr
 
 ////////////////////////////////////////////////////////////////////////////
 //
@@ -369,7 +575,7 @@ void Strings::StrCpyLwrX(const char* cSrc, char* cDest)
         cSrc++;
     }
     *cDest = '\0';
-}
+}// end of StrCpyLwrX
 
 ////////////////////////////////////////////////////////////
 //
@@ -404,7 +610,7 @@ void Strings::StrCpyRev(const char* cSrc, char* cDest)
         iCnt--;
     }
     *cDest = '\0';
-}
+}// end of StrCpyRev
 
 ////////////////////////////////////////////////////////////
 //
@@ -434,7 +640,7 @@ void Strings::StrCpySpace(const char* cSrc, char* cDest)
         cSrc++;
     }
     *cDest = '\0';
-}
+}// end of StrCpySpace
 
 ////////////////////////////////////////////////////////////////////////////
 //
@@ -474,7 +680,7 @@ void Strings::StrCpyTgl(const char* cSrc, char* cDest)
         cSrc++;
     }
     *cDest = '\0';
-}
+}// end of StrCpyTgl
 
 //////////////////////////////////////////////////////////////////////
 //
@@ -510,11 +716,11 @@ void Strings::StrRev(char* cSrc)
         cEnd--;
         cStart++;
     }
-}
+}// end of StrRev
 
 //////////////////////////////////////////////////////////////////////
 //
-//  Name        :StrNRevF
+//  Name        :StrNRev
 //  Input       :char*, int
 //  Returns     :void
 //  Description :reverse the string till first N characters without 
@@ -523,14 +729,13 @@ void Strings::StrRev(char* cSrc)
 //  Date        :24 August 2020
 //
 //////////////////////////////////////////////////////////////////////
-void Strings::StrNRevF(char* cSrc, int iN)
+void Strings::StrNRev(char* cSrc, int iN, char cFlag)
 {
     if(cSrc == NULL)
     {
         cout << "Invalid Input\n" ;
         return;
     }
-
     if(iN < 0)
     {
         iN = -iN;
@@ -539,75 +744,54 @@ void Strings::StrNRevF(char* cSrc, int iN)
     char cTemp = '\0';
     char *cStart = cSrc;
     char *cEnd = cSrc;
-
-    while(*cEnd != '\0' && iN != 1)
+    
+    if(cFlag == FIRST)
     {
-        iN--;
-        cEnd++;
+        while(*cEnd != '\0' && iN != 1)
+        {
+            iN--;
+            cEnd++;
+        }
+
+        if(iN != 1)
+            cEnd--;
+
+        while(cStart < cEnd)
+        {
+            cTemp = *cStart;
+            *cStart = *cEnd;
+            *cEnd = cTemp;
+            cEnd--;
+            cStart++;
+        }
     }
-
-    if(iN != 1)
-        cEnd--;
-
-    while(cStart < cEnd)
+    else if(cFlag == LAST)
     {
-        cTemp = *cStart;
-        *cStart = *cEnd;
-        *cEnd = cTemp;
-        cEnd--;
-        cStart++;
-    }
-}
+        cStart = cSrc;
+        cEnd = NULL;
 
-//////////////////////////////////////////////////////////////////////
-//
-//  Name        :StrNRevL
-//  Input       :char*, int
-//  Returns     :void
-//  Description :reverse the string till las    t N characters without 
-//               taking another string.
-//  Author      :Pranav Choudhary
-//  Date        :24 August 2020
-//
-//////////////////////////////////////////////////////////////////////
-void Strings::StrNRevL(char* cSrc, int iN)
-{
-    if(cSrc == NULL)
-    {
-        cout << "Invalid Input\n" ;
-        return;
-    }
+        while(*(cStart + 1) != '\0')
+        {
+            cStart++;
+        }
+        cEnd = cStart;
 
-    if(iN < 0)
-    {
-        iN = -iN;
-    }
+        while(iN != 0 && cEnd != cSrc)
+        {
+            iN--;
+            cEnd--;
+        }
 
-    char cTemp = '\0';
-    char *cStart = cSrc;
-    char *cEnd = NULL;
-
-    while(*cStart != '\0')
-    {
-        cStart++;
+        while(cStart > cEnd)
+        {
+            cTemp = *cStart;
+            *cStart = *cEnd;
+            *cEnd = cTemp;
+            cEnd++;
+            cStart--;
+        }
     }
-    cEnd = cStart--;
-
-    while(iN != 0 && cEnd != cSrc)
-    {
-        iN--;
-        cEnd--;
-    }
-
-    while(cStart > cEnd)
-    {
-        cTemp = *cStart;
-        *cStart = *cEnd;
-        *cEnd = cTemp;
-        cEnd++;
-        cStart--;
-    }
-}
+}// end of StrNRev
 
 //////////////////////////////////////////////////////////////////////
 //
@@ -658,7 +842,7 @@ void Strings::StrRangeRev(char* cSrc, int iS, int iE)
         cEnd--;
         cStart++;
     }
-}
+}// end of StrRangeRev
 
 ////////////////////////////////////////////////////////////
 //
@@ -695,7 +879,7 @@ int Strings::StrCmp(const char* cStr1, const char* cStr2)
 
 ////////////////////////////////////////////////////////////
 //
-//  Name        :StrCmpi
+//  Name        :StriCmp
 //  Input       :const char*, const char*
 //  Returns     :int
 //  Description :compare 2 strings case insensitive
@@ -736,7 +920,7 @@ int Strings::StriCmp(const char* cStr1, const char* cStr2)
 //  Date        :24 August 2020
 //
 ////////////////////////////////////////////////////////////
-int Strings::StrNCmp(const char* cStr1, const char* cStr2, int iN)
+int Strings::StrNCmp(const char* cStr1, const char* cStr2, int iN, char cFlag)
 {
     if(cStr1 == NULL || cStr2 == NULL)
     {
@@ -747,20 +931,121 @@ int Strings::StrNCmp(const char* cStr1, const char* cStr2, int iN)
     {
         iN = -iN;
     }
-    while(*cStr1 == *cStr2 && iN != 0)
+    if(cFlag == FIRST)
     {
-        if(*cStr1 == '\0' && iN != 0)
+        while(*cStr1 == *cStr2 && iN != 0)
         {
-            break;
+            if(*cStr1 == '\0' && iN != 0)
+            {
+                break;
+            }
+            cStr1++;
+            cStr2++;
+            iN--;
         }
-        cStr1++;
-        cStr2++;
-        iN--;
+        if(*cStr1 == *cStr2)
+            return 0;
+        else
+            return *cStr1 - *cStr2;
     }
-    if(*cStr1 == *cStr2)
-        return 0;
-    else
-        return *cStr1 - *cStr2;
+    else if(cFlag == LAST)
+    {
+        const char *cEnd1 = cStr1;
+        const char *cEnd2 = cStr2;
+
+        while(*(cEnd1 + 1) != '\0')
+        {
+            cEnd1++;
+        }
+        while(*(cEnd2 + 1) != '\0')
+        {
+            cEnd2++;
+        }
+
+        while (*cEnd1 == *cEnd2 && iN != 0)
+        {
+            if(*cEnd1 == *cStr1 && iN != 0)
+            {
+                break;
+            }
+            cEnd1--;
+            cEnd2--;
+            iN--;
+        }
+        if (*cEnd1 == *cEnd2)
+            return 0;
+        else
+            return *cEnd1- *cEnd2;
+    }
+}// end of StrNCmp()
+
+////////////////////////////////////////////////////////////
+//
+//  Name        :StriNCmp
+//  Input       :const char*, const char*
+//  Returns     :int
+//  Description :Implementation of strncmp()
+//  Author      :Pranav Choudhary
+//  Date        :24 August 2020
+//
+////////////////////////////////////////////////////////////
+int Strings::StriNCmp(const char* cStr1, const char* cStr2, int iN, char cFlag)
+{
+    if(cStr1 == NULL || cStr2 == NULL)
+    {
+        cout << "Invalid Input\n" ;
+        return ERROR;
+    }
+    if(iN < 0)
+    {
+        iN = -iN;
+    }
+    if(cFlag == FIRST)
+    {
+        while(*cStr1 == *cStr2 && iN != 0)
+        {
+            if((*cStr1 != *cStr2) && (*cStr1 != *cStr2 + 32) && (*cStr1 != *cStr2 - 32) && iN != 0)
+            {
+                break;
+            }
+            cStr1++;
+            cStr2++;
+            iN--;
+        }
+        if(*cStr1 == *cStr2)
+            return 0;
+        else
+            return *cStr1 - *cStr2;
+    }
+    else if(cFlag == LAST)
+    {
+        const char *cEnd1 = cStr1;
+        const char *cEnd2 = cStr2;
+
+        while(*(cEnd1 + 1) != '\0')
+        {
+            cEnd1++;
+        }
+        while(*(cEnd2 + 1) != '\0')
+        {
+            cEnd2++;
+        }
+
+        while (*cEnd1 == *cEnd2 && iN != 0)
+        {
+            if((*cEnd1 != *cStr1) && (*cEnd1 != *cStr1 + 32) && (*cEnd1 != *cStr1 - 32) && iN != 0)
+            {
+                break;
+            }
+            cEnd1--;
+            cEnd2--;
+            iN--;
+        }
+        if (*cEnd1 == *cEnd2)
+            return 0;
+        else
+            return *cEnd1- *cEnd2;
+    }
 }// end of StrNCmp()
 
 //////////////////////////////////////////////////////////////////////
@@ -790,7 +1075,7 @@ void Strings::StrSet(char *cSrc, char ch)
 
 //////////////////////////////////////////////////////////////////////
 //
-//  Name        :StrNSetF
+//  Name        :StrNSet
 //  Input       :char*, char
 //  Returns     :void
 //  Description :sets first N characters in string to a specific 
@@ -799,7 +1084,7 @@ void Strings::StrSet(char *cSrc, char ch)
 //  Date        :24 August 2020
 //
 //////////////////////////////////////////////////////////////////////
-void Strings::StrNSetF(char *cSrc, char ch, int iN)
+void Strings::StrNSet(char *cSrc, char ch, int iN, char cFlag)
 {
     if(cSrc == NULL)
     {
@@ -810,50 +1095,32 @@ void Strings::StrNSetF(char *cSrc, char ch, int iN)
     {
         iN = -iN;
     }
-    while(*cSrc != '\0' && iN != 0)
+    if(cFlag == FIRST)
     {
-        *cSrc = ch;
-        cSrc++;
-        iN--;
+        while(*cSrc != '\0' && iN != 0)
+        {
+            *cSrc = ch;
+            cSrc++;
+            iN--;
+        }
     }
-}
-
-/////////////////////////////////////////////////////////////////////
-//
-//  Name        :StrNSetL
-//  Input       :char*, char
-//  Returns     :void
-//  Description :sets last N characters in string to a specific 
-//               character (Implement strnset())
-//  Author      :Pranav Choudhary
-//  Date        :24 August 2020
-//
-//////////////////////////////////////////////////////////////////////
-void Strings::StrNSetL(char *cSrc, char ch, int iN)
-{
-    char *cEnd = cSrc;
-    if(cSrc == NULL)
+    else if(cFlag == LAST)
     {
-        cout << "Invalid Input\n" ;
-        return;
-    }
-    if(iN < 0)
-    {
-        iN = -iN;
+        char *cEnd = cSrc;
+        while (*(cEnd + 1) != '\0')
+        {
+            cEnd++;
+        }
+        do
+        {
+            *cEnd = ch;
+            cEnd--;
+            iN--;
+        } while (cEnd != (cSrc - 1) && iN != 0);
     }
 
-    while(*(cEnd + 1) != '\0')
-    {
-        cEnd++;
-    }
-    while(cEnd != cSrc && iN != 0)
-    {
-        *cEnd = ch;
-        cEnd--;
-        iN--;
-    }
-    *cEnd = ch;
-}
+}// end of StrNSet
+
 
 //////////////////////////////////////////////////////////////////////
 //
