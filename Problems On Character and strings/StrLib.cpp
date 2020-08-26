@@ -1563,7 +1563,7 @@ bool Strings::IsAgrm(const char* cStr1, const char* cStr2)
     {
         return false;
     }    
-}
+}// end of IsAgrm
 
 //////////////////////////////////////////////////////////////////////
 //
@@ -1596,4 +1596,28 @@ int Strings::CountSpecials(const char *cSrc)
     }
 
     return iCnt;
-}
+} // end of CountSpecials
+
+//////////////////////////////////////////////////////////////////////
+//
+//  Name        :CountSpace
+//  Input       :const char*
+//  Returns     :int
+//  Description :compute space in the entered string
+//  Author      :Pranav Choudhary
+//  Date        :26 August 2020
+//
+//////////////////////////////////////////////////////////////////////
+int Strings::CountSpace(const char *cSrc)
+{
+    int iCnt = 0;
+    while(*cSrc != '\0')
+    {
+        if(*cSrc == 32)
+        {
+            iCnt++;
+        }
+        cSrc++;
+    }
+    return iCnt;
+}// end of CountSpace

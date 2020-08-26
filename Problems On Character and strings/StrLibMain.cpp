@@ -39,6 +39,88 @@ int main()
                 iRet = sObj.StrLen(cInput[1]);
                 cout << iRet;
             }
+            else if(sObj.StriCmp(cInput[0], "strlwr") == 0)
+            {
+                sObj.StrLwr(cInput[1]);
+                cout << cInput[1] << endl;
+            }
+            else if(sObj.StriCmp(cInput[0], "strupr") == 0)
+            {
+                sObj.StrUpr(cInput[1]);
+                cout << cInput[1] << endl;
+            }
+            else if(sObj.StriCmp(cInput[0], "strtgl") == 0)
+            {
+                sObj.StrTgl(cInput[1]);
+                cout << cInput[1] << endl;
+            }
+            else if(sObj.StriCmp(cInput[0], "strrev") == 0)
+            {
+                sObj.StrRev(cInput[1]);
+                cout << cInput[1] << endl;
+            }
+            else if(sObj.StriCmp(cInput[0], "ispldrm") == 0)
+            {
+                bRet = sObj.IsPldrm(cInput[1]);
+                if(bRet == true)
+                {
+                    cout << "Palidrome String\n";
+                }
+                else
+                {
+                    cout << "Not Palindrome string\n";
+                }
+            }
+            else if(sObj.StriCmp(cInput[0], "isipldrm") == 0)
+            {
+                bRet = sObj.IsiPldrm(cInput[1]);
+                if(bRet == true)
+                {
+                    cout << "Palidrome String\n";
+                }
+                else
+                {
+                    cout << "Not Palindrome string\n";
+                }
+            }
+            else if(sObj.StriCmp(cInput[0], "wordcnt") == 0)
+            {
+                iRet = sObj.WordCnt(cInput[1]);
+                cout << "Word Count is:\t" << iRet;
+            }
+            else if(sObj.StriCmp(cInput[0], "wordrev") == 0)
+            {
+                sObj.WordRev(cInput[1]);
+                cout << cInput[1] << endl;
+            }
+            else if(sObj.StriCmp(cInput[0], "maxoccur") == 0)
+            {
+                sObj.MaxOccur(cInput[1]);                
+            }
+            else if(sObj.StriCmp(cInput[0], "charscnt") == 0)
+            {
+                sObj.CharsCnt(cInput[1]);
+            }
+            else if(sObj.StriCmp(cInput[0], "countlwr") == 0)
+            {
+                iRet = sObj.CountLwr(cInput[1]);
+                cout << iRet << endl;
+            }
+            else if(sObj.StriCmp(cInput[0], "countupr") == 0)
+            {
+                iRet = sObj.CountUpr(cInput[1]);
+                cout << iRet << endl;
+            }
+            else if(sObj.StriCmp(cInput[0], "countspecial") == 0)
+            {
+                iRet = sObj.CountSpecials(cInput[1]);
+                cout << iRet << endl;
+            }
+            else if(sObj.StriCmp(cInput[0], "countspace") == 0)
+            {
+                iRet = sObj.CountSpace(cInput[1]);
+                cout << iRet << endl;
+            }
         }
         else
         {

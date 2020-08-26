@@ -47,7 +47,6 @@ class Strings
         bool IsPldrm(char *);
         bool IsiPldrm(char *);
         bool IsAgrm(const char *, const char *);
-        bool IsiAgrm(const char *, const char *);
         int  WordCnt(const char*);
         void WordRev(char*);
         void MaxOccur(const char*);
