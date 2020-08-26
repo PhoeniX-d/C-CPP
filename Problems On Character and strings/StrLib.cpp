@@ -243,7 +243,7 @@ void Strings::StrNTgl(char* cSrc, int iN, char cFlag)
 
     if(cFlag == FIRST)
     {
-        while(*cSrc !='\0'  && *cSrc != '\n')
+        while(*cSrc !='\0'  && *cSrc != '\n' && iN != 0)
         {
             if((*cSrc >= 'A') && (*cSrc <= 'Z'))
             {
@@ -254,6 +254,7 @@ void Strings::StrNTgl(char* cSrc, int iN, char cFlag)
                 *cSrc = *cSrc - 32;
             }
             cSrc++;
+            iN--;
         }
     }
     else if(cFlag == LAST)
@@ -275,6 +276,7 @@ void Strings::StrNTgl(char* cSrc, int iN, char cFlag)
                 *cEnd = *cEnd - 32;
             }
             cEnd--;
+            iN--;
         } while ((cSrc - 1) != cEnd && iN != 0);
     }
 
@@ -432,13 +434,17 @@ void Strings::StrNCpy(const char* cSrc, char* cDest, int iN, char cFlag)
         {
             cEnd++;
         }
-        do
+        while(iN != 1)
+        {
+            cEnd--;
+            iN--;
+        }
+        while (*cEnd != '\0' && *cEnd != '\n')
         {
             *cDest = *cEnd;
-            cEnd--;
+            cEnd++;
             cDest++;
-            iN--;
-        } while ((cSrc - 1) != cEnd && iN != 0);
+        } 
         *cDest = '\0';
     }
 

@@ -233,10 +233,93 @@ int main()
                 cout << "Last Ocuurance at index " << iRet;
             }                        
         }
+        else if(iCount == 4)
+        {
+            if(sObj.StriCmp(cInput[0], "strnlwr") == 0)
+            {
+                int iN = atoi(cInput[2]);
+                char cFlag = atoi(cInput[3]);
+                sObj.StrNLwr(cInput[1], iN, cFlag);
+                cout << cInput[1];
+            }
+            else if(sObj.StriCmp(cInput[0], "strnupr") == 0)
+            {
+                int iN = atoi(cInput[2]);
+                char cFlag = atoi(cInput[3]);
+                sObj.StrNUpr(cInput[1], iN, cFlag);
+                cout << cInput[1];
+            }
+            else if(sObj.StriCmp(cInput[0], "strntgl") == 0)
+            {
+                int iN = atoi(cInput[2]);
+                char cFlag = atoi(cInput[3]);
+                sObj.StrNTgl(cInput[1], iN, cFlag);
+                cout << cInput[1];
+            }
+            else if(sObj.StriCmp(cInput[0], "strnrev") == 0)
+            {
+                int iN = atoi(cInput[2]);
+                char cFlag = atoi(cInput[3]);
+                sObj.StrNRev(cInput[1], iN, cFlag);
+                cout << cInput[1];
+            }
+            else if(sObj.StriCmp(cInput[0], "strrangerev") == 0)
+            {
+                int iS = atoi(cInput[2]), iE = atoi(cInput[3]);
+                sObj.StrRangeRev(cInput[1], iS, iE);
+                cout << cInput[1];
+            }
+            else if(sObj.StriCmp(cInput[0], "strncpy") == 0)
+            {
+                char cArr[MAXLEN * 2] = {'\0'};
+                int iN = atoi(cInput[2]);
+                char cFlag = atoi(cInput[3]);
+                sObj.StrNCpy(cInput[1], cArr, iN, cFlag);
+                cout << cArr;
+            }
+        }
+        else if(iCount == 5)
+        {
+            if(sObj.StriCmp(cInput[0], "strncat") == 0)
+            {
+                int iN = atoi(cInput[3]);
+                char cFlag = atoi(cInput[4]);
+                sObj.StrNCat(cInput[1], cInput[2], iN, cFlag);
+                cout << cInput[1];
+            }
+            else if(sObj.StriCmp(cInput[0], "strncmp") == 0)
+            {
+                int iN = atoi(cInput[3]);
+                char cFlag = atoi(cInput[4]);
+                iRet = sObj.StrNCmp(cInput[1], cInput[2], iN, cFlag);
+                if(iRet == 0)
+                {
+                    cout << "Equal Strings";
+                }
+                else
+                {
+                    cout << "Unequal Strngs";
+                }
+            }
+            else if(sObj.StriCmp(cInput[0], "strincmp") == 0)
+            {
+                int iN = atoi(cInput[3]);
+                char cFlag = atoi(cInput[4]);
+                iRet = sObj.StriNCmp(cInput[1], cInput[2], iN, cFlag);
+                if(iRet == 0)
+                {
+                    cout << "Equal Strings";
+                }
+                else
+                {
+                    cout << "Unequal Strngs";
+                }
+            }
+        }
         else
         {
             cout << "Enter Valid command (type \'help\')";
         }
-        }
+    }
     return 0;
 }
