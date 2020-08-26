@@ -16,7 +16,6 @@ using namespace std;
 class Strings
 {
     public:
-        void UpdatorNL(char *);
         int  StrLen(const char*);
         void StrLwr(char*);
         void StrNLwr(char*, int, char);

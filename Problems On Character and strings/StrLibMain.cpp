@@ -3,8 +3,6 @@
 
 int main()
 {
-    char cArr1[MAXLEN * 2] = {'\0'};
-    char cArr2[MAXLEN] = {'\0'};
     char cStr[MAXLEN * 5] = {'\0'};
     char cInput[5][MAXLEN * 5] = {'\0'};
     Strings sObj;
@@ -121,65 +119,65 @@ int main()
                 iRet = sObj.CountSpace(cInput[1]);
                 cout << iRet;
             }
-            else if(sObj.StriCmp(cInput[1], "strcpy") == 0)
+            else if(sObj.StriCmp(cInput[0], "strcpy") == 0)
             {
                 char cArr[MAXLEN * 2] = {'\0'};
                 sObj.StrCpy(cInput[1], cArr);
                 cout << cArr;
             }
-            else if(sObj.StriCmp(cInput[1], "strcpycap") == 0)
+            else if(sObj.StriCmp(cInput[0], "strcpycap") == 0)
             {
                 char cArr[MAXLEN * 2] = {'\0'};
                 sObj.StrCpyCap(cInput[1], cArr);
                 cout << cArr;
             }
-            else if(sObj.StriCmp(cInput[1], "strcpycapx") == 0)
+            else if(sObj.StriCmp(cInput[0], "strcpycapx") == 0)
             {
                 char cArr[MAXLEN * 2] = {'\0'};
                 sObj.StrCpyCapX(cInput[1], cArr);
                 cout << cArr;
             }
-            else if(sObj.StriCmp(cInput[1], "strcpylwr") == 0)
+            else if(sObj.StriCmp(cInput[0], "strcpylwr") == 0)
             {
                 char cArr[MAXLEN * 2] = {'\0'};
                 sObj.StrCpyLwr(cInput[1], cArr);
                 cout << cArr;
             }
-            else if(sObj.StriCmp(cInput[1], "strcpylwrx") == 0)
+            else if(sObj.StriCmp(cInput[0], "strcpylwrx") == 0)
             {
                 char cArr[MAXLEN * 2] = {'\0'};
                 sObj.StrCpyLwrX(cInput[1], cArr);
                 cout << cArr;
             }
-            else if(sObj.StriCmp(cInput[1], "strcpytgl") == 0)
+            else if(sObj.StriCmp(cInput[0], "strcpytgl") == 0)
             {
                 char cArr[MAXLEN * 2] = {'\0'};
                 sObj.StrCpyTgl(cInput[1], cArr);
                 cout << cArr;
             }
-            else if(sObj.StriCmp(cInput[1], "strcpyrev") == 0)
+            else if(sObj.StriCmp(cInput[0], "strcpyrev") == 0)
             {
                 char cArr[MAXLEN * 2] = {'\0'};
                 sObj.StrCpyRev(cInput[1], cArr);
                 cout << cArr;
             }
-            else if(sObj.StriCmp(cInput[1], "strcpyspace") == 0)
+            else if(sObj.StriCmp(cInput[0], "strcpyspace") == 0)
             {
                 char cArr[MAXLEN * 2] = {'\0'};
                 sObj.StrCpySpace(cInput[1], cArr);
                 cout << cArr;
-            }
-            
+            }            
         }
         else if(iCount == 3)
         {
-            if(sObj.StriCmp(cInput[1], "strcat") == 0)
+            if(sObj.StriCmp(cInput[0], "strcat") == 0)
             {
                 sObj.StrCat(cInput[1], cInput[2]);
                 cout << cInput[1];
             }
-            else if(sObj.StriCmp(cInput[1], "strcmp") == 0)
+            else if(sObj.StriCmp(cInput[0], "strcmp") == 0)
             {
+                sObj.StrNSet(cInput[2], '\0', 1, 1);
                 iRet = sObj.StrCmp(cInput[1], cInput[2]);
                 if(iRet == 0)
                 {
@@ -190,7 +188,50 @@ int main()
                     cout << "Unequal Strings";
                 }
             }
-                        
+            else if(sObj.StriCmp(cInput[0], "stricmp") == 0)
+            {
+                sObj.StrNSet(cInput[2], '\0', 1, 1);
+                iRet = sObj.StriCmp(cInput[1], cInput[2]);
+                if(iRet == 0)
+                {
+                    cout << "Equal Strings";
+                }
+                else
+                {
+                    cout << "Unequal Strings";
+                }
+            }
+            else if(sObj.StriCmp(cInput[0], "strset") == 0)
+            {
+                char Ch = cInput[2][0];
+                sObj.StrSet(cInput[1], Ch);
+                cout << cInput[1];
+            }
+            else if(sObj.StriCmp(cInput[0], "isagrm") == 0)
+            {
+                sObj.StrNSet(cInput[2], '\0', 1, 1);
+                bRet = sObj.IsAgrm(cInput[1], cInput[2]);
+                if(bRet == true)
+                {
+                    cout << "Both Strings are Anagram";
+                }
+                else
+                {
+                    cout << "Both Strings are Not Anagram";
+                }                
+            }
+            else if(sObj.StriCmp(cInput[0], "firstoccur") == 0)
+            {
+                char Ch = cInput[2][0];
+                iRet = sObj.FirstOccur(cInput[1], Ch);
+                cout << "First Ocuurance at index " << iRet;
+            }
+            else if(sObj.StriCmp(cInput[0], "lastoccur") == 0)
+            {
+                char Ch = cInput[2][0];
+                iRet = sObj.LastOccur(cInput[1], Ch);
+                cout << "Last Ocuurance at index " << iRet;
+            }                        
         }
         else
         {

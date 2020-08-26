@@ -865,7 +865,7 @@ int Strings::StrCmp(const char* cStr1, const char* cStr2)
 
     while(*cStr1 == *cStr2)
     {
-        if(*cStr1 == '\0' && *cStr1 != '\n')
+        if(*cStr1 == '\0' || *cStr1 == '\n')
         {
             break;
         }
@@ -936,7 +936,7 @@ int Strings::StrNCmp(const char* cStr1, const char* cStr2, int iN, char cFlag)
     {
         while(*cStr1 == *cStr2 && iN != 0)
         {
-            if(*cStr1 == '\0' && iN != 0 && *cStr1 != '\n')
+            if((*cStr1 == '\0' || *cStr1 == '\n') && iN != 0)
             {
                 break;
             }
@@ -1098,7 +1098,7 @@ void Strings::StrNSet(char *cSrc, char ch, int iN, char cFlag)
     }
     if(cFlag == FIRST)
     {
-        while(*cSrc != '\0' && iN != 0 && *cSrc != '\n')
+        while(*cSrc != '\0' && *cSrc != '\n'  && iN != 0)
         {
             *cSrc = ch;
             cSrc++;
@@ -1108,7 +1108,7 @@ void Strings::StrNSet(char *cSrc, char ch, int iN, char cFlag)
     else if(cFlag == LAST)
     {
         char *cEnd = cSrc;
-        while (*(cEnd + 1) != '\0' && *(cEnd + 1) != '\n')
+        while (*(cEnd + 1) != '\0')
         {
             cEnd++;
         }
@@ -1546,7 +1546,7 @@ bool Strings::IsAgrm(const char* cStr1, const char* cStr2)
         cStr1++;
         cStr2++;
     }
-    if(*cStr1 == '\0'  && *cStr1 != '\n' && *cStr2 == '\0'  && *cStr2 != '\n' )
+    if((*cStr1 == '\0'  && *cStr2 == '\0') || (*cStr2 != '\n'  && *cStr2 != '\n' ))
     {
        for (i = 0; i < MAX_CHAR; i++)
         {
