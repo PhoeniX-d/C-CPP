@@ -3,6 +3,7 @@
 */
 #include<stdio.h>
 #define MAXLEN      32
+
 typedef unsigned int UINT;
 
 void PrintBin(UINT);

@@ -2,8 +2,6 @@
 *   Program to count Zero's in Binary representation of enterd number
 */
 #include<stdio.h>
-#define MAXLEN      32
-
 typedef unsigned int UINT;
 
 int CountZero(UINT);
@@ -13,12 +11,14 @@ int main()
     UINT uNum = 0;
     int iRet = 0;
     printf("Enter the number\n");
-    scanf("%lu", &uNum);
+    scanf("%u", &uNum);
+   
     iRet = CountZero(uNum);
     printf("Output:\n%d", iRet);
+
     return 0;
 }
-///////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
 //
 //  Name        :CountZero
 //  Input       :UINT
@@ -27,7 +27,7 @@ int main()
 //  Author      :Pranav Choudhary
 //  Date        :27 Aug 2020
 //
-///////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
 int CountZero(UINT uNum)
 {
     int iCnt = 0;
