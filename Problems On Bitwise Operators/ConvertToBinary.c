@@ -36,8 +36,12 @@ void PrintBin(UINT uNum)
         uNum = uNum / 2;
         i++;
     }
-    for (j = i - 1; j >= 0; j--)
+    for (j = 31; j >= 0; j--)
     {
         printf("%d", cBin[j]);
+        if(j % 4 == 0)
+        {
+            printf(" ");
+        }
     }
 }
