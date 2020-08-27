@@ -24,7 +24,7 @@ class Bits
 
 //////////////////////////////////////////////////////////////////////
 //
-//  Name        :CheckONOFF
+//  Name        :CheckONOFF1
 //  Input       :UINT
 //  Returns     :bool
 //  Description :checks whether 9th, 10th, 11th, 25th bit is On or OFF
@@ -50,7 +50,7 @@ bool Bits:: CheckONOFF1(UINT uNum)
 
 //////////////////////////////////////////////////////////////////////
 //
-//  Name        :CheckONOFF
+//  Name        :CheckONOFF2
 //  Input       :UINT
 //  Returns     :bool
 //  Description :checks whether 5th, 18th bit is On or OFF
@@ -76,7 +76,7 @@ bool Bits:: CheckONOFF2(UINT uNum)
 
 //////////////////////////////////////////////////////////////////////
 //
-//  Name        :CheckONOFF
+//  Name        :CheckONOFF3
 //  Input       :UINT
 //  Returns     :bool
 //  Description :checks whether 7th, 15th, 21th, 28th bit is On or OFF
@@ -102,7 +102,7 @@ bool Bits:: CheckONOFF3(UINT uNum)
 
 //////////////////////////////////////////////////////////////////////
 //
-//  Name        :CheckONOFF
+//  Name        :CheckONOFF4
 //  Input       :UINT
 //  Returns     :bool
 //  Description :checks whether 7th, 8th, 9th bit is On or OFF
@@ -128,7 +128,7 @@ bool Bits:: CheckONOFF4(UINT uNum)
 
 //////////////////////////////////////////////////////////////////////
 //
-//  Name        :CheckONOFF
+//  Name        :CheckONOFF5
 //  Input       :UINT
 //  Returns     :bool
 //  Description :checks whether 1th, 32th bit is On or OFF
