@@ -9,6 +9,7 @@ class ToggleBits
     public:
         UINT Toggle7thBit(UINT);
         UINT Toggle13thBit(UINT);
+        UINT Toggle7th10thBit(UINT);
 };
 
 //////////////////////////////////////////////////////////////////////
@@ -54,6 +55,28 @@ UINT ToggleBits::Toggle13thBit(UINT uNum)
     return uNum ^ uMask;
 }
 
+//////////////////////////////////////////////////////////////////////
+//
+//  Name        :Toggle7th10thBit
+//  Input       :UINT
+//  Returns     :UINT
+//  Description :toggles 7th and 10th bit
+//  Author      :Pranav Choudhary
+//  Date        :28 Aug 2020
+//
+//////////////////////////////////////////////////////////////////////
+UINT ToggleBits::Toggle7th10thBit(UINT uNum)
+{
+    UINT uMask = 0;
+    
+    /* uMask = 0000 0000 0000 0000 0000 0010 0100 0000 */
+    uMask = 0x00000240;
+    
+    /* ^ will toggle that bit's status ON(0) or OFF(1) */
+    return uNum ^ uMask;
+}
+
+
 int main()
 {
     UINT uNum = 0, uRet = 0;
@@ -65,6 +88,7 @@ int main()
 
     printf("1. Toggle 7th bit\n");
     printf("2. Toggle 13th bit\n");
+    printf("3. Toggle 7th and 10th bit\n");
     printf("\nEnter choice\n");
     scanf("%d", &iCh);
 
@@ -76,6 +100,11 @@ int main()
         case 2:
             uRet = tbObj.Toggle13thBit(uNum);
             break;
+        case 3:
+            uRet = tbObj.Toggle7th10thBit(uNum);
+            break;
+        default:
+            printf("Enter Valid Choice\n");
     }
 
     printf("Output:\n%u\n", uRet);
