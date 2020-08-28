@@ -6,7 +6,6 @@
 */
 #include<stdio.h>
 
-#define ERROR  -1
 #define BITS    sizeof(int) * 8
 
 typedef unsigned int UINT;
@@ -28,7 +27,7 @@ int main()
     scanf("%d", &iEnd);
 
     uRet = ToggleRange(uNum, iStart, iEnd);
-    if(uRet != ERROR)
+    if(uRet != uNum)
     {
         printf("Output:\n%u\n", uRet);
     }
@@ -54,7 +53,7 @@ UINT ToggleRange(UINT uNum, int iStart, int iEnd)
 {
     if(iStart < 1 || iStart > 32 || iEnd < 1 || iEnd > 32 || iEnd < iStart)
     {
-        return ERROR;
+        return uNum;
     }
     /* way 1 */
     UINT uMask1 = 0xFFFFFFFF, uMask2 = 0xFFFFFFFF;
@@ -62,8 +61,9 @@ UINT ToggleRange(UINT uNum, int iStart, int iEnd)
     uMask1 = uMask1 << (iStart - 1);
     uMask2 = uMask2 >> (BITS - iEnd);
     uMask1 = uMask1 & uMask2;
-    
+
     return uMask1 ^ uNum;
+    
     /* way 2
     UINT uMask = 0;
     // uMask1 = 1111 1111 1111 1111 1111 1111 1111 1111

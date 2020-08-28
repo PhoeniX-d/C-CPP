@@ -59,7 +59,7 @@ BOOL CheckBit(UINT uNum, int iBit)
     UINT uRes = 0, uMask = 1;
     if(iBit > 32 || iBit < 1)
     {
-        return -1;
+        return ERROR;
     }
 
     /* uMask = 0000 0000 0000 0000 0000 0000 0000 0001 */

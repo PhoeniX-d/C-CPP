@@ -23,7 +23,7 @@ int main()
     scanf("%d", &iBit);
 
     uRet = ONBit(uNum, iBit);
-    if(uRet != -1)
+    if(uRet != uNum)
     {
         printf("Output:\n%u\n", uRet);
     }
@@ -49,7 +49,7 @@ UINT ONBit(UINT uNum, int iBit)
     UINT uMask = 1;
     if(iBit > 32 || iBit < 1)
     {
-        return -1;
+        return uNum;
     }
 
     /* uMask = 0000 0000 0000 0000 0000 0000 0000 0001 */

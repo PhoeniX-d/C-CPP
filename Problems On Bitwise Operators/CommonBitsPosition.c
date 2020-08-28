@@ -49,7 +49,7 @@ void CommonBits(UINT uNum1, UINT uNum2)
         {
             printf("%d ", iPos);
         }
-        uMask = uMask << 1;
+        uNo = uNo >> 1;
         iPos++;
     }
 }
