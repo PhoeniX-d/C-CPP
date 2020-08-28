@@ -3,12 +3,12 @@
 */
 
 #include<stdio.h>
+
 #define MAXLEN      30
 #define ERROR       -1
-#define IN           1
-#define OUT          0
 
-int WordCnt(char *);
+
+int WordCnt(const char *);
 
 int main()
 {
@@ -26,34 +26,40 @@ int main()
 //////////////////////////////////////////////////////////////////////
 //
 //  Name        :WordCnt
-//  Input       :char *
+//  Input       :const char *
 //  Returns     :int
 //  Description :count words in given string
 //  Author      :Pranav Choudhary
 //  Date        :22 August 2020
 //
 //////////////////////////////////////////////////////////////////////
-int WordCnt(const char *cSrc)
+int WordCnt(const char *cStr)
 {
     int iCnt = 0;
-    int iState = OUT;
-    if(NULL == cSrc)
+    if(NULL == cStr)
     {
         printf("Invalid Input\n");
         return ERROR;
     }
-    while (*cSrc != '\0')
+       
+    while(*cStr != '\0')
     {
-        if(*cSrc == ' ' || *cSrc == '\n' || *cSrc == '\t')
+        if(*cStr == ' ')
 		{
-            iState = OUT;
-        }
-		else if(iState == OUT)
-		{	
-			iState = IN;
-			iCnt++;
+			while((*cStr == ' ' || *cStr == '\t') && (*cStr != '\0'))
+			{
+				cStr++;
+			}
 		}
-        cSrc++;
+		else
+		{
+			while(*cStr != ' ' && *cStr != '\0')
+			{
+                cStr++;
+            }
+            iCnt++;
+        }
+        cStr++; 
     }
     return iCnt;
 }

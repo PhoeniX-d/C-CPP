@@ -2,19 +2,20 @@
 *
 *      Write a program which accept string from user and return length of
 *      largest word.
-*      Input : “Welcom To C Programming Language”
+*      Input : “Welcome To C Programming Language”
 *      Output : 11
 */
 
 #include<stdio.h>
-#define IN     1       
-#define OUT    0
+#define MAXLEN      30
+#define IN           1
+#define OUT          0
 
 int LargestWord(const char *);
 
 int main()
 {
-    char cArr[30] = {'\0'};
+    char cArr[MAXLEN] = {'\0'};
     int iRet = 0;
         
     printf("Enter the string :\n");
@@ -40,7 +41,7 @@ int main()
 //////////////////////////////////////////////////////////////////////
 int LargestWord(const char *cStr)
 {
-    int iMax[10] = {0} ,STATE = IN ,i = 0 ,iLargest = 0;
+    int iMax = 0 ,i = 0 ,iCnt = 0;
 
     if(cStr == NULL)
     {
@@ -48,37 +49,29 @@ int LargestWord(const char *cStr)
         return -1;
     }
 
-    while(*cStr != '\0' )      
+    while(*cStr != '\0')
     {
-        if((*cStr == ' ') || (*cStr == '\t') || (*cStr == '\n'))
+        if(*cStr == ' ')
+		{
+			while((*cStr == ' ' || *cStr == '\t') && (*cStr != '\0'))
+			{
+				cStr++;
+			}
+		}
+		else
+		{
+			while(*cStr != ' ' && *cStr != '\0')
+			{
+                iCnt++;
+                cStr++;
+            }					
+		}
+        if(iCnt > iMax)
         {
-            STATE = OUT;
+            iMax = iCnt;
         }
-        else if( STATE == OUT )
-        {    
-            STATE = IN;
-            i++;
-            iMax[i]++;
-        }
-        else
-        {
-            iMax[i]++;
-        }
-        cStr++;
+        iCnt = 0;
+        cStr++; 
     }
-
-    for (i = 0; i < 10; i++)
-    {
-        printf("%d ", iMax[i]);
-    }
-    printf("\n");
-    iLargest = iMax[1];
-    for(i = 0; i < 10; i++)
-    {   
-        if( iMax[i] > iLargest )
-        {
-            iLargest = iMax[i];
-        }
-    }
-    return iLargest;    
+    return iMax;
 }

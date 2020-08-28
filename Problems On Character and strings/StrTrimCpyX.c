@@ -36,7 +36,6 @@ void StrTrimCpyX(const char* cSrc, char* cDest)
         printf("Invalid Input\n");
         return;
     }
-    int iSpaces = 0;
     while(*cSrc != '\0')
     {
         if(*cSrc == ' ')

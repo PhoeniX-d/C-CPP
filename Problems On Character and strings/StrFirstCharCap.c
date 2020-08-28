@@ -2,14 +2,12 @@
 *   Program which accept string from user and replace each
 *   occurrence of first character of each word into capital case.
 *      
-*   Input : “marvellous infosystems by Piyush khairnar”
-*   Output : “Marvellous Infosystems By Piyush Khairnar”
+*   Input : "welcome to the c programming Language"
+*   Output : "Welcome To The C Programming Language"
 */
 #include<stdio.h>
 #define MAXLEN      30
 #define ERROR       -1
-#define IN           1
-#define OUT          0
 
 void FirstCharCap(char *);
 
@@ -36,28 +34,34 @@ int main()
 //  Date        :27 August 2020
 //
 //////////////////////////////////////////////////////////////////////
-void FirstCharCap(char *cSrc)
+void FirstCharCap(char *cStr)
 {
-    int iState = OUT;
-    if(NULL == cSrc)
+    if(NULL == cStr)
     {
         printf("Invalid Input\n");
         return;
     }
-    while (*cSrc != '\0')
+
+    while(*cStr != '\0')
     {
-        if(*cSrc == ' ' || *cSrc == '\n' || *cSrc == '\t')
+        if(*cStr == ' ')
 		{
-            iState = OUT;
-        }
-		else if(iState == OUT)
-		{	
-			iState = IN;
-			if(*cSrc >= 'a' && *cSrc <= 'z')
-            {
-                *cSrc = *cSrc - 32;
-            }
+			while((*cStr == ' ' || *cStr == '\t') && (*cStr != '\0'))
+			{
+				cStr++;
+			}
 		}
-        cSrc++;
+		else
+		{
+            if(*cStr >= 'a' && *cStr <= 'z')
+            {
+                *cStr = *cStr - 32;
+            }
+			while(*cStr != ' ' && *cStr != '\0')
+			{
+                cStr++;
+            }
+        }
+        cStr++; 
     }
 }

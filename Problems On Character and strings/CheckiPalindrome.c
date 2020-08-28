@@ -45,8 +45,8 @@ int main()
 ///////////////////////////////////////////////////////////////////////////
 BOOL ChkiPalindrome(const char* cSrc)
 {
-    char *cStart = NULL;
-    char *cEnd = NULL;
+    const char *cStart = NULL;
+    const char *cEnd = NULL;
 
     if(cSrc == NULL)
     {
