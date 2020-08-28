@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
 *   Write a program which accept one number and position from user and ON
 *   that bit. Return modified number.
@@ -62,3 +63,69 @@ UINT ONBit(UINT uNum, int iBit)
     
     return uNum | uMask;
 }
+=======
+/*
+*   Write a program which accept one number and position from user and ON
+*   that bit. Return modified number.
+*   Input : 10 2
+*   Output : 8 
+*/
+#include<stdio.h>
+#define ERROR      -1
+
+typedef unsigned int UINT;
+
+UINT ONBit(UINT, int);
+
+int main()
+{
+    UINT uNum = 0, uRet = 0;
+    int iBit = 0;
+
+    printf("Enter the number:\n");
+    scanf("%u", &uNum);
+
+    printf("Enter the bit position:\n");
+    scanf("%d", &iBit);
+
+    uRet = ONBit(uNum, iBit);
+    if(uRet != -1)
+    {
+        printf("Output:\n%u\n", uRet);
+    }
+    else
+    {
+        printf("Invalid Bit Postion\n");
+    }    
+    return 0;
+}
+
+//////////////////////////////////////////////////////////////////////
+//
+//  Name        :ONBit
+//  Input       :UINT, int
+//  Returns     :UINT
+//  Description :ON the bit at given position
+//  Author      :Pranav Choudhary
+//  Date        :28 Aug 2020
+//
+//////////////////////////////////////////////////////////////////////
+UINT ONBit(UINT uNum, int iBit)
+{
+    UINT uMask = 1;
+    if(iBit > 32 || iBit < 1)
+    {
+        return -1;
+    }
+
+    /* uMask = 0000 0000 0000 0000 0000 0000 0000 0001 */
+    uMask = uMask << (iBit - 1);
+    /* 
+    *   if iBit = 10
+    *   uMask = uMask << (10 - 1);
+    *   uMask = 0000 0000 0000 0000 0000 0010 0000 0000
+    */
+    
+    return uNum | uMask;
+}
+>>>>>>> f61d4d83763659717ccd253f1cc0c0278324f79a
