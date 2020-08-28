@@ -19,7 +19,7 @@ BOOL CheckONandOFF(UINT, int, int);
 int main()
 {
     UINT uNum = 0;
-    int iBit1 = 1, iBit2 = 0;
+    int iBit1 = 0, iBit2 = 0;
     BOOL bRet = FALSE;
 
     printf("Enter the number:\n");
@@ -66,15 +66,15 @@ BOOL CheckONandOFF(UINT uNum, int iBit1, int iBit2)
         return ERROR;
     }
 
-    UINT uMask1 = 1, uMask2 = 1, uMask = 0, uRes = 0;
+    UINT uMask1 = 1, uMask2 = 1, uRes = 0;
 
     uMask1 = uMask1 << (iBit1 - 1);
     uMask2 = uMask2 << (iBit2 - 1);
 
-    uMask = uMask1 | uMask2;
-    uRes = uMask & uNum;
+    uMask1 = uMask1 | uMask2;
+    uRes = uMask1 & uNum;
 
-    if(uRes == uMask)
+    if(uRes == uMask1)
     {
         return TRUE;
     }

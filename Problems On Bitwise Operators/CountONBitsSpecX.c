@@ -1,6 +1,6 @@
 /*
 *   Write a program which accept one number from user and count number of
-*   ON (1) bits in it without using % and / operator.
+*   ON (1) bits in it without using % and / operator. with least time complexity
 *   Input : 11
 *   Output : 3 
 */
@@ -39,17 +39,16 @@ int main()
 int CountONBits(UINT uNum)
 {
     UINT uMask = 1;
-    int i = 0, iCnt = 0;
+    int iCnt = 0;
     /* uMask = 0000 0000 0000 0000 0000 0000 0000 0001 */
     uMask = 0x00000001;
-
-    for (i = 1; i <= 32; i++) // Time complexity 32
+    while(uNum > 0)
     {
         if((uNum & uMask) != 0)
         {
             iCnt++;
         }
-        uMask = uMask << 1;
+        uNum = uNum >> 1;
     }
     return iCnt;
 }
