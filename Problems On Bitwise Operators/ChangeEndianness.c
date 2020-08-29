@@ -1,7 +1,7 @@
 /*
 *   Program to change endianness of entered number
-*   Input   : Decimal -> 43981 => Hexadecimal -> ABCD
-*   Output  : Decimal -> 56506 => HExadecimal -> DCBA
+*   Input   : Decimal -> 4210818301 => Hexadecimal -> FAFBFCFD
+*   Output  : Decimal -> 4261215226 => HExadecimal -> FDFCFBFA
 */
 #include<stdio.h>
 
