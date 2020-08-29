@@ -424,6 +424,7 @@ int Maximum(PNODE First)
     }
     return iMax;
 }// end of Maximum
+
 //////////////////////////////////////////////////////////////
 //
 //  Name        :Minimum
