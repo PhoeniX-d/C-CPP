@@ -15,11 +15,11 @@ typedef struct node
 void InsertLast(PPNODE, int);
 void DisplayList(PNODE);
 void Deallocate(PPNODE);
-void PerfectNums(PNODE);
-void PrimeNums(PNODE);
-int  SecMaximum(PNODE);
-int  SecMinimum(PNODE);
-void SumDigits(PNODE);
+void ListReverse(PNODE);
+void DisplayPalindrome(PNODE);
+void SmallestDigit(PNODE);
+void LargestDigit(PNODE);
+void ProdDigits(PNODE);
 
 // Entry point
 int main()
@@ -39,25 +39,28 @@ int main()
     printf("Linked List:\n");
     DisplayList(Head);
 
-    /* Prints Perfect numbers */
-    printf("Perfect Numbers:\n");
-    PerfectNums(Head);
+    /* Reverses the Linked list */
+    ListReverse(Head);
+    printf("Linked List in Reverse order\n");
+    DisplayList(Head);
 
-    /* Prints Prime numbers */
-    printf("Prime Numbers:\n");
-    PrimeNums(Head);
+    /* Displays Palindrome numbers in a linked list */
+    printf("Palindrome numbers in linked list are\n");
+    DisplayPalindrome(Head);
     
-    /* Prints second maximum number */
-    iNo = SecMaximum(Head);
-    printf("Second Maximum is:\n%d\n", iNo);
 
-    /* Prints second minimum number */
-    iNo = SecMinimum(Head);
-    printf("Second Minimum is:\n%d\n", iNo);
+    /* Product of Digits */
+    printf("Product of Digits of entered elements are\n");
+    ProdDigits(Head);
+    
 
-    /* Sum of Digits */
-    printf("Sum of Digits of entered elements are\n");
-    SumDigits(Head);
+    /* Displays smallest digits from elements in a linked list */
+    printf("Smallest Digits from elements in a linked list are\n");
+    SmallestDigit(Head);
+    
+    /* Displays largest digits from elements in a linked list */
+    printf("Largest Digits from elements in a linked list are\n");
+    LargestDigit(Head);
 
     /* Deallocates all nodes in linked list */
     Deallocate(&Head);
@@ -71,7 +74,7 @@ int main()
 //  Returns     :void
 //  Description :Displays elements in linked list
 //  Author      :Pranav Choudhary
-//  Date        :29 Aug 2020
+//  Date        :30 Aug 2020
 //
 ////////////////////////////////////////////////////////////
 void DisplayList(PNODE First)
@@ -96,7 +99,7 @@ void DisplayList(PNODE First)
 //  Returns     :int
 //  Description :Displays elements in linked list
 //  Author      :Pranav Choudhary
-//  Date        :29 Aug 2020
+//  Date        :30 Aug 2020
 //
 ////////////////////////////////////////////////////////////
 int CountEls(PNODE First)
@@ -122,7 +125,7 @@ int CountEls(PNODE First)
 //  Returns     :void
 //  Description :Deallocates all nodes in linked list
 //  Author      :Pranav Choudhary
-//  Date        :29 Aug 2020
+//  Date        :30 Aug 2020
 //
 ////////////////////////////////////////////////////////////
 void Deallocate(PPNODE First)
@@ -149,7 +152,7 @@ void Deallocate(PPNODE First)
 //  Returns     :void
 //  Description :Insert element at last position
 //  Author      :Pranav Choudhary
-//  Date        :29 Aug 2020
+//  Date        :30 Aug 2020
 //
 ////////////////////////////////////////////////////////////
 void InsertLast(PPNODE First, int iNum)
@@ -182,199 +185,206 @@ void InsertLast(PPNODE First, int iNum)
     }    
 }// End of InsertLast
 
-///////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //
-//  Name        :PerfectNums
+//  Name        :ListReverse
 //  Input       :PNODE
 //  Returns     :void
-//  Description :Displays Prfect numbers in linked list
+//  Description :Function which reverse each element of singly linked list
 //  Author      :Pranav Choudhary
 //  Date        :30 Aug 2020
 //
-///////////////////////////////////////////////////////
-void PerfectNums(PNODE First)
+//////////////////////////////////////////////////////////////////////////
+void ListReverse(PNODE First)
 {
-    if(NULL == First)
+    if(First == NULL)
     {
-        printf("Linked List Is Empty");
+        printf("Linked List is NULL\n");
         return;
     }
-    int i = 0, iTemp = 0, iSum = 0, iFlag = 0; 
-    while(First != NULL)
+    PNODE nTemp = First;
+    int *iArr = NULL, i = 0;
+    iArr = (int *)malloc(sizeof(int) * CountEls(First));
+    if(iArr == NULL)
+    {
+        printf("Memory allocation failed\n");
+    }
+
+    while(nTemp != NULL)
+    {
+        iArr[i++] = nTemp->iData;
+        nTemp = nTemp->cpNext;
+    }
+    nTemp = First;
+    while(nTemp != NULL)
+    {
+        nTemp->iData = iArr[--i];
+        nTemp = nTemp->cpNext;
+    }
+}// end of ListReverse
+
+//////////////////////////////////////////////////////////////////////////
+//
+//  Name        :DisplayPalindrome
+//  Input       :PNODE
+//  Returns     :void
+//  Description :display palindrome elements in singly linked list
+//  Author      :Pranav Choudhary
+//  Date        :30 Aug 2020
+//
+//////////////////////////////////////////////////////////////////////////
+void DisplayPalindrome(PNODE First)
+{
+    if(First == NULL)
+    {
+        printf("Linked List is NULL\n");
+        return;
+    }
+    int iTemp = 0, iRev = 0;
+    char cFlag = 0;
+    while(NULL != First)
     {
         iTemp = First->iData;
-        iSum = 0;
-        for (i = 1; i <= iTemp / 2; i++)
+        iRev = 0;
+        while(iTemp != 0)
         {
-            if(iTemp % i == 0)
-            {
-                iSum = iSum + i;
-            }
+            iRev = iRev * 10 + (iTemp % 10);
+            iTemp = iTemp / 10;
         }
-        if(iSum == iTemp)
+        if(First->iData == iRev)
         {
-            printf("%d ", iTemp);
-            iFlag = 1;
+            printf("%d ", First->iData);
+            cFlag = 1;
         }
         First = First->cpNext;
     }
-    if(iFlag == 0)
+    if(cFlag == 0)
     {
-        printf("There are no Perfect numbers in linked list\n");
+        printf("No Palindrome numbers\n");
     }
     else
     {
         printf("\n");
     }
-}// end of PerfectNums
+    
+}// end of DisplayPalindrome
 
-///////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
 //
-//  Name        :PrimeNums
+//  Name        :ProdDigits
 //  Input       :PNODE
 //  Returns     :void
-//  Description :Displays Prime numbers in linked list
-//  Author      :Pranav Choudhary
-//  Date        :30 Aug 2020
-//
-///////////////////////////////////////////////////////
-void PrimeNums(PNODE First)
-{
-    if(NULL == First)
-    {
-        printf("Linked List Is Empty");
-        return;
-    }
-    int i = 0, iTemp = 0, iFlag = 0; 
-    while(First != NULL)
-    {
-        iTemp = First->iData;
-        for (i = iTemp / 2; i > 1; i--)
-        {
-            if(iTemp % i == 0)
-            {
-                break;
-            }
-        }
-        if(i == 1)
-        {
-            printf("%d ", iTemp);
-            iFlag = 1;
-        }
-        First = First->cpNext;
-    }
-    if(iFlag == 0)
-    {
-        printf("There are no Prime numbers in linked list\n");
-    }
-    else
-    {
-        printf("\n");
-    }    
-}// end of PrimeNums
-
-//////////////////////////////////////////////////////////////
-//
-//  Name        :SecMaximum
-//  Input       :PNODE
-//  Returns     :int
-//  Description :returns second largest element in linked list
-//  Author      :Pranav Choudhary
-//  Date        :29 Aug 2020
-//
-//////////////////////////////////////////////////////////////
-int SecMaximum(PNODE First)
-{
-    int iMax1 = 0, iMax2 = 0;
-    if(NULL == First)
-    {
-        printf("Linked list is Empty\n");
-        return -1;
-    }
-    iMax1 = First->iData;
-    First = First->cpNext;
-    while(First != NULL)
-    {
-        if(iMax1 < First->iData)
-        {
-            iMax2 = iMax1;
-            iMax1 = First->iData;
-        }
-        else if(iMax2 < First->iData)
-        {
-            iMax2 = First->iData;
-        }
-        First = First->cpNext;
-    }
-    return iMax2;
-}// end of SecMaximum
-
-//////////////////////////////////////////////////////////////
-//
-//  Name        :SecMinimum
-//  Input       :PNODE
-//  Returns     :int
-//  Description :returns second smallest element in linked list
-//  Author      :Pranav Choudhary
-//  Date        :29 Aug 2020
-//
-//////////////////////////////////////////////////////////////
-int SecMinimum(PNODE First)
-{
-    int iMin1 = 0, iMin2 = 0;
-    if(NULL == First)
-    {
-        printf("Linked list is Empty\n");
-        return -1;
-    }
-    iMin1 = First->iData;
-    First = First->cpNext;
-    while(First != NULL)
-    {
-        if(iMin1 > First->iData)
-        {
-            iMin2 = iMin1;
-            iMin1 = First->iData;
-        }
-        else if((iMin1 > iMin2 || iMin2 > First->iData) && iMin1 != iMin2)
-        {
-            iMin2 = First->iData;
-        }
-        First = First->cpNext;
-    }
-    return iMin2;
-}// end of SecMinimum
-
-//////////////////////////////////////////////////////////////
-//
-//  Name        :SumDigits
-//  Input       :PNODE
-//  Returns     :void
-//  Description :computes summation of elements digits
+//  Description :computes product of elements digits
 //  Author      :Pranav Choudhary
 //  Date        :30 Aug 2020
 //
 //////////////////////////////////////////////////////////////
-void SumDigits(PNODE First)
+void ProdDigits(PNODE First)
 {
     if(NULL == First)
     {
         printf("Linked list is empty\n");
         return;
     }
-    int iDigSum = 0, iTemp = 0;
+    int iDigProd = 0, iTemp = 0;
 
     while(First != NULL)
     {
         iTemp = 0;
-        iDigSum = 0;
+        iDigProd = 1;
         iTemp = First->iData;
+        if(iTemp == 0)
+        {
+            iDigProd = 0;
+        }
         while(iTemp != 0)
         {
-            iDigSum = iDigSum + iTemp % 10;
+            if(iTemp % 10 != 0)
+            {
+                iDigProd = iDigProd * (iTemp % 10);
+            }           
             iTemp = iTemp / 10;
         }
-        printf("%d ", iDigSum);
+        printf("%d ", iDigProd);
         First = First->cpNext;
     }
-}// end of SumDigits
+    printf("\n");
+}// end of ProdDigits
+
+//////////////////////////////////////////////////////////////
+//
+//  Name        :SmallestDigit
+//  Input       :PNODE
+//  Returns     :void
+//  Description :computes smallest digits of elements in LL
+//  Author      :Pranav Choudhary
+//  Date        :30 Aug 2020
+//
+//////////////////////////////////////////////////////////////
+void SmallestDigit(PNODE First)
+{
+    if(NULL == First)
+    {
+        printf("Linked list is empty\n");
+        return;
+    }
+    int iSmallDig = 0, iTemp = 0;
+
+    while(First != NULL)
+    {
+        iTemp = 0;
+        iSmallDig = 0;
+        iTemp = First->iData;
+        iSmallDig = iTemp % 10;
+        while(iTemp != 0)
+        {
+            if(iTemp % 10 < iSmallDig)
+            {
+                iSmallDig = iTemp % 10;
+            }           
+            iTemp = iTemp / 10;
+        }
+        printf("%d ", iSmallDig);
+        First = First->cpNext;
+    }
+    printf("\n");
+}// end of SmallestDigit
+
+//////////////////////////////////////////////////////////////
+//
+//  Name        :LargestDigit
+//  Input       :PNODE
+//  Returns     :void
+//  Description :computes Largest digits of elements in LL
+//  Author      :Pranav Choudhary
+//  Date        :30 Aug 2020
+//
+//////////////////////////////////////////////////////////////
+void LargestDigit(PNODE First)
+{
+    if(NULL == First)
+    {
+        printf("Linked list is empty\n");
+        return;
+    }
+    int iLargeDig = 0, iTemp = 0;
+
+    while(First != NULL)
+    {
+        iTemp = 0;
+        iLargeDig = 0;
+        iTemp = First->iData;
+        iLargeDig = iTemp % 10;
+        while(iTemp != 0)
+        {
+            if(iTemp % 10 > iLargeDig)
+            {
+                iLargeDig = iTemp % 10;
+            }           
+            iTemp = iTemp / 10;
+        }
+        printf("%d ", iLargeDig);
+        First = First->cpNext;
+    }
+    printf("\n");
+}// end of LargestDigit

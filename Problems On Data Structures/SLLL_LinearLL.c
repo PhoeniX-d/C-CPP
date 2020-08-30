@@ -1,6 +1,5 @@
-
 /*
-*   Implementaion of Singly Linear Linked List
+*   Implementaion of Singly Linear Linked List in C
 */
 #include<stdio.h>
 #include<stdlib.h>
