@@ -58,45 +58,45 @@ int main()
     if(iRet != -1)
         printf("Smallest elements is:\n%d\n", iRet);
 
-    /* Addition of all Elements
+    /* Addition of all Elements */
     iRet = Add(Head);
     if(iRet != -1)
-        printf("Addition of  Elements is:\n%d\n", iRet); */
-    
-    /* Addition of Even Elements
+        printf("Addition of  Elements is:\n%d\n", iRet);
+
+    /* Addition of Even Elements */
     iRet = AddEven(Head);
     if(iRet != -1)
-        printf("Addition of Even Elements is:\n%d\n", iRet); */
+        printf("Addition of Even Elements is:\n%d\n", iRet);
 
-    /* Addition of odd Elements
+    /* Addition of odd Elements */
     iRet = AddOdd(Head);
     if(iRet != -1)
-        printf("Addition of Odd Elements is:\n%d\n", iRet); */
+        printf("Addition of Odd Elements is:\n%d\n", iRet);
 
-    /* counts frequncy of number
+    /* counts frequncy of number */
     printf("Enter number:\n");
     scanf("%d", &iNum);
     iRet = CountFreq(Head, iNum);
     if(iRet != -1)
-        printf("No. of occurances of %d :\n%d\n", iNum, iRet); */
+        printf("No. of occurances of %d :\n%d\n", iNum, iRet);
 
-    /* finds first occuarance of number
+    /* finds first occuarance of number */
     printf("Enter number:\n");
     scanf("%d", &iNum);
     iRet = FirstOccur(Head, iNum);
     if(iRet != -1)
         printf("First Occurance of %d is at :\n%d\n", iNum, iRet);
     else if(iRet == 0)
-        printf("Element Not Present in linked list\n"); */
+        printf("Element Not Present in linked list\n"); 
 
-    /* finds last occuarance of number
+    /* finds last occuarance of number */
     printf("Enter number:\n");
     scanf("%d", &iNum);
     iRet = LastOccur(Head, iNum);
     if(iRet != -1)
         printf("Last Occurance of %d is at :\n%d\n", iNum, iRet);
     else if(iRet == 0)
-        printf("Element Not Present in linked list\n"); */
+        printf("Element Not Present in linked list\n");
 
     /* Deallocates all nodes in linked list */
     Deallocate(&Head);
