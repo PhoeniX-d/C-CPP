@@ -12,24 +12,18 @@ typedef struct node
     struct node     *npNext;
 } NODE, *PNODE, **PPNODE;
 
-// class for singly circular linked list
-class Singly_CircularLL
-{
-    private:
-        PNODE Head;
-        PNODE Tail;
-    public:
-        inline char *StrDup(char*);
-        inline void DisplayList();
-        inline int CountEls();
-        void InsertFirst(char*);
-        void DeleteFirst();
-        void InsertLast(char*);
-        void DeleteLast();
-        void InsertAtPos(char*, int);
-        void DeleteAtPos(int);
+// global declarations
+char *StrDup(char *);
+void InsertFirst(PPNODE, PPNODE, char*);
+void DeleteFirst(PPNODE, PPNODE);
+void InsertLast(PPNODE, PPNODE, char*);
+void DeleteLast(PPNODE, PPNODE);
+void InsertAtPos(PPNODE, PPNODE, char*, int);
+void DeleteAtPos(PPNODE, PPNODE, int);
+void DisplayList(PNODE, PNODE);
+int  CountEls(PNODE, PNODE);
+void Deallocate(PPNODE, PPNODE);
 
-};
 // Entry point
 int main()
 {
@@ -76,6 +70,7 @@ int main()
     
     Deallocate(&Head, &Tail);
     printf("\nLinked List Deallocated\n");
+
     return 0;
 }
 
@@ -103,7 +98,7 @@ char* StrDup(char* cSrc)
 ////////////////////////////////////////////////////////////
 //
 //  Name        :DisplayList
-//  Input       :
+//  Input       :PNODE, PNODE
 //  Returns     :void
 //  Description :Displays elements in linked list
 //  Author      :Pranav Choudhary
@@ -129,7 +124,7 @@ void DisplayList(PNODE First, PNODE Last)
 ////////////////////////////////////////////////////////////
 //
 //  Name        :CountEls
-//  Input       :
+//  Input       :PNODE, PNODE
 //  Returns     :int
 //  Description :Displays elements in linked list
 //  Author      :Pranav Choudhary
@@ -156,7 +151,7 @@ int CountEls(PNODE First, PNODE Last)
 ////////////////////////////////////////////////////////////
 //
 //  Name        :Deallocate
-//  Input       :
+//  Input       :PPNODE, PPNODE
 //  Returns     :void
 //  Description :Deallocates all nodes in linked list
 //  Author      :Pranav Choudhary
@@ -170,20 +165,30 @@ void Deallocate(PPNODE First, PPNODE Last)
         printf("Linked List is NULL\n");
         return;
     }
-    PNODE nFirst = (*Last)->npNext;
     PNODE nTemp = NULL;
     do
     {
         nTemp = *First;
-        *First = nTemp->npNext;
+        *First = (*First)->npNext;
+        (*Last)->npNext = *First;
         free(nTemp);
-    } while ((*First) != nFirst);
+        printf("Deleted\n");
+        if(*Last == *First)
+        {
+            free(*First);
+            *First = NULL;
+            *Last = NULL;
+            printf("Deleted\n");
+            break;
+        }
+    } while ((*Last) != (*First));
+
 }// end of Deallocate
 
 ////////////////////////////////////////////////////////////
 //
 //  Name        :InsertFirst
-//  Input       :char*
+//  Input       :PPNODE, PPNODE, char*
 //  Returns     :void
 //  Description :Insert element at first position
 //  Author      :Pranav Choudhary
@@ -215,7 +220,6 @@ void InsertFirst(PPNODE First, PPNODE Last, char* cStr)
         NewN->npNext = *First;
         *First = NewN;
     }
-
     (*Last)->npNext = *First;
 
 }// End of InsertFirst
@@ -223,7 +227,7 @@ void InsertFirst(PPNODE First, PPNODE Last, char* cStr)
 ////////////////////////////////////////////////////////////
 //
 //  Name        :InsertLast
-//  Input       :int
+//  Input       :PPNODE, PPNODE, int
 //  Returns     :void
 //  Description :Insert element at last position
 //  Author      :Pranav Choudhary
@@ -248,19 +252,20 @@ void InsertLast(PPNODE First, PPNODE Last, char* cStr)
     if(*First == NULL && *Last == NULL)
     {
         *First = NewN;
+        *Last = NewN;
     }
     else
     {
         (*Last)->npNext = NewN;
+        *Last = (*Last)->npNext;
     }
-    *Last = NewN;
     (*Last)->npNext = *First;  
 }// End of InsertLast
 
 ////////////////////////////////////////////////////////////
 //
 //  Name        :InsertAtPos
-//  Input       :int, int
+//  Input       :PPNODE, PPNODE, int, int
 //  Returns     :void
 //  Description :Insert element at desired position
 //  Author      :Pranav Choudhary
@@ -312,7 +317,7 @@ void InsertAtPos(PPNODE First, PPNODE Last, char* cStr, int iPos)
 ////////////////////////////////////////////////////////////
 //
 //  Name        :DeleteFirst
-//  Input       :
+//  Input       :PPNODE, PPNODE
 //  Returns     :void
 //  Description :Deletes element at first position
 //  Author      :Pranav Choudhary
@@ -326,19 +331,24 @@ void DeleteFirst(PPNODE First, PPNODE Last)
         printf("Linked List is already empty\n");
         return;
     }
+    else if(*First == *Last)
+    {
+        free(*First);
+        *First = NULL;
+        *Last = NULL;
+    }
     else
     {
-        PNODE nTemp = *First;
-        *First = nTemp->npNext;
-        free(nTemp);
+        *First = (*First)->npNext;
+        free((*Last)->npNext);
+        (*Last)->npNext = *First;
     }
-    (*Last)->npNext = *First;
 }// End of DeleteFirst
 
 ////////////////////////////////////////////////////////////
 //
 //  Name        :DeleteLast
-//  Input       :
+//  Input       :PPNODE, PPNODE
 //  Returns     :void
 //  Description :deletes element at last position
 //  Author      :Pranav Choudhary
@@ -352,9 +362,9 @@ void DeleteLast(PPNODE First, PPNODE Last)
         printf("Linked List is already empty\n");
         return;
     }
-    else if((*First)->npNext == NULL && (*Last)->npNext == NULL)
+    else if(*First == *Last)
     {
-        free(*First);
+        free(*Last);
         *First = NULL;
         *Last = NULL;
     }
@@ -365,8 +375,8 @@ void DeleteLast(PPNODE First, PPNODE Last)
         {
             nTemp = nTemp->npNext;
         }
+        free(*Last);
         *Last = nTemp;
-        free((*Last)->npNext);
         (*Last)->npNext = *First;
     }
     
@@ -375,7 +385,7 @@ void DeleteLast(PPNODE First, PPNODE Last)
 ////////////////////////////////////////////////////////////
 //
 //  Name        :DeleteAtPos
-//  Input       :int
+//  Input       :PPNODE, PPNODE, int
 //  Returns     :void
 //  Description :Deletes element from desired position
 //  Author      :Pranav Choudhary

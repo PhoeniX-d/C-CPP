@@ -44,7 +44,7 @@ Singly_LinearLL::Singly_LinearLL()
 
 ////////////////////////////////////////////////////////////
 //
-//  Name        :~Singly_LinearLL a constructor
+//  Name        :~Singly_LinearLL a destructor
 //
 ///////////////////////////////////////////////////////////
 Singly_LinearLL::~Singly_LinearLL()

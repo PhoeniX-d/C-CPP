@@ -68,6 +68,9 @@ int main()
 
     Deallocate(&Head);
     printf("\nLinked List Deallocated\n");
+
+    iRet = CountEls(Head);
+    printf("Total Elements:\n%d\n", iRet);
     return 0;
 }
 
