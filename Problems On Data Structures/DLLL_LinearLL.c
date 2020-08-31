@@ -4,7 +4,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-/* structure of node for Doubly Linear Linked List */
+/* Structure of node for Doubly Linear Linked List */
 typedef struct dnode
 {
     int iData;
@@ -12,7 +12,7 @@ typedef struct dnode
     struct dnode *npPrev;
 } DNODE, *PDNODE, **PPDNODE ;
 
-// global declarations
+// Global declarations
 void InsertFirst(PPDNODE, int);
 void InsertLast(PPDNODE, int);
 void InsertAtPos(PPDNODE, int, int);
@@ -24,7 +24,7 @@ void DisplayListB(PDNODE);
 void Deallocate(PPDNODE);
 int  CountEls(PDNODE);
 
-// entry point
+// Entry point
 int main()
 {
     printf("\n----------Doubly Linear Linked List----------\n\n");

@@ -9,7 +9,7 @@ typedef struct node
 {
     int             iData;
     struct node     *npNext;
-} NODE, *PNODE, **PPNODE;
+} NODE, *PNODE;
 
 class Singly_LinearLL
 {

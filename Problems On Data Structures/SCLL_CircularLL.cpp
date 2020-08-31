@@ -10,7 +10,7 @@ typedef struct node
 {
     int             iData;
     struct node* npNext;
-} NODE, * PNODE, ** PPNODE;
+} NODE, * PNODE;
 
 // class for singly circular linked list
 class Singly_CircularLL
