@@ -12,18 +12,24 @@ typedef struct node
     struct node     *npNext;
 } NODE, *PNODE, **PPNODE;
 
-// global declarations
-char *StrDup(char *);
-void InsertFirst(PPNODE, PPNODE, char*);
-void DeleteFirst(PPNODE, PPNODE);
-void InsertLast(PPNODE, PPNODE, char*);
-void DeleteLast(PPNODE, PPNODE);
-void InsertAtPos(PPNODE, PPNODE, char*, int);
-void DeleteAtPos(PPNODE, PPNODE, int);
-void DisplayList(PNODE, PNODE);
-int  CountEls(PNODE, PNODE);
-void Deallocate(PPNODE, PPNODE);
+// class for singly circular linked list
+class Singly_CircularLL
+{
+    private:
+        PNODE Head;
+        PNODE Tail;
+    public:
+        inline char *StrDup(char*);
+        inline void DisplayList();
+        inline int CountEls();
+        void InsertFirst(char*);
+        void DeleteFirst();
+        void InsertLast(char*);
+        void DeleteLast();
+        void InsertAtPos(char*, int);
+        void DeleteAtPos(int);
 
+};
 // Entry point
 int main()
 {
@@ -97,7 +103,7 @@ char* StrDup(char* cSrc)
 ////////////////////////////////////////////////////////////
 //
 //  Name        :DisplayList
-//  Input       :PNODE, PNODE
+//  Input       :
 //  Returns     :void
 //  Description :Displays elements in linked list
 //  Author      :Pranav Choudhary
@@ -123,7 +129,7 @@ void DisplayList(PNODE First, PNODE Last)
 ////////////////////////////////////////////////////////////
 //
 //  Name        :CountEls
-//  Input       :PNODE, PNODE
+//  Input       :
 //  Returns     :int
 //  Description :Displays elements in linked list
 //  Author      :Pranav Choudhary
@@ -150,7 +156,7 @@ int CountEls(PNODE First, PNODE Last)
 ////////////////////////////////////////////////////////////
 //
 //  Name        :Deallocate
-//  Input       :PPNODE, PPNODE
+//  Input       :
 //  Returns     :void
 //  Description :Deallocates all nodes in linked list
 //  Author      :Pranav Choudhary
@@ -177,7 +183,7 @@ void Deallocate(PPNODE First, PPNODE Last)
 ////////////////////////////////////////////////////////////
 //
 //  Name        :InsertFirst
-//  Input       :PPNODE, PPNODE, char*
+//  Input       :char*
 //  Returns     :void
 //  Description :Insert element at first position
 //  Author      :Pranav Choudhary
@@ -217,7 +223,7 @@ void InsertFirst(PPNODE First, PPNODE Last, char* cStr)
 ////////////////////////////////////////////////////////////
 //
 //  Name        :InsertLast
-//  Input       :PPNODE, PPNODE, int
+//  Input       :int
 //  Returns     :void
 //  Description :Insert element at last position
 //  Author      :Pranav Choudhary
@@ -254,7 +260,7 @@ void InsertLast(PPNODE First, PPNODE Last, char* cStr)
 ////////////////////////////////////////////////////////////
 //
 //  Name        :InsertAtPos
-//  Input       :PPNODE, PPNODE, int, int
+//  Input       :int, int
 //  Returns     :void
 //  Description :Insert element at desired position
 //  Author      :Pranav Choudhary
@@ -306,7 +312,7 @@ void InsertAtPos(PPNODE First, PPNODE Last, char* cStr, int iPos)
 ////////////////////////////////////////////////////////////
 //
 //  Name        :DeleteFirst
-//  Input       :PPNODE, PPNODE
+//  Input       :
 //  Returns     :void
 //  Description :Deletes element at first position
 //  Author      :Pranav Choudhary
@@ -332,7 +338,7 @@ void DeleteFirst(PPNODE First, PPNODE Last)
 ////////////////////////////////////////////////////////////
 //
 //  Name        :DeleteLast
-//  Input       :PPNODE, PPNODE
+//  Input       :
 //  Returns     :void
 //  Description :deletes element at last position
 //  Author      :Pranav Choudhary
@@ -369,7 +375,7 @@ void DeleteLast(PPNODE First, PPNODE Last)
 ////////////////////////////////////////////////////////////
 //
 //  Name        :DeleteAtPos
-//  Input       :PPNODE, PPNODE, int
+//  Input       :int
 //  Returns     :void
 //  Description :Deletes element from desired position
 //  Author      :Pranav Choudhary
