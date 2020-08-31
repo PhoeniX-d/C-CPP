@@ -1,5 +1,5 @@
 /*
-*   Implementaion of Singly CIrcular Linked List in C
+*   Implementaion of Singly Circular Linked List in C++
 */
 #include<stdio.h>
 #include<stdlib.h>

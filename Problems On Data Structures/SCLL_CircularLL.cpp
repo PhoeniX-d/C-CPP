@@ -8,7 +8,7 @@
 // structure of node of circular linked list
 typedef struct node
 {
-    int          iData;
+    int             iData;
     struct node* npNext;
 } NODE, * PNODE, ** PPNODE;
 
