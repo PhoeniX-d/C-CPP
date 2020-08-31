@@ -93,7 +93,7 @@ void DisplayList(PNODE First)
     }
     while(First != NULL)
     {
-        printf("%d->", First->iData);
+        printf("|%4d|->", First->iData);
         First = First->npNext;
     }
     printf("NULL\n\n");
@@ -304,17 +304,14 @@ void InsertAtPos(PPNODE First, int iNum, int iPos)
     if(iPos > iSize + 1 || iPos < 1)
     {
         printf("Invalid Position Entered\n");
-        return;
     }
     else if(iPos == 1)
     {
         InsertFirst(First, iNum);
-        return;
     }
     else if(iPos == iSize + 1)
     {
         InsertLast(First, iNum);
-        return;
     }
     else
     {
@@ -356,17 +353,14 @@ void DeleteAtPos(PPNODE First, int iPos)
     if(iPos > iSize || iPos < 1 || NULL == *First)
     {
         printf("Invalid Position Entered or Linked list is empty\n");
-        return;
     }
     else if(iPos == 1)
     {
         DeleteFirst(First);
-        return;
     }
     else if(iPos == iSize)
     {
         DeleteLast(First);
-        return;
     }
     else
     {

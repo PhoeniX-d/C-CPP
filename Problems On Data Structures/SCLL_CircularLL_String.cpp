@@ -409,9 +409,6 @@ int main(int argc, char **argv)
     scllObj.InsertLast(argv[4]);
     scllObj.InsertLast(argv[5]);
     scllObj.InsertLast(argv[6]);
-    scllObj.InsertLast(argv[7]);
-    scllObj.InsertLast(argv[8]);
-    scllObj.InsertLast(argv[9]);
 
     printf("Linked List:InsertLast\n");
     scllObj.DisplayList();
@@ -429,7 +426,7 @@ int main(int argc, char **argv)
     printf("Linked List:DeleteLast\n");
     scllObj.DisplayList();
 
-    scllObj.DeleteAtPos(10);
+    scllObj.DeleteAtPos(3);
     printf("Linked List:DeleteAtPos\n");
     scllObj.DisplayList();
 
