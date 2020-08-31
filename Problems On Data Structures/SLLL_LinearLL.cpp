@@ -8,7 +8,7 @@
 typedef struct node
 {
     int             iData;
-    struct node     *cpNext;
+    struct node     *npNext;
 } NODE, *PNODE, **PPNODE;
 
 class Singly_LinearLL
@@ -55,7 +55,7 @@ Singly_LinearLL::~Singly_LinearLL()
         while(Head != NULL)
         {
             nTemp = Head;
-            Head = Head->cpNext;
+            Head = Head->npNext;
             delete nTemp;
             iCount--;
         }
@@ -99,14 +99,14 @@ bool Singly_LinearLL::DisplayList()
     while(First != NULL)
     {
         printf("%d->", First->iData);
-        First = First->cpNext;
+        First = First->npNext;
     }
     /* way 2
     int iCnt = 0;
     while(iCnt != iCount)
     {
         printf("%d->", First->iData);
-        First = First->cpNext;
+        First = First->npNext;
         iCnt++;
     } 
     */
@@ -135,7 +135,7 @@ bool Singly_LinearLL::InsertFirst(int iNum)
     }
     
     NewN->iData = iNum;
-    NewN->cpNext = NULL;
+    NewN->npNext = NULL;
 
     /* If Linked List is empty */
     if(Head == NULL)      
@@ -144,7 +144,7 @@ bool Singly_LinearLL::InsertFirst(int iNum)
     }
     else
     {
-        NewN->cpNext = Head;
+        NewN->npNext = Head;
         Head = NewN;
     }
     iCount++;
@@ -171,7 +171,7 @@ bool Singly_LinearLL::DeleteFirst()
     else
     {
         PNODE nTemp = Head;
-        Head = nTemp->cpNext;
+        Head = nTemp->npNext;
         free(nTemp);
         iCount--;
         return true;
@@ -198,7 +198,7 @@ bool Singly_LinearLL::InsertLast(int iNum)
     }
     
     NewN->iData = iNum;
-    NewN->cpNext = NULL;
+    NewN->npNext = NULL;
 
      /* if linked list is empty */
     if(Head == NULL)
@@ -208,11 +208,11 @@ bool Singly_LinearLL::InsertLast(int iNum)
     else
     {
         PNODE nTemp = Head;
-        while(nTemp->cpNext != NULL)
+        while(nTemp->npNext != NULL)
         {
-            nTemp = nTemp->cpNext;
+            nTemp = nTemp->npNext;
         }
-        nTemp->cpNext = NewN;
+        nTemp->npNext = NewN;
     }
     iCount++;
     return true;
@@ -235,7 +235,7 @@ bool Singly_LinearLL::DeleteLast()
         printf("Linked List is Empty\n");
         return false;
     }
-    else if((Head)->cpNext == NULL)
+    else if((Head)->npNext == NULL)
     {
         delete Head;
         Head = NULL;
@@ -243,12 +243,12 @@ bool Singly_LinearLL::DeleteLast()
     else
     {
         PNODE nTemp = Head;
-        while((nTemp->cpNext)->cpNext != NULL)
+        while((nTemp->npNext)->npNext != NULL)
         {
-            nTemp = nTemp->cpNext;
+            nTemp = nTemp->npNext;
         }
-        delete nTemp->cpNext;
-        nTemp->cpNext = NULL;
+        delete nTemp->npNext;
+        nTemp->npNext = NULL;
     }
     iCount--;
     return true;
@@ -292,14 +292,14 @@ bool Singly_LinearLL::InsertAtPos(int iNum, int iPos)
         }
         
         NewN->iData = iNum;
-        NewN->cpNext = NULL;
+        NewN->npNext = NULL;
 
         for (i = 1; i < iPos - 1; i++)
         {
-            nTemp = nTemp->cpNext;
+            nTemp = nTemp->npNext;
         }
-        NewN->cpNext = nTemp->cpNext;
-        nTemp->cpNext = NewN;
+        NewN->npNext = nTemp->npNext;
+        nTemp->npNext = NewN;
         iCount++;
         return true;
     }   
@@ -338,10 +338,10 @@ bool Singly_LinearLL::DeleteAtPos(int iPos)
 
         for (i = 1; i < iPos - 1; i++)
         {
-            nTemp = nTemp->cpNext;
+            nTemp = nTemp->npNext;
         }
-        nTarget = nTemp->cpNext;
-        nTemp->cpNext = nTarget->cpNext;
+        nTarget = nTemp->npNext;
+        nTemp->npNext = nTarget->npNext;
         delete nTarget;
         iCount--;
         return true;
@@ -353,47 +353,82 @@ int main()
 {
     printf("\n----------Singly Linear Linked List----------\n\n");
     Singly_LinearLL sllObj;
+    Singly_LinearLL *sllObj2 = new Singly_LinearLL;
+
     int iRet = 0;
 
+    /* Linked List 1 */
     sllObj.InsertFirst(40);
     sllObj.InsertFirst(50);
     sllObj.InsertFirst(10);
-    sllObj.InsertFirst(20);
 
-    printf("Linked List:InsertFirst\n");
+    printf("Linked List 1:InsertFirst\n");
     printf("Total %d elements\n", sllObj.Count());
     sllObj.DisplayList();
 
     sllObj.InsertLast(34);
     sllObj.InsertLast(56);
-    sllObj.InsertLast(24);
-    sllObj.InsertLast(900);
 
-    printf("Linked List:InsertLast\n");
+    printf("Linked List 1:InsertLast\n");
     printf("Total %d elements\n", sllObj.Count());
     sllObj.DisplayList();
+
+    /* Linked List 2 */
+    sllObj2->InsertFirst(54);
+    sllObj2->InsertFirst(30);
+    sllObj2->InsertFirst(89);
+
+    printf("Linked List 2:InsertFirst\n");
+    printf("Total %d elements\n", sllObj2->Count());
+    sllObj2->DisplayList();
+
+    sllObj2->InsertLast(37);
+    sllObj2->InsertLast(29);
+
+    printf("Linked List 2:InsertLast\n");
+    printf("Total %d elements\n", sllObj2->Count());
+    sllObj2->DisplayList();
 
     sllObj.InsertAtPos(233, 1);
-    sllObj.InsertAtPos(2235, 3);
+    sllObj2->InsertAtPos(2235, 3);
 
-    printf("Linked List:InsertAtPos\n");
+    printf("Linked List 1:InsertAtPos\n");
     printf("Total %d elements\n", sllObj.Count());
     sllObj.DisplayList();
+
+    printf("Linked List 2:InsertAtPos\n");
+    printf("Total %d elements\n", sllObj2->Count());
+    sllObj2->DisplayList();
 
     sllObj.DeleteFirst();
-    printf("Linked List:DeleteFirst\n");
+    printf("Linked List 1:DeleteFirst\n");
     printf("Total %d elements\n", sllObj.Count());
     sllObj.DisplayList();
 
+    sllObj2->DeleteFirst();
+    printf("Linked List 2:DeleteFirst\n");
+    printf("Total %d elements\n", sllObj2->Count());
+    sllObj2->DisplayList();
+
     sllObj.DeleteLast();
-    printf("Linked List:DeleteLast\n");
+    printf("Linked List 1:DeleteLast\n");
     printf("Total %d elements\n", sllObj.Count());
     sllObj.DisplayList();
 
     sllObj.DeleteAtPos(2);
-    printf("Linked List:DeleteAtPos\n");
+    printf("Linked List 1:DeleteAtPos\n");
     printf("Total %d elements\n", sllObj.Count());
     sllObj.DisplayList();
+
+    sllObj2->DeleteLast();
+    printf("Linked List 2:DeleteLast\n");
+    printf("Total %d elements\n", sllObj2->Count());
+    sllObj2->DisplayList();
+
+    sllObj2->DeleteAtPos(2);
+    printf("Linked List 2:DeleteAtPos\n");
+    printf("Total %d elements\n", sllObj2->Count());
+    sllObj2->DisplayList();
 
     return 0;
 }

@@ -8,7 +8,7 @@
 typedef struct node
 {
     int             iData;
-    struct node     *cpNext;
+    struct node     *npNext;
 } NODE, *PNODE, **PPNODE;
 
 // global declarations
@@ -91,7 +91,7 @@ void DisplayList(PNODE First)
     while(First != NULL)
     {
         printf("%d->", First->iData);
-        First = First->cpNext;
+        First = First->npNext;
     }
     printf("NULL\n\n");
 }// end of DisplayList
@@ -117,7 +117,7 @@ int CountEls(PNODE First)
     while(First != NULL)
     {
         iCnt++;
-        First = First->cpNext;
+        First = First->npNext;
     }
     return iCnt;
 }// end of CountEls
@@ -144,7 +144,7 @@ void Deallocate(PPNODE First)
     while(*First != NULL)
     {
         nTemp = *First;
-        *First = nTemp->cpNext;
+        *First = nTemp->npNext;
         free(nTemp);
     }
 }// end of Deallocate
@@ -171,7 +171,7 @@ void InsertFirst(PPNODE First, int iNum)
     }
     
     NewN->iData = iNum;
-    NewN->cpNext = NULL;
+    NewN->npNext = NULL;
 
     /* If Linked List is empty */
     if(*First == NULL)      
@@ -180,7 +180,7 @@ void InsertFirst(PPNODE First, int iNum)
     }
     else
     {
-        NewN->cpNext = *First;
+        NewN->npNext = *First;
         *First = NewN;
     }   
 }// End of InsertFirst
@@ -205,7 +205,7 @@ void DeleteFirst(PPNODE First)
     else
     {
         PNODE nTemp = *First;
-        *First = nTemp->cpNext;
+        *First = nTemp->npNext;
         free(nTemp);
     }    
 }// End of DeleteFirst
@@ -232,7 +232,7 @@ void InsertLast(PPNODE First, int iNum)
     }
     
     NewN->iData = iNum;
-    NewN->cpNext = NULL;
+    NewN->npNext = NULL;
 
      /* if linked list is not empty */
     if(*First == NULL)
@@ -242,11 +242,11 @@ void InsertLast(PPNODE First, int iNum)
     else
     {
         PNODE nTemp = *First;
-        while(nTemp->cpNext != NULL)
+        while(nTemp->npNext != NULL)
         {
-            nTemp = nTemp->cpNext;
+            nTemp = nTemp->npNext;
         }
-        nTemp->cpNext = NewN;
+        nTemp->npNext = NewN;
     }    
 }// End of InsertLast
 
@@ -267,7 +267,7 @@ void DeleteLast(PPNODE First)
         printf("Linked List is Empty\n");
         return;
     }
-    else if((*First)->cpNext == NULL)
+    else if((*First)->npNext == NULL)
     {
         free(*First);
         *First = NULL;
@@ -275,12 +275,12 @@ void DeleteLast(PPNODE First)
     else
     {
         PNODE nTemp = *First;
-        while((nTemp->cpNext)->cpNext != NULL)
+        while((nTemp->npNext)->npNext != NULL)
         {
-            nTemp = nTemp->cpNext;
+            nTemp = nTemp->npNext;
         }
-        free(nTemp->cpNext);
-        nTemp->cpNext = NULL;
+        free(nTemp->npNext);
+        nTemp->npNext = NULL;
     }
     
 }// End of DeleteLast
@@ -326,14 +326,14 @@ void InsertAtPos(PPNODE First, int iNum, int iPos)
         }
         
         NewN->iData = iNum;
-        NewN->cpNext = NULL;
+        NewN->npNext = NULL;
 
         for (i = 1; i < iPos - 1; i++)
         {
-            nTemp = nTemp->cpNext;
+            nTemp = nTemp->npNext;
         }
-        NewN->cpNext = nTemp->cpNext;
-        nTemp->cpNext = NewN;
+        NewN->npNext = nTemp->npNext;
+        nTemp->npNext = NewN;
     }   
 }// End of InsertAtPos
 
@@ -373,10 +373,10 @@ void DeleteAtPos(PPNODE First, int iPos)
 
         for (i = 1; i < iPos - 1; i++)
         {
-            nTemp = nTemp->cpNext;
+            nTemp = nTemp->npNext;
         }
-        nTarget = nTemp->cpNext;
-        nTemp->cpNext = nTarget->cpNext;
+        nTarget = nTemp->npNext;
+        nTemp->npNext = nTarget->npNext;
         free(nTarget);
     }   
 }// End of DeleteAtPos
