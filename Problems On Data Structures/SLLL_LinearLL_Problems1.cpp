@@ -44,7 +44,7 @@ class Singly_LinearLL
 //  Returns     :   -
 //  Description :constructor
 //  Author      :Pranav Choudhary
-//  Date        :31 Aug 2020
+//  Date        :1 Sept 2020
 //
 ////////////////////////////////////////////////////////////
 Singly_LinearLL::Singly_LinearLL()
@@ -60,7 +60,7 @@ Singly_LinearLL::Singly_LinearLL()
 //  Returns     :   -
 //  Description :constructor
 //  Author      :Pranav Choudhary
-//  Date        :31 Aug 2020
+//  Date        :1 Sept 2020
 //
 ////////////////////////////////////////////////////////////
 Singly_LinearLL::~Singly_LinearLL()
@@ -85,7 +85,7 @@ Singly_LinearLL::~Singly_LinearLL()
 //  Returns     :int
 //  Description :returns count of elements
 //  Author      :Pranav Choudhary
-//  Date        :31 Aug 2020
+//  Date        :1 Sept 2020
 //
 ////////////////////////////////////////////////////////////
 int Singly_LinearLL::Count()
@@ -100,7 +100,7 @@ int Singly_LinearLL::Count()
 //  Returns     :bool
 //  Description :Displays elements in linked list
 //  Author      :Pranav Choudhary
-//  Date        :31 Aug 2020
+//  Date        :1 Sept 2020
 //
 ////////////////////////////////////////////////////////////
 bool Singly_LinearLL::DisplayList()
@@ -137,7 +137,7 @@ bool Singly_LinearLL::DisplayList()
 //  Returns     :bool
 //  Description :Insert element at last position
 //  Author      :Pranav Choudhary
-//  Date        :31 Aug 2020
+//  Date        :1 Sept 2020
 //
 ////////////////////////////////////////////////////////////
 bool Singly_LinearLL::InsertLast(int iNum)
