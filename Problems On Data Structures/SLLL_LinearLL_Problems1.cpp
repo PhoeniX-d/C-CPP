@@ -1,5 +1,5 @@
 /*
-*   Implementaion of Singly Linear Linked List in C++
+*   Implementaion of Singly Linear Linked List in C++ with Problems 1
 */
 #include<stdio.h>
 #include<stdlib.h>
@@ -35,6 +35,7 @@ class Singly_LinearLL
         int Minimum();
         int SecMinimum();
         bool ReverseList();
+        int TotalOccur(int);
 };
 
 ////////////////////////////////////////////////////////////
@@ -114,14 +115,14 @@ bool Singly_LinearLL::DisplayList()
     /* way 1 */
     while(First != NULL)
     {
-        printf("%d->", First->iData);
+        printf("|%d|->", First->iData);
         First = First->npNext;
     }
     /* way 2
     int iCnt = 0;
     while(iCnt != iCount)
     {
-        printf("%d->", First->iData);
+        printf("|%d|->", First->iData);
         First = First->npNext;
         iCnt++;
     } 
@@ -201,6 +202,36 @@ bool Singly_LinearLL::ReverseList()
     Head = Prev;
     return true;
 }// end of ReverseList   
+
+//////////////////////////////////////////////////////////////
+//
+//  Name        :TotalOccur
+//  Input       :int
+//  Returns     :int
+//  Description :returns number of occurance of number
+//  Author      :Pranav Choudhary
+//  Date        :1 Sept 2020
+//
+//////////////////////////////////////////////////////////////
+int Singly_LinearLL::TotalOccur(int iNum)
+{
+    int iCnt = -1;
+    if(NULL == Head)
+    {
+        printf("Linked list is Empty\n");
+        return iCnt;
+    }
+    PNODE First = Head;
+    while(First != NULL)
+    {
+        if(First->iData == iNum)
+        {
+            iCnt++;
+        }
+        First = First->npNext;
+    }
+    return iCnt;
+}// end of TotalOccur
 
 //////////////////////////////////////////////////////////////
 //
@@ -494,18 +525,29 @@ int Singly_LinearLL::SecMinimum()
 int main()
 {
     printf("\n----------Singly Linear Linked List Problems 1----------\n\n");
-    int iRet = 0, i = 0, iNo = 0, iNum = 0;
+    int iRet = 0, i = 0, iNum = 0;
     Singly_LinearLL sllObj;
+
     printf("Enter Number of elements\n");
-    scanf("%d", &iNo);
+    scanf("%d", &iRet);
     printf("Enter the numbers\n");
-    for (i = 1; i <= iNo; i++)
+    for (i = 1; i <= iRet; i++)
     {
         scanf("%d", &iNum);
         sllObj.InsertLast(iNum);
     }
     printf("Linked List:\n");
     sllObj.DisplayList();
+
+    printf("-----------------------------------------------------\n");
+    /* First occurance of particular number */
+    printf("Enter number for first occurance:\n");
+    scanf("%d", &iNum);
+    iRet = sllObj.TotalOccur(iNum);
+    if(iRet != -1)
+        printf("Total Occuarance of %d:\n%d\n", iNum, iRet);
+    else
+        printf("Element Not Found!!\n");
 
     printf("-----------------------------------------------------\n");
     /* First occurance of particular number */
@@ -559,13 +601,13 @@ int main()
 
     printf("-----------------------------------------------------\n");
     /* Prints second maximum number */
-    iNo = sllObj.SecMaximum();
-    printf("Second Maximum is:\n%d\n", iNo);
+    iRet = sllObj.SecMaximum();
+    printf("Second Maximum is:\n%d\n", iRet);
 
     printf("-----------------------------------------------------\n");
     /* Prints second minimum number */
-    iNo = sllObj.SecMinimum();
-    printf("Second Minimum is:\n%d\n", iNo);
+    iRet = sllObj.SecMinimum();
+    printf("Second Minimum is:\n%d\n", iRet);
 
     printf("-----------------------------------------------------\n");
     /* Reverses whole list in place */
