@@ -141,7 +141,7 @@ void DisplayListB(PDNODE First)
     }
     printf("NULL\n");
 
-}// end of DisplayListF
+}// end of DisplayListB
 
 ////////////////////////////////////////////////////////////
 //

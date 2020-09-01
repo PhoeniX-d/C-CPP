@@ -33,9 +33,14 @@ class Singly_LinearLL
 
 ////////////////////////////////////////////////////////////
 //
-//  Name        :Singly_LinearLL a constructor
+//  Name        :Singly_LinearLL
+//  Input       :void
+//  Returns     :   -
+//  Description :constructor
+//  Author      :Pranav Choudhary
+//  Date        :31 Aug 2020
 //
-///////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
 Singly_LinearLL::Singly_LinearLL()
 {
     Head = NULL;
@@ -44,9 +49,14 @@ Singly_LinearLL::Singly_LinearLL()
 
 ////////////////////////////////////////////////////////////
 //
-//  Name        :~Singly_LinearLL a destructor
+//  Name        :Singly_LinearLL
+//  Input       :void
+//  Returns     :   -
+//  Description :constructor
+//  Author      :Pranav Choudhary
+//  Date        :31 Aug 2020
 //
-///////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
 Singly_LinearLL::~Singly_LinearLL()
 {
     if(Head != NULL)

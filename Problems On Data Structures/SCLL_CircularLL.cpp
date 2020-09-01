@@ -35,9 +35,14 @@ public:
 
 ////////////////////////////////////////////////////////////
 //
-//  Name        :Singly_CircularLL a constructor
+//  Name        :Singly_CircularLL
+//  Input       :void
+//  Returns     :   -
+//  Description :constructor
+//  Author      :Pranav Choudhary
+//  Date        :31 Aug 2020
 //
-///////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
 Singly_CircularLL::Singly_CircularLL()
 {
     Head = NULL;
@@ -47,9 +52,14 @@ Singly_CircularLL::Singly_CircularLL()
 
 ////////////////////////////////////////////////////////////
 //
-//  Name        :~Singly_CircularLL a destructor
+//  Name        :Singly_CircularLL
+//  Input       :void
+//  Returns     :   -
+//  Description :constructor
+//  Author      :Pranav Choudhary
+//  Date        :31 Aug 2020
 //
-///////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
 Singly_CircularLL::~Singly_CircularLL()
 {
     if((Head != NULL) && (Tail != NULL))

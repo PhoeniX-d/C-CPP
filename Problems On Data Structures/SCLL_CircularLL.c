@@ -160,7 +160,7 @@ int CountEls(PNODE First, PNODE Last)
 ////////////////////////////////////////////////////////////
 void Deallocate(PPNODE First, PPNODE Last)
 {
-    if(NULL == First || NULL == Last)
+    if(NULL == *First || NULL == *Last)
     {
         printf("Linked List is NULL\n");
         return;
@@ -257,7 +257,7 @@ void InsertLast(PPNODE First, PPNODE Last, char* cStr)
     else
     {
         (*Last)->npNext = NewN;
-        *Last = (*Last)->npNext;
+        *Last = NewN;
     }
     (*Last)->npNext = *First;  
 }// End of InsertLast
