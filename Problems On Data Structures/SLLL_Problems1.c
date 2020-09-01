@@ -8,7 +8,7 @@
 typedef struct node
 {
     int             iData;
-    struct node     *cpNext;
+    struct node     *npNext;
 } NODE, *PNODE, **PPNODE;
 
 // global declarations
@@ -123,7 +123,7 @@ void DisplayList(PNODE First)
     while(First != NULL)
     {
         printf("%d->", First->iData);
-        First = First->cpNext;
+        First = First->npNext;
     }
     printf("NULL\n\n");
 }// end of DisplayList
@@ -149,7 +149,7 @@ int CountEls(PNODE First)
     while(First != NULL)
     {
         iCnt++;
-        First = First->cpNext;
+        First = First->npNext;
     }
     return iCnt;
 }// end of CountEls
@@ -176,7 +176,7 @@ void Deallocate(PPNODE First)
     while(*First != NULL)
     {
         nTemp = *First;
-        *First = nTemp->cpNext;
+        *First = nTemp->npNext;
         free(nTemp);
     }
 }// end of Deallocate
@@ -203,7 +203,7 @@ void InsertLast(PPNODE First, int iNum)
     }
     
     NewN->iData = iNum;
-    NewN->cpNext = NULL;
+    NewN->npNext = NULL;
 
      /* if linked list is not empty */
     if(*First == NULL)
@@ -213,11 +213,11 @@ void InsertLast(PPNODE First, int iNum)
     else
     {
         PNODE nTemp = *First;
-        while(nTemp->cpNext != NULL)
+        while(nTemp->npNext != NULL)
         {
-            nTemp = nTemp->cpNext;
+            nTemp = nTemp->npNext;
         }
-        nTemp->cpNext = NewN;
+        nTemp->npNext = NewN;
     }    
 }// End of InsertLast
 
@@ -242,7 +242,7 @@ int Add(PNODE First)
     while(First != NULL)
     {
         iSum = iSum + First->iData;
-        First = First->cpNext;
+        First = First->npNext;
     }
     return iSum;
 }// end of Add
@@ -271,7 +271,7 @@ int AddEven(PNODE First)
         {
             iEsum = iEsum + First->iData;
         }
-        First = First->cpNext;
+        First = First->npNext;
     }
     return iEsum;
 }// end of AddEven
@@ -300,7 +300,7 @@ int AddOdd(PNODE First)
         {
             iOsum = iOsum + First->iData;
         }
-        First = First->cpNext;
+        First = First->npNext;
     }
     return iOsum;
 }// end of AddOdd
@@ -329,7 +329,7 @@ int CountFreq(PNODE First, int iNum)
         {
             iCnt++;
         }
-        First = First->cpNext;
+        First = First->npNext;
     }
     return iCnt;
 }// end of CountFreq
@@ -359,7 +359,7 @@ int FirstOccur(PNODE First, int iNum)
         {
             break;
         }
-        First = First->cpNext;
+        First = First->npNext;
     }
     return iPos;
 }// end of FirstOccur
@@ -389,7 +389,7 @@ int LastOccur(PNODE First, int iNum)
         {
             iPos = iCnt;
         }
-        First = First->cpNext;
+        First = First->npNext;
     }
     return iPos;
 }// end of LastOccur
@@ -413,14 +413,14 @@ int Maximum(PNODE First)
         return -1;
     }
     iMax = First->iData;
-    First = First->cpNext;
+    First = First->npNext;
     while(First != NULL)
     {
         if(iMax < First->iData)
         {
             iMax = First->iData;
         }
-        First = First->cpNext;
+        First = First->npNext;
     }
     return iMax;
 }// end of Maximum
@@ -444,14 +444,14 @@ int Minimum(PNODE First)
         return -1;
     }
     iMin = First->iData;
-    First = First->cpNext;
+    First = First->npNext;
     while(First != NULL)
     {
         if(iMin > First->iData)
         {
             iMin = First->iData;
         }
-        First = First->cpNext;
+        First = First->npNext;
     }
     return iMin;
 }// end of Minimum

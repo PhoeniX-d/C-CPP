@@ -8,7 +8,7 @@
 typedef struct node
 {
     int             iData;
-    struct node     *cpNext;
+    struct node     *npNext;
 } NODE, *PNODE, **PPNODE;
 
 // global declarations
@@ -84,7 +84,7 @@ void DisplayList(PNODE First)
     while(First != NULL)
     {
         printf("%d->", First->iData);
-        First = First->cpNext;
+        First = First->npNext;
     }
     printf("NULL\n\n");
 }// end of DisplayList
@@ -110,7 +110,7 @@ int CountEls(PNODE First)
     while(First != NULL)
     {
         iCnt++;
-        First = First->cpNext;
+        First = First->npNext;
     }
     return iCnt;
 }// end of CountEls
@@ -137,7 +137,7 @@ void Deallocate(PPNODE First)
     while(*First != NULL)
     {
         nTemp = *First;
-        *First = nTemp->cpNext;
+        *First = nTemp->npNext;
         free(nTemp);
     }
 }// end of Deallocate
@@ -164,7 +164,7 @@ void InsertLast(PPNODE First, int iNum)
     }
     
     NewN->iData = iNum;
-    NewN->cpNext = NULL;
+    NewN->npNext = NULL;
 
      /* if linked list is not empty */
     if(*First == NULL)
@@ -174,11 +174,11 @@ void InsertLast(PPNODE First, int iNum)
     else
     {
         PNODE nTemp = *First;
-        while(nTemp->cpNext != NULL)
+        while(nTemp->npNext != NULL)
         {
-            nTemp = nTemp->cpNext;
+            nTemp = nTemp->npNext;
         }
-        nTemp->cpNext = NewN;
+        nTemp->npNext = NewN;
     }    
 }// End of InsertLast
 
@@ -216,7 +216,7 @@ void PerfectNums(PNODE First)
             printf("%d ", iTemp);
             iFlag = 1;
         }
-        First = First->cpNext;
+        First = First->npNext;
     }
     if(iFlag == 0)
     {
@@ -261,7 +261,7 @@ void PrimeNums(PNODE First)
             printf("%d ", iTemp);
             iFlag = 1;
         }
-        First = First->cpNext;
+        First = First->npNext;
     }
     if(iFlag == 0)
     {
@@ -292,7 +292,7 @@ int SecMaximum(PNODE First)
         return -1;
     }
     iMax1 = First->iData;
-    First = First->cpNext;
+    First = First->npNext;
     while(First != NULL)
     {
         if(iMax1 < First->iData)
@@ -304,7 +304,7 @@ int SecMaximum(PNODE First)
         {
             iMax2 = First->iData;
         }
-        First = First->cpNext;
+        First = First->npNext;
     }
     return iMax2;
 }// end of SecMaximum
@@ -328,7 +328,7 @@ int SecMinimum(PNODE First)
         return -1;
     }
     iMin1 = First->iData;
-    First = First->cpNext;
+    First = First->npNext;
     while(First != NULL)
     {
         if(iMin1 > First->iData)
@@ -340,7 +340,7 @@ int SecMinimum(PNODE First)
         {
             iMin2 = First->iData;
         }
-        First = First->cpNext;
+        First = First->npNext;
     }
     return iMin2;
 }// end of SecMinimum
@@ -375,6 +375,6 @@ void SumDigits(PNODE First)
             iTemp = iTemp / 10;
         }
         printf("%d ", iDigSum);
-        First = First->cpNext;
+        First = First->npNext;
     }
 }// end of SumDigits

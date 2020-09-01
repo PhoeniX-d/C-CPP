@@ -8,7 +8,7 @@
 typedef struct node
 {
     int             iData;
-    struct node     *cpNext;
+    struct node     *npNext;
 } NODE, *PNODE, **PPNODE;
 
 // global declarations
@@ -87,7 +87,7 @@ void DisplayList(PNODE First)
     while(First != NULL)
     {
         printf("%d->", First->iData);
-        First = First->cpNext;
+        First = First->npNext;
     }
     printf("NULL\n\n");
 }// end of DisplayList
@@ -113,7 +113,7 @@ int CountEls(PNODE First)
     while(First != NULL)
     {
         iCnt++;
-        First = First->cpNext;
+        First = First->npNext;
     }
     return iCnt;
 }// end of CountEls
@@ -140,7 +140,7 @@ void Deallocate(PPNODE First)
     while(*First != NULL)
     {
         nTemp = *First;
-        *First = nTemp->cpNext;
+        *First = nTemp->npNext;
         free(nTemp);
     }
 }// end of Deallocate
@@ -167,7 +167,7 @@ void InsertLast(PPNODE First, int iNum)
     }
     
     NewN->iData = iNum;
-    NewN->cpNext = NULL;
+    NewN->npNext = NULL;
 
      /* if linked list is not empty */
     if(*First == NULL)
@@ -177,11 +177,11 @@ void InsertLast(PPNODE First, int iNum)
     else
     {
         PNODE nTemp = *First;
-        while(nTemp->cpNext != NULL)
+        while(nTemp->npNext != NULL)
         {
-            nTemp = nTemp->cpNext;
+            nTemp = nTemp->npNext;
         }
-        nTemp->cpNext = NewN;
+        nTemp->npNext = NewN;
     }    
 }// End of InsertLast
 
@@ -213,13 +213,13 @@ void ListReverse(PNODE First)
     while(nTemp != NULL)
     {
         iArr[i++] = nTemp->iData;
-        nTemp = nTemp->cpNext;
+        nTemp = nTemp->npNext;
     }
     nTemp = First;
     while(nTemp != NULL)
     {
         nTemp->iData = iArr[--i];
-        nTemp = nTemp->cpNext;
+        nTemp = nTemp->npNext;
     }
 }// end of ListReverse
 
@@ -256,7 +256,7 @@ void DisplayPalindrome(PNODE First)
             printf("%d ", First->iData);
             cFlag = 1;
         }
-        First = First->cpNext;
+        First = First->npNext;
     }
     if(cFlag == 0)
     {
@@ -306,7 +306,7 @@ void ProdDigits(PNODE First)
             iTemp = iTemp / 10;
         }
         printf("%d ", iDigProd);
-        First = First->cpNext;
+        First = First->npNext;
     }
     printf("\n");
 }// end of ProdDigits
@@ -345,7 +345,7 @@ void SmallestDigit(PNODE First)
             iTemp = iTemp / 10;
         }
         printf("%d ", iSmallDig);
-        First = First->cpNext;
+        First = First->npNext;
     }
     printf("\n");
 }// end of SmallestDigit
@@ -384,7 +384,7 @@ void LargestDigit(PNODE First)
             iTemp = iTemp / 10;
         }
         printf("%d ", iLargeDig);
-        First = First->cpNext;
+        First = First->npNext;
     }
     printf("\n");
 }// end of LargestDigit
