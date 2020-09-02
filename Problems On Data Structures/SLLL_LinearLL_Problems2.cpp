@@ -28,9 +28,12 @@ public:
     /* Problems */
     bool ListCat(Singly_LinearLL& ODest, Singly_LinearLL& OSrc);
     bool ListCpy(Singly_LinearLL& ODest, Singly_LinearLL& OSrc);
+    bool ListNCpy(Singly_LinearLL& ODest, Singly_LinearLL& OSrc, int);
+    bool ListLNCpy(Singly_LinearLL& ODest, Singly_LinearLL& OSrc, int);
     bool ListNCat(Singly_LinearLL& ODest, Singly_LinearLL& OSrc, int);
     bool ListLNCat(Singly_LinearLL& ODest, Singly_LinearLL& OSrc, int);
     bool ListRangeCat(Singly_LinearLL& ODest, Singly_LinearLL& OSrc, int, int);
+    bool ListRangeCpy(Singly_LinearLL& ODest, Singly_LinearLL& OSrc, int, int);
 };
 
 ////////////////////////////////////////////////////////////
@@ -295,15 +298,17 @@ bool Singly_LinearLL::ListRangeCat(Singly_LinearLL& ODest, Singly_LinearLL& OSrc
         printf("Linked Lists is empty\n");
         return false;
     }
+
+    if(iS < 0)
+        iS = -iS;
+    if(iE < 0)
+        iE = -iE;
+
     if(iE > OSrc.iCount || iS < 1)
     {
         printf("Please Enter valid number to concat\n");
         return false;
     }
-    if(iS < 0)
-        iS = -iS;
-    if(iE < 0)
-        iE = -iE;
 
     int iCnt = iE - iS + 1, i = 0;
     PNODE nTemp = OSrc.Head;
@@ -322,7 +327,7 @@ bool Singly_LinearLL::ListRangeCat(Singly_LinearLL& ODest, Singly_LinearLL& OSrc
 
 ////////////////////////////////////////////////////////////
 //
-//  Name        :ListCat
+//  Name        :ListCpy
 //  Input       :Singly_LinearLL, Singly_LinearLL
 //  Returns     :bool
 //  Description :concats src linked list into destination
@@ -332,7 +337,7 @@ bool Singly_LinearLL::ListRangeCat(Singly_LinearLL& ODest, Singly_LinearLL& OSrc
 ////////////////////////////////////////////////////////////
 bool Singly_LinearLL::ListCpy(Singly_LinearLL& ODest, Singly_LinearLL& OSrc)
 {
-    if (NULL == OSrc.Head)
+    if (NULL == OSrc.Head && NULL != ODest.Head)
     {
         printf("Linked Lists is empty\n");
         return false;
@@ -345,6 +350,125 @@ bool Singly_LinearLL::ListCpy(Singly_LinearLL& ODest, Singly_LinearLL& OSrc)
     }
     return true;
 }// end of ListCpy
+
+////////////////////////////////////////////////////////////
+//
+//  Name        :ListNCpy
+//  Input       :Singly_LinearLL, Singly_LinearLL, int
+//  Returns     :bool
+//  Description :concats src linked list into destination
+//  Author      :Pranav Choudhary
+//  Date        :1 Sept 2020
+//
+////////////////////////////////////////////////////////////
+bool Singly_LinearLL::ListNCpy(Singly_LinearLL& ODest, Singly_LinearLL& OSrc, int iN)
+{
+    if (NULL == OSrc.Head)
+    {
+        printf("Linked Lists is empty\n");
+        return false;
+    }
+    if(iN < 0)
+        iN = -iN;
+    if(iN > OSrc.iCount || iN < 1)
+    {
+        printf("Please Enter valid number of els\n");
+        return false;
+    }
+    PNODE nTemp = OSrc.Head;
+    while (nTemp != NULL && iN != 0)
+    {
+        ODest.InsertLast(nTemp->iData);
+        nTemp = nTemp->npNext;
+        iN--;
+    }
+    return true;
+}// end of ListNCpy
+
+////////////////////////////////////////////////////////////
+//
+//  Name        :ListLNCpy
+//  Input       :Singly_LinearLL, Singly_LinearLL, int
+//  Returns     :bool
+//  Description :concats src linked list into destination
+//  Author      :Pranav Choudhary
+//  Date        :1 Sept 2020
+//
+////////////////////////////////////////////////////////////
+bool Singly_LinearLL::ListLNCpy(Singly_LinearLL& ODest, Singly_LinearLL& OSrc, int iN)
+{
+    if (NULL == OSrc.Head && NULL != ODest.Head)
+    {
+        printf("Linked Lists is empty\n");
+        return false;
+    }
+    if(iN < 0)
+        iN = -iN;
+    if(iN > OSrc.iCount || iN < 1)
+    {
+        printf("Please Enter valid number of els\n");
+        return false;
+    }
+    int iCnt = OSrc.iCount - iN;
+    PNODE nTemp = OSrc.Head;
+    while (nTemp != NULL && iCnt != 0)
+    {
+        nTemp = nTemp->npNext;
+        iCnt--;
+    }
+    
+    while (nTemp != NULL)
+    {
+        ODest.InsertLast(nTemp->iData);
+        nTemp = nTemp->npNext;
+    }
+    return true;
+}// end of ListNCpy
+
+/////////////////////////////////////////////////////////////////
+//
+//  Name        :ListRangeCpy
+//  Input       :Singly_LinearLL, Singly_LinearLL, int, int
+//  Returns     :bool
+//  Description :copies elements from src list to destinaton
+//              :in given range
+//  Author      :Pranav Choudhary
+//  Date        :1 Sept 2020
+//
+/////////////////////////////////////////////////////////////////
+bool Singly_LinearLL::ListRangeCpy(Singly_LinearLL& ODest, Singly_LinearLL& OSrc, int iS, int iE)
+{
+    if (NULL == ODest.Head && NULL == OSrc.Head)
+    {
+        printf("Linked Lists is empty\n");
+        return false;
+    }
+
+    if(iS < 0)
+        iS = -iS;
+    if(iE < 0)
+        iE = -iE;
+
+    if(iE > OSrc.iCount || iS < 1)
+    {
+        printf("Please Enter valid number to concat\n");
+        return false;
+    }
+
+    int iCnt = iE - iS + 1, i = 0;
+    PNODE nTemp = OSrc.Head;
+    for (i = 1; i < iS ; i++)
+    {
+        nTemp = nTemp->npNext;
+    }
+    while (nTemp != NULL && iCnt != 0)
+    {
+        ODest.InsertLast(nTemp->iData);
+        nTemp = nTemp->npNext;
+        iCnt--;
+    }
+    return true;
+}// end of ListRangeCpy
 
 // Entry point
 int main()
@@ -382,28 +506,36 @@ int main()
 
     /* ListCat: Concat 2 lists
     printf("-----------------------------------------------------\n");
-    sllObj1.ListCat(sllObj1, sllObj2);
-    printf("Destination Linked List After Concat:\n");
-    sllObj1.DisplayList();
-    printf("Total Elements Destination List:\n%d\n", sllObj1.Count());*/
+    if(sllObj1.ListCat(sllObj1, sllObj2))
+    {
+        printf("Destination Linked List After Concat:\n");
+        sllObj1.DisplayList();
+        printf("Total Elements Destination List:\n%d\n", sllObj1.Count());
+    }
+    */
 
     /* ListNcat: Concats N elements
     printf("-----------------------------------------------------\n");
     printf("Enter number of elements to concat:\n");
     scanf("%d", &iNum);
-    sllObj1.ListNCat(sllObj1, sllObj2, iNum);
-    printf("Destination Linked List After N Concat %d:\n", iNum);
-    sllObj1.DisplayList();
-    printf("Total Elements Destination List:\n%d\n", sllObj1.Count());*/
+    if(sllObj1.ListNCat(sllObj1, sllObj2, iNum))
+    {
+        printf("Destination Linked List After N Concat %d:\n", iNum);
+        sllObj1.DisplayList();
+        printf("Total Elements Destination List:\n%d\n", sllObj1.Count());
+    }
+    */
 
     /* ListLNCat: Concats last N elements 
     printf("-----------------------------------------------------\n");
     printf("Enter number of last elements to concat:\n");
     scanf("%d", &iNum);
-    sllObj1.ListLNCat(sllObj1, sllObj2, iNum);
-    printf("Destination Linked List After Last N Concat %d:\n", iNum);
-    sllObj1.DisplayList();
-    printf("Total Elements Destination List:\n%d\n", sllObj1.Count());*/
+    if(sllObj1.ListLNCat(sllObj1, sllObj2, iNum))
+    {
+        printf("Destination Linked List After Last N Concat %d:\n", iNum);
+        sllObj1.DisplayList();
+        printf("Total Elements Destination List:\n%d\n", sllObj1.Count());
+    }*/
 
     /* ListRangeCat: concat elements in range 
     printf("-----------------------------------------------------\n");
@@ -411,16 +543,55 @@ int main()
     scanf("%d", &iStart);
     printf("Enter position of end:\n");
     scanf("%d", &iEnd);
-    sllObj1.ListRangeCat(sllObj1, sllObj2, iStart, iEnd);
-    printf("Destination Linked List After Last N Concat %d:\n", iNum);
-    sllObj1.DisplayList();
-    printf("Total Elements Destination List:\n%d\n", sllObj1.Count());*/
+    if(sllObj1.ListRangeCat(sllObj1, sllObj2, iStart, iEnd))
+    {
+        printf("Destination Linked List After Last N Concat %d:\n", iNum);
+        sllObj1.DisplayList();
+        printf("Total Elements Destination List:\n%d\n", sllObj1.Count());
+    }*/
 
-    /* ListCpy: copies source linked list to destination */
+    /* ListCpy: copies source linked list to destination
     printf("-----------------------------------------------------\n");
-    sllObj2.ListCpy(sllObj3, sllObj2);
-    printf("Destination Linked List After copy:\n");
-    sllObj3.DisplayList();
-    printf("Total Elements Destination List:\n%d\n", sllObj3.Count());
+    if(sllObj2.ListCpy(sllObj3, sllObj2))
+    {
+        printf("Destination Linked List After copy:\n");
+        sllObj3.DisplayList();
+        printf("Total Elements Destination List:\n%d\n", sllObj3.Count());
+    }*/
+
+    /* ListNCpy: copies first N elements from source linked list to destination
+    printf("-----------------------------------------------------\n");
+    printf("Enter the number of first elements to cpy:\n");
+    scanf("%d", &iNum);
+    if(sllObj2.ListNCpy(sllObj3, sllObj2, iNum))
+    {
+        printf("Destination Linked List After first N copy:\n");
+        sllObj3.DisplayList();
+        printf("Total Elements Destination List:\n%d\n", sllObj3.Count());
+    } */
+
+    /* ListLNCpy: copies last N elements from source linked list to destination
+    printf("-----------------------------------------------------\n");
+    printf("Enter the number of last elements to cpy:\n");
+    scanf("%d", &iNum);
+    if(sllObj2.ListLNCpy(sllObj3, sllObj2, iNum))
+    {
+        printf("Destination Linked List After last N copy:\n");
+        sllObj3.DisplayList();
+        printf("Total Elements Destination List:\n%d\n", sllObj3.Count());
+    }*/
+
+    /* ListRangeCpy: copies elements in range */
+    printf("-----------------------------------------------------\n");
+    printf("Enter position of start:\n");
+    scanf("%d", &iStart);
+    printf("Enter position of end:\n");
+    scanf("%d", &iEnd);
+    if(sllObj3.ListRangeCat(sllObj3, sllObj1, iStart, iEnd))
+    {
+        printf("Destination Linked List After Range Copy %d:\n", iNum);
+        sllObj3.DisplayList();
+        printf("Total Elements Destination List:\n%d\n", sllObj3.Count());
+    }
     return 0;
 }
