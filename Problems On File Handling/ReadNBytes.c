@@ -1,11 +1,12 @@
 /*
-*   Program to accept fname and read N bytes and display on
+*   Program to accept fname and read data N bytes and display on
 *   console
 */
 
 #include<stdio.h>
 #include<fcntl.h>
 
+#define BLOCKSIZE     1024
 #define NAMESIZE        16
 
 void Display(char *, int);
@@ -16,9 +17,8 @@ int main()
     int iBytes = 0;
     printf("Enter the file name:\n");
     scanf("%s", cFname);
-
-    printf("Enter the number of bytes:\n");
-    scanf("%d", &iBytes);
+    printf("Enter the number of bytes\n");
+    scanf(" %d", &iBytes);
 
     Display(cFname, iBytes);
 
@@ -28,18 +28,23 @@ int main()
 //////////////////////////////////////////////////////////
 //
 //  Name        :Display
-//  Input       :char*, int
+//  Input       :char* , int
 //  Returns     :void
-//  Description :read N bytes from file and display
+//  Description :Display read file data upto N bytes
 //  Author      :Pranav Choudhary
-//  Last Update :2 Sept 2020 by Pranav Choudhary
+//  Last Update :3 Sept 2020 by Pranav Choudhary
 //
 ///////////////////////////////////////////////////////////
 void Display(char* cFileName, int iBytes)
 {
+    if(iBytes < 0)
+    {
+        iBytes = -iBytes;
+    }
+    
     int iFd = 0, iRet = 0;
-    char *cBuffer = (char *)malloc(sizeof(char) * iBytes + 1);
-    memset(cBuffer, '\0', iBytes + 1);
+    char *cBuffer = (char*)malloc(sizeof(char * iBytes + 1);
+    memset(cBuffer, 0, (iBytes + 1));
 
     if((iFd = open(cFileName, O_RDONLY)) == -1)
     {
@@ -52,6 +57,7 @@ void Display(char* cFileName, int iBytes)
         close(iFd);
         return;
     }
-    printf("%d bytes Data Successfully read:\n%s\n", iBytes, cBuffer);
+    printf("Data Successfully read:\n%s\n", cBuffer);
     free(cBuffer);
+    close(iFd);
 }

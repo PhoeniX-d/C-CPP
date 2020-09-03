@@ -1,12 +1,12 @@
 /*
-*   Program to accept fname and read data 10 bytes and display on
+*   Program to accept fname and read whole file and display on
 *   console
 */
 
 #include<stdio.h>
 #include<fcntl.h>
 
-#define BLOCKSIZE     1024
+#define BLOCKSIZE      512 
 #define NAMESIZE        16
 
 void Display(char *);
@@ -14,10 +14,8 @@ void Display(char *);
 int main()
 {
     char cFname[NAMESIZE] = {'\0'};
-
     printf("Enter the file name:\n");
     scanf("%s", cFname);
-
     Display(cFname);
 
     return 0;
@@ -28,7 +26,7 @@ int main()
 //  Name        :Display
 //  Input       :char*
 //  Returns     :void
-//  Description :Display read file data
+//  Description :read and display whole file
 //  Author      :Pranav Choudhary
 //  Last Update :3 Sept 2020 by Pranav Choudhary
 //
@@ -36,18 +34,18 @@ int main()
 void Display(char* cFileName)
 {
     int iFd = 0, iRet = 0;
-    char cBuffer[BLOCKSIZE] = {'\0'};
+    char cBuffer[BLOCKSIZE];
+
     if((iFd = open(cFileName, O_RDONLY)) == -1)
     {
         printf("Unable to open file\n");
         return;
     }
-    if((iRet = read(iFd, cBuffer, BLOCKSIZE)) < 0)
+    while((iRet = read(iFd, cBuffer, BLOCKSIZE)) != 0)
     {
-        printf("Unable to read file\n");
-        close(iFd);
-        return;
+        write(1, cBuffer, iRet);
+        memset(cBuffer, '\0', BLOCKSIZE);
     }
-    printf("Data Successfully read:\n%s\n", cBuffer);
+    free(cBuffer);
     close(iFd);
 }

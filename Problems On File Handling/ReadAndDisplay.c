@@ -49,4 +49,5 @@ void Display(char* cFileName)
         return;
     }
     printf("Data Successfully read:\n%s\n", cBuffer);
+    close(iFd);
 }
