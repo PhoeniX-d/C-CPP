@@ -45,6 +45,7 @@ void Display(char* cFileName)
     while((iRet = read(iFd, cBuffer, BLOCKSZIE)) > 0)
     {
         write(1, cBuffer, iRet);
-        memset(cBuffer, 0, iRet);
+        memset(cBuffer, 0, BLOCKSZIE);
     }
+    close(iFd);
 }

@@ -53,4 +53,5 @@ void Display(char* cFileName, int iBytes)
         return;
     }
     printf("%d bytes Data Successfully read:\n%s\n", iBytes, cBuffer);
+    free(cBuffer);
 }
