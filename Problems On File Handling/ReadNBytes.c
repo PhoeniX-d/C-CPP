@@ -1,6 +1,8 @@
 /*
-*   Program to accept fname and read data N bytes and display on
-*   console
+*   Write a program which accepts file name and one count from user and read
+*   that number of characters from starting position.
+*   Input : Demo.txt 12
+*   Output : Display first 12 characters from Demo.txt 
 */
 
 #include<stdio.h>
@@ -43,7 +45,7 @@ void Display(char* cFileName, int iBytes)
     }
     
     int iFd = 0, iRet = 0;
-    char *cBuffer = (char*)malloc(sizeof(char * iBytes + 1);
+    char *cBuffer = (char*)malloc(sizeof(char) * iBytes + 1);
     memset(cBuffer, 0, (iBytes + 1));
 
     if((iFd = open(cFileName, O_RDONLY)) == -1)

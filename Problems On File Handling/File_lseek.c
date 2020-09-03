@@ -44,6 +44,11 @@ int main(int argc, char* argv[])
 ////////////////////////////////////////////////////////////////////
 BOOL Display(char *cFileName, int iOffset)
 {
+    if(cFileName == NULL)
+    {
+        printf("Please enter filename\n");
+        return;
+    }
     int iFd = 0, iRet = 0;
     char cBuffer[BLOCKSZIE];
     memset(cBuffer, '\0', BLOCKSZIE);
