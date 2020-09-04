@@ -6,7 +6,7 @@
 #include<stdio.h>
 #include<fcntl.h>
 
-#define BLOCKSZIE     1024
+#define BLOCKSIZE     1024
 #define NAMESIZE        16
 
 int CountOccur(char *, char);
@@ -54,15 +54,15 @@ int main(int argc, char* argv[])
 int CountOccur(char* cFileName, char ch)
 {
     int iFd = 0, iCnt = 0, i = 0, iRead = 0;
-    char cBuffer[BLOCKSZIE];
-    memset(cBuffer, 0, BLOCKSZIE);
+    char cBuffer[BLOCKSIZE];
+    memset(cBuffer, 0, BLOCKSIZE);
 
     if((iFd = open(cFileName, O_RDONLY)) == -1)
     {
         printf("Unable to open file\n");
         return -1;
     }
-    while((iRead = read(iFd, cBuffer, BLOCKSZIE)) > 0)
+    while((iRead = read(iFd, cBuffer, BLOCKSIZE)) > 0)
     {
         for (i = 0; i < iRead; i++)
         {
@@ -71,7 +71,7 @@ int CountOccur(char* cFileName, char ch)
                 iCnt++;
             }
         }
-        memset(cBuffer, 0, BLOCKSZIE);
+        memset(cBuffer, 0, BLOCKSIZE);
     }
     close(iFd);
     if(iCnt == 0)
