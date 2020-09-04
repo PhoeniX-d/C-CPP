@@ -37,6 +37,11 @@ int main()
 ///////////////////////////////////////////////////////////
 void PrintLastTenChar(char *cFileName)
 {
+	if(NULL == cFileName)
+    {
+        printf("Invalid Inputs\n");
+        return;
+    }
 	//create FILE pointer
 	FILE *fp = NULL;
 	char ch;

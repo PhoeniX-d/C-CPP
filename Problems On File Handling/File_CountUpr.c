@@ -52,10 +52,10 @@ int main(int argc, char* argv[])
 ///////////////////////////////////////////////////////////
 int CountUpr(char* cFileName)
 {
-    if(cFileName == NULL)
+   if(NULL == cFileName)
     {
-        printf("Please enter filename\n");
-        return;
+        printf("Invalid Inputs\n");
+        return -1;
     }
     int iFd = 0, iRet = 0, iCnt = 0;
     char cBuffer[BLOCKSIZE];

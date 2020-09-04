@@ -39,6 +39,11 @@ int main()
 ///////////////////////////////////////////////////////////
 void Display(char* cFileName, int iBytes)
 {
+    if(NULL == cFileName)
+    {
+        printf("Invalid Inputs\n");
+        return;
+    }
     if(iBytes < 0)
     {
         iBytes = -iBytes;

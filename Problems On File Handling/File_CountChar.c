@@ -53,6 +53,11 @@ int main(int argc, char* argv[])
 ///////////////////////////////////////////////////////////
 int CountOccur(char* cFileName, char ch)
 {
+    if(NULL == cFileName)
+    {
+        printf("Invalid Inputs\n");
+        return -1;
+    }
     int iFd = 0, iCnt = 0, i = 0, iRead = 0;
     char cBuffer[BLOCKSIZE];
     memset(cBuffer, 0, BLOCKSIZE);

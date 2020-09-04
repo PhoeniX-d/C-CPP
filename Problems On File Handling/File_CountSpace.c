@@ -52,6 +52,11 @@ int main(int argc, char* argv[])
 ///////////////////////////////////////////////////////////
 int CountSpace(char* cFileName)
 {
+    if(NULL == cFileName)
+    {
+        printf("Invalid Inputs\n");
+        return -1;
+    }
     if(cFileName == NULL)
     {
         printf("Please enter filename\n");

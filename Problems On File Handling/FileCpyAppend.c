@@ -50,7 +50,7 @@ void FileCpyAppend(char cFileName1[], char cFileName2[])
 {
     if(NULL == cFileName1 || NULL == cFileName2)
     {
-        printf("Please Enter the file name properly\n");
+        printf("Invalid Inputes\n");
         exit(1);
     }
     FILE *fp1 = NULL, *fp2 = NULL;

@@ -44,6 +44,11 @@ int main(int argc, char* argv[])
 ///////////////////////////////////////////////////////////
 void PrintFile(char *cFileName)
 {
+	if(NULL == cFileName)
+    {
+        printf("Invalid Inputs\n");
+        return;
+    }
 	//create FILE pointer
 	FILE *fp = NULL;
 	int iNo = 1;

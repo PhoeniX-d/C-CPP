@@ -45,6 +45,11 @@ int main(int argc, char* argv[])
 ///////////////////////////////////////////////////////////////////
 void CntUprLwr(char *cFileName)
 {
+    if(NULL == cFileName)
+    {
+        printf("Invalid Inputs\n");
+        return -1;
+    }
 	//create FILE pointer
 	FILE *fp = NULL;
 	int iUprCnt = 0, iLwrCnt = 0, i = 0;

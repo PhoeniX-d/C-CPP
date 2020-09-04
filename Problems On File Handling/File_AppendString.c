@@ -40,6 +40,11 @@ int main(int argc, char* argv[])
 ///////////////////////////////////////////////////////////
 void AppendString(char* cFileName, char* cString)
 {
+    if(NULL == cFileName || NULL == cString)
+    {
+        printf("Invalid Inputs\n");
+        return -1;
+    }
     int iFd = 0, iWritten = 0;
     char cBuffer[BLOCKSZIE];
     memset(cBuffer, '\0', BLOCKSZIE);

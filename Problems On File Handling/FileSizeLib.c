@@ -50,6 +50,11 @@ int main(int argc, char* argv[])
 ///////////////////////////////////////////////////////////
 int SizeOf(char *cFileName)
 {
+    if(NULL == cFileName)
+    {
+        printf("Invalid Inputs\n");
+        return -1;
+    }
 	//create FILE pointer
 	FILE *fp = NULL;
 	int iSize = 1;

@@ -47,14 +47,14 @@ void DisplayRecord(PEMPLOYEE ptrEmp, char cName[])
     if(ptrEmp == NULL || cName == NULL)
     {
         printf("Invalid Inputs\n");
-        exit(1);
+        return;
     }
     FILE *fp = NULL;
 	fp = fopen("EmployeeInfo.txt","rb");
 	if(fp == NULL)
 	{
 		printf("\n can not open file.");
-		exit(2);
+		return;
 	}
 	memset(ptrEmp, 0, sizeof(EMPLOYEE) * MAXRECORD);
 	fread(ptrEmp, sizeof(EMPLOYEE), MAXRECORD, fp);

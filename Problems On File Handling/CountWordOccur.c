@@ -55,6 +55,11 @@ int main(int argc, char* argv[])
 ///////////////////////////////////////////////////////////
 int CountOccur(char cFileName[], char cWord[])
 {
+    if(NULL == cFileName || NULL == cWord)
+    {
+        printf("Invalid Inputs\n");
+        return -1;
+    }
     int iCnt = 0, i = 0, j = 0;
     FILE *fp = NULL;
     char cBuffer[BLOCKSIZE];

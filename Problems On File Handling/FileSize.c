@@ -50,6 +50,11 @@ int main(int argc, char* argv[])
 ///////////////////////////////////////////////////////////
 int SizeOf(char* cFileName)
 {
+    if(NULL == cFileName)
+    {
+        printf("Invalid Inputs\n");
+        return -1;
+    }
     int iFd = 0, iRet = 0, iSize = 0;
     char cBuffer[BLOCKSIZE];
     memset(cBuffer, 0, BLOCKSIZE);

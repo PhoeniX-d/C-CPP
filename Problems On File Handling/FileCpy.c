@@ -63,6 +63,7 @@ int main(int argc, char* argv[])
 ///////////////////////////////////////////////////////////
 BOOL FileCpy(int iFd1, int iFd2)
 {
+    
     int iRead = 0, iWritten = 0;
     char cBuffer[BLOCKSZIE];
     memset(cBuffer, 0, BLOCKSZIE);

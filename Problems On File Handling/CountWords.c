@@ -55,6 +55,11 @@ int main(int argc, char* argv[])
 ///////////////////////////////////////////////////////////
 int CountWord(char cFileName[])
 {
+    if(NULL == cFileName)
+    {
+        printf("Invalid Inputs\n");
+        return -1;
+    }
     int iWcnt = 0, i = 0, j = 0;
     FILE *fp = NULL;
     char cBuffer[BLOCKSIZE];

@@ -35,6 +35,11 @@ int main()
 ///////////////////////////////////////////////////////////
 void Display(char* cFileName)
 {
+    if(NULL == cFileName)
+    {
+        printf("Invalid Inputs\n");
+        return;
+    }
     int iFd = 0, iRet = 0;
     char cBuffer[BLOCKSIZE] = {'\0'};
     if((iFd = open(cFileName, O_RDONLY)) == -1)

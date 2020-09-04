@@ -63,7 +63,7 @@ BOOL FileCmp(char cFileName1[], char cFileName2[])
 {
     if(NULL == cFileName1 || NULL == cFileName2)
     {
-        printf("Please Enter the file name properly\n");
+        printf("Invalid Inputs\n");
         exit(1);
     }
     int i = 0;

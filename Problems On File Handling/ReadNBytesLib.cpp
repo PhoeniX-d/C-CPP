@@ -39,9 +39,9 @@ int main()
 ///////////////////////////////////////////////////////////
 void Display(char cFileName[], int iBytes)
 {
-    if(cFileName == NULL)
+    if(NULL == cFileName)
     {
-        printf("Please enter filename\n");
+        printf("Invalid Inputs\n");
         return;
     }
     if(iBytes < 0)

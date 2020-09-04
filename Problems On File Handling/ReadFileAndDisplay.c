@@ -35,6 +35,11 @@ int main(int argc, char* argv[])
 ///////////////////////////////////////////////////////////
 void Display(char* cFileName)
 {
+    if(NULL == cFileName)
+    {
+        printf("Invalid Inputs\n");
+        return;
+    }
     int iFd = 0, iRet = 0, iSize = 0;
     char cBuffer[BLOCKSIZE];
     memset(cBuffer, 0, BLOCKSIZE);

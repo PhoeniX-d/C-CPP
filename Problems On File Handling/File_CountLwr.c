@@ -52,6 +52,11 @@ int main(int argc, char* argv[])
 ///////////////////////////////////////////////////////////
 int CountLwr(char* cFileName)
 {
+    if(NULL == cFileName)
+    {
+        printf("Invalid Inputs\n");
+        return -1;
+    }
     int iFd = 0, iRet = 0, iCnt = 0;
     char cBuffer[BLOCKSIZE];
     memset(cBuffer, 0, BLOCKSIZE);

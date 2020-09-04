@@ -48,6 +48,11 @@ int main(int argc, char* argv[])
 ///////////////////////////////////////////////////////////
 void FileCpy(char cFileName1[], char cFileName2[])
 {
+    if(NULL == cFileName || NULL == cFileName2)
+    {
+        printf("Invalid Inputs\n");
+        return;
+    }
     int iSize = 0;
     FILE *fp1 = NULL, *fp2 = NULL;
     char cBuffer[BLOCKSIZE], ch = '\0', *cWBuffer = NULL;

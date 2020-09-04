@@ -46,6 +46,11 @@ int main(int argc, char* argv[])
 ///////////////////////////////////////////////////////////
 void CountWordLineChar(char cFileName[])
 {
+    if(NULL == cFileName)
+    {
+        printf("Invalid Inputs\n");
+        return;
+    }
     int iW = 0, iC = 0, iL = 0, i = 0, j = 0;
     FILE *fp = NULL;
     char cBuffer[BLOCKSIZE];

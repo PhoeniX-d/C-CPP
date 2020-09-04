@@ -44,10 +44,10 @@ int main(int argc, char* argv[])
 ////////////////////////////////////////////////////////////////////
 BOOL Display(char *cFileName, int iOffset)
 {
-    if(cFileName == NULL)
+    if(NULL == cFileName)
     {
-        printf("Please enter filename\n");
-        return;
+        printf("Invalid Inputs\n");
+        return -1;
     }
     int iFd = 0, iRet = 0;
     char cBuffer[BLOCKSZIE];

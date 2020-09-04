@@ -53,6 +53,11 @@ int main(int argc, char* argv[])
 ///////////////////////////////////////////////////////////////////
 int CountVowels(char *cFileName)
 {
+    if(NULL == cFileName)
+    {
+        printf("Invalid Inputs\n");
+        return -1;
+    }
 	//create FILE pointer
 	FILE *fp = NULL;
 	int iVowels = 0, i = 0;
