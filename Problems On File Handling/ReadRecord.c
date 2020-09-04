@@ -16,7 +16,6 @@ typedef struct _employee
     char    eAdd[50];
 } EMPLOYEE, *PEMPLOYEE;
 
-void WriteRecord(PEMPLOYEE);
 void DisplayRecord(PEMPLOYEE, char[]);
 
 int main(int argc, char* argv[])
@@ -28,61 +27,9 @@ int main(int argc, char* argv[])
         printf("Enter Employee Name to be searched\n");
         return -1;
     }
-    /*
-    printf("Enter record for 5 employees\n");
-    while(i < MAXRECORD)
-    {
-        printf("\n-------------- Employee %d --------------\n", i + 1);
-        printf("Enter Name of employee:\n");
-        scanf(" %[^\n]", emp[i].eName);
-
-        printf("Enter Address of employee:\n");
-        scanf(" %[^\n]", emp[i].eAdd);
-
-        printf("Enter Id of employee:\n");
-        scanf(" %d", &emp[i].eId);
-
-        printf("Enter Department of employee:\n");
-        scanf(" %[^\n]", emp[i].eDept);
-
-        printf("Enter Salary of employee:\n");
-        scanf(" %f", &emp[i].eSalary);
-
-        fflush(stdin);
-        i++;
-    }*/
-    //WriteRecord(emp);
     DisplayRecord(emp, argv[1]);
 
     return 0;
-}
-
-/////////////////////////////////////////////////////////////////
-//
-//  Name        :WriteRecord
-//  Inputs      :PEMPLOYEE
-//  Returns     :void
-//  Description :Writes Employee record into a file
-//  Author      :Pranav Choudhary
-//  Date        :4 Sept 2020
-//
-//////////////////////////////////////////////////////////////////
-void WriteRecord(PEMPLOYEE ptrEmp)
-{
-    if(ptrEmp == NULL)
-    {
-        printf("Invalid inputs\n");
-        return;
-    }
-    FILE *fp = NULL;
-    fp = fopen("EmployeeInfo.txt", "wb");
-    if(fp == NULL)
-    {
-        printf("Unable to open file\n");
-        return;
-    }
-    fwrite((void *)ptrEmp, MAXRECORD, sizeof(EMPLOYEE), fp);
-    fclose(fp);
 }
 
 /////////////////////////////////////////////////////////////////
