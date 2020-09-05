@@ -22,10 +22,10 @@ int main(int argc, char* argv[])
     int iFd1 = 0, iFd2 = 0;
     BOOL bRet = FALSE;
 
-    printf("Enter the existing file name:\n");
+    printf("\nEnter existing file name with extension\t:");
     scanf("%s", cFname1);
 
-    printf("Enter the new file name:\n");
+    printf("\nEnter destination file name with extension\t:");
     scanf(" %s", cFname2);
 
     if ((iFd1 = open(cFname1, O_RDONLY)) == -1)

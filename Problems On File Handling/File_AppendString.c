@@ -17,10 +17,10 @@ int main(int argc, char* argv[])
     char cFname[NAMESIZE] = {'\0'};
     char cString[MAXSZIE] = {'\0'};
 
-    printf("Enter the file name:\n");
+    printf("\nEnter file name with extension\t:");
     scanf("%s", cFname);
 
-    printf("Enter the string:\n");
+    printf("Enter the string\t:");
     scanf(" %[^\n]", cString);
 
     AppendString(cFname, cString);
@@ -32,7 +32,7 @@ int main(int argc, char* argv[])
 //
 //  Name        :AppendString
 //  Input       :char*, char*
-//  Returns     :int
+//  Returns     :void
 //  Description :Append string at end of file
 //  Author      :Pranav Choudhary
 //  Last Update :3 Sept 2020 by Pranav Choudhary

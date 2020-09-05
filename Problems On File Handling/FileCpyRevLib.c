@@ -19,10 +19,10 @@ int main(int argc, char* argv[])
     //char cFname2[NAMESIZE] = {'\0'};
 
     /*
-    printf("Enter the source file name:\n");
+    printf("\nEnter source file name with extension\t:");
     scanf("%s", cFname1);
 
-    printf("Enter the destination file name:\n");
+    printf("\nEnter destination file name with extension\t:");
     scanf("%s", cFname2);
     */
     if(argc != 3)
@@ -48,7 +48,7 @@ int main(int argc, char* argv[])
 ///////////////////////////////////////////////////////////
 void FileCpy(char cFileName1[], char cFileName2[])
 {
-    if(NULL == cFileName || NULL == cFileName2)
+    if(NULL == cFileName1 || NULL == cFileName2)
     {
         printf("Invalid Inputs\n");
         return;

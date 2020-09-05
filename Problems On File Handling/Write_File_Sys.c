@@ -14,6 +14,16 @@ int main(int argc, char** argv)
     int iFd = 0, iRet = 0;
     char cArr[] = "Hello";
 
+    /*
+    char cFname[NAMESIZE] = {'\0'};
+    char cBuffer[] = "Hello";
+    */
+
+    /*
+    printf("\nEnter file name with extension\t:");
+    scanf("%s", cFname);
+    */
+
     if((iFd = open(argv[1], O_APPEND | O_WRONLY)) == -1)
     {
         printf("Unable to open that file\n");
@@ -26,7 +36,7 @@ int main(int argc, char** argv)
         close(iFd);
         return -1;
     }
-    printf("Successfully Written % bytes\n", iRet);
+    printf("Successfully Written %d bytes\t:", iRet);
     close(iFd);
     return 0;
 }

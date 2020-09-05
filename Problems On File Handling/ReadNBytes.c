@@ -17,8 +17,9 @@ int main()
 {
     char cFname[NAMESIZE] = {'\0'};
     int iBytes = 0;
-    printf("Enter the file name:\n");
+    printf("\nEnter file name with extension\t:");
     scanf("%s", cFname);
+    
     printf("Enter the number of bytes\n");
     scanf(" %d", &iBytes);
 

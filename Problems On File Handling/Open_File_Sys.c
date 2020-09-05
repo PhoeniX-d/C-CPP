@@ -10,7 +10,7 @@ int main(int argc, char** argv)
     int iFd = 0;
     char cFname[16] = {'\0'};
 
-    printf("Enter name of file:\n");
+    printf("\nEnter file name with extension\t:");
     scanf("%s", cFname);
 
     /* Open file using open() in readonly mode */
