@@ -27,7 +27,10 @@ public:
 
     /* Problems */
     bool ListCpyEven(Singly_LinearLL& ODest, Singly_LinearLL& OSrc);
+    int IsSublist(Singly_LinearLL& ODest, Singly_LinearLL& OSrc);
     bool ListCpyPrime(Singly_LinearLL& ODest, Singly_LinearLL& OSrc);
+    bool ListCpyAsc(Singly_LinearLL& ODest, Singly_LinearLL& OSrc);
+    bool ListCpyDesc(Singly_LinearLL& ODest, Singly_LinearLL& OSrc);
 };
 
 ////////////////////////////////////////////////////////////
@@ -250,6 +253,171 @@ bool Singly_LinearLL::ListCpyPrime(Singly_LinearLL& ODest, Singly_LinearLL& OSrc
     return true;
 }// end of ListCpyPrime
 
+////////////////////////////////////////////////////////////
+//
+//  Name        :IsSublist
+//  Input       :Singly_LinearLL, Singly_LinearLL
+//  Returns     :int
+//  Description :Checks that list2 is sublist of list1
+//  Author      :Pranav Choudhary
+//  Date        :5 Sept 2020
+//
+////////////////////////////////////////////////////////////
+int Singly_LinearLL::IsSublist(Singly_LinearLL& List1, Singly_LinearLL& List2)
+{
+    if (NULL == List1.Head && NULL == List2.Head)
+    {
+        printf("Linked Lists is empty\n");
+        return -1;
+    }
+    PNODE nTemp1 = List1.Head;
+    PNODE nTemp2 = NULL;
+    int iPos = 0;
+    while(nTemp1 != NULL)
+    {
+        nTemp2 = List2.Head;
+        while(nTemp1 != NULL && nTemp2 != NULL)
+        {
+            if(nTemp1->iData != nTemp2->iData)
+            {
+                break;
+            }
+            nTemp1 = nTemp1->npNext;
+            nTemp2 = nTemp2->npNext;
+        }
+        if(nTemp2 == NULL)
+        {
+            iPos++;
+            break;
+        }
+        if(nTemp1 != NULL)
+        {
+            nTemp1 = nTemp1->npNext;
+        }
+        iPos++;
+    }
+    if(nTemp2 == NULL)
+    {
+        return iPos;
+    }
+    else
+    {
+        return -1;
+    }
+}// end of IsSublist
+
+////////////////////////////////////////////////////////////
+//
+//  Name        :ListCpyAsc
+//  Input       :Singly_LinearLL, Singly_LinearLL
+//  Returns     :bool
+//  Description :copies list1 to list 2 in ascending order
+//  Author      :Pranav Choudhary
+//  Date        :5 Sept 2020
+//
+////////////////////////////////////////////////////////////
+bool Singly_LinearLL::ListCpyAsc(Singly_LinearLL& List1, Singly_LinearLL& List2)
+{
+    if (NULL == List1.Head)
+    {
+        printf("Linked List 1 is empty\n");
+        return false;
+    }
+    PNODE newn = NULL;
+    PNODE nTemp1 = List1.Head;
+    PNODE nTemp2 = NULL;
+    PNODE nTemp3 = NULL;
+
+    while(nTemp1 != NULL)
+    {
+        newn = new NODE;
+        newn->iData = nTemp1->iData;
+        newn->npNext = NULL;
+        
+        List2.iCount++;
+
+        if(List2.Head == NULL)
+        {
+            List2.Head = newn;
+        }
+
+        else if(List2.Head->iData > newn->iData)
+        {
+            newn->npNext = List2.Head;
+            List2.Head = newn;
+        }
+        else if(newn->iData > List2.Head->iData)
+        {
+            nTemp2 = List2.Head;
+            while(nTemp2 != NULL && nTemp2->iData < newn->iData)
+            {
+                nTemp3 = nTemp2;
+                nTemp2 = nTemp2->npNext;
+			}			
+			newn->npNext = nTemp2;
+			nTemp3->npNext = newn;
+		}
+        nTemp1 = nTemp1->npNext;
+    }
+    return true;
+}// end of ListCpyAsc
+
+////////////////////////////////////////////////////////////
+//
+//  Name        :ListCpyDesc
+//  Input       :Singly_LinearLL, Singly_LinearLL
+//  Returns     :bool
+//  Description :copies list1 to list 2 in Descending order
+//  Author      :Pranav Choudhary
+//  Date        :5 Sept 2020
+//
+////////////////////////////////////////////////////////////
+bool Singly_LinearLL::ListCpyDesc(Singly_LinearLL& List1, Singly_LinearLL& List2)
+{
+    if (NULL == List1.Head)
+    {
+        printf("Linked List 1 is empty\n");
+        return false;
+    }
+    PNODE newn = NULL;
+    PNODE nTemp1 = List1.Head;
+    PNODE nTemp2 = NULL;
+    PNODE nTemp3 = NULL;
+
+    while(nTemp1 != NULL)
+    {
+        newn = new NODE;
+        newn->iData = nTemp1->iData;
+        newn->npNext = NULL;
+        
+        List2.iCount++;
+
+        if(List2.Head == NULL)
+        {
+            List2.Head = newn;
+        }
+
+        else if(List2.Head->iData < newn->iData)
+        {
+            newn->npNext = List2.Head;
+            List2.Head = newn;
+        }
+        else if(newn->iData < List2.Head->iData)
+        {
+            nTemp2 = List2.Head;
+            while(nTemp2 != NULL && nTemp2->iData > newn->iData)
+            {
+                nTemp3 = nTemp2;
+                nTemp2 = nTemp2->npNext;
+			}			
+			newn->npNext = nTemp2;
+			nTemp3->npNext = newn;
+		}
+        nTemp1 = nTemp1->npNext;
+    }
+    return true;
+}// end of ListCpyDesc
+
 // Entry point
 int main()
 {
@@ -257,8 +425,8 @@ int main()
     int iRet = 0, i = 0, iNum = 0, iStart = 0, iEnd = 0;
     Singly_LinearLL sllObj1, sllObj2, sllObj3;
 
-    /* Destination Linked List
-    printf("Enter Number of elements for Destination Linked List\n");
+    /* Linked List 1*/
+    printf("Enter Number of elements for Linked List 1\n");
     scanf("%d", &iRet);
     printf("Enter the numbers\n");
     for (i = 1; i <= iRet; i++)
@@ -268,11 +436,11 @@ int main()
     }
     printf("Destination Linked List:\n");
     sllObj1.DisplayList();
-    printf("Total Elements Destination List:\n%d\n", sllObj1.Count());*/
+    printf("Total Elements Destination List:\n%d\n", sllObj1.Count());
 
-    /* Source Linked List */
+    /* Linked List 2
     printf("-----------------------------------------------------\n");
-    printf("Enter Number of elements for Source Linked List\n");
+    printf("Enter Number of elements for Source Linked List 2\n");
     scanf("%d", &iRet);
     printf("Enter the numbers\n");
     for (i = 1; i <= iRet; i++)
@@ -282,7 +450,7 @@ int main()
     }
     printf("Source Linked List:\n");
     sllObj2.DisplayList();
-    printf("Total Elements Source List:\n%d\n", sllObj2.Count());
+    printf("Total Elements List 2\t\t:%d\n", sllObj2.Count()); */
 
     /* ListCpyAlt: copies source linked list to destination whose SumDig is even
     printf("-----------------------------------------------------\n");
@@ -290,17 +458,49 @@ int main()
     {
         printf("Destination Linked List After Even sum element copy:\n");
         sllObj3.DisplayList();
-        printf("Total Elements Destination List:\n%d\n", sllObj3.Count());
+        printf("Total Elements in Linked List 3\t\t:%2d\n", sllObj3.Count());
     }
     */
-    /* ListCpyAlt: copies source linked list to destination whose SumDig is prime */
+    /* ListCpyAlt: copies source linked list to destination whose SumDig is prime
     printf("-----------------------------------------------------\n");
     if(sllObj2.ListCpyPrime(sllObj3, sllObj2))
     {
         printf("Destination Linked List After Prime sum element copy:\n");
         sllObj3.DisplayList();
-        printf("Total Elements Destination List:\n%d\n", sllObj3.Count());
+        printf("Total Elements in Linked List 3\t\t:%2d\n", sllObj3.Count());
     }
-    
+    */
+    /* IsSublist: check List2 is sublist in List1 or not
+    printf("-----------------------------------------------------\n");
+    iRet = sllObj1.IsSublist(sllObj1, sllObj2);
+    if(iRet != -1)
+    {
+        printf("List2 is sublist in List1 at position\t:%d", iRet);
+    }
+    else
+    {
+        printf("List2 is Not sublist in List1\n");
+    }
+    */
+
+    /* ListCpyAsc: copy list1 to list2 in ascending order
+    printf("-----------------------------------------------------\n");
+    if(sllObj1.ListCpyAsc(sllObj1, sllObj3))
+    {
+        printf("Linked List 3 after copy Ascending order:\n");
+        sllObj3.DisplayList();
+        printf("Total Elements in Linked List 3\t\t:%2d\n", sllObj3.Count());
+    }
+    */
+    /* ListCpyAsc: copy list1 to list2 in descending order
+    printf("-----------------------------------------------------\n");
+    if(sllObj1.ListCpyDesc(sllObj1, sllObj3))
+    {
+        printf("Linked List 3 after copy Descending order:\n");
+        sllObj3.DisplayList();
+        printf("Total Elements in Linked List 3\t\t:%2d\n", sllObj3.Count());
+    }
+    */
+   
     return 0;
 }
