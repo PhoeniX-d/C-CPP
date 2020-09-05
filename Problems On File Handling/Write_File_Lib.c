@@ -21,7 +21,8 @@ int main(int argc, char** argv)
     char cBuffer[] = "Hello";*/
     FILE *fp = NULL;
 
-    /*printf("Enter name of file:\n");
+    /*
+    printf("\nEnter file name with extension\t:");
     scanf("%s", cFname);*/
 
     /* Open file using fopen() in readonly mode */

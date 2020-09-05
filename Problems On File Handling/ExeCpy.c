@@ -2,6 +2,7 @@
 *   Write a program which accept executable file name from user and create
 *   same executable on “D” drive with name “demo.exe”
 */
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<fcntl.h>
@@ -19,10 +20,10 @@ int main(int argc, char* argv[])
     //char cFname2[NAMESIZE] = {'\0'};
 
     /*
-    printf("Enter the source file name:\n");
+    printf("\nEnter source file name with extension\t:");
     scanf("%s", cFname1);
 
-    printf("Enter the destination file name:\n");
+    printf("\nEnter destination file name with extension\t:");
     scanf("%s", cFname2);
     */
     if(argc != 3)

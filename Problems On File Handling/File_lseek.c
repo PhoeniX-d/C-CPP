@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
     int iOffset = 0;
     BOOL bRet = FALSE;
 
-    printf("Enter the file name:\n");
+    printf("\nEnter file name with extension\t:");
     scanf("%s", cFname);
 
     printf("Enter the offset:\n");
@@ -35,7 +35,7 @@ int main(int argc, char* argv[])
 ///////////////////////////////////////////////////////////////////
 //
 //  Name        :Display
-//  Input       :char*, int, int
+//  Input       :char*, int
 //  Returns     :BOOL
 //  Description :read file after particular offser and display data
 //  Author      :Pranav Choudhary

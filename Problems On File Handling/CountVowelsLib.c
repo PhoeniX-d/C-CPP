@@ -2,6 +2,7 @@
 *   Write a program which accept file name from user and count number of
 *   occurrences of vowels (a, e, i, o, u) by using library functions.
 */
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -23,7 +24,7 @@ int main(int argc, char* argv[])
         return 1;
     }
 	/* accept file name from user 
-	printf("\nEnter file name with extension:\n");
+	printf("\nEnter file name with extension\t:");
 	scanf("%s",fname);
     */
 

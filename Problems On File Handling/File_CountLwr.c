@@ -8,7 +8,6 @@
 #include<stdio.h>
 #include<fcntl.h>
 #include<string.h>
-#include<io.h>
 
 #define BLOCKSIZE     1024
 #define NAMESIZE        16
@@ -20,7 +19,7 @@ int main(int argc, char* argv[])
     //char cFname[NAMESIZE] = {'\0'};
     int iRet = 0;
     /*
-    printf("Enter the file name:\n");
+    printf("\nEnter file name with extension\t:");
     scanf("%s", cFname);
     */
     if(argc != 2)

@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
         return 1;
     }
 	/* accept file name from user 
-	printf("\nEnter file name with extension:\n");
+	printf("\nEnter file name with extension\t:");
 	scanf("%s",fname);
     */
     PrintChar(argv[1]);
@@ -32,7 +32,7 @@ int main(int argc, char* argv[])
 ////////////////////////////////////////////////////////////////////
 //
 //  Name        :PrintChar
-//  Input       :char*, char
+//  Input       :char*
 //  Returns     :void
 //  Description :print two characters after every fifty bytes by
 //               using library functions

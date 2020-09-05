@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
     char cAlp = '\0';
     int iRet = 0;
     /*
-    printf("Enter the file name:\n");
+    printf("\nEnter file name with extension\t:");
     scanf("%s", cFname);
     */
     if(argc != 2)
@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
         printf("Required filename!!");
         return -1;
     }
-    printf("Enter the character:\n");
+    printf("Enter the character\t:");
     scanf(" %c", &cAlp);
 
     iRet = CountOccur(argv[1], cAlp);

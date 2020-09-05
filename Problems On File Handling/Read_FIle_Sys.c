@@ -14,7 +14,7 @@ int main(int argc, char** argv)
     char cFname[NAMESIZE] = {'\0'};
     char cBuffer[BLOCKSIZE + 1] = {'\0'};
 
-    printf("Enter name of file:\n");
+    printf("\nEnter file name with extension\t:");
     scanf("%s", cFname);
 
     /* Open file using open() in readonly mode */

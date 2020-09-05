@@ -2,6 +2,7 @@
 *   Write a program which accept file name from user and print number of
 *   words in that file along with offset at which they occured
 */
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<fcntl.h>
@@ -19,7 +20,7 @@ int main(int argc, char* argv[])
     char cWord[NAMESIZE] = {'\0'};
 
     /*
-    printf("Enter the file name:\n");
+    printf("\nEnter file name with extension\t:");
     scanf("%s", cFname);
     */
     if(argc != 3)

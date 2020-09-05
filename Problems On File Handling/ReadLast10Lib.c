@@ -16,7 +16,7 @@ int main()
 	char fname[NAMESIZE]={'\0'};
 
 	//accept file name from user
-	printf("\nEnter file name with extension:\n");
+	printf("\nEnter file name with extension\t:");
 	scanf("%s",fname);
 
 	PrintLastTenChar(fname);

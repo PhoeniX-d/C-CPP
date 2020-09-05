@@ -17,7 +17,7 @@ int main()
     char cFname[NAMESIZE] = {'\0'};
     int iBytes = 0;
 
-    cout << "Enter the filename with extension:\n";
+    cout << "Enter the filename with extension\t:";
     scanf("%s", cFname);
 
     cout <<"Enter number of bytes to read:\n";

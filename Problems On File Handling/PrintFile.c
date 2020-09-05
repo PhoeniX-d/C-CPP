@@ -23,7 +23,7 @@ int main(int argc, char* argv[])
         return 1;
     }
 	/* accept file name from user 
-	printf("\nEnter file name with extension:\n");
+	printf("\nEnter file name with extension\t:");
 	scanf("%s",fname);
     */
 
