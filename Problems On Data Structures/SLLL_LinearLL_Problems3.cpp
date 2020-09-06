@@ -493,7 +493,7 @@ bool Singly_LinearLL::ListMergeAlt(Singly_LinearLL& ODest, Singly_LinearLL& OSrc
 //  Name        :ListSwap
 //  Input       :Singly_LinearLL, Singly_LinearLL
 //  Returns     :bool
-//  Description :Merge 2 linked list alternate way
+//  Description :Swaps consecutive elements in List
 //  Author      :Pranav Choudhary
 //  Date        :1 Sept 2020
 //
