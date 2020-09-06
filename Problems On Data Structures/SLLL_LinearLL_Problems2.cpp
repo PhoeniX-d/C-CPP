@@ -8,16 +8,16 @@
 typedef struct node
 {
     int             iData;
-    struct node* npNext;
-} NODE, * PNODE;
+    struct node     *npNext;
+} NODE, *PNODE;
 
 class Singly_LinearLL
 {
-private:
-    PNODE Head;
-    int   iCount;
+    private:
+        PNODE Head;
+        int   iCount;
 
-public:
+    public:
     /* Required Functions As Linked List */
     Singly_LinearLL();      /* constructor */
     ~Singly_LinearLL();     /* Destructor */
@@ -37,7 +37,7 @@ public:
     bool ListRangeCpy(Singly_LinearLL& ODest, Singly_LinearLL& OSrc, int, int);
 };
 
-////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
 //
 //  Name        :Singly_LinearLL
 //  Input       :void
@@ -65,17 +65,16 @@ Singly_LinearLL::Singly_LinearLL()
 ////////////////////////////////////////////////////////////
 Singly_LinearLL::~Singly_LinearLL()
 {
-    if (Head != NULL)
+    if(Head != NULL)
     {
         PNODE nTemp = NULL;
-        while (Head != NULL)
+        while(Head != NULL)
         {
             nTemp = Head;
             Head = Head->npNext;
             delete nTemp;
             iCount--;
         }
-        Head = NULL;
     }
 }// end of Destructor
 
@@ -91,7 +90,7 @@ Singly_LinearLL::~Singly_LinearLL()
 ////////////////////////////////////////////////////////////
 int Singly_LinearLL::Count()
 {
-    return this->iCount;
+	return iCount;
 }// end of Count
 
 ////////////////////////////////////////////////////////////
@@ -106,14 +105,14 @@ int Singly_LinearLL::Count()
 ////////////////////////////////////////////////////////////
 bool Singly_LinearLL::DisplayList()
 {
-    if (Head == NULL)
+    if(Head == NULL)
     {
         printf("Linked List is NULL\n");
         return false;
     }
     PNODE First = Head;
     /* way 1 */
-    while (First != NULL)
+    while(First != NULL)
     {
         printf("|%d|->", First->iData);
         First = First->npNext;
@@ -125,7 +124,7 @@ bool Singly_LinearLL::DisplayList()
         printf("|%d|->", First->iData);
         First = First->npNext;
         iCnt++;
-    }
+    } 
     */
     printf("NULL\n\n");
     return true;
@@ -144,24 +143,24 @@ bool Singly_LinearLL::DisplayList()
 bool Singly_LinearLL::InsertLast(int iNum)
 {
     PNODE NewN = new NODE;
-    if (NULL == NewN)
+    if(NULL == NewN)
     {
         printf("Memory Allocation Failed");
         return false;
     }
-
+    
     NewN->iData = iNum;
     NewN->npNext = NULL;
 
-    /* if linked list is empty */
-    if (Head == NULL)
+     /* if linked list is empty */
+    if(Head == NULL)
     {
         Head = NewN;
     }
     else
     {
         PNODE nTemp = Head;
-        while (nTemp->npNext != NULL)
+        while(nTemp->npNext != NULL)
         {
             nTemp = nTemp->npNext;
         }

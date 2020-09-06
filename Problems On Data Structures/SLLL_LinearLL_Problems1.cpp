@@ -215,11 +215,11 @@ bool Singly_LinearLL::ReverseList()
 //////////////////////////////////////////////////////////////
 int Singly_LinearLL::TotalOccur(int iNum)
 {
-    int iCnt = -1;
+    int iCnt = 0;
     if(NULL == Head)
     {
         printf("Linked list is Empty\n");
-        return iCnt;
+        return -1;
     }
     PNODE First = Head;
     while(First != NULL)
@@ -283,7 +283,7 @@ int Singly_LinearLL::FirstOccur(int iNum)
 //////////////////////////////////////////////////////////////
 int Singly_LinearLL::SecOccur(int iNum)
 {
-    int iPos = 0, iCnt = 0;
+    int iPos = 0, iCnt = 0, iPos2 = 0;
     if(NULL == Head)
     {
         printf("Linked list is Empty\n");
@@ -296,16 +296,21 @@ int Singly_LinearLL::SecOccur(int iNum)
         if(First->iData == iNum)
         {
             iCnt++;
-            if(iCnt == 2)
+			if(iCnt == 2)
             {
                 break;
             }
+			iPos2 = iPos;
         }
         First = First->npNext;
     }
-    if(iCnt == 2 || iCnt == 1)
+    if(iCnt == 2)
     {
         return iPos;
+    }
+	else if(iCnt == 1)
+    {
+        return iPos2;
     }
     else
     {
@@ -341,7 +346,14 @@ int Singly_LinearLL::LastOccur(int iNum)
         }
         First = First->npNext;
     }
-    return iPos;
+    if(iPos == 0)
+	{
+		return -1;
+	}
+	else
+	{
+		return iPos;
+	}
 }// end of FirstOccur
 
 //////////////////////////////////////////////////////////////

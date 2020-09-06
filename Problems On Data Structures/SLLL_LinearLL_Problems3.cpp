@@ -8,16 +8,16 @@
 typedef struct node
 {
     int             iData;
-    struct node* npNext;
-} NODE, * PNODE;
+    struct node     *npNext;
+} NODE, *PNODE;
 
 class Singly_LinearLL
 {
-private:
-    PNODE Head;
-    int   iCount;
+    private:
+        PNODE Head;
+        int   iCount;
 
-public:
+    public:
     /* Required Functions As Linked List */
     Singly_LinearLL();      /* constructor */
     ~Singly_LinearLL();     /* Destructor */
@@ -27,10 +27,11 @@ public:
 
     /* Problems */
     bool ListCpyEven(Singly_LinearLL& ODest, Singly_LinearLL& OSrc);
-    int IsSublist(Singly_LinearLL& ODest, Singly_LinearLL& OSrc);
+    int  IsSublist(Singly_LinearLL& ODest, Singly_LinearLL& OSrc);
     bool ListCpyPrime(Singly_LinearLL& ODest, Singly_LinearLL& OSrc);
     bool ListCpyAsc(Singly_LinearLL& ODest, Singly_LinearLL& OSrc);
     bool ListCpyDesc(Singly_LinearLL& ODest, Singly_LinearLL& OSrc);
+	bool ListRev();
 };
 
 ////////////////////////////////////////////////////////////
@@ -61,17 +62,16 @@ Singly_LinearLL::Singly_LinearLL()
 ////////////////////////////////////////////////////////////
 Singly_LinearLL::~Singly_LinearLL()
 {
-    if (Head != NULL)
+    if(Head != NULL)
     {
         PNODE nTemp = NULL;
-        while (Head != NULL)
+        while(Head != NULL)
         {
             nTemp = Head;
             Head = Head->npNext;
             delete nTemp;
             iCount--;
         }
-        Head = NULL;
     }
 }// end of Destructor
 
@@ -87,7 +87,7 @@ Singly_LinearLL::~Singly_LinearLL()
 ////////////////////////////////////////////////////////////
 int Singly_LinearLL::Count()
 {
-    return this->iCount;
+	return iCount;
 }// end of Count
 
 ////////////////////////////////////////////////////////////
@@ -102,14 +102,14 @@ int Singly_LinearLL::Count()
 ////////////////////////////////////////////////////////////
 bool Singly_LinearLL::DisplayList()
 {
-    if (Head == NULL)
+    if(Head == NULL)
     {
         printf("Linked List is NULL\n");
         return false;
     }
     PNODE First = Head;
     /* way 1 */
-    while (First != NULL)
+    while(First != NULL)
     {
         printf("|%d|->", First->iData);
         First = First->npNext;
@@ -121,7 +121,7 @@ bool Singly_LinearLL::DisplayList()
         printf("|%d|->", First->iData);
         First = First->npNext;
         iCnt++;
-    }
+    } 
     */
     printf("NULL\n\n");
     return true;
@@ -140,24 +140,24 @@ bool Singly_LinearLL::DisplayList()
 bool Singly_LinearLL::InsertLast(int iNum)
 {
     PNODE NewN = new NODE;
-    if (NULL == NewN)
+    if(NULL == NewN)
     {
         printf("Memory Allocation Failed");
         return false;
     }
-
+    
     NewN->iData = iNum;
     NewN->npNext = NULL;
 
-    /* if linked list is empty */
-    if (Head == NULL)
+     /* if linked list is empty */
+    if(Head == NULL)
     {
         Head = NewN;
     }
     else
     {
         PNODE nTemp = Head;
-        while (nTemp->npNext != NULL)
+        while(nTemp->npNext != NULL)
         {
             nTemp = nTemp->npNext;
         }
@@ -166,6 +166,38 @@ bool Singly_LinearLL::InsertLast(int iNum)
     iCount++;
     return true;
 }// End of InsertLast
+
+//////////////////////////////////////////////////////////////
+//
+//  Name        :ReverseList
+//  Input       :void
+//  Returns     :void
+//  Description :returns position of First occurance of number
+//  Author      :Pranav Choudhary
+//  Date        :1 Sept 2020
+//
+//////////////////////////////////////////////////////////////
+bool Singly_LinearLL::ListRev()
+{
+    if(NULL == Head)
+    {
+        printf("Linked list is empty\n");
+        return false;
+    }
+
+    PNODE Next = NULL;
+    PNODE Prev = NULL;
+
+    while(Head != NULL)
+    {
+        Next = Head->npNext;
+        Head->npNext = Prev;
+        Prev = Head;
+        Head = Next;
+    }
+    Head = Prev;
+    return true;
+}// end of ListRev  
 
 ////////////////////////////////////////////////////////////
 //
@@ -191,7 +223,7 @@ bool Singly_LinearLL::ListCpyEven(Singly_LinearLL& ODest, Singly_LinearLL& OSrc)
     {
         iEvenSum = 0;
         iTemp = nTemp->iData;
-        while(iTemp != 0)
+        while(iTemp > 0)
         {
             iEvenSum = iEvenSum + (iTemp % 10);
             iTemp = iTemp / 10;
@@ -230,7 +262,7 @@ bool Singly_LinearLL::ListCpyPrime(Singly_LinearLL& ODest, Singly_LinearLL& OSrc
     {
         iPrimeSum = 0;
         iTemp = nTemp->iData;
-        while(iTemp != 0)
+        while(iTemp > 0)
         {
             iPrimeSum = iPrimeSum + (iTemp % 10);
             iTemp = iTemp / 10;
@@ -316,15 +348,15 @@ int Singly_LinearLL::IsSublist(Singly_LinearLL& List1, Singly_LinearLL& List2)
 //  Date        :5 Sept 2020
 //
 ////////////////////////////////////////////////////////////
-bool Singly_LinearLL::ListCpyAsc(Singly_LinearLL& List1, Singly_LinearLL& List2)
+bool Singly_LinearLL::ListCpyAsc(Singly_LinearLL& ODest, Singly_LinearLL& OSrc)
 {
-    if (NULL == List1.Head)
+    if (NULL == OSrc.Head && NULL != ODest.Head)
     {
-        printf("Linked List 1 is empty\n");
+        printf("Invalid Inputs\n");
         return false;
     }
     PNODE newn = NULL;
-    PNODE nTemp1 = List1.Head;
+    PNODE nTemp1 = OSrc.Head;
     PNODE nTemp2 = NULL;
     PNODE nTemp3 = NULL;
 
@@ -334,21 +366,21 @@ bool Singly_LinearLL::ListCpyAsc(Singly_LinearLL& List1, Singly_LinearLL& List2)
         newn->iData = nTemp1->iData;
         newn->npNext = NULL;
         
-        List2.iCount++;
+        ODest.iCount++;
 
-        if(List2.Head == NULL)
+        if(ODest.Head == NULL)
         {
-            List2.Head = newn;
+            ODest.Head = newn;
         }
 
-        else if(List2.Head->iData > newn->iData)
+        else if(ODest.Head->iData > newn->iData)
         {
-            newn->npNext = List2.Head;
-            List2.Head = newn;
+            newn->npNext = ODest.Head;
+            ODest.Head = newn;
         }
-        else if(newn->iData > List2.Head->iData)
+        else if(newn->iData > ODest.Head->iData)
         {
-            nTemp2 = List2.Head;
+            nTemp2 = ODest.Head;
             while(nTemp2 != NULL && nTemp2->iData < newn->iData)
             {
                 nTemp3 = nTemp2;
@@ -372,15 +404,15 @@ bool Singly_LinearLL::ListCpyAsc(Singly_LinearLL& List1, Singly_LinearLL& List2)
 //  Date        :5 Sept 2020
 //
 ////////////////////////////////////////////////////////////
-bool Singly_LinearLL::ListCpyDesc(Singly_LinearLL& List1, Singly_LinearLL& List2)
+bool Singly_LinearLL::ListCpyDesc(Singly_LinearLL& ODest, Singly_LinearLL& Osrc)
 {
-    if (NULL == List1.Head)
+    if (NULL == Osrc.Head && NULL != ODest.Head)
     {
-        printf("Linked List 1 is empty\n");
+        printf("Invalid Inputs\n");
         return false;
     }
     PNODE newn = NULL;
-    PNODE nTemp1 = List1.Head;
+    PNODE nTemp1 = Osrc.Head;
     PNODE nTemp2 = NULL;
     PNODE nTemp3 = NULL;
 
@@ -390,21 +422,21 @@ bool Singly_LinearLL::ListCpyDesc(Singly_LinearLL& List1, Singly_LinearLL& List2
         newn->iData = nTemp1->iData;
         newn->npNext = NULL;
         
-        List2.iCount++;
+        ODest.iCount++;
 
-        if(List2.Head == NULL)
+        if(ODest.Head == NULL)
         {
-            List2.Head = newn;
+            ODest.Head = newn;
         }
 
-        else if(List2.Head->iData < newn->iData)
+        else if(ODest.Head->iData < newn->iData)
         {
-            newn->npNext = List2.Head;
-            List2.Head = newn;
+            newn->npNext = ODest.Head;
+            ODest.Head = newn;
         }
-        else if(newn->iData < List2.Head->iData)
+        else if(newn->iData < ODest.Head->iData)
         {
-            nTemp2 = List2.Head;
+            nTemp2 = ODest.Head;
             while(nTemp2 != NULL && nTemp2->iData > newn->iData)
             {
                 nTemp3 = nTemp2;
@@ -422,10 +454,10 @@ bool Singly_LinearLL::ListCpyDesc(Singly_LinearLL& List1, Singly_LinearLL& List2
 int main()
 {
     printf("\n----------Singly Linear Linked List Problems 3----------\n\n");
-    int iRet = 0, i = 0, iNum = 0, iStart = 0, iEnd = 0;
-    Singly_LinearLL sllObj1, sllObj2, sllObj3;
+    int iRet = 0, i = 0, iNum = 0;
+    Singly_LinearLL sllObj1, sllObj2, sllObj3, sllObj4, sllObj5, sllObj6;
 
-    /* Linked List 1*/
+    /* Linked List 1 */
     printf("Enter Number of elements for Linked List 1\n");
     scanf("%d", &iRet);
     printf("Enter the numbers\n");
@@ -434,13 +466,13 @@ int main()
         scanf("%d", &iNum);
         sllObj1.InsertLast(iNum);
     }
-    printf("Destination Linked List:\n");
+    printf("Linked List 1:\n");
     sllObj1.DisplayList();
-    printf("Total Elements Destination List:\n%d\n", sllObj1.Count());
+    printf("Total Elements List 1\t:%d\n",  sllObj1.Count());
 
-    /* Linked List 2
+    /* Linked List 2 */
     printf("-----------------------------------------------------\n");
-    printf("Enter Number of elements for Source Linked List 2\n");
+    printf("Enter Number of elements for Linked List 2\n");
     scanf("%d", &iRet);
     printf("Enter the numbers\n");
     for (i = 1; i <= iRet; i++)
@@ -448,29 +480,29 @@ int main()
         scanf("%d", &iNum);
         sllObj2.InsertLast(iNum);
     }
-    printf("Source Linked List:\n");
+    printf("Linked List 2:\n");
     sllObj2.DisplayList();
-    printf("Total Elements List 2\t\t:%d\n", sllObj2.Count()); */
+    printf("Total Elements List 2\t:%d\n", sllObj2.Count());
 
-    /* ListCpyAlt: copies source linked list to destination whose SumDig is even
+    /* ListCpyAlt: copies source linked list to destination whose SumDig is even */
     printf("-----------------------------------------------------\n");
-    if(sllObj2.ListCpyEven(sllObj3, sllObj2))
+    if(sllObj1.ListCpyEven(sllObj3, sllObj1))
     {
         printf("Destination Linked List After Even sum element copy:\n");
         sllObj3.DisplayList();
         printf("Total Elements in Linked List 3\t\t:%2d\n", sllObj3.Count());
     }
-    */
-    /* ListCpyAlt: copies source linked list to destination whose SumDig is prime
+
+    /* ListCpyAlt: copies source linked list to destination whose SumDig is prime */
     printf("-----------------------------------------------------\n");
-    if(sllObj2.ListCpyPrime(sllObj3, sllObj2))
+    if(sllObj1.ListCpyPrime(sllObj4, sllObj1))
     {
         printf("Destination Linked List After Prime sum element copy:\n");
-        sllObj3.DisplayList();
-        printf("Total Elements in Linked List 3\t\t:%2d\n", sllObj3.Count());
+        sllObj4.DisplayList();
+        printf("Total Elements in Linked List 3\t\t:%2d\n", sllObj4.Count());
     }
-    */
-    /* IsSublist: check List2 is sublist in List1 or not
+    
+    /* IsSublist: check List2 is sublist in List1 or not */
     printf("-----------------------------------------------------\n");
     iRet = sllObj1.IsSublist(sllObj1, sllObj2);
     if(iRet != -1)
@@ -481,26 +513,30 @@ int main()
     {
         printf("List2 is Not sublist in List1\n");
     }
-    */
-
-    /* ListCpyAsc: copy list1 to list2 in ascending order
+    
+    /* ListCpyAsc: copy list1 to list2 in ascending order */
     printf("-----------------------------------------------------\n");
-    if(sllObj1.ListCpyAsc(sllObj1, sllObj3))
+    if(sllObj1.ListCpyAsc(sllObj5, sllObj1))
     {
         printf("Linked List 3 after copy Ascending order:\n");
-        sllObj3.DisplayList();
-        printf("Total Elements in Linked List 3\t\t:%2d\n", sllObj3.Count());
+        sllObj5.DisplayList();
+        printf("Total Elements in Linked List 3\t\t:%2d\n", sllObj5.Count());
     }
-    */
-    /* ListCpyAsc: copy list1 to list2 in descending order
+	
+    /* ListCpyAsc: copy list1 to list2 in descending order */
     printf("-----------------------------------------------------\n");
-    if(sllObj1.ListCpyDesc(sllObj1, sllObj3))
+    if(sllObj1.ListCpyDesc(sllObj6, sllObj1))
     {
         printf("Linked List 3 after copy Descending order:\n");
-        sllObj3.DisplayList();
-        printf("Total Elements in Linked List 3\t\t:%2d\n", sllObj3.Count());
+        sllObj6.DisplayList();
+        printf("Total Elements in Linked List 3\t\t:%2d\n", sllObj6.Count());
     }
-    */
-   
+	
+	/* ListRev: reverses linked list in place */
+    printf("-----------------------------------------------------\n");
+    sllObj1.ListRev();
+    printf("Linked List Reversed:\n");
+    sllObj1.DisplayList();
+    printf("Total Elements Destination List:\n%d\n", sllObj1.Count());
     return 0;
 }
