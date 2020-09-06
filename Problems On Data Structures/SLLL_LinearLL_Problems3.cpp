@@ -31,7 +31,9 @@ class Singly_LinearLL
     bool ListCpyPrime(Singly_LinearLL& ODest, Singly_LinearLL& OSrc);
     bool ListCpyAsc(Singly_LinearLL& ODest, Singly_LinearLL& OSrc);
     bool ListCpyDesc(Singly_LinearLL& ODest, Singly_LinearLL& OSrc);
-	bool ListRev();
+    bool ListMergeAlt(Singly_LinearLL &ODest, Singly_LinearLL &OSrc);
+    bool ListSwap();
+    bool ListRev();
 };
 
 ////////////////////////////////////////////////////////////
@@ -450,12 +452,85 @@ bool Singly_LinearLL::ListCpyDesc(Singly_LinearLL& ODest, Singly_LinearLL& Osrc)
     return true;
 }// end of ListCpyDesc
 
+///////////////////////////////////////////////////////////////////////
+//
+//  Name        :ListMergeAlt
+//  Input       :Singly_LinearLL, Singly_LinearLL
+//  Returns     :bool
+//  Description :Merge 2 linked list alternate way
+//  Author      :Pranav Choudhary
+//  Date        :1 Sept 2020
+//
+///////////////////////////////////////////////////////////////////////
+bool Singly_LinearLL::ListMergeAlt(Singly_LinearLL& ODest, Singly_LinearLL& OSrc)
+{
+    if (NULL == OSrc.Head && NULL == ODest.Head)
+    {
+        printf("Linked Lists is empty\n");
+        return false;
+    }
+    PNODE nTemp1 = ODest.Head;
+    PNODE nTemp2 = NULL;
+    PNODE nTemp3 = OSrc.Head;
+
+    while (nTemp1 != NULL && nTemp3 != NULL)
+    {
+        nTemp2 = nTemp1->npNext;
+        nTemp2 = nTemp1->npNext;
+        PNODE newn = new NODE;
+        newn->iData = nTemp3->iData;
+        newn->npNext = nTemp2;
+        nTemp1->npNext = newn;
+        nTemp1 = nTemp2;
+        nTemp3 = nTemp3->npNext;
+        iCount++;
+    }
+    return true;
+}// end of ListMergeAlt
+
+///////////////////////////////////////////////////////////////////////
+//
+//  Name        :ListSwap
+//  Input       :Singly_LinearLL, Singly_LinearLL
+//  Returns     :bool
+//  Description :Merge 2 linked list alternate way
+//  Author      :Pranav Choudhary
+//  Date        :1 Sept 2020
+//
+///////////////////////////////////////////////////////////////////////
+bool Singly_LinearLL::ListSwap()
+{
+    if (NULL == Head)
+    {
+        printf("Linked Lists is empty\n");
+        return false;
+    }
+    PNODE nTemp1 = Head;
+    PNODE nTemp2 = NULL;
+    int iTemp = 0;
+
+    while (nTemp1 != NULL)
+    {
+        if(nTemp1->npNext == NULL)
+        {
+            break;
+        }
+        nTemp2 = nTemp1->npNext;
+        iTemp = nTemp1->iData;
+        nTemp1->iData = nTemp2->iData;
+        nTemp2->iData = iTemp;
+
+        nTemp1 = nTemp2->npNext;
+    }
+    return true;
+}// end of ListMerge
+
 // Entry point
 int main()
 {
     printf("\n----------Singly Linear Linked List Problems 3----------\n\n");
     int iRet = 0, i = 0, iNum = 0;
-    Singly_LinearLL sllObj1, sllObj2, sllObj3, sllObj4, sllObj5, sllObj6;
+    Singly_LinearLL sllObj1, sllObj2, sllObj3, sllObj4, sllObj5, sllObj6, sllObj7;
 
     /* Linked List 1 */
     printf("Enter Number of elements for Linked List 1\n");
@@ -470,7 +545,7 @@ int main()
     sllObj1.DisplayList();
     printf("Total Elements List 1\t:%d\n",  sllObj1.Count());
 
-    /* Linked List 2 */
+    /* Linked List 2
     printf("-----------------------------------------------------\n");
     printf("Enter Number of elements for Linked List 2\n");
     scanf("%d", &iRet);
@@ -482,9 +557,9 @@ int main()
     }
     printf("Linked List 2:\n");
     sllObj2.DisplayList();
-    printf("Total Elements List 2\t:%d\n", sllObj2.Count());
+    printf("Total Elements List 2\t:%d\n", sllObj2.Count()); */
 
-    /* ListCpyAlt: copies source linked list to destination whose SumDig is even */
+    /* ListCpyAlt: copies source linked list to destination whose SumDig is even 
     printf("-----------------------------------------------------\n");
     if(sllObj1.ListCpyEven(sllObj3, sllObj1))
     {
@@ -493,7 +568,7 @@ int main()
         printf("Total Elements in Linked List 3\t\t:%2d\n", sllObj3.Count());
     }
 
-    /* ListCpyAlt: copies source linked list to destination whose SumDig is prime */
+    /* ListCpyAlt: copies source linked list to destination whose SumDig is prime 
     printf("-----------------------------------------------------\n");
     if(sllObj1.ListCpyPrime(sllObj4, sllObj1))
     {
@@ -502,7 +577,7 @@ int main()
         printf("Total Elements in Linked List 3\t\t:%2d\n", sllObj4.Count());
     }
     
-    /* IsSublist: check List2 is sublist in List1 or not */
+    /* IsSublist: check List2 is sublist in List1 or not 
     printf("-----------------------------------------------------\n");
     iRet = sllObj1.IsSublist(sllObj1, sllObj2);
     if(iRet != -1)
@@ -514,7 +589,7 @@ int main()
         printf("List2 is Not sublist in List1\n");
     }
     
-    /* ListCpyAsc: copy list1 to list2 in ascending order */
+    /* ListCpyAsc: copy list1 to list2 in ascending order
     printf("-----------------------------------------------------\n");
     if(sllObj1.ListCpyAsc(sllObj5, sllObj1))
     {
@@ -522,8 +597,8 @@ int main()
         sllObj5.DisplayList();
         printf("Total Elements in Linked List 3\t\t:%2d\n", sllObj5.Count());
     }
-	
-    /* ListCpyAsc: copy list1 to list2 in descending order */
+
+    /* ListCpyAsc: copy list1 to list2 in descending order 
     printf("-----------------------------------------------------\n");
     if(sllObj1.ListCpyDesc(sllObj6, sllObj1))
     {
@@ -532,11 +607,25 @@ int main()
         printf("Total Elements in Linked List 3\t\t:%2d\n", sllObj6.Count());
     }
 	
-	/* ListRev: reverses linked list in place */
+	/* ListRev: reverses linked list in place
     printf("-----------------------------------------------------\n");
     sllObj1.ListRev();
     printf("Linked List Reversed:\n");
     sllObj1.DisplayList();
-    printf("Total Elements Destination List:\n%d\n", sllObj1.Count());
+    printf("Total Elements in List:\n%d\n", sllObj1.Count());
+
+    /* ListMergeAlt:Merge Two lists alterntely
+    printf("-----------------------------------------------------\n");
+    sllObj1.ListMergeAlt(sllObj1, sllObj2);
+    printf("Linked List Merged:\n");
+    sllObj1.DisplayList();
+    printf("Total Elements in List:\n%d\n", sllObj1.Count());
+
+    /* ListSwap =:Swaps elements in list */
+    printf("-----------------------------------------------------\n");
+    sllObj1.ListSwap();
+    printf("Linked List contents Swaped:\n");
+    sllObj1.DisplayList();
+    printf("Total Elements in List:\n%d\n", sllObj1.Count());
     return 0;
 }

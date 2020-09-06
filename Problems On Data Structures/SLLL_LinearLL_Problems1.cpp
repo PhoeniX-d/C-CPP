@@ -1,5 +1,5 @@
 /*
-*   Implementaion of Singly Linear Linked List in C++ with Problems 1
+*   Implementaion of Singly Linear Linked List in C++ with Problems 1:
 */
 #include<stdio.h>
 #include<stdlib.h>
