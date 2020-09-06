@@ -1,5 +1,5 @@
 /*
-*   Program to implement stack in dynamic way using Liked list
+*   Program to implement stack in static way using array
 */
 
 #include<iostream>
@@ -7,31 +7,28 @@
 
 using namespace std;
 
-typedef class Node
-{
-    public:
-        int     iData;
-        Node    *cpNext;
-}NODE, *PNODE;
-
-/* class DStack */
-class DStack
+/* class SStack */
+template<class T>
+class SStack
 {
     private:
-        PNODE Head;
+        T   *Arr;
+        int iTop;
         int iSize;
-
+    
     public:
-    /* Constructor*/
-    DStack();
+    /* Parameterized constructor with default args */
+    SStack(int);
     /* Destructor */
-    ~DStack();
+    ~SStack();
     /* IsEmpty: check stack is empty or not */
     bool IsEmpty();
+    /* IsFull: check stack is full or not */
+    bool IsFull();
     /* Push: Push element in stack */
-    void Push(int);
+    void Push(T);
     /* Pop: Pop element from stack */
-    int  Pop();
+    T Pop();
     /* Display elements in stack */
     void Display();
 
@@ -39,7 +36,7 @@ class DStack
 
 ////////////////////////////////////////////////////////////
 //
-//  Name        :DStack
+//  Name        :SStack
 //  Input       :int
 //  Returns     :   -
 //  Description :constructor
@@ -47,15 +44,17 @@ class DStack
 //  Date        :6 Sept 2020
 //
 ////////////////////////////////////////////////////////////
-DStack::DStack()
+template<class T>
+SStack<T>::SStack(int iNum) 
 {
-    Head = NULL;
-    iSize = 0;
+    this->iSize = iNum;
+    this->iTop = -1;
+    this->Arr = new T[this->iSize];
 }// end of constructor
 
 ////////////////////////////////////////////////////////////
 //
-//  Name        :~DStack
+//  Name        :~SStack
 //  Input       :   -
 //  Returns     :   -
 //  Description :destructor
@@ -63,19 +62,10 @@ DStack::DStack()
 //  Date        :6 Sept 2020
 //
 ////////////////////////////////////////////////////////////
-DStack::~DStack()
+template<class T>
+SStack<T>::~SStack()
 {
-   if(Head != NULL)
-   {
-       PNODE cTemp = NULL;
-       while(Head != NULL)
-       {
-           cTemp = Head;
-           Head = Head->cpNext;
-           delete cTemp;
-           iSize--;
-       }
-   }
+   delete[] Arr;
 }// end of destructor
 
 ////////////////////////////////////////////////////////////
@@ -88,9 +78,10 @@ DStack::~DStack()
 //  Date        :6 Sept 2020
 //
 ////////////////////////////////////////////////////////////
-bool DStack::IsEmpty()
+template<class T>
+bool SStack<T>::IsEmpty()
 {
-    if(this->Head == NULL)
+    if(this->iTop == -1)
     {
         return true;
     }
@@ -102,6 +93,29 @@ bool DStack::IsEmpty()
 
 ////////////////////////////////////////////////////////////
 //
+//  Name        :IsFull
+//  Input       :void
+//  Returns     :bool
+//  Description :Check whether stack is full or not
+//  Author      :Pranav Choudhary
+//  Date        :6 Sept 2020
+//
+////////////////////////////////////////////////////////////
+template<class T>
+bool SStack<T>::IsFull()
+{
+    if(this->iTop == iSize)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }    
+}// end of IsFull
+
+////////////////////////////////////////////////////////////
+//
 //  Name        :Display
 //  Input       :void
 //  Returns     :void
@@ -110,7 +124,8 @@ bool DStack::IsEmpty()
 //  Date        :6 Sept 2020
 //
 ////////////////////////////////////////////////////////////
-void DStack::Display()
+template<class T>
+void SStack<T>::Display()
 {
     if(IsEmpty())
     {
@@ -118,12 +133,10 @@ void DStack::Display()
         return;
     }
     int i = 0;
-    PNODE cTemp = Head;
     cout << "Top--->";
-    while(cTemp != NULL)
+    for(i = this->iSize -1; i >= 0; i--)
     {
-        printf("\t| % 4d |\n", cTemp->iData);
-        cTemp = cTemp->cpNext;
+        cout << "\t| " << this->Arr[i] << " |" << endl;
     }
 }// end of Display
 
@@ -137,26 +150,16 @@ void DStack::Display()
 //  Date        :6 Sept 2020
 //
 ////////////////////////////////////////////////////////////
-void DStack::Push(int iNum)
+template<class T>
+void SStack<T>::Push(T tData)
 {
-    PNODE newn = new NODE;
-    newn->iData = iNum;
-    newn->cpNext = NULL;
-
-    if(Head == NULL)
+    if(IsFull())
     {
-        Head = newn;
+        cout << "Stack is Full\n";
+        return;
     }
-    else
-    {
-        PNODE cTemp = Head;
-        while(cTemp->cpNext != NULL)
-        {
-            cTemp = cTemp->cpNext;
-        }
-        cTemp->cpNext = newn;
-    }
-    iSize++;
+    this->iTop++;
+    this->Arr[iTop] = tData;
 }// end of Push
 
 ////////////////////////////////////////////////////////////
@@ -169,50 +172,40 @@ void DStack::Push(int iNum)
 //  Date        :6 Sept 2020
 //
 ////////////////////////////////////////////////////////////
-int DStack::Pop()
+template<class T>
+T SStack<T>::Pop()
 {
-    int iNum = 0;
     if(IsEmpty())
     {
         cout << "Stack is Empty\n";
-        return -1;
+        return T(-1);
     }
-    iNum = Head->iData;
-    if(Head->cpNext == NULL)
-    {
-        delete Head;
-        Head = NULL;
-    }
-    else
-    {
-        PNODE cTemp = Head;
-        Head = Head->cpNext;
-        delete cTemp;
-    }
-    iSize--;
-    return iNum;
+    T tData = 0;
+    tData = this->Arr[iTop--];
+    return tData;
 }// end of Push
 
 int main()
 {
-    int iNum = 0, iSize = 0, i = 0;
-    DStack dsObj;
-    cout << "Enter elements[enter \'0\' to break]:\n";
-    while(1)
+
+    char ch;
+    int iSize = 0, i = 0;
+    cout << "Enter the number of Stack elements\t:";
+    cin >> iSize;
+    SStack<char> ssObj1(iSize);
+
+    cout << "Enter elements:\n";
+    for(i = 1; i <= iSize; i++)
     {
-        cin >> iNum;
-        if(iNum == 0)
-        {
-            break;
-        }
-        dsObj.Push(iNum);
+        cin >> ch;
+        ssObj1.Push(ch);
     }
     cout << "\nStack:\n\n";
-    dsObj.Display();
+    ssObj1.Display();
 
-    cout << "\nPoped Element\t:" << dsObj.Pop() << endl;
-    cout << "Poped Element\t:" << dsObj.Pop() << endl;
-    cout << "Poped Element\t:" << dsObj.Pop() << endl;
+    cout << "\nPoped Element\t:" << ssObj1.Pop() << endl;
+    cout << "Poped Element\t:" << ssObj1.Pop() << endl;
+    cout << "Poped Element\t:" << ssObj1.Pop() << endl;
 
     return 0;
 }
