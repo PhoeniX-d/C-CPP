@@ -540,12 +540,14 @@ int main()
     int iRet = 0, i = 0, iNum = 0;
     Singly_LinearLL sllObj;
 
-    printf("Enter Number of elements\n");
-    scanf("%d", &iRet);
-    printf("Enter the numbers\n");
-    for (i = 1; i <= iRet; i++)
+    printf("Enter the numbers[enter \'0\' to break]\n");
+    while(1)
     {
         scanf("%d", &iNum);
+        if(iNum == 0)
+        {
+            break;
+        }
         sllObj.InsertLast(iNum);
     }
     printf("Linked List:\n");

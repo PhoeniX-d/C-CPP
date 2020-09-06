@@ -533,12 +533,14 @@ int main()
     Singly_LinearLL sllObj1, sllObj2, sllObj3, sllObj4, sllObj5, sllObj6, sllObj7;
 
     /* Linked List 1 */
-    printf("Enter Number of elements for Linked List 1\n");
-    scanf("%d", &iRet);
-    printf("Enter the numbers\n");
-    for (i = 1; i <= iRet; i++)
+    printf("Enter the numbers[enter \'0\' to break]\n");
+    while(1)
     {
         scanf("%d", &iNum);
+        if(iNum == 0)
+        {
+            break;
+        }
         sllObj1.InsertLast(iNum);
     }
     printf("Linked List 1:\n");
@@ -547,12 +549,14 @@ int main()
 
     /* Linked List 2
     printf("-----------------------------------------------------\n");
-    printf("Enter Number of elements for Linked List 2\n");
-    scanf("%d", &iRet);
-    printf("Enter the numbers\n");
-    for (i = 1; i <= iRet; i++)
+    printf("Enter the numbers[enter \'0\' to break]\n");
+    while(1)
     {
         scanf("%d", &iNum);
+        if(iNum == 0)
+        {
+            break;
+        }
         sllObj2.InsertLast(iNum);
     }
     printf("Linked List 2:\n");
