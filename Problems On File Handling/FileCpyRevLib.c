@@ -79,6 +79,8 @@ void FileCpy(char cFileName1[], char cFileName2[])
             cWBuffer = (char *)realloc(cWBuffer, BLOCKSIZE + iSize);
         }
         strcat(cWBuffer, cBuffer);
+        /* Cleans buffer */
+        memset(cBuffer, 0, BLOCKSIZE);
     }
     strrev(cWBuffer);
     if(fwrite(cWBuffer, NMEMB, strlen(cWBuffer), fp2))
