@@ -16,6 +16,11 @@ int main()
     scanf("%d", &iStart);
     printf("Enter the end of range\t\t:");
     scanf("%d", &iEnd);
+    if(iStart > iEnd || iStart < 0)
+    {
+        printf("Invalid Range!!\n");
+        return;
+    }
     PerfectRange(iStart, iEnd);
     return 0;
 }

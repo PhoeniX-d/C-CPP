@@ -16,6 +16,11 @@ int main()
     printf("Enter the number\t:");
     scanf("%d", &iNum);
 
+    if(iNum == 0)
+    {
+        return iNum;
+    }
+
     printf("Enter the power\t\t:");
     scanf("%d", &iPow);
 
@@ -38,10 +43,6 @@ float PowerX(int iNo, int iPower)
 {
     static float fAns = 1;
     static int i = 1;
-    if(iNo == 0)
-    {
-        return iNo;
-    }
     if(i <= abs(iPower))
     {
         fAns = iNo * fAns;

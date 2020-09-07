@@ -15,6 +15,10 @@ int main()
     int iRet = 0;
     printf("Enter the number:\n");
     scanf("%lld", &iNum);
+    if(iNum < 0)
+    {
+        iNum = -iNum;
+    }
     iRet = MinDigit(iNum);    
     printf("Smallest digit in %lld\t:%d\n", iNum, iRet);
     return 0;
@@ -32,10 +36,6 @@ int main()
 int MinDigit(long long int iNo)
 {
     static int iMin = 9;   /* Initialized only once */
-    if(iNo < 0)
-    {
-        iNo = -iNo;
-    }
     if(iNo != 0)
     {
         if(iMin > (iNo % 10))

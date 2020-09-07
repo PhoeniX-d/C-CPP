@@ -13,6 +13,10 @@ int main()
     long long int iNum = 0;
     printf("Enter the number\t:");
     scanf("%lld", &iNum);
+    if(iNum < 0)
+    {
+        iNum = -iNum;
+    }
     Display(iNum);
     return 0;
 }

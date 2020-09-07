@@ -20,7 +20,10 @@ int main()
         printf("Please Enter numbers upto 1000[in case its recursion]\n");
         return -1;
     }
-
+    
+    if(iNum < 0)
+        iNum = -iNum;
+    
     iArr = (int *)malloc(sizeof(int) * iNum);
     printf("Enter the elements:\n");
     for (int i = 0; i < iNum; i++)
@@ -45,6 +48,10 @@ int main()
 ////////////////////////////////////////////////////////////
 int SumN(int iArr[], int iNo)
 {
+    if(iArr == NULL)
+    {
+        return -1;
+    }
     static int iSum = 0, i = 0;   /* Initialized only once */
     if(i < iNo)
     {

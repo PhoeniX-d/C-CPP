@@ -14,6 +14,10 @@ int main()
     int iRet = 0;
     printf("Enter the number\t:");
     scanf("%lld", &iNum);
+    if(iNum < 0)
+    {
+        iNum = -iNum;
+    }
     iRet = SumDigit(iNum);
     printf("Sum of digits is\t:%d\n", iRet);
     return 0;
@@ -31,6 +35,7 @@ int main()
 int SumDigit(long long int iNo)
 {
     static int iSum = 0;   /* Initialized only once */
+
     if(iNo != 0)
     {
         iSum = iSum + iNo % 10;

@@ -15,6 +15,10 @@ int main()
     int iRet = 0;
     printf("Enter the number:\n");
     scanf("%lld", &iNum);
+    if(iNum < 0)
+    {
+        iNum = -iNum;
+    }
     iRet = MaxDigit(iNum);    
     printf("Largest digit in %lld\t:%d\n", iNum, iRet);
     return 0;
@@ -32,10 +36,7 @@ int main()
 int MaxDigit(long long int iNo)
 {
     static int iMax = 0;   /* Initialized only once */
-    if(iNo < 0)
-    {
-        iNo = -iNo;
-    }
+    
     if(iNo != 0)
     {
         if(iMax < (iNo % 10))

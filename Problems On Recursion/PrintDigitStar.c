@@ -14,6 +14,10 @@ int main()
     int iNum = 0;
     printf("Enter the number\t:");
     scanf("%d", &iNum);
+    if(iNum < 0)
+    {
+        iNum = -iNum;
+    }
     Display(iNum);
     return 0;
 }

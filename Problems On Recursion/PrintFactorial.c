@@ -33,6 +33,10 @@ int main()
 UINT Factorial(int iNo)
 {
     static UINT iFact = 1;   /* Initialized only once */
+    if(iNo < 0)
+    {
+        iNo = -iNo;
+    }
     if(iNo != 0)
     {
         iFact = iFact * iNo;

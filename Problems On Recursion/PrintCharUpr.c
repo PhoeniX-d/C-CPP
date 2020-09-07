@@ -13,6 +13,10 @@ int main()
     int iNum = 0;
     printf("Enter the number\t:");
     scanf("%d", &iNum);
+    if(iNum < 0)
+    {
+        iNum = -iNum;
+    }
     DisplayUpr(iNum);
     return 0;
 }
@@ -30,6 +34,7 @@ void DisplayUpr(int iNo)
 {
     static int i = 1;        /* Initialized only once */
     static char ch = 'A';    /* Initialized only once */
+
     if(i <= iNo)
     {
         printf("%c ", ch);

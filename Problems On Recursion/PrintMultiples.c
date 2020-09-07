@@ -14,6 +14,10 @@ int main()
     int iNum = 0;
     printf("Enter the number\t:");
     scanf("%d", &iNum);
+    if(iNum < 0)
+    {
+        iNum = -iNum;
+    }
     PrintMultiples(iNum);
     return 0;
 }
@@ -30,6 +34,7 @@ int main()
 void PrintMultiples(int iNo)
 {
     static int i = 1;   /* Initialized only once */
+
     if(i <= 5)
     {
         printf("%d ", i * iNo);

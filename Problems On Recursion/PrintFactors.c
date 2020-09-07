@@ -28,6 +28,10 @@ int main()
 void Factors(int iNo)
 {
     static int i = 1;   /* Initialized only once */
+    if(iNo < 0)
+    {
+        iNo = -iNo;
+    }
     if(i <= iNo / 2)
     {
         if(iNo % i == 0)

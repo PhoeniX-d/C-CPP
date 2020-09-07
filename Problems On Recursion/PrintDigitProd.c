@@ -14,6 +14,10 @@ int main()
     int iRet = 0;
     printf("Enter the number\t:");
     scanf("%lld", &iNum);
+    if(iNum < 0)
+    {
+        iNum = -iNum;
+    }
     iRet = ProdDigit(iNum);
     printf("Product of digits is\t:%d\n", iRet);
     return 0;
@@ -32,6 +36,7 @@ int ProdDigit(long long int iNo)
 {
     static int iProd = 0;   /* Initialized only once */
     int iDigit = 0;
+
     if(iNo != 0)
     {
         iDigit = iNo % 10;

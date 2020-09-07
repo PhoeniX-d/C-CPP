@@ -15,6 +15,10 @@ int main()
     int iNum = 0;
     printf("\nEnter the number\t:");
     scanf("%d", &iNum);
+    if(iNum < 0)
+    {
+        iNum = -iNum;
+    }
     printf("\n");
     PatternRows(iNum);
     return 0;

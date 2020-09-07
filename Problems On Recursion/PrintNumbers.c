@@ -14,6 +14,10 @@ int main()
     int iNum = 0;
     printf("Enter the number\t:");
     scanf("%d", &iNum);
+    if(iNum < 0)
+    {
+        iNum = -iNum;
+    }
     Display(iNum);
     return 0;
 }
@@ -30,6 +34,7 @@ int main()
 void Display(int iNo)
 {
     static int i = 1;   /* Initialized only once */
+
     if(i <= iNo && i <= MAXNO)
     {
         printf("%d ", i);

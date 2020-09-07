@@ -34,6 +34,10 @@ int main()
 ///////////////////////////////////////////////////////////////
 int CountSpaceX(char *cStr)
 {
+    if(NULL == cStr)
+    {
+        return -1;
+    }
     static int iCnt = 0;
     if(*cStr != '\0')
     {

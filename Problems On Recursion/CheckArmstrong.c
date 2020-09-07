@@ -16,6 +16,10 @@ int main()
     BOOL bRet = 0;
     printf("Enter the number\t:");
     scanf("%lld", &iNum);
+    if(iNum < 0)
+    {
+        iNum = -iNum;
+    }
     bRet = IsArmstrong(iNum);
     if(bRet == TRUE)
         printf("Armstrong number\n");
@@ -38,10 +42,7 @@ BOOL IsArmstrong(long long int iNo)
     static int iSum = 0;  /* Initialized only once */
     int iDigit = 0;
     static long long int iTemp = 0;
-    if(iNo < 0)
-    {
-        iNo = -iNo;
-    }
+    
     if(iNo != 0)
     {
         iDigit = iNo % 10;

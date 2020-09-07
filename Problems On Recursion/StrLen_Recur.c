@@ -31,6 +31,10 @@ int main()
 int StrLenX(char *cStr)
 {
     static int iCnt = 0;
+    if(NULL == cStr)
+    {
+        return -1;
+    }
     if(*cStr != '\0')
     {
         iCnt++;

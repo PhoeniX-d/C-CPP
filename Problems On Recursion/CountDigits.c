@@ -14,6 +14,10 @@ int main()
     int iRet = 0;
     printf("Enter the number\t:");
     scanf("%lld", &iNum);
+    if(iNum < 0)
+    {
+        iNum = -iNum;
+    
     iRet = NumLen(iNum);
     printf("Number of digits\t:%d\n", iRet);
     return 0;
@@ -31,10 +35,6 @@ int main()
 int NumLen(long long int iNo)
 {
     static int iLen = 0;   /* Initialized only once */
-    if(iNo < 0)
-    {
-        iNo = -iNo;
-    }
     if(iNo != 0)
     {
         iLen++;
