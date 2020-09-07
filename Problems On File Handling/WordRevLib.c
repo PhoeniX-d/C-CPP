@@ -1,6 +1,6 @@
 /*
-*   Write a program which accept file name from user and print number of
-*   words in that file along with offset at which they occured
+*   Write a program which accept file name from user and reverse
+*   occurrence of particular word in that file.
 */
 
 #include<stdio.h>
@@ -10,14 +10,19 @@
 
 #define BLOCKSIZE     1024
 #define NAMESIZE        16
-#define NMEMB            1
+#define TRUE             1
+#define FALSE            0
+typedef int BOOL;
 
-void CountWord(char[], char[]);
+BOOL ReplaceOccur(char[], char[]);
 
 int main(int argc, char* argv[])
 {
     //char cFname[NAMESIZE] = {'\0'};
     char cWord[NAMESIZE] = {'\0'};
+
+    int iRet = 0;
+    BOOL bRet = FALSE;
 
     /*
     printf("\nEnter file name with extension\t:");
@@ -31,64 +36,81 @@ int main(int argc, char* argv[])
    /* printf("Enter the word:\n");
     scanf(" %s", cWord);*/
 
-    CountWord(argv[1], argv[2]);
+    bRet = ReplaceOccur(argv[1], argv[2]);
+    if(bRet == TRUE)
+    {
+        printf("Occurance replaced successfully\n");
+    }
+    else
+    {
+        printf("Word not found\n");
+    }
+    
     return 0;
 }
 
 //////////////////////////////////////////////////////////
 //
-//  Name        :CountWord
+//  Name        :ReplaceOccur
 //  Input       :char[], char[]
-//  Returns     :void
-//  Description :counts number of words along with offset 
-//               at which they occured.
+//  Returns     :BOOL
+//  Description :counts number of occurance of a word.
 //               returns -1 if not found
 //  Author      :Pranav Choudhary
 //  Last Update :4 Sept 2020 by Pranav Choudhary
 //
 ///////////////////////////////////////////////////////////
-void CountWord(char cFileName[], char cWord[])
+BOOL ReplaceOccur(char cFileName[], char cWord[])
 {
     if(NULL == cFileName || NULL == cWord)
     {
         printf("Invalid Inputs\n");
-        return;
+        return FALSE;
     }
-    int iWcnt = 0, i = 0, j = 0, iOffset = 0;
+    int iCnt = 0, i = 0, j = 0;
     FILE *fp = NULL;
+    BOOL bRet = FALSE;
+    
+    char *cWd = (char *)malloc(sizeof(char) * strlen(cWord));
+    strcpy(cWd, cWord);
+    strrev(cWd);
     char cBuffer[BLOCKSIZE];
     memset(cBuffer, 0, BLOCKSIZE);
-
+    fpos_t pos;
+    
     //open file by using fopen()
-	fp = fopen(cFileName, "r");
+	fp = fopen(cFileName, "r+");
 	
 	//check whether file is open or not.
 	if(fp == NULL)
 	{
 		printf("\n Can not open file.\n");
-		exit(1);
+		return FALSE;
 	}
-    while(fread(cBuffer, NMEMB, BLOCKSIZE, fp))
+    while((fgets(cBuffer, BLOCKSIZE, fp)) != NULL)
 	{
         for (i = 0; cBuffer[i] != '\0'; i++)
         {
             j = 0;
-            iOffset++;  
+            iCnt++;
             while(cWord[j] != '\0' && cWord[j] == cBuffer[i])
             {
                 i++;
                 j++;
-                iOffset++;
+                iCnt++;
             }
             if(j == strlen(cWord))
             {
-                iWcnt++;
-                printf("\n%d occurrence of \"%s\" word is found at %d offset.", iWcnt, cWord, (iOffset - j));
+                fgetpos(fp, &pos);
+                fseek(fp, iCnt - j - 1 ,SEEK_SET);
+                fputs(cWd, fp);
+                fsetpos(fp, &pos);
+                bRet = TRUE;
             }
         }
-        /* cleans buffer for further use */
         memset(cBuffer, 0, BLOCKSIZE);
     }
-    printf("\n");
     fclose(fp);
+    free(cWd);
+    return bRet;
 }
