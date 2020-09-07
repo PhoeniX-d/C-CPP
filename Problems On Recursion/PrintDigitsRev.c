@@ -1,7 +1,8 @@
 /*
-*   Write a recursive program which prints digits of number
-*   Input   : 123
-*   Output  : 3 2 1
+*   Write a recursive program which accept number from user and return its
+*   reverse number.
+*   Input : 523
+*   Output : 325 
 */
 
 #include<stdio.h>
@@ -21,17 +22,17 @@ int main()
 //  Name        :Display
 //  Input       :long long int
 //  Returns     :void
-//  Description :which prints digits of number using recursion
+//  Description :which prints digits in reverse order of a
+//               number using recursion
 //  Author      :Pranav Choudhary
 //  Date        :6 Sept 2020
 //
 ///////////////////////////////////////////////////////////////
 void Display(long long int iNo)
 {
-    //static int i = 1;   /* Initialized only once */
     if(iNo != 0)
     {
-        printf("%d ", iNo % 10);
         Display(iNo / 10);   /*  Recursive calls Display() until i becomes iNo */
+        printf("%d ", iNo % 10);
     }    
 }
