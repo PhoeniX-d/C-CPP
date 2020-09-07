@@ -19,6 +19,7 @@ void DeleteLast(PPNODE);
 void InsertAtPos(PPNODE, int, int);
 void DeleteAtPos(PPNODE, int);
 void DisplayList(PNODE);
+void DisplayListRec(PNODE);
 int  CountEls(PNODE);
 void Deallocate(PPNODE);
 
@@ -35,7 +36,9 @@ int main()
     InsertFirst(&Head, 20);
 
     printf("Linked List:InsertFirst\n");
-    DisplayList(Head);
+    //DisplayList(Head);
+    DisplayListRec(Head);
+    printf("\n");
 
     InsertLast(&Head, 34);
     InsertLast(&Head, 56);
@@ -43,26 +46,31 @@ int main()
     InsertLast(&Head, 900);
 
     printf("Linked List:InsertLast\n");
-    DisplayList(Head);
+    DisplayListRec(Head);
+    printf("\n");
 
     InsertAtPos(&Head, 233, 1);
     InsertAtPos(&Head, 2235, 3);
 
     printf("Linked List:InsertAtPos\n");
-    DisplayList(Head);
+    DisplayListRec(Head);
+    printf("\n");
 
     DeleteFirst(&Head);
     printf("Linked List:DeleteFirst\n");
-    DisplayList(Head);
+    DisplayListRec(Head);
+    printf("\n");
 
     DeleteLast(&Head);
     printf("Linked List:DeleteLast\n");
-    DisplayList(Head);
-
+    DisplayListRec(Head);
+    printf("\n");
+    
     DeleteAtPos(&Head, 2);
     printf("Linked List:DeleteAtPos\n");
-    DisplayList(Head);
-
+    DisplayListRec(Head);
+    printf("\n");
+    
     iRet = CountEls(Head);
     printf("Total Elements:\n%d\n", iRet);
 
@@ -98,6 +106,25 @@ void DisplayList(PNODE First)
     }
     printf("NULL\n\n");
 }// end of DisplayList
+
+////////////////////////////////////////////////////////////
+//
+//  Name        :DisplayListRec
+//  Input       :PNODE
+//  Returns     :void
+//  Description :Displays elements in linked list
+//  Author      :Pranav Choudhary
+//  Date        :29 Aug 2020
+//
+////////////////////////////////////////////////////////////
+void DisplayListRec(PNODE First)
+{
+    if(First != NULL)
+    {
+        printf("|%4d|->", First->iData);
+        DisplayListRec(First->npNext);
+    }
+}// end of DisplayListRec
 
 ////////////////////////////////////////////////////////////
 //
