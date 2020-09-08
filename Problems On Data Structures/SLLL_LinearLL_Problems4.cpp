@@ -28,6 +28,12 @@ class Singly_LinearLL
 
     /* Problems */
     bool IsPalindrome();
+    void ListSortAsc();
+    void ListSortDesc();
+    bool ListCmp(Singly_LinearLL &);
+    bool ListNCmp(Singly_LinearLL &, int);
+    bool ListLNCmp(Singly_LinearLL &, int);
+    int FindMiddle();
 };
 
 ////////////////////////////////////////////////////////////
@@ -180,7 +186,8 @@ bool Singly_LinearLL::IsPalindrome()
         printf("List Is Empty");
         return false;
     }
-    int iArr[iCount], i = 0, j = 0;
+    int *iArr = (int*)malloc(sizeof(int) * iCount);
+    int i = 0, j = 0;
     PNODE cTemp = Head;
     while(cTemp != NULL)
     {
@@ -204,6 +211,275 @@ bool Singly_LinearLL::IsPalindrome()
         return false;
 }
 
+///////////////////////////////////////////////////////////////////////
+//
+//  Name        :ListSortAsc
+//  Input       :void
+//  Returns     :void
+//  Description :Sorts List in Ascending order
+//  Author      :Pranav Choudhary
+//  Date        :8 Sept 2020
+//
+///////////////////////////////////////////////////////////////////////
+void Singly_LinearLL::ListSortAsc()
+{
+    if(Head == NULL && Head->cpNext == NULL)
+    {
+        return;
+    }
+    PNODE Temp1 = Head;
+    PNODE Temp2 = Head->cpNext;
+    PNODE Temp3 = NULL;
+
+    while(Temp2 != NULL)
+    {
+        if(Temp1->iData > Temp2->iData)
+        {
+            if(Temp1 == Head && Temp2 == Head->cpNext)
+            {
+                Temp1->cpNext = Temp2->cpNext;
+                Temp2->cpNext = Head;
+                Head = Temp2;
+            }
+            else
+            {
+                Temp3 = Head;
+                while(Temp3->cpNext != Temp1)
+                {
+                    Temp3 = Temp3->cpNext;
+                }
+                Temp3->cpNext = Temp2;
+                Temp1->cpNext = Temp2->cpNext;
+                Temp2->cpNext = Temp1;
+            }
+            Temp1 = Head;
+            Temp2 = Temp1->cpNext;
+        }
+        else
+        {
+            Temp1 = Temp1->cpNext;
+            Temp2 = Temp1->cpNext;
+        }        
+    }
+}// end of ListSortAsc
+
+///////////////////////////////////////////////////////////////////////
+//
+//  Name        :ListSortDesc
+//  Input       :void
+//  Returns     :void
+//  Description :Sorts List in Descending order
+//  Author      :Pranav Choudhary
+//  Date        :8 Sept 2020
+//
+///////////////////////////////////////////////////////////////////////
+void Singly_LinearLL::ListSortDesc()
+{
+    if(Head == NULL && Head->cpNext == NULL)
+    {
+        return;
+    }
+    PNODE Temp1 = Head;
+    PNODE Temp2 = Head->cpNext;
+    PNODE Temp3 = NULL;
+
+    while(Temp2 != NULL)
+    {
+        if(Temp1->iData < Temp2->iData)
+        {
+            if(Temp1 == Head && Temp2 == Head->cpNext)
+            {
+                Temp1->cpNext = Temp2->cpNext;
+                Temp2->cpNext = Head;
+                Head = Temp2;
+            }
+            else
+            {
+                Temp3 = Head;
+                while(Temp3->cpNext != Temp1)
+                {
+                    Temp3 = Temp3->cpNext;
+                }
+                Temp3->cpNext = Temp2;
+                Temp1->cpNext = Temp2->cpNext;
+                Temp2->cpNext = Temp1;
+            }
+            Temp1 = Head;
+            Temp2 = Temp1->cpNext;
+        }
+        else
+        {
+            Temp1 = Temp1->cpNext;
+            Temp2 = Temp1->cpNext;
+        }        
+    }
+}// end of ListSortDesc
+
+///////////////////////////////////////////////////////////////////////
+//
+//  Name        :ListCmp
+//  Input       :Singly_LinearLL&
+//  Returns     :bool
+//  Description :Compares 2 List for equality
+//  Author      :Pranav Choudhary
+//  Date        :8 Sept 2020
+//
+///////////////////////////////////////////////////////////////////////
+bool Singly_LinearLL::ListCmp(Singly_LinearLL &List2)
+{
+    if(this->Head == NULL || List2.Head == NULL)
+    {
+        printf("List are empty\n");
+        return false;
+    }
+    
+    PNODE temp1 = this->Head;
+    PNODE temp2 = List2.Head;
+
+    while(temp1 != NULL && temp2 != NULL)
+    {
+        if(temp1->iData != temp2->iData)
+        {
+            break;
+        }
+        temp1 = temp1->cpNext;
+        temp2 = temp2->cpNext;
+    }
+    if(temp1 == NULL && temp2 == NULL)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }    
+}// end of ListCmp
+
+///////////////////////////////////////////////////////////////////////
+//
+//  Name        :ListCmp
+//  Input       :Singly_LinearLL&
+//  Returns     :bool
+//  Description :Compares 2 List for equality
+//  Author      :Pranav Choudhary
+//  Date        :8 Sept 2020
+//
+///////////////////////////////////////////////////////////////////////
+bool Singly_LinearLL::ListNCmp(Singly_LinearLL &List2, int iN)
+{
+    if(this->Head == NULL || List2.Head == NULL)
+    {
+        printf("List are empty\n");
+        return false;
+    }
+    if(iN < 1 && iN > iCount)
+    {
+        printf("Invalid value of N\n");
+        return false;
+    }
+    PNODE temp1 = this->Head;
+    PNODE temp2 = List2.Head;
+
+    while(temp1 != NULL && temp2 != NULL)
+    {
+        if(temp1->iData != temp2->iData)
+        {
+            break;
+        }
+        temp1 = temp1->cpNext;
+        temp2 = temp2->cpNext;
+    }
+    if(temp1 == NULL && temp2 == NULL)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }    
+}// end of ListNCmp
+
+///////////////////////////////////////////////////////////////////////
+//
+//  Name        :ListCmp
+//  Input       :Singly_LinearLL&
+//  Returns     :bool
+//  Description :Compares 2 List for equality
+//  Author      :Pranav Choudhary
+//  Date        :8 Sept 2020
+//
+///////////////////////////////////////////////////////////////////////
+bool Singly_LinearLL::ListLNCmp(Singly_LinearLL &List2, int iN)
+{
+    if(this->Head == NULL || List2.Head == NULL)
+    {
+        printf("List are empty\n");
+        return false;
+    }
+    if(iN < 1 && iN > iCount)
+    {
+        printf("Invalid value of N\n");
+        return false;
+    }
+    PNODE temp1 = this->Head;
+    PNODE temp2 = List2.Head;
+
+    int iCnt = iCount - iN;
+    
+    while(iCnt != 0)
+    {
+        temp1 = temp1->cpNext;
+        iCnt--;
+    }
+
+    while(temp1 != NULL && temp2 != NULL)
+    {
+        if(temp1->iData != temp2->iData)
+        {
+            break;
+        }
+        temp1 = temp1->cpNext;
+        temp2 = temp2->cpNext;
+    }
+    if(temp1 == NULL && temp2 == NULL)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }    
+}// end of ListLNCmp
+
+///////////////////////////////////////////////////////////////////////
+//
+//  Name        :FindMiddle
+//  Input       :void
+//  Returns     :int
+//  Description :Returns middle element of List
+//  Author      :Pranav Choudhary
+//  Date        :8 Sept 2020
+//
+///////////////////////////////////////////////////////////////////////
+int Singly_LinearLL::FindMiddle()
+{
+    if(NULL == Head)
+    {
+        printf("List is empty\n");
+        return 0;
+    }
+    PNODE temp1 = Head, temp2 = Head;
+    while(temp1 != NULL && temp2->cpNext != NULL)
+    {
+        temp1 = temp1->cpNext;
+        if(temp2->cpNext->cpNext != NULL)
+            temp2 = temp2->cpNext->cpNext;
+        else
+            temp2 = temp2->cpNext;
+    }
+    return temp1->iData;
+}// end of FindMiddle
+
 // Entry point
 int main()
 {
@@ -226,7 +502,7 @@ int main()
     sllObj1.DisplayList();
     printf("Total Elements List 1\t:%d\n",  sllObj1.Count());
 
-    /* Linked List 2 
+    /* Linked List 2
     printf("-----------------------------------------------------\n");
     printf("Enter the numbers[enter \'0\' to break]\n");
     while(1)
@@ -240,9 +516,9 @@ int main()
     }
     printf("Linked List 2:\n");
     sllObj2.DisplayList();
-    printf("Total Elements List 2\t:%d\n", sllObj2.Count()); */
+    printf("Total Elements List 2\t:%d\n", sllObj2.Count());*/
 
-    /* IsPalindrome:Check whether string is palindrome or not */
+    /* IsPalindrome:Check whether string is palindrome or not 
     printf("------------------------------------------------------\n");
     if(sllObj1.IsPalindrome() == true)
     {
@@ -253,5 +529,66 @@ int main()
     {
         printf("List is not palindrome\n");
     }
+    */
+
+    /* ListSortAsc:Sorts list in ascending order 
+    printf("------------------------------------------------------\n");
+    printf("Linked In Sorted order\n");
+    sllObj1.ListSortAsc();
+    sllObj1.DisplayList();
+    printf("Total Elements List 2\t:%d\n", sllObj1.Count());
+
+    /* ListSortAsc:Sorts list in ascending order
+    printf("------------------------------------------------------\n");
+    printf("Linked In Sorted order\n");
+    sllObj1.ListSortDesc();
+    sllObj1.DisplayList();
+    printf("Total Elements List 2\t:%d\n", sllObj1.Count()); */
+
+    /* ListCmp:compares two lists for equality 
+    printf("------------------------------------------------------\n");
+    if(sllObj1.ListCmp(sllObj2) == true)
+    {
+        printf("Lists are equal\n");
+    }
+    else
+    {
+        printf("List are not equal\n");
+    }
+    */
+
+    /* ListNCmp:compares two lists for equality upto N elements
+    printf("------------------------------------------------------\n");
+    printf("Enter value of N\t:");
+    scanf("%d", &iNum);
+    if(sllObj1.ListNCmp(sllObj2, iNum) == true)
+    {
+        printf("Lists are equal\n");
+    }
+    else
+    {
+        printf("List are not equal\n");
+    }
+
+    /* ListLNCmp:compares two lists for equality only last N elements
+    printf("------------------------------------------------------\n");
+    printf("Enter value of N\t:");
+    scanf("%d", &iNum);
+    if(sllObj1.ListLNCmp(sllObj2, iNum) == true)
+    {
+        printf("Lists are equal\n");
+    }
+    else
+    {
+        printf("List are not equal\n");
+    }
+    */
+    /* FindMiddle : Find middle element of list */
+    printf("------------------------------------------------------\n");
+    iRet = sllObj1.FindMiddle();
+    if(iRet != 0)
+        printf("Middle element of List is\t:%d\n", iRet);
+    printf("Total Elements List 2\t:%d\n", sllObj1.Count());
+
     return 0;
 }

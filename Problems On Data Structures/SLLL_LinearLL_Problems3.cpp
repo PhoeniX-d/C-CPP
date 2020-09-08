@@ -469,7 +469,7 @@ int Singly_LinearLL::IsIntersect(Singly_LinearLL& List1, Singly_LinearLL& List2)
 //  Name        :ListCpyAsc
 //  Input       :Singly_LinearLL, Singly_LinearLL
 //  Returns     :bool
-//  Description :copies list1 to list 2 in ascending order
+//  Description :copies Destlist to SrcList in ascending order
 //  Author      :Pranav Choudhary
 //  Date        :5 Sept 2020
 //
