@@ -36,11 +36,16 @@ class Singly_LinearLL
     bool ListRev();
     bool ListRevInRange(int, int);
     bool InsertListAtPos(Singly_LinearLL&, Singly_LinearLL&, int);
-    /* Requires that Pointers of List1 and List2 should be
-    *  interact with each other not possible in C++ bcoz 
-    * destructor will throw execption while deallcating either 
-    * list as pointers are internally common */
-   // int IsIntersect(Singly_LinearLL &, Singly_LinearLL &);
+
+    /* 
+    *	Requires that Pointers of List1 and List2 should be
+    *  	intersect with each other at some node not possible in C++ bcoz 
+    * 	destructor will throw execption while deallocating either 
+    * 	list as pointers are internally pointed to common node 
+    *	
+    *	int IsIntersect(Singly_LinearLL &, Singly_LinearLL &);
+ 	*/
+   
 };
 
 ////////////////////////////////////////////////////////////
