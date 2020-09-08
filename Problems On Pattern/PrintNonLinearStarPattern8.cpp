@@ -59,7 +59,11 @@ bool Pattern::Updater(int iRow, int iCol)
 //	Input		:void
 //	Returns		:void
 //	Description	:print given pattern
-
+//                  A
+//                  A B A
+//                  A B C B A
+//                  A B C D C B A
+//                  A B C D E D C B A
 //	Author		:Pranav Choudhary
 //	Date		:20 August 2020
 //

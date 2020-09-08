@@ -25,78 +25,118 @@ int FirstOccur(PNODE, int);
 int LastOccur(PNODE, int);
 int Maximum(PNODE);
 int Minimum(PNODE);
+/*void ListCat(PNODE, PNODE);
+int IsIntersect(PNODE, PNODE);*/
 
 // Entry point
 int main()
 {
     printf("\n----------Singly Linear Linked List Problems 1----------\n\n");
     PNODE Head = NULL;
+    PNODE Head1 = NULL;
+
     int iRet = 0, i = 0, iNo = 0, iNum = 0;
 
-    printf("Enter Number of elements\n");
-    scanf("%d", &iNo);
-    printf("Enter the numbers\n");
-    for (i = 1; i <= iNo; i++)
+    printf("List 1:\n");
+    printf("-----------------------------------------------------\n");
+    printf("Enter the numbers[enter \'0\' to break]\n");
+    while(1)
     {
         scanf("%d", &iNum);
+        if(iNum == 0)
+        {
+            break;
+        }
         InsertLast(&Head, iNum);
     }
-    printf("Linked List:\n");
+    printf("Linked List 1:\n");
     DisplayList(Head);
     
     /* Count number of elemnts */
     iRet = CountEls(Head);
-    printf("Total Elements:\n%d\n", iRet);
+    printf("Total Elements:\t\t%d\n", iRet);
 
     /* Finds largest element in linked list */
     iRet = Maximum(Head);
     if(iRet != -1)
-        printf("Largest elements is:\n%d\n", iRet);
+        printf("Largest elements is:\t\t%d\n", iRet);
 
     /* Finds smallest element in linked list */
     iRet = Minimum(Head);
     if(iRet != -1)
-        printf("Smallest elements is:\n%d\n", iRet);
+        printf("Smallest elements is:\t\t%d\n", iRet);
 
     /* Addition of all Elements */
     iRet = Add(Head);
     if(iRet != -1)
-        printf("Addition of  Elements is:\n%d\n", iRet);
+        printf("Addition of  Elements is:\t\t%d\n", iRet);
 
     /* Addition of Even Elements */
     iRet = AddEven(Head);
     if(iRet != -1)
-        printf("Addition of Even Elements is:\n%d\n", iRet);
+        printf("Addition of Even Elements is:\t\t%d\n", iRet);
 
     /* Addition of odd Elements */
     iRet = AddOdd(Head);
     if(iRet != -1)
-        printf("Addition of Odd Elements is:\n%d\n", iRet);
+        printf("Addition of Odd Elements is:\t\t%d\n", iRet);
 
     /* counts frequncy of number */
-    printf("Enter number:\n");
+    printf("Enter number for number of occurance:\n");
     scanf("%d", &iNum);
     iRet = CountFreq(Head, iNum);
     if(iRet != -1)
-        printf("No. of occurances of %d :\n%d\n", iNum, iRet);
+        printf("No. of occurances of %d :\t\t%d\n", iNum, iRet);
+    else
+        printf("Number not present in List\n");
 
     /* finds first occuarance of number */
-    printf("Enter number:\n");
+    printf("Enter number for first occurance:\n");
     scanf("%d", &iNum);
     iRet = FirstOccur(Head, iNum);
     if(iRet != -1)
-        printf("First Occurance of %d is at :\n%d\n", iNum, iRet);
-    else if(iRet == 0)
+        printf("First Occurance of %d is at :\t\t%d\n", iNum, iRet);
+    else
         printf("Element Not Present in linked list\n"); 
 
     /* finds last occuarance of number */
-    printf("Enter number:\n");
+    printf("Enter number for last occurance:\n");
     scanf("%d", &iNum);
     iRet = LastOccur(Head, iNum);
     if(iRet != -1)
-        printf("Last Occurance of %d is at :\n%d\n", iNum, iRet);
-    else if(iRet == 0)
+        printf("Last Occurance of %d is at :\t\t%d\n", iNum, iRet);
+    else
         printf("Element Not Present in linked list\n");
+
+    /*
+    printf("List 2:\n");
+    printf("-----------------------------------------------------\n");
+    printf("Enter the numbers[enter \'0\' to break]\n");
+    while(1)
+    {
+        scanf("%d", &iNum);
+        if(iNum == 0)
+        {
+            break;
+        }
+        InsertLast(&Head1, iNum);
+    }
+    printf("Linked List 2:\n");
+    DisplayList(Head1);
+
+    ListCat(Head, Head1);
+    DisplayList(Head);
+
+    iRet = IsIntersect(Head, Head1);
+    if(iRet != -1)
+    {
+        printf("Intersect At pos\t:%d\n", iRet);
+    }
+    else
+    {
+        printf("Not Intersect\n");
+    }
+    */
 
     /* Deallocates all nodes in linked list */
     Deallocate(&Head);
@@ -361,7 +401,15 @@ int FirstOccur(PNODE First, int iNum)
         }
         First = First->npNext;
     }
-    return iPos;
+    if(iPos != 0)
+    {
+        return iPos;
+    }
+    else
+    {
+        return -1;
+    }
+
 }// end of FirstOccur
 
 //////////////////////////////////////////////////////////////
@@ -390,6 +438,10 @@ int LastOccur(PNODE First, int iNum)
             iPos = iCnt;
         }
         First = First->npNext;
+    }
+    if(iPos == 0)
+    {
+        return -1;
     }
     return iPos;
 }// end of LastOccur
@@ -455,3 +507,79 @@ int Minimum(PNODE First)
     }
     return iMin;
 }// end of Minimum
+
+//////////////////////////////////////////////////////////////
+//
+//  Name        :ListCat
+//  Input       :PPNODE, PPNODE
+//  Returns     :void
+//  Description :concats two lists
+//  Author      :Pranav Choudhary
+//  Date        :7 Sept 2020
+//
+//////////////////////////////////////////////////////////////
+void ListCat(PNODE First1, PNODE First2)
+{
+    PNODE nTemp = First1;
+    while(nTemp->npNext != NULL)
+    {
+        nTemp = nTemp->npNext;
+    }
+    nTemp->npNext = First2;
+} // end of ListCat
+
+////////////////////////////////////////////////////////////
+//
+//  Name        :IsIntersect
+//  Input       :Singly_LinearLL, Singly_LinearLL
+//  Returns     :int
+//  Description :Checks that lists are intersecting or not
+//  Author      :Pranav Choudhary
+//  Date        :5 Sept 2020
+//
+////////////////////////////////////////////////////////////
+int IsIntersect(PNODE First1, PNODE First2)
+{
+    if (NULL == First1 && NULL == First2)
+    {
+        printf("Linked Lists is empty\n");
+        return -1;
+    }
+    PNODE nTemp1 = First1;
+    PNODE nTemp2 = First2;
+    int iDiff = 0, i = 0, iCnt1 = CountEls(First1), iCnt2 = CountEls(First2);
+    if(iCnt1 > iCnt2)
+    {
+        iDiff = iCnt1 - iCnt2;
+        for(i = 1; i <= iDiff; i++)
+        {
+            nTemp1 = nTemp1->npNext;
+        }
+    }
+    else if(iCnt1 < iCnt2)
+    {
+        iDiff = iCnt2 - iCnt1;
+        for(i = 1; i <= iDiff; i++)
+        {
+            nTemp1 = nTemp1->npNext;
+        }
+    }
+    while(nTemp1 != NULL && nTemp2 != NULL)
+    {
+        if(nTemp1 == nTemp2)
+        {
+            break;
+        }
+        nTemp1 = nTemp1->npNext;
+        nTemp2 = nTemp2->npNext;
+        i++;
+    }
+    if(nTemp1 == NULL && nTemp2 == NULL)
+    {
+        return -1;
+    }
+    else
+    {
+        return i;
+    }
+}// end of IsIntersect

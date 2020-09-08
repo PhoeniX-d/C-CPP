@@ -26,14 +26,21 @@ class Singly_LinearLL
     bool DisplayList();     /* displays list */
 
     /* Problems */
-    bool ListCpyEven(Singly_LinearLL& ODest, Singly_LinearLL& OSrc);
-    int  IsSublist(Singly_LinearLL& ODest, Singly_LinearLL& OSrc);
-    bool ListCpyPrime(Singly_LinearLL& ODest, Singly_LinearLL& OSrc);
-    bool ListCpyAsc(Singly_LinearLL& ODest, Singly_LinearLL& OSrc);
-    bool ListCpyDesc(Singly_LinearLL& ODest, Singly_LinearLL& OSrc);
-    bool ListMergeAlt(Singly_LinearLL &ODest, Singly_LinearLL &OSrc);
+    bool ListCpyEven(Singly_LinearLL&, Singly_LinearLL&);
+    int  IsSublist(Singly_LinearLL&, Singly_LinearLL&);
+    bool ListCpyPrime(Singly_LinearLL&, Singly_LinearLL&);
+    bool ListCpyAsc(Singly_LinearLL&, Singly_LinearLL&);
+    bool ListCpyDesc(Singly_LinearLL&, Singly_LinearLL&);
+    bool ListMergeAlt(Singly_LinearLL&, Singly_LinearLL&);
     bool ListSwap();
     bool ListRev();
+    bool ListRevInRange(int, int);
+    bool InsertListAtPos(Singly_LinearLL&, Singly_LinearLL&, int);
+    /* Requires that Pointers of List1 and List2 should be
+    *  interact with each other not possible in C++ bcoz 
+    * destructor will throw execption while deallcating either 
+    * list as pointers are internally common */
+   // int IsIntersect(Singly_LinearLL &, Singly_LinearLL &);
 };
 
 ////////////////////////////////////////////////////////////
@@ -201,6 +208,60 @@ bool Singly_LinearLL::ListRev()
     return true;
 }// end of ListRev  
 
+//////////////////////////////////////////////////////////////
+//
+//  Name        :ListRevInRange
+//  Input       :int, int
+//  Returns     :bool
+//  Description :reverses nodes data in given range
+//  Author      :Pranav Choudhary
+//  Date        :1 Sept 2020
+//
+//////////////////////////////////////////////////////////////
+bool Singly_LinearLL::ListRevInRange(int iS, int iE)
+{
+    if(NULL == Head)
+    {
+        printf("Linked list is empty\n");
+        return false;
+    }
+    if(iS < 1 || iE > iCount || iS > iE)
+    {
+        printf("Invalid Inputs\n");
+        return false;
+    }
+
+    PNODE nTemp = Head, nStart = Head;
+    int iPos = 1, i = 0;
+    int *iArr = (int *)malloc(sizeof(int) * iCount);
+    while(nTemp != NULL)
+    {
+        if(iPos == iS)
+        {
+            nStart = nTemp;
+            while(iPos != (iE + 1))
+            {
+                iArr[i] = nTemp->iData;
+                i++;
+                iPos++;
+                nTemp = nTemp->npNext;
+            }
+            break;
+        }
+        nTemp = nTemp->npNext;
+        iPos++;
+    }
+
+    while(--i > -1)
+    {
+        nStart->iData = iArr[i];
+        nStart = nStart->npNext;
+    }
+    free(iArr);
+    return true;
+}// end of ListRevInRange  
+
+
 ////////////////////////////////////////////////////////////
 //
 //  Name        :ListCpyEven
@@ -339,6 +400,64 @@ int Singly_LinearLL::IsSublist(Singly_LinearLL& List1, Singly_LinearLL& List2)
         return -1;
     }
 }// end of IsSublist
+
+/*
+////////////////////////////////////////////////////////////
+//
+//  Name        :IsIntersect
+//  Input       :Singly_LinearLL, Singly_LinearLL
+//  Returns     :int
+//  Description :Checks that lists are intersecting or not
+//  Author      :Pranav Choudhary
+//  Date        :5 Sept 2020
+//
+////////////////////////////////////////////////////////////
+int Singly_LinearLL::IsIntersect(Singly_LinearLL& List1, Singly_LinearLL& List2)
+{
+    if (NULL == List1.Head && NULL == List2.Head)
+    {
+        printf("Linked Lists is empty\n");
+        return -1;
+    }
+    PNODE nTemp1 = List1.Head;
+    PNODE nTemp2 = List2.Head;
+    int iDiff = 0, i = 0;
+    if(List1.iCount > List2.iCount)
+    {
+        iDiff = List1.iCount - List2.iCount;
+        for(i = 1; i <= iDiff; i++)
+        {
+            nTemp1 = nTemp1->npNext;
+        }
+    }
+    else if(List1.iCount < List2.iCount)
+    {
+        iDiff = List2.iCount - List1.iCount;
+        for(i = 1; i <= iDiff; i++)
+        {
+            nTemp1 = nTemp1->npNext;
+        }
+    }
+    while(nTemp1 != NULL && nTemp2 != NULL)
+    {
+        if(nTemp1 == nTemp2)
+        {
+            break;
+        }
+        nTemp1 = nTemp1->npNext;
+        nTemp2 = nTemp2->npNext;
+        i++;
+    }
+    if(nTemp1 == NULL && nTemp2 == NULL)
+    {
+        return -1;
+    }
+    else
+    {
+        return i;
+    }
+}// end of IsIntersect
+*/
 
 ////////////////////////////////////////////////////////////
 //
@@ -523,13 +642,88 @@ bool Singly_LinearLL::ListSwap()
         nTemp1 = nTemp2->npNext;
     }
     return true;
-}// end of ListMerge
+}// end of ListSwap
+
+///////////////////////////////////////////////////////////////////////
+//
+//  Name        :InsertListAtPos
+//  Input       :Singly_LinearLL, Singly_LinearLL
+//  Returns     :bool
+//  Description :Inserts List2 at given position in List1
+//  Author      :Pranav Choudhary
+//  Date        :7 Sept 2020
+//
+///////////////////////////////////////////////////////////////////////
+bool Singly_LinearLL::InsertListAtPos(Singly_LinearLL &ODest, Singly_LinearLL &OSrc, int iPos)
+{
+    if(NULL == ODest.Head || NULL == OSrc.Head || iPos < 0 || iPos > OSrc.iCount)
+    {
+        printf("Invalid Input(s)\n");
+        return false;
+    }
+    int *iArr, i = 0;
+    iArr = (int*)malloc(sizeof(int) * OSrc.iCount);
+    PNODE nTemp = OSrc.Head;
+    while(nTemp != NULL)
+    {
+        iArr[i++] = nTemp->iData;
+        printf("%d\n", iArr[i - 1]);
+        nTemp = nTemp->npNext;
+    }
+    if(iPos == 1)
+    {
+        while(--i != -1)
+        {
+            PNODE newn = new NODE;
+            newn->iData = iArr[i];
+            newn->npNext = NULL;
+            if(ODest.Head == NULL)
+            {
+                ODest.Head = newn;
+            }
+            else
+            {
+                newn->npNext = ODest.Head;
+                ODest.Head = newn;
+            }            
+        }
+    }
+    else if(iPos == iCount)
+    {
+        PNODE nTemp = OSrc.Head;
+        while(nTemp != NULL)
+        {
+            ODest.InsertLast(nTemp->iData);
+            nTemp = nTemp->npNext;
+        }
+    }
+    else
+    {
+        int i = 0;
+        PNODE nTemp = ODest.Head;
+        for(i = 1; i < iPos - 1; i++)
+        {
+            nTemp = nTemp->npNext;
+        }
+        i = OSrc.iCount;
+        while(--i > -1)
+        {
+            PNODE newn = new NODE;
+            newn->iData = iArr[i];
+            newn->npNext = NULL;
+            newn->npNext = nTemp->npNext;
+            nTemp->npNext = newn;
+        }
+    }
+    free(iArr);
+    return true;
+}// end of InsertListApPos
 
 // Entry point
 int main()
 {
     printf("\n----------Singly Linear Linked List Problems 3----------\n\n");
-    int iRet = 0, i = 0, iNum = 0;
+    int iRet = 0, i = 0, iNum = 0, iStart = 0, iEnd = 0;
     Singly_LinearLL sllObj1, sllObj2, sllObj3, sllObj4, sllObj5, sllObj6, sllObj7;
 
     /* Linked List 1 */
@@ -547,7 +741,7 @@ int main()
     sllObj1.DisplayList();
     printf("Total Elements List 1\t:%d\n",  sllObj1.Count());
 
-    /* Linked List 2
+    /* Linked List 2 */
     printf("-----------------------------------------------------\n");
     printf("Enter the numbers[enter \'0\' to break]\n");
     while(1)
@@ -561,7 +755,7 @@ int main()
     }
     printf("Linked List 2:\n");
     sllObj2.DisplayList();
-    printf("Total Elements List 2\t:%d\n", sllObj2.Count()); */
+    printf("Total Elements List 2\t:%d\n", sllObj2.Count());
 
     /* ListCpyAlt: copies source linked list to destination whose SumDig is even 
     printf("-----------------------------------------------------\n");
@@ -625,11 +819,45 @@ int main()
     sllObj1.DisplayList();
     printf("Total Elements in List:\n%d\n", sllObj1.Count());
 
-    /* ListSwap =:Swaps elements in list */
+    /* ListSwap =:Swaps elements in list 
     printf("-----------------------------------------------------\n");
     sllObj1.ListSwap();
     printf("Linked List contents Swaped:\n");
     sllObj1.DisplayList();
+    printf("Total Elements in List:\n%d\n", sllObj1.Count());*/
+
+    /* InsertListAtPos:Inserts List2 int List1 at specific position 
+    printf("-----------------------------------------------------\n");
+    if(sllObj1.InsertListAtPos(sllObj1, sllObj2, 2) == true)
+    {
+        printf("Linked List Inserted:\n");
+        sllObj1.DisplayList();
+    }
     printf("Total Elements in List:\n%d\n", sllObj1.Count());
+    */
+
+    /* ListRevInRange: reverses linked list in place
+    printf("-----------------------------------------------------\n");
+    printf("Enter start\t:");
+    scanf("%d", &iStart);
+    printf("Enter start\t:");
+    scanf("%d", &iEnd);
+    sllObj1.ListRevInRange(iStart, iEnd);
+    printf("Linked List in range Reversed:\n");
+    sllObj1.DisplayList();
+    printf("Total Elements in List:\n%d\n", sllObj1.Count());*/
+
+    /* IsIntersect: check lists intersect or not 
+    printf("-----------------------------------------------------\n");
+    iRet = sllObj1.IsIntersect(sllObj1, sllObj2);
+    if(iRet != -1)
+    {
+        printf("Linked List intersects at\t:%d\n");
+    }
+    else
+    {
+        printf("Linked list not intersects\n");
+    }
+    */
     return 0;
 }
