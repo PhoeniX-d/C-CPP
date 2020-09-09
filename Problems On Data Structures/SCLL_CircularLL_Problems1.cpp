@@ -310,16 +310,16 @@ int Singly_CircularLL::SecOccur(int iNum)
         return iPos;
 }// end of SecOccur
 
-/////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
 //
-//  Name        :FirstOccur
+//  Name        :SecLastOccur
 //  Input       :int
 //  Returns     :int
-//  Description :Finds first occurance of el and returns its position
+//  Description :Finds second last occurance of el and returns its position
 //  Author      :Pranav Choudhary
 //  Date        :9 Sept 2020
 //
-/////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
 int Singly_CircularLL::SecLastOccur(int iNum)
 {
     if(Head == NULL && Tail == NULL)
