@@ -424,12 +424,19 @@ bool Singly_LinearLL::ListLNCmp(Singly_LinearLL &List2, int iN)
     PNODE temp1 = this->Head;
     PNODE temp2 = List2.Head;
 
-    int iCnt = iCount - iN;
+    int iCnt1 = this->iCount - iN;
+    int iCnt2 = List2.iCount - iN;
     
-    while(iCnt != 0)
+    while(iCnt1 != 0 && temp1 != NULL)
     {
         temp1 = temp1->cpNext;
-        iCnt--;
+        iCnt1--;
+    }
+
+    while(iCnt2 != 0 && temp2 != NULL)
+    {
+        temp2 = temp2->cpNext;
+        iCnt2--;
     }
 
     while(temp1 != NULL && temp2 != NULL)

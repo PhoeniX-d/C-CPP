@@ -1,5 +1,5 @@
 /*
-*   Implementaion of Singly CIrcular Linked List in C
+*   Implementaion of Singly CIrcular Linked List in C Problems
 */
 #include<stdio.h>
 
@@ -32,15 +32,19 @@ public:
     bool InsertLast(int);       /* Insert els at last of list */
 
     /* Problems */
-    int Occurances(int);
-    int FirstOccur(int);
-    int SecOccur(int);
-    int LastOccur(int);
-    int SecLastOccur(int);
-    int ListCat(Singly_CircularLL &);
-    int ListNCat(Singly_CircularLL &, int);
-    bool IsPalindrome();
-    void ListSortAsc();
+    int     Occurances(int);
+    int     FirstOccur(int);
+    int     SecOccur(int);
+    int     LastOccur(int);
+    int     SecLastOccur(int);
+    int     ListCat(Singly_CircularLL &);
+    int     ListNCat(Singly_CircularLL &, int);
+    bool    IsPalindrome();
+    void    ListSortAsc();
+    void    ListSortDesc();
+    bool    ListCmp(Singly_CircularLL &);
+    bool    ListNCmp(Singly_CircularLL &, int);
+    bool    ListLNCmp(Singly_CircularLL &, int);
 };
 
 ////////////////////////////////////////////////////////////
@@ -485,42 +489,249 @@ void Singly_CircularLL::ListSortAsc()
         return;
     }
 
-    PNODE npTemp1 = Head, npTemp2 = Head->npNext, npTemp3 = NULL;
+    PNODE temp1 = Head, temp2 = Head->npNext, temp3 = NULL;
+
+    do
+	{
+		if(temp1->iData > temp2->iData)
+		{
+			if(temp1 == Head && temp2 == temp1->npNext)
+			{
+				temp1->npNext = temp2->npNext;
+				temp2->npNext = Head;
+				Head = temp2;
+				Tail->npNext=Head;
+			}
+			else 
+			{
+				temp3 = Head;
+				while(temp3->npNext != temp1)
+				{
+					temp3 = temp3->npNext;
+				}
+				temp3->npNext = temp2;
+				temp1->npNext = temp2->npNext;
+                if(Tail == temp2)
+                {
+                    Tail = temp1;
+                }
+				temp2->npNext = temp1;
+
+            }
+			temp1 = Head;
+			temp2 = temp1->npNext;
+		}
+		else
+		{
+			temp1 = temp1->npNext;
+			temp2 = temp1->npNext;
+		}
+	
+	}while(temp2 != Head);
+}// end of ListSortAsc
+
+///////////////////////////////////////////////////////////////////////
+//
+//  Name        :ListSortDesc
+//  Input       :void
+//  Returns     :void
+//  Description :Sorts list in descending order
+//  Author      :Pranav Choudhary
+//  Date        :10 Sept 2020
+//
+///////////////////////////////////////////////////////////////////////
+void Singly_CircularLL::ListSortDesc()
+{
+    if(Head == NULL && Head->npNext == NULL)
+    {
+        printf("List is Empty");
+        return;
+    }
+
+    PNODE temp1 = Head, temp2 = Head->npNext, temp3 = NULL;
+
+    do
+	{
+		if(temp1->iData < temp2->iData)
+		{
+			if(temp1 == Head && temp2 == temp1->npNext)
+			{
+				temp1->npNext = temp2->npNext;
+				temp2->npNext = Head;
+				Head = temp2;
+				Tail->npNext=Head;
+			}
+			else 
+			{
+				temp3 = Head;
+				while(temp3->npNext != temp1)
+				{
+					temp3 = temp3->npNext;
+				}
+				temp3->npNext = temp2;
+				temp1->npNext = temp2->npNext;
+                if(Tail == temp2)
+                {
+                    Tail = temp1;
+                }
+				temp2->npNext = temp1;
+
+            }
+			temp1 = Head;
+			temp2 = temp1->npNext;
+		}
+		else
+		{
+			temp1 = temp1->npNext;
+			temp2 = temp1->npNext;
+		}
+	
+	}while(temp2 != Head);
+}// end of ListSortDesc
+
+///////////////////////////////////////////////////////////////////////
+//
+//  Name        :ListCmp
+//  Input       :Singly_CircularLL
+//  Returns     :bool
+//  Description :Compares two linked list
+//  Author      :Pranav Choudhary
+//  Date        :10 Sept 2020
+//
+///////////////////////////////////////////////////////////////////////
+bool Singly_CircularLL::ListCmp(Singly_CircularLL &List2)
+{
+    if(this->Head == NULL && List2.Head == NULL)
+    {
+        printf("List is Empty");
+        return false;
+    }
+
+    if(this->iCount != List2.iCount)
+    {
+        return false;
+    }
+    PNODE temp1 = this->Head, temp2 = List2.Head;
+    do
+	{
+        if(temp1->iData != temp2->iData)
+        {
+            break;
+        }
+		temp1 = temp1->npNext;
+		temp2 = temp2->npNext;	
+	}while(temp1 != this->Head && temp2 != List2.Head);
+    if(temp1 == Head && temp2 == List2.Head)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+    
+}// end of ListCmp
+
+///////////////////////////////////////////////////////////////////////
+//
+//  Name        :LisNtCmp
+//  Input       :Singly_CircularLL, int
+//  Returns     :bool
+//  Description :Compares two linked list upto N els
+//  Author      :Pranav Choudhary
+//  Date        :10 Sept 2020
+//
+///////////////////////////////////////////////////////////////////////
+bool Singly_CircularLL::ListNCmp(Singly_CircularLL &List2, int iN)
+{
+    if(this->Head == NULL && List2.Head == NULL)
+    {
+        printf("List is Empty");
+        return false;
+    }
+
+    if(iN > this->iCount || iN > List2.iCount || iN < 1)
+    {
+        return false;
+    }
+    PNODE temp1 = this->Head, temp2 = List2.Head;
+    do
+	{
+        if(temp1->iData != temp2->iData)
+        {
+            break;
+        }
+		temp1 = temp1->npNext;
+		temp2 = temp2->npNext;
+        iN--;
+    }while(temp1 != this->Head && temp2 != List2.Head && iN != 0);
+    if(iN == 0)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }    
+}// end of ListNCmp
+
+///////////////////////////////////////////////////////////////////////
+//
+//  Name        :LisLNtCmp
+//  Input       :Singly_CircularLL, int
+//  Returns     :bool
+//  Description :Compares two linked list last N els
+//  Author      :Pranav Choudhary
+//  Date        :10 Sept 2020
+//
+///////////////////////////////////////////////////////////////////////
+bool Singly_CircularLL::ListLNCmp(Singly_CircularLL &List2, int iN)
+{
+    if(this->Head == NULL && List2.Head == NULL)
+    {
+        printf("List is Empty");
+        return false;
+    }
+
+    if(iN > this->iCount || iN > List2.iCount || iN < 1)
+    {
+        return false;
+    }
+    int iCnt1 = this->iCount - iN;
+    int iCnt2 = List2.iCount - iN;
+
+    PNODE temp1 = this->Head, temp2 = List2.Head;
 
     do
     {
-        if(npTemp1->iData > npTemp2->iData)
-        {
-            if(npTemp1 == Head && npTemp2 == Head->npNext)
-            {
-                npTemp1->npNext = npTemp2->npNext;
-                npTemp2->npNext = Head;
-                Head = npTemp2;
-                Tail->npNext = Head;
-            }
-            else
-            {
-                npTemp3 = Head;
-                while(npTemp3->npNext != npTemp1)
-                {
-                    npTemp3 = npTemp3->npNext;
-                }
-                npTemp3->npNext = npTemp2;
-                npTemp1->npNext = npTemp2->npNext;
-                npTemp2->npNext = npTemp1;
-            }
-            npTemp1 = Head;
-            npTemp2 = npTemp1->npNext;
-        }
-        else
-        {
-            npTemp1 = npTemp1->npNext;
-            npTemp2 = npTemp1->npNext;
-        }
-    } while (npTemp2 != Head);
-    Tail = npTemp1;
-}
+		temp1 = temp1->npNext;
+        iCnt1--;
+    }while(temp1 != this->Head && iCnt1 != 0);
 
+    do
+    {
+		temp2 = temp2->npNext;
+        iCnt2--;
+    }while(temp2 != List2.Head && iCnt2 != 0);
+
+    do
+	{
+        if(temp1->iData != temp2->iData)
+        {
+            break;
+        }
+		temp1 = temp1->npNext;
+		temp2 = temp2->npNext;
+    }while(temp1 != this->Head && temp2 != List2.Head);
+    if(temp1 == Head && temp2 == List2.Head)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }    
+}// end of ListLNCmp
 
 // Entry point
 int main()
@@ -548,7 +759,7 @@ int main()
     iRet = scllObj.CountEls();
     printf("Total Elements:\n%d\n", iRet);
 
-    /* List 2
+    /* List 2 */
     printf("-------------------------------------------------------------\n");
     printf("Enter elements [\'0\' to stop entering input]\n");
     while(true)
@@ -567,7 +778,7 @@ int main()
     printf("Total Elements:\n%d\n", iRet);
 
 
-    /* Occurances : Find  total occurance of iNum in list
+    /* Occurances : Find  total occurance of iNum in list */
     printf("-------------------------------------------------------------\n");
     printf("Enter number for total occurnces\t\t:");
     scanf("%d", &iNum);
@@ -585,7 +796,7 @@ int main()
         printf("Total occurances of %d is\t\t\t:%d\n", iNum, iRet);
     }
 
-    /* FirstOccur : Find first occurance of iNum in list
+    /* FirstOccur : Find first occurance of iNum in list */
     printf("-------------------------------------------------------------\n");
     printf("Enter number for first occurance\t\t:");
     scanf("%d", &iNum);
@@ -604,7 +815,7 @@ int main()
     }
     
 
-    /* LastOccur : Find last occurance of iNum in list
+    /* LastOccur : Find last occurance of iNum in list */
     printf("-------------------------------------------------------------\n");
     printf("Enter number for last occurnce\t\t\t:");
     scanf("%d", &iNum);
@@ -622,7 +833,7 @@ int main()
         printf("Last occurance of %d is at position\t\t:%d\n", iNum, iRet);
     }
 
-    /* SecOccur : Find second occurance of iNum in list
+    /* SecOccur : Find second occurance of iNum in list */
     printf("-------------------------------------------------------------\n");
     printf("Enter number for second occurnce\t\t:");
     scanf("%d", &iNum);
@@ -640,7 +851,7 @@ int main()
         printf("Second occurance of %d is at position\t\t:%d\n", iNum, iRet);
     }
 
-    /* SecLastOccur : Find  last occurance of iNum in list 
+    /* SecLastOccur : Find  last occurance of iNum in list */
     printf("-------------------------------------------------------------\n");
     printf("Enter number for second last occurnce\t\t:");
     scanf("%d", &iNum);
@@ -659,7 +870,7 @@ int main()
     }
 
     
-    /* ListCat:concats list2 at end of list1
+    /* ListCat:concats list2 at end of list1 */
     printf("-------------------------------------------------------------\n");
     iRet = scllObj.ListCat(scllObj1);
     if(iRet == EMPTY)
@@ -673,7 +884,7 @@ int main()
         printf("Total Elements:\n%d\n", scllObj.CountEls());
     }
 
-    /* ListNCat : Concats first N elements from List2 
+    /* ListNCat : Concats first N elements from List2  */
     printf("-------------------------------------------------------------\n");
     printf("Enter number of elements to concat\t\t:");
     scanf("%d", &iNum);
@@ -693,7 +904,7 @@ int main()
         printf("Total Elements:\n%d\n", scllObj.CountEls());
     }
 
-    /* IsPalindrome : Checks whether List is palindrome or not
+    /* IsPalindrome : Checks whether List is palindrome or not */
     printf("-------------------------------------------------------------\n");
     bRet = scllObj.IsPalindrome();
     if(bRet == false)
@@ -711,6 +922,53 @@ int main()
     scllObj.ListSortAsc();
     scllObj.DisplayList();
     printf("Total Elements List 1\t:%d\n", scllObj.CountEls());
+
+    /* ListSortDesc:Sorts list in descending order */
+    printf("------------------------------------------------------\n");
+    printf("Linked In Sorted order\n");
+    scllObj.ListSortDesc();
+    scllObj.DisplayList();
+    printf("Total Elements List 1\t:%d\n", scllObj.CountEls());
+
+    /* ListCmp : Checks whether Lists are equal or not */
+    printf("-------------------------------------------------------------\n");
+    bRet = scllObj.ListCmp(scllObj1);
+    if(bRet == false)
+    {
+        printf("Lists are not equal\n");
+    }
+    else
+    {
+        printf("List are equal\n");
+    }
+
+     /* ListNCmp : Checks whether Lists are equal or not upto N els */
+    printf("-------------------------------------------------------------\n");
+    printf("Enter number of first elements to compare\t\t:");
+    scanf("%d", &iNum);
+    bRet = scllObj.ListNCmp(scllObj1, iNum);
+    if(bRet == false)
+    {
+        printf("Lists are not equal\n");
+    }
+    else
+    {
+        printf("List are equal\n");
+    }
+
+     /* ListNCmp : Checks whether Lists are equal or not upto N els */
+    printf("-------------------------------------------------------------\n");
+    printf("Enter number of last elements to compare\t\t:");
+    scanf("%d", &iNum);
+    bRet = scllObj.ListLNCmp(scllObj1, iNum);
+    if(bRet == false)
+    {
+        printf("Lists are not equal\n");
+    }
+    else
+    {
+        printf("List are equal\n");
+    }
 
     printf("-------------------------------------------------------------\n");
     return 0;
