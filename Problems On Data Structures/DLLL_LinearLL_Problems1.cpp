@@ -841,25 +841,28 @@ int Doubly_LinearLL::IsSublistF(Doubly_LinearLL &List2)
         while(temp1 != NULL)
         {
             temp2 = List2.Head;
-            while(temp1 != NULL && temp2 != NULL)
-            {
-                if(temp1->iData != temp2->iData)
+            if(temp1->iData == temp2->iData)
+            {   
+                while(temp1 != NULL && temp2 != NULL)
                 {
+                    if(temp1->iData != temp2->iData)
+                    {
+                        break;
+                    }
+                    temp1 = temp1->npNext;
+                    temp2 = temp2->npNext;
+                }
+                if(temp2 == NULL)
+                {
+                    iPos++;
                     break;
                 }
-                temp1 = temp1->npNext;
-                temp2 = temp2->npNext;
             }
-            if(temp2 == NULL)
+            else
             {
+                temp1 = temp1->npNext;
                 iPos++;
-                break;
             }
-            if(temp1 != NULL)
-            {
-                temp1 = temp1->npNext;
-            }
-            iPos++;
         }
         if(temp2 == NULL)
         {
@@ -877,30 +880,34 @@ int Doubly_LinearLL::IsSublistF(Doubly_LinearLL &List2)
         PDNODE temp2 = NULL;
         while(temp1 != NULL)
         {
-            temp2 = this->Head;
-            while(temp1 != NULL && temp2 != NULL)
-            {
-                if(temp1->iData != temp2->iData)
+            temp2 = List2.Head;
+            if(temp1->iData == temp2->iData)
+            {   
+                while(temp1 != NULL && temp2 != NULL)
                 {
+                    if(temp1->iData != temp2->iData)
+                    {
+                        break;
+                    }
+                    temp1 = temp1->npNext;
+                    temp2 = temp2->npNext;
+                    iPos++;
+                }
+                if(temp2 == NULL)
+                {
+                    iPos++;
                     break;
                 }
-                temp1 = temp1->npNext;
-                temp2 = temp2->npNext;
             }
-            if(temp2 == NULL)
+            else
             {
+                temp1 = temp1->npNext;
                 iPos++;
-                break;
             }
-            if(temp1 != NULL)
-            {
-                temp1 = temp1->npNext;
-            }
-            iPos++;
         }
         if(temp2 == NULL)
         {
-            cout << "Linked List 1 is sublist of Linked List 2\n";
+            cout << "Linked List 2 is sublist of Linked List 1\n";
             return iPos;
         }
         else
@@ -929,7 +936,7 @@ int Doubly_LinearLL::IsSublistL(Doubly_LinearLL &List2)
         return EMPTY;
     }
 
-    int iPos = 0, iCnt = 1, iPos2 = 0;
+    int iPos = 0, iCnt = 1, iPos2 = -1;
     if(this->iCount >= List2.iCount)
     {
         PDNODE temp1 = this->Head;
@@ -938,27 +945,29 @@ int Doubly_LinearLL::IsSublistL(Doubly_LinearLL &List2)
         {
             temp2 = List2.Head;
             iPos = iCnt;
-            while(temp1 != NULL && temp2 != NULL)
-            {
-                if(temp1->iData != temp2->iData)
+            if(temp1->iData == temp2->iData)
+            {    while(temp1 != NULL && temp2 != NULL)
                 {
-                    break;
+                    if(temp1->iData != temp2->iData)
+                    {
+                        break;
+                    }
+                    temp1 = temp1->npNext;
+                    temp2 = temp2->npNext;
+                    iCnt++;
                 }
-                temp1 = temp1->npNext;
-                temp2 = temp2->npNext;
-                iCnt++;
+                if(temp2 == NULL)
+                {
+                    iPos2 = iPos;
+                }
             }
-            if(temp2 == NULL)
-            {
-                iPos2 = iPos;
-            }
-            if(temp1 != NULL)
+            else
             {
                 temp1 = temp1->npNext;
                 iCnt++;
             }
         }
-        if(temp2 == NULL)
+        if(iPos2 != -1)
         {
             cout << "Linked List 2 is sublist of Linked List 1\n";
             return iPos2;
@@ -976,29 +985,31 @@ int Doubly_LinearLL::IsSublistL(Doubly_LinearLL &List2)
         {
             temp2 = this->Head;
             iPos = iCnt;
-            while(temp1 != NULL && temp2 != NULL)
-            {
-                if(temp1->iData != temp2->iData)
+            if(temp1->iData == temp2->iData)
+            {    while(temp1 != NULL && temp2 != NULL)
                 {
-                    break;
+                    if(temp1->iData != temp2->iData)
+                    {
+                        break;
+                    }
+                    temp1 = temp1->npNext;
+                    temp2 = temp2->npNext;
+                    iCnt++;
                 }
-                temp1 = temp1->npNext;
-                temp2 = temp2->npNext;
-                iCnt++;
+                if(temp2 == NULL)
+                {
+                    iPos2 = iPos;
+                }
             }
-            if(temp2 == NULL)
-            {
-                iPos2 = iPos;
-            }
-            if(temp1 != NULL)
+            else
             {
                 temp1 = temp1->npNext;
                 iCnt++;
             }
         }
-        if(temp2 == NULL)
+        if(iPos2 != -1)
         {
-            cout << "Linked List 1 is sublist of Linked List 2\n";
+            cout << "Linked List 2 is sublist of Linked List 1\n";
             return iPos2;
         }
         else
@@ -1239,7 +1250,7 @@ int main()
     cout << "Total elements in list 1\t\t:" << dllObj1.Count() << endl;
     */
 
-    /* IsSublist: Checks whether Lists are have sublist of each other
+    /* IsSublist: Checks whether Lists are have sublist of each other */
     printf("----------------------------------------------------------------\n");
     iRet = dllObj1.IsSublistF(dllObj2);
     if(iRet == NOTFOUND)
