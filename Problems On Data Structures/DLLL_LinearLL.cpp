@@ -1,5 +1,5 @@
 /*
-*   Implementation Of Doubly Linear Linked List Using C
+*   Implementation Of Doubly Linear Linked List Using C++
 */
 #include<stdio.h>
 #include<stdlib.h>
@@ -62,7 +62,7 @@ Doubly_LinearLL::Doubly_LinearLL()
 ////////////////////////////////////////////////////////////
 Doubly_LinearLL::~Doubly_LinearLL()
 {
-    if(NULL == Head)
+    if(NULL == Head && Tail == NULL)
     {
         printf("Linked List is Empty\n");
         return;
@@ -89,7 +89,7 @@ Doubly_LinearLL::~Doubly_LinearLL()
 ////////////////////////////////////////////////////////////
 bool Doubly_LinearLL::DisplayListF()
 {
-    if(NULL == Head)
+    if(NULL == Head && Tail == NULL)
     {
         printf("Linked List is Empty\n");
         return false;
@@ -117,17 +117,12 @@ bool Doubly_LinearLL::DisplayListF()
 ////////////////////////////////////////////////////////////
 bool Doubly_LinearLL::DisplayListB()
 {    
-    if(NULL == Head)
+    if(NULL == Head && Tail == NULL)
     {
         printf("Linked List is Empty\n");
         return false;
     }
-    PDNODE First = Head;
-    while(First->npNext != NULL)
-    {
-        First = First->npNext;
-    }
-
+    PDNODE First = Tail;
     printf("NULL");
     while(First != NULL)
     {
@@ -178,6 +173,7 @@ bool Doubly_LinearLL::InsertFirst(int iNum)
     if(NULL == Head)
     {
         Head = NewN;
+        Tail = NewN;
     }
     else
     {
@@ -217,14 +213,9 @@ bool Doubly_LinearLL::InsertLast(int iNum)
     }
     else
     {
-        PDNODE nTemp = Head;
-        while(nTemp->npNext != NULL)
-        {
-            nTemp = nTemp->npNext;
-        }
-
-        nTemp->npNext = NewN;
-        NewN->npPrev = nTemp;
+        Tail->npNext = NewN;
+        NewN->npPrev = Tail;
+        Tail = NewN;
     }
     iCount++;
     return true;
@@ -293,7 +284,7 @@ bool Doubly_LinearLL::InsertAtPos(int iNum, int iPos)
 //////////////////////////////////////////////////////////////////
 bool Doubly_LinearLL::DeleteFirst()
 {
-    if(NULL == Head)
+    if(NULL == Head && Tail == NULL)
     {
         printf("Linked List Is Empty\n");
         return false;
@@ -302,11 +293,12 @@ bool Doubly_LinearLL::DeleteFirst()
     {
         delete Head;
         Head = NULL;
+        Tail = NULL;
     }
     else
     {
         Head = Head->npNext;
-        Head->npPrev->npNext = NULL;
+        //Head->npPrev->npNext = NULL;
         delete Head->npPrev;
         Head->npPrev = NULL;
     }
@@ -326,26 +318,22 @@ bool Doubly_LinearLL::DeleteFirst()
 //////////////////////////////////////////////////////////////////
 bool Doubly_LinearLL::DeleteLast()
 {
-    if(NULL == Head)
+    if(NULL == Head && NULL == Tail)
     {
         printf("Linked List Is Empty\n");
         return false;
     }
     else if(Head->npNext == NULL)
     {
-        delete Head;
+        delete Tail;
         Head = NULL;
+        Tail = NULL;
     }
     else
     {
-        PDNODE nTemp = Head;
-        while(nTemp->npNext->npNext != NULL)
-        {
-            nTemp = nTemp->npNext;
-        }
-        nTemp->npNext->npPrev = NULL;
-        delete nTemp->npNext;
-        nTemp->npNext = NULL;
+        Tail = Tail->npPrev;
+        delete Tail->npNext;
+        Tail->npNext = NULL;
     }
     iCount--;
     return true;

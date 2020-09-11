@@ -1,5 +1,5 @@
 /*
-*   Implementaion of Singly CIrcular Linked List in C Problems
+*  Solved Problems on Singly CIrcular Linked List in C Problems
 */
 #include<stdio.h>
 
