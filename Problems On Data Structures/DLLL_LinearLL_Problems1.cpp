@@ -56,8 +56,8 @@ class Doubly_LinearLL
         void    ListAltCpy(Doubly_LinearLL &);
         int     IsSublistF(Doubly_LinearLL&);
         int     IsSublistL(Doubly_LinearLL&);
-        void    ListSortAsc();
-        void    ListSortDesc();
+        void    ListCpyAsc(Doubly_LinearLL&);
+        void    ListCpyDesc(Doubly_LinearLL&);
 };
 
 ////////////////////////////////////////////////////////////
@@ -1020,6 +1020,147 @@ int Doubly_LinearLL::IsSublistL(Doubly_LinearLL &List2)
     return -1;
 }// end of IsSublistL
 
+////////////////////////////////////////////////////////////////////////////
+//
+//  Name        :ListCpyAsc
+//  Input       :Doubly_LinearLL &
+//  Returns     :void
+//  Description :copies els from List1 into List2 in sorted order
+//  Author      :Pranav Choudhary
+//  Date        :11 Sept 2020
+//
+////////////////////////////////////////////////////////////////////////////
+void Doubly_LinearLL::ListCpyAsc(Doubly_LinearLL &List2)
+{
+    if(Head == NULL && Tail == NULL && List2.Head != NULL && List2.Head != NULL)
+    {
+        cout << "Linked list is empty\n";
+        return;
+    }
+    PDNODE temp1 = Head;
+    PDNODE NewN = NULL;
+    PDNODE temp2 = NULL, temp3 = NULL;
+
+    while(temp1 != NULL)
+    {
+        NewN = new dNode;
+        NewN->iData = temp1->iData;
+        NewN->npNext = NULL;
+        NewN->npPrev = NULL;
+        List2.iCount++;
+        if (List2.Head == NULL && List2.Tail == NULL)
+        {
+            List2.Head = NewN;
+            List2.Tail = NewN;
+        }
+        else if(NewN->iData < List2.Head->iData)
+        {
+            NewN->npNext = List2.Head;
+            List2.Head->npPrev = NewN;
+            List2.Head = NewN;
+            if(List2.Head == List2.Tail)
+            {
+                List2.Tail = NewN;
+            }
+        }
+        else if(NewN->iData > List2.Head->iData)
+        {
+            temp2 = List2.Head;
+            while( temp2 != NULL && temp2->iData < NewN->iData)
+			{
+                temp3 = temp2;
+                temp2 = temp2->npNext;
+			}
+			
+			if(List2.Tail == temp3)
+			{
+                List2.Tail->npNext = NewN;
+                NewN->npPrev = List2.Tail;
+                List2.Tail = NewN;
+            }
+			else
+			{
+                NewN->npNext = temp2;
+                temp2->npPrev = NewN;
+                temp3->npNext = NewN;
+                NewN->npPrev = temp3;
+            }
+        }
+        temp1 = temp1->npNext;
+    }
+}// end of ListCpyAsc
+
+
+////////////////////////////////////////////////////////////////////////////
+//
+//  Name        :ListCpyAsc
+//  Input       :Doubly_LinearLL &
+//  Returns     :void
+//  Description :copies els from List1 into List2 in sorted order
+//  Author      :Pranav Choudhary
+//  Date        :11 Sept 2020
+//
+////////////////////////////////////////////////////////////////////////////
+void Doubly_LinearLL::ListCpyDesc(Doubly_LinearLL &List2)
+{
+    if(Head == NULL && Tail == NULL && List2.Head != NULL && List2.Head != NULL)
+    {
+        cout << "Linked list is empty\n";
+        return;
+    }
+    PDNODE temp1 = Head;
+    PDNODE NewN = NULL;
+    PDNODE temp2 = NULL, temp3 = NULL;
+
+    while(temp1 != NULL)
+    {
+        NewN = new dNode;
+        NewN->iData = temp1->iData;
+        NewN->npNext = NULL;
+        NewN->npPrev = NULL;
+        List2.iCount++;
+        if (List2.Head == NULL && List2.Tail == NULL)
+        {
+            List2.Head = NewN;
+            List2.Tail = NewN;
+        }
+        else if(NewN->iData > List2.Head->iData)
+        {
+            NewN->npNext = List2.Head;
+            List2.Head->npPrev = NewN;
+            List2.Head = NewN;
+            if(List2.Head == List2.Tail)
+            {
+                List2.Tail = NewN;
+            }
+        }
+        else if(NewN->iData < List2.Head->iData)
+        {
+            temp2 = List2.Head;
+            while( temp2 != NULL && temp2->iData > NewN->iData)
+			{
+                temp3 = temp2;
+                temp2 = temp2->npNext;
+			}
+			
+			if(List2.Tail == temp3)
+			{
+                List2.Tail->npNext = NewN;
+                NewN->npPrev = List2.Tail;
+                List2.Tail = NewN;
+            }
+			else
+			{
+                NewN->npNext = temp2;
+                temp2->npPrev = NewN;
+                temp3->npNext = NewN;
+                NewN->npPrev = temp3;
+            }
+        }
+        temp1 = temp1->npNext;
+    }
+}// end of ListCpyDesc
+
 // Entry point
 int main()
 {
@@ -1045,7 +1186,7 @@ int main()
     cout << "Total elements in list 1\t\t:" << dllObj1.Count() << endl;
 
     
-    /* Linked List 2 */
+    /* Linked List 2
     printf("----------------------------------------------------------------\n");
     cout << "Enter numbers [\'0\' to stop entering input]\n";
     while(true)
@@ -1250,7 +1391,7 @@ int main()
     cout << "Total elements in list 1\t\t:" << dllObj1.Count() << endl;
     */
 
-    /* IsSublist: Checks whether Lists are have sublist of each other */
+    /* IsSublist: Checks whether Lists are have sublist of each other
     printf("----------------------------------------------------------------\n");
     iRet = dllObj1.IsSublistF(dllObj2);
     if(iRet == NOTFOUND)
@@ -1266,7 +1407,7 @@ int main()
         cout << "Sublist found at position\t\t" << iRet << endl;
     }
 
-    /* IsSublist: Checks whether Lists are have sublist of each other */
+    /* IsSublist: Checks whether Lists are have sublist of each other
     printf("----------------------------------------------------------------\n");
     iRet = dllObj1.IsSublistL(dllObj2);
     if(iRet == NOTFOUND)
@@ -1281,6 +1422,21 @@ int main()
     {
         cout << "Sublist found at position\t\t" << iRet << endl;
     }
+    */
+    
+    /* ListCpyAsc : Sorts Linked list in ascending order 
+    printf("----------------------------------------------------------------\n");
+    dllObj1.ListCpyAsc(dllObj2);
+    cout << "Linked List 1 after copying in Ascending order\n";
+    dllObj2.DisplayListF();
+    cout << "Total elements in list 2\t\t:" << dllObj2.Count() << endl;
+
+    /* ListCpyAsc : Sorts Linked list in ascending order */
+    printf("----------------------------------------------------------------\n");
+    dllObj1.ListCpyDesc(dllObj2);
+    cout << "Linked List 1 after copying in Descending order\n";
+    dllObj2.DisplayListF();
+    cout << "Total elements in list 2\t\t:" << dllObj2.Count() << endl;
 
     printf("----------------------------------------------------------------\n");
     return 0;
