@@ -62,19 +62,18 @@ Doubly_LinearLL::Doubly_LinearLL()
 ////////////////////////////////////////////////////////////
 Doubly_LinearLL::~Doubly_LinearLL()
 {
-    if(NULL == Head && Tail == NULL)
+    if(NULL != Head && Tail != NULL)
     {
-        printf("Linked List is Empty\n");
-        return;
+        PDNODE nTemp = NULL;
+        while(Head != NULL)
+        {
+            nTemp = Head;
+            Head = nTemp->npNext;
+            delete nTemp;
+            iCount--;
+        }
     }
-    PDNODE nTemp = NULL;
-    while(Head != NULL)
-    {
-        nTemp = Head;
-        Head = nTemp->npNext;
-        delete nTemp;
-        iCount--;
-    }
+    
 }// end of destructor
 
 ////////////////////////////////////////////////////////////

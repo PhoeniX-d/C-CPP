@@ -370,40 +370,82 @@ int Singly_LinearLL::IsSublist(Singly_LinearLL& List1, Singly_LinearLL& List2)
         printf("Linked Lists is empty\n");
         return -1;
     }
-    PNODE nTemp1 = List1.Head;
-    PNODE nTemp2 = NULL;
     int iPos = 0;
-    while(nTemp1 != NULL)
+    if(this->iCount >= List2.iCount)
     {
-        nTemp2 = List2.Head;
-        while(nTemp1 != NULL && nTemp2 != NULL)
+        PNODE temp1 = this->Head;
+        PNODE temp2 = NULL;
+        while(temp1 != NULL)
         {
-            if(nTemp1->iData != nTemp2->iData)
+            temp2 = List2.Head;
+            while(temp1 != NULL && temp2 != NULL)
             {
+                if(temp1->iData != temp2->iData)
+                {
+                    break;
+                }
+                temp1 = temp1->npNext;
+                temp2 = temp2->npNext;
+            }
+            if(temp2 == NULL)
+            {
+                iPos++;
                 break;
             }
-            nTemp1 = nTemp1->npNext;
-            nTemp2 = nTemp2->npNext;
-        }
-        if(nTemp2 == NULL)
-        {
+            if(temp1 != NULL)
+            {
+                temp1 = temp1->npNext;
+            }
             iPos++;
-            break;
         }
-        if(nTemp1 != NULL)
+        if(temp2 == NULL)
         {
-            nTemp1 = nTemp1->npNext;
+            printf("Linked List 2 is sublist of Linked List 1\n");
+            return iPos;
         }
-        iPos++;
+        else
+        {
+            return -1;
+        }
     }
-    if(nTemp2 == NULL)
+    else if(this->iCount < List2.iCount)
     {
-        return iPos;
+        PNODE temp1 = List2.Head;
+        PNODE temp2 = NULL;
+        while(temp1 != NULL)
+        {
+            temp2 = this->Head;
+            while(temp1 != NULL && temp2 != NULL)
+            {
+                if(temp1->iData != temp2->iData)
+                {
+                    break;
+                }
+                temp1 = temp1->npNext;
+                temp2 = temp2->npNext;
+            }
+            if(temp2 == NULL)
+            {
+                iPos++;
+                break;
+            }
+            if(temp1 != NULL)
+            {
+                temp1 = temp1->npNext;
+            }
+            iPos++;
+        }
+        if(temp2 == NULL)
+        {
+            printf("Linked List 1 is sublist of Linked List 2\n");
+            return iPos;
+        }
+        else
+        {
+            return -1;
+        }
     }
-    else
-    {
-        return -1;
-    }
+    return -1;
 }// end of IsSublist
 
 /*
