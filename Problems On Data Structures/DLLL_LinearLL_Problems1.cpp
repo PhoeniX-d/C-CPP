@@ -1,9 +1,10 @@
-/*
+0/*
 *   Solved Problems on Doubly Linear Linked List Using C++
 */
 #include<stdio.h>
 #include<stdlib.h>
 #include<iostream>
+
 using namespace std;
 
 #define SUCEESS         0x0000
@@ -82,7 +83,7 @@ Doubly_LinearLL::Doubly_LinearLL()
 //  Name        :~Doubly_LinearLL
 //  Input       :   -
 //  Returns     :   -
-//  Description :desstructor
+//  Description :destructor
 //  Author      :Pranav Choudhary
 //  Date        :11 Sept 2020
 //
@@ -163,7 +164,7 @@ bool Doubly_LinearLL::DisplayListB()
 //  Name        :CountEls
 //  Input       :void
 //  Returns     :int
-//  Description :counts elements in linked list
+//  Description :Returns count of elements in linked list
 //  Author      :Pranav Choudhary
 //  Date        :11 Sept 2020
 //
@@ -289,7 +290,7 @@ int Doubly_LinearLL::FirstOccur(int iNum)
 //  Name        :SecOccur
 //  Input       :int
 //  Returns     :int
-//  Description :Searches first occurance of iNum in list
+//  Description :Searches second occurance of iNum in list
 //  Author      :Pranav Choudhary
 //  Date        :11 Sept 2020
 //
@@ -409,8 +410,8 @@ int Doubly_LinearLL::SecLastOccur(int iNum)
 //
 //  Name        :ListCat
 //  Input       :Doubly_LinearLL &
-//  Returns     :int
-//  Description :Concates two linked lists
+//  Returns     :void
+//  Description :Concates two linked (List2 to List1)
 //  Author      :Pranav Choudhary
 //  Date        :11 Sept 2020
 //
@@ -429,7 +430,7 @@ void Doubly_LinearLL::ListCat(Doubly_LinearLL &List2)
 //
 //  Name        :ListNCat
 //  Input       :Doubly_LinearLL &, int
-//  Returns     :int
+//  Returns     :void
 //  Description :Concates two linked lists upto first N els
 //  Author      :Pranav Choudhary
 //  Date        :11 Sept 2020
@@ -462,7 +463,7 @@ void Doubly_LinearLL::ListNCat(Doubly_LinearLL &List2, int iN)
 //
 //  Name        :ListLNCat
 //  Input       :Doubly_LinearLL &, int
-//  Returns     :int
+//  Returns     :void
 //  Description :Concates two linked lists only last N els
 //  Author      :Pranav Choudhary
 //  Date        :11 Sept 2020
@@ -500,7 +501,7 @@ void Doubly_LinearLL::ListLNCat(Doubly_LinearLL &List2, int iN)
 //  Name        :ListRangeCat
 //  Input       :Doubly_LinearLL &, int, int
 //  Returns     :void
-//  Description :Concates List2 only els in range
+//  Description :Concates List2 to List1 only els in range from List2
 //  Author      :Pranav Choudhary
 //  Date        :11 Sept 2020
 //
@@ -537,9 +538,9 @@ void Doubly_LinearLL::ListRangeCat(Doubly_LinearLL &List2, int iS, int iE)
 //////////////////////////////////////////////////////////////////
 //
 //  Name        :ListAltCat
-//  Input       :Doubly_LinearLL &, int, int
+//  Input       :Doubly_LinearLL &
 //  Returns     :void
-//  Description :Concates List2 only els in range
+//  Description :Concates alpternate els of List2 to List1
 //  Author      :Pranav Choudhary
 //  Date        :11 Sept 2020
 //
@@ -567,8 +568,8 @@ void Doubly_LinearLL::ListAltCat(Doubly_LinearLL &List2)
 //
 //  Name        :ListCpy
 //  Input       :Doubly_LinearLL &
-//  Returns     :int
-//  Description :Copies two List 1 into List 2
+//  Returns     :void
+//  Description :Copies two List1 into List2
 //  Author      :Pranav Choudhary
 //  Date        :11 Sept 2020
 //
@@ -592,7 +593,7 @@ void Doubly_LinearLL::ListCpy(Doubly_LinearLL &List2)
 //
 //  Name        :ListNCpy
 //  Input       :Doubly_LinearLL &, int
-//  Returns     :int
+//  Returns     :void
 //  Description :Copies List1 to List2 upto first N els
 //  Author      :Pranav Choudhary
 //  Date        :11 Sept 2020
@@ -625,7 +626,7 @@ void Doubly_LinearLL::ListNCpy(Doubly_LinearLL &List2, int iN)
 //
 //  Name        :ListLNCpy
 //  Input       :Doubly_LinearLL &, int
-//  Returns     :int
+//  Returns     :void
 //  Description :Copies List1 into List2 only last N els
 //  Author      :Pranav Choudhary
 //  Date        :11 Sept 2020
@@ -663,7 +664,7 @@ void Doubly_LinearLL::ListLNCpy(Doubly_LinearLL &List2, int iN)
 //  Name        :ListRangeCat
 //  Input       :Doubly_LinearLL &, int, int
 //  Returns     :void
-//  Description :Concates List2 only els in range
+//  Description :Copies List1 into List2 only els in range
 //  Author      :Pranav Choudhary
 //  Date        :11 Sept 2020
 //
@@ -702,7 +703,7 @@ void Doubly_LinearLL::ListRangeCpy(Doubly_LinearLL &List2, int iS, int iE)
 //  Name        :ListAltCpy
 //  Input       :Doubly_LinearLL &
 //  Returns     :void
-//  Description :Concates List2's alternate els
+//  Description :Copies List1 into List2 alternate els
 //  Author      :Pranav Choudhary
 //  Date        :11 Sept 2020
 //
@@ -820,7 +821,7 @@ void Doubly_LinearLL::ListCpyPrime(Doubly_LinearLL &List2)
 //  Name        :IsSublistF
 //  Input       :Doubly_LinearLL &
 //  Returns     :int
-//  Description :Check either List is Sublist of other,  if yes then returns
+//  Description :Check either List is Sublist of other, if yes then returns
 //               first position(First occurance's first position)
 //  Author      :Pranav Choudhary
 //  Date        :11 Sept 2020
@@ -1025,7 +1026,7 @@ int Doubly_LinearLL::IsSublistL(Doubly_LinearLL &List2)
 //  Name        :ListCpyAsc
 //  Input       :Doubly_LinearLL &
 //  Returns     :void
-//  Description :copies els from List1 into List2 in sorted order
+//  Description :copies els from List1 into List2 in sorted order Ascending
 //  Author      :Pranav Choudhary
 //  Date        :11 Sept 2020
 //
@@ -1096,7 +1097,7 @@ void Doubly_LinearLL::ListCpyAsc(Doubly_LinearLL &List2)
 //  Name        :ListCpyAsc
 //  Input       :Doubly_LinearLL &
 //  Returns     :void
-//  Description :copies els from List1 into List2 in sorted order
+//  Description :copies els from List1 into List2 in sorted order Descending
 //  Author      :Pranav Choudhary
 //  Date        :11 Sept 2020
 //
