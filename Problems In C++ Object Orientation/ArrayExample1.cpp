@@ -177,7 +177,7 @@ int ArraySearch::FirstOccur(int iNum)    /* FirstOccur(const ArraySearch *this, 
 
 ///////////////////////////////////////////////////////////////////
 //
-//  Name        :FirstOccur
+//  Name        :SecOccur
 //  Input       :int
 //  Returns     :int
 //  Description :Searches first occurance of particular number
@@ -215,7 +215,7 @@ int ArraySearch::SecOccur(int iNum)    /* SecOccur(const ArraySearch *this, int)
 
 ///////////////////////////////////////////////////////////////////
 //
-//  Name        :FirstOccur
+//  Name        :LastOccur
 //  Input       :int
 //  Returns     :int
 //  Description :Searches first occurance of particular number
