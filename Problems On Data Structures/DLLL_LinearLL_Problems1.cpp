@@ -1,4 +1,4 @@
-0/*
+/*
 *   Solved Problems on Doubly Linear Linked List Using C++
 */
 #include<stdio.h>
