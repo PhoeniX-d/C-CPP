@@ -60,7 +60,7 @@ class Array
 //  Date        :12 Sept 2020
 //
 ///////////////////////////////////////////////////////////////////
-void Array::Accept()    /* Accept(Array *const this) */
+void Array::Accept()    /* Accept(const Array *this) */
 {
     if(this->iArr == NULL)
     {
@@ -84,7 +84,7 @@ void Array::Accept()    /* Accept(Array *const this) */
 //  Date        :12 Sept 2020
 //
 ///////////////////////////////////////////////////////////////////
-void Array::Display()   /* Display(Array *const this) */
+void Array::Display()   /* Display(const Array *this) */
 {
     if(this->iArr == NULL)
     {

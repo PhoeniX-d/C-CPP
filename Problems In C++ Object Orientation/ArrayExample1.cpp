@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /*
 *   Design a class that contains following openation
 *   1. Memory allocation
@@ -12,6 +11,10 @@
 #include<iostream>
 using namespace std;
 
+/* Error Code */
+#define     NOTFOUND        0x11111111
+#define     EMPTY           0x11111110
+
 class Array
 {
     protected:
@@ -21,7 +24,7 @@ class Array
     public:
         Array(int i = 10)       /* Parameterized constructor:Memory allocation */
         {
-            if(i < 0)
+            if (i < 0)
                 i = -i;
 
             this->iSize = i;
@@ -51,6 +54,20 @@ class Array
         inline void Display();
 };
 
+// class ArraySearch
+class ArraySearch : public Array
+{
+    public:
+        ArraySearch(int i = 7):Array(i)     /* Base Member initialization */
+        {}
+
+        int Occurances(int);
+        int FirstOccur(int);
+        int SecOccur(int);
+        int LastOccur(int);
+        int SecLastOccur(int);
+};
+
 ///////////////////////////////////////////////////////////////////
 //
 //  Name        :Accept
@@ -61,7 +78,7 @@ class Array
 //  Date        :12 Sept 2020
 //
 ///////////////////////////////////////////////////////////////////
-void Array::Accept()    /* Accept(Array *const this) */
+void Array::Accept()    /* Accept(const Array *this) */
 {
     if(this->iArr == NULL)
     {
@@ -73,7 +90,7 @@ void Array::Accept()    /* Accept(Array *const this) */
     {
         cin >> this->iArr[i];
     }
-}
+}// end of Accept()
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -85,192 +102,303 @@ void Array::Accept()    /* Accept(Array *const this) */
 //  Date        :12 Sept 2020
 //
 ///////////////////////////////////////////////////////////////////
-void Array::Display()   /* Display(Array *const this) */
+void Array::Display()   /* Display(const Array *this) */
 {
     if(this->iArr == NULL)
     {
         cout << "Array is empty\n";
         return;
     }
-    cout << "[ ";
     for (int i = 0; i < this->iSize; i++)
     {
-       cout << this->iArr[i] << " ";
+       cout << "[ " << this->iArr[i] << " ]";
     }
-    cout << "]" << endl;
-}
+    cout << "\n\n";
+} // end of Display()
 
-// class ArraySearch
-class ArraySearch : protected Array
+///////////////////////////////////////////////////////////////////
+//
+//  Name        :Occurances
+//  Input       :int
+//  Returns     :int
+//  Description :Searches all occurance of particular number
+//  Author      :Pranav Choudhary
+//  Date        :12 Sept 2020
+//
+///////////////////////////////////////////////////////////////////
+int ArraySearch::Occurances(int iNum)    /* Occurances(const ArraySearch *this, int)*/
 {
-    public:
-        ArraySearch(int i = 7):Array(i) /* Base Member initialization */
-        {}
-
-};
-
-// Entry point
-int main()
-{
-    Array aObj1;
-
-    cout << "\nEnter elements\n";
-    aObj1.Accept(); /* Accept(&aObj1); */
-    cout << "\nArray 1 elements\n";
-    aObj1.Display(); /* Display(&aObj1); */
-
-    int iValue = 0;
-    cout << "\nEnter no. of elements\n";
-    cin >> iValue;
-    Array *pArray = new Array(iValue);
-    cout << "\nEnter elemnets\n";
-    pArray->Accept(); /* Accept(pArray); */
-    cout << "\nArray 2 elements\n";
-    pArray->Display(); /* Display(pArray); */
-    delete pArray;
-
-    Array *pArray2 = new Array(aObj1);
-    cout << "\nArray 3 elements\n";
-    pArray2->Display(); /* Display(pArray2); */
-    delete pArray2;
-
-    return 0;
-=======
-/*
-*   Design a class that contains following openation
-*   1. Memory allocation
-*   2. Memory deallocation
-*   3. Copy contents from one memory location to other
-*   4. Accept data and store it into array
-*   5. Display contents of array
-*/
-
-// Header files
-#include<iostream>
-using namespace std;
-
-class Array
-{
-    protected:
-        int *iArr;
-        int iSize;
-    
-    public:
-        Array(int i = 10)       /* Parameterized constructor:Memory allocation */
+    if(this->iArr == NULL)
+    {
+        return EMPTY;
+    }
+    int iCnt = 0;
+    for (int i = 0; i < this->iSize; i++)
+    {
+        if(this->iArr[i] == iNum)
         {
-            if(i < 0)
-                i = -i;
-
-            this->iSize = i;
-            this->iArr = new int[this->iSize];
+            iCnt++;
         }
+    }
+    if(iCnt == 0)
+    {
+        return NOTFOUND;
+    }
+    else
+    {
+        return iCnt;
+    }
+}// end of Occurances()
 
-        Array(Array &Ref)       /* Copy constructor : Memory content copy */
+///////////////////////////////////////////////////////////////////
+//
+//  Name        :FirstOccur
+//  Input       :int
+//  Returns     :int
+//  Description :Searches first occurance of particular number
+//  Author      :Pranav Choudhary
+//  Date        :12 Sept 2020
+//
+///////////////////////////////////////////////////////////////////
+int ArraySearch::FirstOccur(int iNum)    /* FirstOccur(const ArraySearch *this, int)*/
+{
+    if(this->iArr == NULL)
+    {
+        return EMPTY;
+    }
+    int i = 0;
+    for (i = 0; i < this->iSize; i++)
+    {
+        if(this->iArr[i] == iNum)
         {
-            /* First allocate memory */
-            this->iSize = Ref.iSize;
-            this->iArr = new int[this->iSize];
+            break;
+        }
+    }
+    if(i == this->iSize)
+    {
+        return NOTFOUND;
+    }
+    else
+    {
+        return i;
+    }
+}// end of FirstOccur()
 
-            /* Now copying contents */
-            for (int i = 0; i < this->iSize; i++)
+///////////////////////////////////////////////////////////////////
+//
+//  Name        :FirstOccur
+//  Input       :int
+//  Returns     :int
+//  Description :Searches first occurance of particular number
+//  Author      :Pranav Choudhary
+//  Date        :12 Sept 2020
+//
+///////////////////////////////////////////////////////////////////
+int ArraySearch::SecOccur(int iNum)    /* SecOccur(const ArraySearch *this, int)*/
+{
+    if(this->iArr == NULL)
+    {
+        return EMPTY;
+    }
+    int i = 0, iPos = -1, iCnt = 0;
+    for (i = 0; i < this->iSize; i++)
+    {
+        if(this->iArr[i] == iNum)
+        {
+            iCnt++;
+            if(iCnt == 1 || iCnt == 2)
             {
-                this->iArr[i] = Ref.iArr[i];
+                iPos = i;
             }
         }
+    }
+    if(iPos == -1)
+    {
+        return NOTFOUND;
+    }
+    else
+    {
+        return iPos;
+    }
+}// end of SecOccur()
 
-        ~Array()                /* Destructor: Memory deallocation */
+///////////////////////////////////////////////////////////////////
+//
+//  Name        :FirstOccur
+//  Input       :int
+//  Returns     :int
+//  Description :Searches first occurance of particular number
+//  Author      :Pranav Choudhary
+//  Date        :12 Sept 2020
+//
+///////////////////////////////////////////////////////////////////
+int ArraySearch::LastOccur(int iNum)  /* LastOccur(const ArraySearch *this, int)*/
+{
+    if(this->iArr == NULL)
+    {
+        return EMPTY;
+    }
+    int iPos = -1, i = 0;
+    for (i = 0; i < this->iSize; i++)
+    {
+        if(this->iArr[i] == iNum)
         {
-            delete[] this->iArr;
+            iPos = i;
         }
-
-        /* Utility functions */
-        inline void Accept();
-        inline void Display();
-};
+    }
+    if(iPos == -1)
+    {
+        return NOTFOUND;
+    }
+    else
+    {
+        return iPos;
+    }
+}// end of LastOccur()
 
 ///////////////////////////////////////////////////////////////////
 //
-//  Name        :Accept
-//  Input       :void
-//  Returns     :void
-//  Description :Accepts N elements from user (through constructor)
+//  Name        :SecLastOccur
+//  Input       :int
+//  Returns     :int
+//  Description :Searches second last occurance of particular number
 //  Author      :Pranav Choudhary
 //  Date        :12 Sept 2020
 //
 ///////////////////////////////////////////////////////////////////
-void Array::Accept()    /* Accept(Array *const this) */
+int ArraySearch::SecLastOccur(int iNum)  /* SecLastOccur(const ArraySearch *this, int)*/
 {
     if(this->iArr == NULL)
     {
-        cout << "Array is empty\n";
-        return;
+        return EMPTY;
     }
-    
-    for (int i = 0; i < this->iSize; i++)
+    int iPos1 = -1, iPos2 = -1, i = 0;
+    for (i = 0; i < this->iSize; i++)
     {
-        cin >> this->iArr[i];
+        if(this->iArr[i] == iNum)
+        {
+            iPos2 = iPos1;
+            iPos1 = i;
+        }
     }
-}
-
-///////////////////////////////////////////////////////////////////
-//
-//  Name        :Display
-//  Input       :void
-//  Returns     :void
-//  Description :Displays Array elemets
-//  Author      :Pranav Choudhary
-//  Date        :12 Sept 2020
-//
-///////////////////////////////////////////////////////////////////
-void Array::Display()   /* Display(Array *const this) */
-{
-    if(this->iArr == NULL)
+    if(iPos1 == -1)
     {
-        cout << "Array is empty\n";
-        return;
+        return NOTFOUND;
     }
-    cout << "[ ";
-    for (int i = 0; i < this->iSize; i++)
+    else if(iPos2 == -1)
     {
-       cout << this->iArr[i] << " ";
+        return iPos1;
     }
-    cout << "]" << endl;
-}
-
-// class ArraySearch
-class ArraySearch : protected Array
-{
-    public:
-        ArraySearch(int i = 7):Array(i) /* Base Member initialization */
-        {}
-
-};
+    else
+    {
+        return iPos2;
+    }
+}// end of SecLastOccur()
 
 // Entry point
 int main()
 {
-    Array aObj1;
-
-    cout << "\nEnter elements\n";
-    aObj1.Accept(); /* Accept(&aObj1); */
-    cout << "\nArray 1 elements\n";
-    aObj1.Display(); /* Display(&aObj1); */
-
-    int iValue = 0;
+    int iValue = 0, iRet = 0;
     cout << "\nEnter no. of elements\n";
     cin >> iValue;
-    Array *pArray = new Array(iValue);
+    ArraySearch *pArraySearch = new ArraySearch(iValue);
     cout << "\nEnter elemnets\n";
-    pArray->Accept(); /* Accept(pArray); */
-    cout << "\nArray 2 elements\n";
-    pArray->Display(); /* Display(pArray); */
-    delete pArray;
+    pArraySearch->Accept(); /* Accept(pArraySearch); */
+    cout << "\nArray 1 elements\n";
+    pArraySearch->Display(); /* Display(pArraySearch); */
+    
+    /* Occurances: Searches all occurances of iNum */
+    cout << "---------------------------------------------------------------\n";
+    cout << "Enter value to be searched\t\t:";
+    cin >> iValue;
+    iRet = pArraySearch->Occurances(iValue);
+    if(iRet == EMPTY)
+    {
+        cout << "Array is Empty\n";
+    }
+    else if(iRet == NOTFOUND)
+    {
+        cout << "Element not found\n";
+    }
+    else
+    {
+        cout << "No. of Occurances of " << iValue << "\t\t\t:" << iRet << endl;
+    }
 
-    Array *pArray2 = new Array(aObj1);
-    cout << "\nArray 3 elements\n";
-    pArray2->Display(); /* Display(pArray2); */
-    delete pArray2;
+    /* FirstOccur: Searches first occurances of iNum */
+    cout << "---------------------------------------------------------------\n";
+    cout << "Enter value for first occur\t\t:";
+    cin >> iValue;
+    iRet = pArraySearch->FirstOccur(iValue);
+    if(iRet == EMPTY)
+    {
+        cout << "Array is Empty\n";
+    }
+    else if(iRet == NOTFOUND)
+    {
+        cout << "Element not found\n";
+    }
+    else
+    {
+        cout << "First of Occurances of " << iValue << "\t\t:at Index " << iRet << endl;
+    }
 
+    /* SecOccur: Searches second occurances of iNum */
+    cout << "---------------------------------------------------------------\n";
+    cout << "Enter value for second occur\t\t:";
+    cin >> iValue;
+    iRet = pArraySearch->SecOccur(iValue);
+    if(iRet == EMPTY)
+    {
+        cout << "Array is Empty\n";
+    }
+    else if(iRet == NOTFOUND)
+    {
+        cout << "Element not found\n";
+    }
+    else
+    {
+        cout << "Second of Occurances of " << iValue << "\t\t:at Index " << iRet << endl;
+    }
+
+    /* LastOccur: Searches last occurances of iNum */
+    cout << "---------------------------------------------------------------\n";
+    cout << "Enter value for last occur\t\t:";
+    cin >> iValue;
+    iRet = pArraySearch->LastOccur(iValue);
+    if(iRet == EMPTY)
+    {
+        cout << "Array is Empty\n";
+    }
+    else if(iRet == NOTFOUND)
+    {
+        cout << "Element not found\n";
+    }
+    else
+    {
+        cout << "Last of Occurances of " << iValue << "\t\t\t:at Index " << iRet << endl;
+    }
+    
+    /* SecLastOccur: Searches second last occurances of iNum */
+    cout << "---------------------------------------------------------------\n";
+    cout << "Enter value for second last occur\t:";
+    cin >> iValue;
+    iRet = pArraySearch->SecLastOccur(iValue);
+    if(iRet == EMPTY)
+    {
+        cout << "Array is Empty\n";
+    }
+    else if(iRet == NOTFOUND)
+    {
+        cout << "Element not found\n";
+    }
+    else
+    {
+        cout << "Second Last of Occurances of " << iValue << "\t\t:at Index " << iRet << endl;
+    }
+
+    /* deallocate pointer */
+    delete pArraySearch;
+    cout << "---------------------------------------------------------------\n";
     return 0;
->>>>>>> 7e1db77ccd04542c2bf2a8e755bf2a3acc822aa2
 }
