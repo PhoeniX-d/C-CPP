@@ -1,12 +1,3 @@
-/*
-*   Design a class that contains following openation
-*   1. Memory allocation
-*   2. Memory deallocation
-*   3. Copy contents from one memory location to other
-*   4. Accept data and store it into array
-*   5. Display contents of array
-*/
-
 // Header files
 #include<iostream>
 using namespace std;
