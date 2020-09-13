@@ -52,11 +52,14 @@ class ArraySearch : public Array
         ArraySearch(int i = 7):Array(i)     /* Base Member initialization */
         {}
 
+        /* Utility functions */
         int Occurances(int);
         int FirstOccur(int);
         int SecOccur(int);
         int LastOccur(int);
         int SecLastOccur(int);
+        int EvenCount();
+        int OddCount();
 };
 
 ///////////////////////////////////////////////////////////////////
@@ -286,6 +289,74 @@ int ArraySearch::SecLastOccur(int iNum)  /* SecLastOccur(const ArraySearch *this
     }
 }// end of SecLastOccur()
 
+///////////////////////////////////////////////////////////////////
+//
+//  Name        :EvenCount
+//  Input       :void
+//  Returns     :int
+//  Description :Returns total number of even numbers in Array
+//  Author      :Pranav Choudhary
+//  Date        :13 Sept 2020
+//
+///////////////////////////////////////////////////////////////////
+int ArraySearch::EvenCount()  /* EvenCount(const ArraySearch *this)*/
+{
+    if(this->iArr == NULL)
+    {
+        return EMPTY;
+    }
+    int iECnt = 0, i = 0;
+    for (i = 0; i < this->iSize; i++)
+    {
+        if(this->iArr[i] % 2 == 0)
+        {
+            iECnt++;
+        }
+    }
+    if(iECnt == 0)
+    {
+        return NOTFOUND;
+    }
+    else
+    {
+        return iECnt;
+    }
+}// end of EvenCount()
+
+///////////////////////////////////////////////////////////////////
+//
+//  Name        :OddCount
+//  Input       :void
+//  Returns     :int
+//  Description :Returns total number of odd numbers in Array
+//  Author      :Pranav Choudhary
+//  Date        :13 Sept 2020
+//
+///////////////////////////////////////////////////////////////////
+int ArraySearch::OddCount()  /* OddCount(const ArraySearch *this)*/
+{
+    if(this->iArr == NULL)
+    {
+        return EMPTY;
+    }
+    int iOCnt = 0, i = 0;
+    for (i = 0; i < this->iSize; i++)
+    {
+        if(this->iArr[i] % 2 != 0)
+        {
+            iOCnt++;
+        }
+    }
+    if(iOCnt == 0)
+    {
+        return NOTFOUND;
+    }
+    else
+    {
+        return iOCnt;
+    }
+}// end of OddCount()
+
 // Entry point
 int main()
 {
@@ -386,6 +457,38 @@ int main()
     else
     {
         cout << "Second Last of Occurances of " << iValue << "\t\t:at Index " << iRet << endl;
+    }
+
+    /* EvenCount: Counts even number in array */
+    cout << "---------------------------------------------------------------\n";
+    iRet = pArraySearch->EvenCount();
+    if(iRet == EMPTY)
+    {
+        cout << "Array is Empty\n";
+    }
+    else if(iRet == NOTFOUND)
+    {
+        cout << "Doesn't have even numbers\n";
+    }
+    else
+    {
+        cout << "Total even numbers in array are " << "\t:"<< iRet << endl;
+    }
+
+    /* OddCount: Counts odd number in array */
+    cout << "---------------------------------------------------------------\n";
+    iRet = pArraySearch->OddCount();
+    if(iRet == EMPTY)
+    {
+        cout << "Array is Empty\n";
+    }
+    else if(iRet == NOTFOUND)
+    {
+        cout << "Doesn't have odd numbers\n";
+    }
+    else
+    {
+        cout << "Total odd numbers in array are " << "\t\t:"<< iRet << endl;
     }
 
     /* deallocate pointer */
