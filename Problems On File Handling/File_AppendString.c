@@ -17,10 +17,10 @@ int main(int argc, char* argv[])
     char cFname[NAMESIZE] = {'\0'};
     char cString[MAXSZIE] = {'\0'};
 
-    printf("\nEnter file name with extension\t:");
+    printf("\nEnter file name with extension\t\t:");
     scanf("%s", cFname);
 
-    printf("Enter the string\t:");
+    printf("Enter the string\t\t:");
     scanf(" %[^\n]", cString);
 
     AppendString(cFname, cString);
