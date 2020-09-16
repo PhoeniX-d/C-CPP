@@ -1,5 +1,5 @@
 /*
-*   Program to Delete a particular line from file
+*   Program to replace a particular line from file with entered text
 */
 #include<stdio.h>
 #include<string.h>
@@ -9,36 +9,40 @@
 #define MAXLEN      256
 #define NAMESIZE     16
 
-void DeleteLine(char *, int);
+void RepalceLine(char*, int, char*);
 
 int main(int argc, char* argv[])
 {
     int iLine = 0;
     char sFileName[NAMESIZE] = {'\0'};
+    char sText[MAXLEN] = {'\0'};
 
     printf("Enter the file name with extension\t:");
     scanf("%s", sFileName);
 
-    printf("Enter Line number to be deleted \t:");
-    scanf("%d", &iLine);
+    printf("Enter Line number to be repalced \t:");
+    scanf(" %d", &iLine);
 
-    DeleteLine(sFileName, iLine);
+    printf("Enter replacement text:\n");
+    scanf(" %[^\n]", sText);
+
+    RepalceLine(sFileName, iLine, sText);
     return 0;
 }
 
-//////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
 //
-//  Name        :DeleteLine
+//  Name        :RepalceLine
 //  Input       :char[], int
 //  Returns     :void
-//  Description :Delete desired line from file
+//  Description :repalce desired line from file with some text
 //  Author      :Pranav Choudhary
 //  Last Update :16 Sept 2020 by Pranav Choudhary
 //
-///////////////////////////////////////////////////////////
-void DeleteLine(char * sFileName, int iLineNo)
+/////////////////////////////////////////////////////////////
+void RepalceLine(char sFileName[], int iLineNo, char sText[])
 {
-    if(sFileName == NULL)
+    if(sFileName == NULL || sText == NULL)
     {
         printf("Invalid Input\n");
         return;
@@ -75,6 +79,7 @@ void DeleteLine(char * sFileName, int iLineNo)
             else
             {
                 j = iLineNo;
+                fprintf(fp2, "%s\n", sText);
             }
         }       
     }

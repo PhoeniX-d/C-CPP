@@ -30,9 +30,9 @@ int main(int argc, char* argv[])
 //  Name        :StoreArray
 //  Input       :char*
 //  Returns     :void
-//  Description :read entire file and StoreArray
+//  Description :read Lines from file and Store it in Array
 //  Author      :Pranav Choudhary
-//  Last Update :3 Sept 2020 by Pranav Choudhary
+//  Last Update :16 Sept 2020 by Pranav Choudhary
 //
 ///////////////////////////////////////////////////////////
 void StoreArray(char* cFileName)
