@@ -7,7 +7,7 @@
 #include<string.h>
 #include<fcntl.h>
 
-#define BLOCKSZIE     1024
+#define BLOCKSIZE     1024
 #define NAMESIZE        16
 #define TRUE             1
 #define FALSE            0
@@ -65,10 +65,10 @@ BOOL FileCpy(int iFd1, int iFd2)
 {
     
     int iRead = 0, iWritten = 0;
-    char cBuffer[BLOCKSZIE];
-    memset(cBuffer, 0, BLOCKSZIE);
+    char cBuffer[BLOCKSIZE];
+    memset(cBuffer, 0, BLOCKSIZE);
 
-    while ((iRead = read(iFd1, cBuffer, BLOCKSZIE)) > 0)
+    while ((iRead = read(iFd1, cBuffer, BLOCKSIZE)) > 0)
     {
         write(iFd2, cBuffer, iRead);
         if((iWritten = write(iFd2, cBuffer, iRead)) < 0)
@@ -76,7 +76,7 @@ BOOL FileCpy(int iFd1, int iFd2)
             printf("Unable to write data to file\n");
             return FALSE;
         }
-        memset(cBuffer, 0, BLOCKSZIE);
+        memset(cBuffer, 0, BLOCKSIZE);
     }
     close(iFd1);
     close(iFd2);

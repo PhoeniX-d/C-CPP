@@ -33,7 +33,8 @@ int main()
     }
 
     RemoveEmptyLines(fp1, fp2);
-
+    fclose(fp1);
+    fclose(fp2);
     remove(sFileName);
     rename("temp.txt", sFileName);
 
@@ -78,6 +79,4 @@ void RemoveEmptyLines(FILE *fp1, FILE *fp2)
         /* Clear the buffer */
         memset(Line, 0, iLen);
     }
-    fclose(fp1);
-    fclose(fp2);
 }
