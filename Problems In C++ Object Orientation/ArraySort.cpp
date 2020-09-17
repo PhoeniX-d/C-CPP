@@ -220,6 +220,38 @@ void ArraySort::SelectionSort()       /* SelectionSort(ArraySort const *this) */
     }
 }// end of SelectionSort
 
+//////////////////////////////////////////////////////////////////
+//
+//  Name        :InsertionSort
+//  Input       :void
+//  Returns     :void
+//  Description :Sorts elements using InsertionSort technique
+//  Author      :Pranav Choudhary
+//  Date        :17 Sept 2020
+//
+///////////////////////////////////////////////////////////////////
+void ArraySort::InsertionSort()       /* InsertionSort(ArraySort const *this) */
+{
+    if(NULL == this->iArr)
+    {
+        cout << "Array Is Empty\n";
+        return;
+    }
+    int i = 0, j = 0, iKey = 0;
+    for (i = 1; i < this->iSize; i++)
+    {
+        iKey = this->iArr[i];
+        j = i - 1;
+        /* Iterate array to find out position for key */
+        while((j >= 0) && (this->iArr[j] > iKey))
+        {
+            this->iArr[j + 1] = this->iArr[j];
+            j--;
+        }
+        this->iArr[j + 1] = iKey;      /* store selected element at desired position */
+    }
+}// end of InsertionSort
+
 // Entry point
 int main()
 {
