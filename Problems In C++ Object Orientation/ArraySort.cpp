@@ -58,6 +58,7 @@ class ArraySort:public Array
         void SelectionSort();
         void InsertionSort();
         void QuickSort();
+		void Qsort(int, int);
         void MergeSort();
 };// end of class ArraySort
 
@@ -252,6 +253,75 @@ void ArraySort::InsertionSort()       /* InsertionSort(ArraySort const *this) */
     }
 }// end of InsertionSort
 
+//////////////////////////////////////////////////////////////////
+//
+//  Name        :QuickSort
+//  Input       :void
+//  Returns     :void
+//  Description :Sorts elements using QuickSort() technique
+//  Author      :Pranav Choudhary
+//  Date        :18 Sept 2020
+//
+///////////////////////////////////////////////////////////////////
+void ArraySort::QuickSort()       /* QuickSort()(ArraySort const *this) */
+{
+    if(NULL == this->iArr)
+    {
+        cout << "Array Is Empty\n";
+        return;
+    }
+	Qsort(0, this->iSize - 1);
+    
+}// end of QuickSort()
+
+//////////////////////////////////////////////////////////////////
+//
+//  Name        :Qsort
+//  Input       :void
+//  Returns     :void
+//  Description :Sorts elements using Qsort() technique
+//  Author      :Pranav Choudhary
+//  Date        :18 Sept 2020
+//
+///////////////////////////////////////////////////////////////////
+/* Qsort()(ArraySort const *this, int, int) */
+void ArraySort::Qsort(int iLow, int iHigh) 
+{
+	int iPivot = 0, i =  0, j = 0, iTemp = 0;
+	if(iLow < iHigh)
+	{	
+		i = iLow;
+		j = iHigh;
+		iPivot = this->iArr[iLow];
+		
+		while(i < j)
+		{
+			
+			while(this->iArr[i] <= iPivot && i < iHigh)
+			{
+				i++;
+			}
+			while(this->iArr[j] > iPivot)
+			{
+				j--;
+			}
+			
+			if(i < j)
+			{	
+				iTemp = this->iArr[i];
+				this->iArr[i] = this->iArr[j];
+				this->iArr[j] = iTemp;
+			}
+		}		
+		iTemp = this->iArr[iLow];
+		this->iArr[iLow] = this->iArr[j];
+		this->iArr[j] = iTemp;
+
+		Qsort(iLow, j - 1);
+		Qsort(j + 1, iHigh);
+	}	
+}// end of QuickSort()
+
 // Entry point
 int main()
 {
@@ -279,9 +349,15 @@ int main()
     cout << "\nArray elements\n";
     pArraySort->Display(); /* Display(pArraySort); */
 
-     /* BubbleSortX : Performs BubbleSort on Array */
+    /* BubbleSortX : Performs BubbleSort on Array 
     cout << "----------------------------------------------------------------------\n";
     pArraySort->SelectionSort();
+    cout << "\nArray elements\n";
+    pArraySort->Display(); /* Display(pArraySort); */
+	
+	 /* QuickSort : Performs QuickSort on Array */
+    cout << "----------------------------------------------------------------------\n";
+    pArraySort->QuickSort();
     cout << "\nArray elements\n";
     pArraySort->Display(); /* Display(pArraySort); */
 
