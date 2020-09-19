@@ -1,83 +1,84 @@
 // Header files
-#include<iostream>
+#include <iostream>
 using namespace std;
 
 /* Error Code */
-#define     NOTFOUND        0x11111111
-#define     EMPTY           0x11111110
+#define NOTFOUND 0x11111111
+#define EMPTY 0x11111110
 
 class Array
 {
-    protected:
-        int *iArr;
-        int iSize;
-    
-    public:
-        Array(int i = 10)       /* Parameterized constructor:Memory allocation */
+protected:
+    int *iArr;
+    int iSize;
+
+public:
+    Array(int i = 10) /* Parameterized constructor:Memory allocation */
+    {
+        if (i < 0)
+            i = -i;
+
+        this->iSize = i;
+        this->iArr = new int[this->iSize];
+    }
+
+    Array(Array &Ref) /* Copy constructor : Memory content copy */
+    {
+        /* First allocate memory */
+        this->iSize = Ref.iSize;
+        this->iArr = new int[this->iSize];
+
+        /* Now copying contents */
+        for (int i = 0; i < this->iSize; i++)
         {
-            if(i < 0)
-                i = -i;
-
-            this->iSize = i;
-            this->iArr = new int[this->iSize];
+            this->iArr[i] = Ref.iArr[i];
         }
+    }
 
-        Array(Array &Ref)       /* Copy constructor : Memory content copy */
-        {
-            /* First allocate memory */
-            this->iSize = Ref.iSize;
-            this->iArr = new int[this->iSize];
+    ~Array() /* Destructor: Memory deallocation */
+    {
+        delete[] this->iArr;
+    }
 
-            /* Now copying contents */
-            for (int i = 0; i < this->iSize; i++)
-            {
-                this->iArr[i] = Ref.iArr[i];
-            }
-        }
-
-        ~Array()                /* Destructor: Memory deallocation */
-        {
-            delete[] this->iArr;
-        }
-
-        /* Utility functions */
-        inline void Accept();
-        inline void Display();
-};// end of class Array
+    /* Utility functions */
+    inline void Accept();
+    inline void Display();
+}; // end of class Array
 
 // class ArraySearch
-class ArraySearch:public Array
+class ArraySearch : public Array
 {
-    private:
-        bool IsSorted()
+private:
+    bool IsSorted()
+    {
+        int i = 0;
+        for (i = 0; i < this->iSize - 1; i++)
         {
-            int i = 0;
-            for (i = 0; i < this->iSize - 1; i++)
+            if (this->iArr[i] > this->iArr[i + 1])
             {
-                if(this->iArr[i] > this->iArr[i + 1])
-                {
-                    break;
-                }
+                break;
             }
-            if(i == this->iSize - 1)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }            
         }
+        if (i == this->iSize - 1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
-    public:
-        ArraySearch(int i = 7):Array(i)     /* Base Member Initialization */
-        {}
+public:
+    ArraySearch(int i = 7) : Array(i) /* Base Member Initialization */
+    {
+    }
 
-        /* Utility functions */
-        int LinearSearch(int);
-        int LinearSearchX(int);
-        int BinarySearch(int);
-};// end of class ArraySearch
+    /* Utility functions */
+    int LinearSearch(int);
+    int LinearSearchX(int);
+    int BinarySearch(int);
+}; // end of class ArraySearch
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -89,14 +90,14 @@ class ArraySearch:public Array
 //  Date        :13 Sept 2020
 //
 ///////////////////////////////////////////////////////////////////
-void Array::Accept()    /* Accept(const Array *this) */
+void Array::Accept() /* Accept(const Array *this) */
 {
-    if(this->iArr == NULL)
+    if (this->iArr == NULL)
     {
         cout << "Array is empty\n";
         return;
     }
-    
+
     for (int i = 0; i < this->iSize; i++)
     {
         cin >> this->iArr[i];
@@ -113,9 +114,9 @@ void Array::Accept()    /* Accept(const Array *this) */
 //  Date        :13 Sept 2020
 //
 ///////////////////////////////////////////////////////////////////
-void Array::Display()   /* Display(const Array *this) */
+void Array::Display() /* Display(const Array *this) */
 {
-    if(this->iArr == NULL)
+    if (this->iArr == NULL)
     {
         cout << "Array is empty\n";
         return;
@@ -123,7 +124,7 @@ void Array::Display()   /* Display(const Array *this) */
     cout << "[ ";
     for (int i = 0; i < this->iSize; i++)
     {
-       cout << this->iArr[i] << " ";
+        cout << this->iArr[i] << " ";
     }
     cout << "]" << endl;
 }
@@ -138,9 +139,9 @@ void Array::Display()   /* Display(const Array *this) */
 //  Date        :13 Sept 2020
 //
 ///////////////////////////////////////////////////////////////////
-int ArraySearch::LinearSearch(int iNum)    /* LinearSearch(ArraySearch const *this, int) */
+int ArraySearch::LinearSearch(int iNum) /* LinearSearch(ArraySearch const *this, int) */
 {
-    if(NULL == this->iArr)
+    if (NULL == this->iArr)
     {
         cout << "Array is empty\n";
         return EMPTY;
@@ -149,13 +150,13 @@ int ArraySearch::LinearSearch(int iNum)    /* LinearSearch(ArraySearch const *th
     int i = 0;
     for (i = 0; i < this->iSize; i++)
     {
-        if(this->iArr[i] == iNum)
+        if (this->iArr[i] == iNum)
         {
             break;
         }
     }
 
-    if(i == this->iSize)
+    if (i == this->iSize)
     {
         return NOTFOUND;
     }
@@ -163,8 +164,8 @@ int ArraySearch::LinearSearch(int iNum)    /* LinearSearch(ArraySearch const *th
     {
         return i;
     }
-    
-}// end of LinearSearch()
+
+} // end of LinearSearch()
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -176,37 +177,37 @@ int ArraySearch::LinearSearch(int iNum)    /* LinearSearch(ArraySearch const *th
 //  Date        :13 Sept 2020
 //
 ///////////////////////////////////////////////////////////////////
-int ArraySearch::LinearSearchX(int iNum)    /* LinearSearch(ArraySearch const *this, int) */
+int ArraySearch::LinearSearchX(int iNum) /* LinearSearch(ArraySearch const *this, int) */
 {
-    if(NULL == this->iArr)
+    if (NULL == this->iArr)
     {
         cout << "Array is empty\n";
         return EMPTY;
     }
 
     int i = 0, j = this->iSize - 1;
-    while(i < j)
+    while (i < j)
     {
-        if(this->iArr[i] == iNum || this->iArr[j] == iNum)
+        if (this->iArr[i] == iNum || this->iArr[j] == iNum)
         {
             break;
         }
         i++;
         j--;
     }
-    if(i >= j)
+    if (i >= j)
     {
         return NOTFOUND;
     }
     else
     {
-        if(this->iArr[i] == iNum)
+        if (this->iArr[i] == iNum)
             return i;
-        else if(this->iArr[j] == iNum)
+        else if (this->iArr[j] == iNum)
             return j;
     }
     return NOTFOUND;
-}// end of LinearSearchX()
+} // end of LinearSearchX()
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -218,9 +219,9 @@ int ArraySearch::LinearSearchX(int iNum)    /* LinearSearch(ArraySearch const *t
 //  Date        :13 Sept 2020
 //
 ///////////////////////////////////////////////////////////////////
-int ArraySearch::BinarySearch(int iNum)    /* BinarySearch(ArraySearch const *this, int) */
+int ArraySearch::BinarySearch(int iNum) /* BinarySearch(ArraySearch const *this, int) */
 {
-    if(NULL == this->iArr)
+    if (NULL == this->iArr)
     {
         cout << "Array is empty\n";
         return EMPTY;
@@ -230,36 +231,36 @@ int ArraySearch::BinarySearch(int iNum)    /* BinarySearch(ArraySearch const *th
     iEnd = this->iSize;
     iMid = (iBeg + iEnd) / 2;
     bRet = IsSorted();
-    if(bRet == false)
+    if (bRet == false)
     {
         return LinearSearchX(iNum);
     }
-    while(iBeg <= iEnd)
+    while (iBeg <= iEnd)
     {
         iMid = (iBeg + iEnd) / 2;
-        if(this->iArr[iMid] == iNum)
+        if (this->iArr[iMid] == iNum)
         {
             break;
         }
-        if(this->iArr[iMid] > iNum)
+        if (this->iArr[iMid] > iNum)
         {
             iEnd = iMid - 1;
         }
-        else if(this->iArr[iMid] < iNum)
+        else if (this->iArr[iMid] < iNum)
         {
             iBeg = iMid + 1;
-        }        
+        }
     }
-    if(this->iArr[iMid] == iNum)
+    if (this->iArr[iMid] == iNum)
     {
         return iMid;
     }
     else
     {
         return NOTFOUND;
-    }   
+    }
 
-}// end of BinarySearch()
+} // end of BinarySearch()
 
 // Entry point
 int main()
@@ -313,11 +314,11 @@ int main()
     cout << "Enter value for BinarySearch\t:";
     cin >> iValue;
     iRet = pArraySearch->BinarySearch(iValue);
-    if(iRet == EMPTY)
+    if (iRet == EMPTY)
     {
         cout << "Array Is Empty\n";
     }
-    else if(iRet == NOTFOUND)
+    else if (iRet == NOTFOUND)
     {
         cout << "Element not present in Array\n";
     }

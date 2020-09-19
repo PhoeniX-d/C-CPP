@@ -60,6 +60,8 @@ public:
     void InsertionSort();
     void QuickSort();
     void Qsort(int, int);
+    void Merge_Sort(int, int);
+    void Merge(int, int, int);
     void MergeSort();
 }; // end of class ArraySort
 
@@ -271,6 +273,8 @@ void ArraySort::QuickSort() /* QuickSort()(ArraySort const *this) */
         cout << "Array Is Empty\n";
         return;
     }
+    /*  Taking pivot as first element , we can take last or middle also,
+    *   slight change in logic */
     Qsort(0, this->iSize - 1);
 
 } // end of QuickSort()
@@ -282,7 +286,7 @@ void ArraySort::QuickSort() /* QuickSort()(ArraySort const *this) */
 //  Returns     :void
 //  Description :Sorts elements using Qsort() technique
 //  Author      :Pranav Choudhary
-//  Date        :18 Sept 2020
+//  Date        :19 Sept 2020
 //
 ///////////////////////////////////////////////////////////////////
 /* Qsort()(ArraySort const *this, int, int) */
@@ -323,6 +327,113 @@ void ArraySort::Qsort(int iLow, int iHigh)
     }
 } // end of QuickSort()
 
+//////////////////////////////////////////////////////////////////
+//
+//  Name        :MergeSort
+//  Input       :void
+//  Returns     :void
+//  Description :Sorts elements using MergeSort() technique
+//  Author      :Pranav Choudhary
+//  Date        :19 Sept 2020
+//
+///////////////////////////////////////////////////////////////////
+/* MergeSort()(ArraySort const *this) */
+void ArraySort::MergeSort()
+{
+    if (this->iArr == NULL)
+    {
+        cout << "Array is Empty\n";
+        return;
+    }
+    Merge_Sort(0, this->iSize - 1);
+}
+
+//////////////////////////////////////////////////////////////////
+//
+//  Name        :Merge
+//  Input       :void
+//  Returns     :void
+//  Description :Sorts elements using MergeSort() technique
+//  Author      :Pranav Choudhary
+//  Date        :19 Sept 2020
+//
+///////////////////////////////////////////////////////////////////
+/* Merge()(ArraySort const *this, int, int, int) */
+void ArraySort::Merge(int iLow, int iMid, int iHigh)
+{
+    int i, j, k;
+    int iSize1 = iMid - iLow + 1;
+    int iSize2 = iHigh - iMid;
+
+    int *L = new int[iSize1], *R = new int[iSize2];
+
+    for (i = 0; i < iSize1; i++)
+    {
+        L[i] = this->iArr[iLow + i];
+    }
+    for (j = 0; j < iSize2; j++)
+    {
+        R[j] = this->iArr[iMid + 1 + j];
+    }
+    i = 0;
+    j = 0;
+    k = iLow;
+    while (i < iSize1 && j < iSize2)
+    {
+        if (L[i] <= R[j])
+        {
+            this->iArr[k] = L[i];
+            i++;
+        }
+        else
+        {
+            this->iArr[k] = R[j];
+            j++;
+        }
+        k++;
+    }
+
+    while (i < iSize1)
+    {
+        this->iArr[k] = L[i];
+        i++;
+        k++;
+    }
+
+    while (j < iSize2)
+    {
+        this->iArr[k] = R[j];
+        j++;
+        k++;
+    }
+
+    delete[] L;
+    delete[] R;
+}
+
+//////////////////////////////////////////////////////////////////
+//
+//  Name        :Merge_Sort
+//  Input       :void
+//  Returns     :void
+//  Description :Sorts elements using MergeSort() technique
+//  Author      :Pranav Choudhary
+//  Date        :19 Sept 2020
+//
+///////////////////////////////////////////////////////////////////
+/* Merge_Sort()(ArraySort const *this, int, int) */
+void ArraySort::Merge_Sort(int iLow, int iHigh)
+{
+    if (iLow < iHigh)
+    {
+        int iMid = iLow + (iHigh - iLow) / 2;
+        Merge_Sort(iLow, iMid);
+        Merge_Sort(iMid + 1, iHigh);
+        cout << iLow << iMid << iHigh << endl;
+        Merge(iLow, iMid, iHigh);
+    }
+}
+
 // Entry point
 int main()
 {
@@ -356,15 +467,21 @@ int main()
     cout << "\nArray elements\n";
     pArraySort->Display(); /* Display(pArraySort); */
 
-    /* InsertionSort : Performs InsertionSort on Array */
+    /* InsertionSort : Performs InsertionSort on Array
     cout << "----------------------------------------------------------------------\n";
-    pArraySort->InsertionSort(); /* InsertionSort(pArraySort)*/
+    pArraySort->InsertionSort(); /* InsertionSort(pArraySort)
     cout << "\nArray elements\n";
     pArraySort->Display(); /* Display(pArraySort); */
 
-    /* QuickSort : Performs QuickSort on Array */
+    /* QuickSort : Performs QuickSort on Array 
     cout << "----------------------------------------------------------------------\n";
-    pArraySort->QuickSort();
+    pArraySort->QuickSort();    /* QuickSort(pArraySort)
+    cout << "\nArray elements\n";
+    pArraySort->Display(); /* Display(pArraySort); */
+
+    /* MergeSort : Performs QuickSort on Array */
+    cout << "----------------------------------------------------------------------\n";
+    pArraySort->MergeSort(); /* MergeSort(pArraySort) */
     cout << "\nArray elements\n";
     pArraySort->Display(); /* Display(pArraySort); */
 
