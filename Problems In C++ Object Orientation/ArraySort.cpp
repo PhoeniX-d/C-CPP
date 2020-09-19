@@ -1,65 +1,67 @@
 // Header files
-#include<iostream>
+#include <iostream>
 using namespace std;
 
 /* Error Code */
-#define     NOTFOUND        0x11111111
-#define     EMPTY           0x11111110
+#define NOTFOUND 0x11111111
+#define EMPTY 0x11111110
 
 class Array
 {
-    protected:
-        int *iArr;
-        int iSize;
-    
-    public:
-        Array(int i = 10)       /* Parameterized constructor:Memory allocation */
+protected:
+    int *iArr;
+    int iSize;
+
+public:
+    Array(int i = 10) /* Parameterized constructor:Memory allocation */
+    {
+        if (i < 0)
+            i = -i;
+
+        this->iSize = i;
+        this->iArr = new int[this->iSize];
+    }
+
+    Array(Array &Ref) /* Copy constructor : Memory content copy */
+    {
+        /* First allocate memory */
+        this->iSize = Ref.iSize;
+        this->iArr = new int[this->iSize];
+
+        /* Now copying contents */
+        for (int i = 0; i < this->iSize; i++)
         {
-            if(i < 0)
-                i = -i;
-
-            this->iSize = i;
-            this->iArr = new int[this->iSize];
+            this->iArr[i] = Ref.iArr[i];
         }
+    }
 
-        Array(Array &Ref)       /* Copy constructor : Memory content copy */
-        {
-            /* First allocate memory */
-            this->iSize = Ref.iSize;
-            this->iArr = new int[this->iSize];
+    ~Array() /* Destructor: Memory deallocation */
+    {
+        delete[] this->iArr;
+    }
 
-            /* Now copying contents */
-            for (int i = 0; i < this->iSize; i++)
-            {
-                this->iArr[i] = Ref.iArr[i];
-            }
-        }
-
-        ~Array()                /* Destructor: Memory deallocation */
-        {
-            delete[] this->iArr;
-        }
-
-        /* Utility functions */
-        inline void Accept();
-        inline void Display();
-};// end of class Array
+    /* Utility functions */
+    inline void Accept();
+    inline void Display();
+}; // end of class Array
 
 // class ArraySort
-class ArraySort:public Array
+class ArraySort : public Array
 {
-    public:
-        ArraySort(int i = 7):Array(i)     /* Base Member Initialization */
-        {}
+public:
+    ArraySort(int i = 7) : Array(i) /* Base Member Initialization */
+    {
+    }
 
-        /* Utility functions */
-        void BubbleSort();
-        void BubbleSortX();
-        void SelectionSort();
-        void InsertionSort();
-        void QuickSort();
-        void MergeSort();
-};// end of class ArraySort
+    /* Utility functions */
+    void BubbleSort();
+    void BubbleSortX();
+    void SelectionSort();
+    void InsertionSort();
+    void QuickSort();
+    void Qsort(int, int);
+    void MergeSort();
+}; // end of class ArraySort
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -71,14 +73,14 @@ class ArraySort:public Array
 //  Date        :17 Sept 2020
 //
 ///////////////////////////////////////////////////////////////////
-void Array::Accept()    /* Accept(const Array *this) */
+void Array::Accept() /* Accept(const Array *this) */
 {
-    if(this->iArr == NULL)
+    if (this->iArr == NULL)
     {
         cout << "Array is empty\n";
         return;
     }
-    
+
     for (int i = 0; i < this->iSize; i++)
     {
         cin >> this->iArr[i];
@@ -95,9 +97,9 @@ void Array::Accept()    /* Accept(const Array *this) */
 //  Date        :17 Sept 2020
 //
 ///////////////////////////////////////////////////////////////////
-void Array::Display()   /* Display(const Array *this) */
+void Array::Display() /* Display(const Array *this) */
 {
-    if(this->iArr == NULL)
+    if (this->iArr == NULL)
     {
         cout << "Array is empty\n";
         return;
@@ -105,7 +107,7 @@ void Array::Display()   /* Display(const Array *this) */
     cout << "[ ";
     for (int i = 0; i < this->iSize; i++)
     {
-       cout << this->iArr[i] << " ";
+        cout << this->iArr[i] << " ";
     }
     cout << "]" << endl;
 }
@@ -120,9 +122,9 @@ void Array::Display()   /* Display(const Array *this) */
 //  Date        :17 Sept 2020
 //
 ///////////////////////////////////////////////////////////////////
-void ArraySort::BubbleSort()       /* BubbleSort(ArraySort const *this) */
+void ArraySort::BubbleSort() /* BubbleSort(ArraySort const *this) */
 {
-    if(NULL == this->iArr)
+    if (NULL == this->iArr)
     {
         cout << "Array Is Empty\n";
         return;
@@ -132,7 +134,7 @@ void ArraySort::BubbleSort()       /* BubbleSort(ArraySort const *this) */
     {
         for (i = 0; i < this->iSize - iPass; i++)
         {
-            if(this->iArr[i] > this->iArr[i + 1])
+            if (this->iArr[i] > this->iArr[i + 1])
             {
                 iTemp = this->iArr[i];
                 this->iArr[i] = this->iArr[i + 1];
@@ -140,7 +142,7 @@ void ArraySort::BubbleSort()       /* BubbleSort(ArraySort const *this) */
             }
         }
     }
-}// end of BubbleSort()
+} // end of BubbleSort()
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -153,9 +155,9 @@ void ArraySort::BubbleSort()       /* BubbleSort(ArraySort const *this) */
 //  Date        :17 Sept 2020
 //
 ///////////////////////////////////////////////////////////////////
-void ArraySort::BubbleSortX()       /* BubbleSortX(ArraySort const *this) */
+void ArraySort::BubbleSortX() /* BubbleSortX(ArraySort const *this) */
 {
-    if(NULL == this->iArr)
+    if (NULL == this->iArr)
     {
         cout << "Array Is Empty\n";
         return;
@@ -167,7 +169,7 @@ void ArraySort::BubbleSortX()       /* BubbleSortX(ArraySort const *this) */
         bFlag = false;
         for (i = 0; i < this->iSize - iPass; i++)
         {
-            if(this->iArr[i] > this->iArr[i + 1])
+            if (this->iArr[i] > this->iArr[i + 1])
             {
                 iTemp = this->iArr[i];
                 this->iArr[i] = this->iArr[i + 1];
@@ -175,12 +177,12 @@ void ArraySort::BubbleSortX()       /* BubbleSortX(ArraySort const *this) */
                 bFlag = true;
             }
         }
-        if(bFlag == false)
+        if (bFlag == false)
         {
             break;
         }
     }
-}// end of BubbleSortX
+} // end of BubbleSortX
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -193,9 +195,9 @@ void ArraySort::BubbleSortX()       /* BubbleSortX(ArraySort const *this) */
 //  Date        :17 Sept 2020
 //
 ///////////////////////////////////////////////////////////////////
-void ArraySort::SelectionSort()       /* SelectionSort(ArraySort const *this) */
+void ArraySort::SelectionSort() /* SelectionSort(ArraySort const *this) */
 {
-    if(NULL == this->iArr)
+    if (NULL == this->iArr)
     {
         cout << "Array Is Empty\n";
         return;
@@ -206,19 +208,19 @@ void ArraySort::SelectionSort()       /* SelectionSort(ArraySort const *this) */
         iMin = i;
         for (j = i + 1; j < this->iSize; j++)
         {
-            if(this->iArr[j] < this->iArr[iMin])
+            if (this->iArr[j] < this->iArr[iMin])
             {
                 iMin = j;
             }
         }
-        if(i != iMin)
+        if (i != iMin)
         {
             iTemp = this->iArr[i];
             this->iArr[i] = this->iArr[iMin];
             this->iArr[iMin] = iTemp;
         }
     }
-}// end of SelectionSort
+} // end of SelectionSort
 
 //////////////////////////////////////////////////////////////////
 //
@@ -230,9 +232,9 @@ void ArraySort::SelectionSort()       /* SelectionSort(ArraySort const *this) */
 //  Date        :17 Sept 2020
 //
 ///////////////////////////////////////////////////////////////////
-void ArraySort::InsertionSort()       /* InsertionSort(ArraySort const *this) */
+void ArraySort::InsertionSort() /* InsertionSort(ArraySort const *this) */
 {
-    if(NULL == this->iArr)
+    if (NULL == this->iArr)
     {
         cout << "Array Is Empty\n";
         return;
@@ -243,14 +245,83 @@ void ArraySort::InsertionSort()       /* InsertionSort(ArraySort const *this) */
         iKey = this->iArr[i];
         j = i - 1;
         /* Iterate array to find out position for key */
-        while((j >= 0) && (this->iArr[j] > iKey))
+        while ((j >= 0) && (this->iArr[j] > iKey))
         {
             this->iArr[j + 1] = this->iArr[j];
             j--;
         }
-        this->iArr[j + 1] = iKey;      /* store selected element at desired position */
+        this->iArr[j + 1] = iKey; /* store selected element at desired position */
     }
-}// end of InsertionSort
+} // end of InsertionSort
+
+//////////////////////////////////////////////////////////////////
+//
+//  Name        :QuickSort
+//  Input       :void
+//  Returns     :void
+//  Description :Sorts elements using QuickSort() technique
+//  Author      :Pranav Choudhary
+//  Date        :18 Sept 2020
+//
+///////////////////////////////////////////////////////////////////
+void ArraySort::QuickSort() /* QuickSort()(ArraySort const *this) */
+{
+    if (NULL == this->iArr)
+    {
+        cout << "Array Is Empty\n";
+        return;
+    }
+    Qsort(0, this->iSize - 1);
+
+} // end of QuickSort()
+
+//////////////////////////////////////////////////////////////////
+//
+//  Name        :Qsort
+//  Input       :void
+//  Returns     :void
+//  Description :Sorts elements using Qsort() technique
+//  Author      :Pranav Choudhary
+//  Date        :18 Sept 2020
+//
+///////////////////////////////////////////////////////////////////
+/* Qsort()(ArraySort const *this, int, int) */
+void ArraySort::Qsort(int iLow, int iHigh)
+{
+    int iPivot = 0, i = 0, j = 0, iTemp = 0;
+    if (iLow < iHigh)
+    {
+        i = iLow;
+        j = iHigh;
+        iPivot = this->iArr[iLow];
+
+        while (i < j)
+        {
+
+            while (this->iArr[i] <= iPivot && i < iHigh)
+            {
+                i++;
+            }
+            while (this->iArr[j] > iPivot)
+            {
+                j--;
+            }
+
+            if (i < j)
+            {
+                iTemp = this->iArr[i];
+                this->iArr[i] = this->iArr[j];
+                this->iArr[j] = iTemp;
+            }
+        }
+        iTemp = this->iArr[iLow];
+        this->iArr[iLow] = this->iArr[j];
+        this->iArr[j] = iTemp;
+
+        Qsort(iLow, j - 1);
+        Qsort(j + 1, iHigh);
+    }
+} // end of QuickSort()
 
 // Entry point
 int main()
@@ -287,7 +358,13 @@ int main()
 
     /* InsertionSort : Performs InsertionSort on Array */
     cout << "----------------------------------------------------------------------\n";
-    pArraySort->InsertionSort();    /* InsertionSort(pArraySort)*/
+    pArraySort->InsertionSort(); /* InsertionSort(pArraySort)*/
+    cout << "\nArray elements\n";
+    pArraySort->Display(); /* Display(pArraySort); */
+
+    /* QuickSort : Performs QuickSort on Array */
+    cout << "----------------------------------------------------------------------\n";
+    pArraySort->QuickSort();
     cout << "\nArray elements\n";
     pArraySort->Display(); /* Display(pArraySort); */
 
