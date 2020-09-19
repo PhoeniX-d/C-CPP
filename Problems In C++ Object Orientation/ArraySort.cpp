@@ -269,19 +269,25 @@ int main()
 
     /* BubbleSort : Performs BubbleSort on Array
     cout << "----------------------------------------------------------------------\n";
-    pArraySort->BubbleSort();
+    pArraySort->BubbleSort();   /* BubbleSort(pArratSort); 
     cout << "\nArray elements\n";
     pArraySort->Display(); /* Display(pArraySort); */
 
     /* BubbleSortX : Performs BubbleSort on Array
     cout << "----------------------------------------------------------------------\n";
-    pArraySort->BubbleSortX();
+    pArraySort->BubbleSortX();  /* BubbleSortX(pArratSort); 
     cout << "\nArray elements\n";
     pArraySort->Display(); /* Display(pArraySort); */
 
-     /* BubbleSortX : Performs BubbleSort on Array */
+    /* SelectionSort : Performs SelectionSort on Array 
     cout << "----------------------------------------------------------------------\n";
-    pArraySort->SelectionSort();
+    pArraySort->SelectionSort();    /* SelectionSort(pArratSort); 
+    cout << "\nArray elements\n";
+    pArraySort->Display(); /* Display(pArraySort); */
+
+    /* InsertionSort : Performs InsertionSort on Array */
+    cout << "----------------------------------------------------------------------\n";
+    pArraySort->InsertionSort();    /* InsertionSort(pArraySort)*/
     cout << "\nArray elements\n";
     pArraySort->Display(); /* Display(pArraySort); */
 
