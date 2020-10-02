@@ -35,6 +35,17 @@ int main(int argc, char* argv[])
     return 0;
 }
 
+/////////////////////////////////////////////////////////
+//
+//  Name        :ReadInfo
+//  Input       :char[]
+//  Returns     :BOOL
+//  Description :Calculates addition of marks of students 
+//               stored in a file
+//  Author      :Pranav Choudhary
+//  Last Update :2 Oct 2020 by Pranav Choudhary
+//
+///////////////////////////////////////////////////////////
 BOOL ReadInfo(char* szFilename)
 {
     if(szFilename == NULL)

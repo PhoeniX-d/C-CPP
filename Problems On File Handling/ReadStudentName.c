@@ -1,5 +1,5 @@
 /* 
-*   Program to read student marks from a file
+*   Program to read student names from a file
 */
 
 #include<stdio.h>
@@ -35,6 +35,16 @@ int main(int argc, char* argv[])
     return 0;
 }
 
+//////////////////////////////////////////////////////////
+//
+//  Name        :ReadInfo
+//  Input       :char[]
+//  Returns     :BOOL
+//  Description :Reads names of students stored in a file
+//  Author      :Pranav Choudhary
+//  Last Update :2 Oct 2020 by Pranav Choudhary
+//
+///////////////////////////////////////////////////////////
 BOOL ReadInfo(char* szFilename)
 {
     if(szFilename == NULL)
