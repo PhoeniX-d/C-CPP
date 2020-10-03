@@ -105,7 +105,7 @@ BOOL WriteInfo(char *szFilename, PSTUDENT pstudent, int iSize)
         return FALSE;
     }
     int fd = 0;
-    if((fd = creat(szFilename, 0666)) == -1)
+    if((fd = open(szFilename, O_APPEND | O_WRONLY)) == -1)
     {
         printf("Unable to creat file\n");
         return FALSE;
