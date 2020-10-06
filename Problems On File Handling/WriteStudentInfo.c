@@ -42,7 +42,7 @@ int main()
     }
     while(iRecords != i)
     {
-        printf("\n---------- Enter details for redcord %d ----------\n", i + 1);
+        printf("\n---------- Enter details for record %d ----------\n", i + 1);
         if((GetInfo(&student[i])) == FALSE)
         {
             return -1;
@@ -107,7 +107,7 @@ BOOL WriteInfo(char *szFilename, PSTUDENT pstudent, int iSize)
     int fd = 0;
     if((fd = open(szFilename, O_APPEND | O_WRONLY)) == -1)
     {
-        printf("Unable to creat file\n");
+        printf("Unable to creat / open file\n");
         return FALSE;
     }
     write(fd, pstudent, sizeof(STUDENT) * iSize);
