@@ -28,6 +28,12 @@ int main()
     if (iCol < 0)
         iCol = -iCol;
 
+    if (iRow != iCol)
+    {
+        printf("Number of Rows should match with number of Columns\n");
+        return -1;
+    }
+
     iArr = (int **)malloc(sizeof(int *) * iRow);
     if (iArr == NULL)
     {
@@ -108,6 +114,12 @@ BOOL IsBinary(int *iArr[], int iRow, int iCol)
         iRow = -iRow;
     if (iCol < 0)
         iCol = -iCol;
+
+    if (iRow != iCol)
+    {
+        printf("Number of Rows should match with number of Columns\n");
+        return FALSE;
+    }
 
     int i = 0, j = 0;
     BOOL bFlag = TRUE;

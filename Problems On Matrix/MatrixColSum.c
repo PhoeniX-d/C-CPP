@@ -118,4 +118,5 @@ void ColumnSum(int *iArr[], int iRow, int iCol)
     {
         printf("%-3d", iColSum[i]);
     }
+    free(iColSum);
 }
