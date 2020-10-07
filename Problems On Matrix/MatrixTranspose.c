@@ -1,20 +1,15 @@
 /*
-*   Program to check whether matrix is Identity matrix(contains only 0's and 1's)
-*   or not
+*   Write a program which accept matrix from user and display transpose of the
+*   matrix. 
 */
-#include <stdio.h>
-#include <stdlib.h>
-#define TRUE 1
-#define FALSE 0
-typedef int BOOL;
+#include<stdio.h>
+#include<stdlib.h>
 
-BOOL IsIdentity(int **, int, int);
+void Transpose(int*[], int, int);
 
 int main()
 {
-    // Code
     int iRow = 0, iCol = 0, i = 0, j = 0;
-    BOOL bRet = FALSE;
     int **iArr = NULL;
 
     printf("Enter the total number of rows in a Matrix\t:");
@@ -33,6 +28,7 @@ int main()
         printf("Number of Rows should match with number of Columns\n");
         return -1;
     }
+
     iArr = (int **)malloc(sizeof(int *) * iRow);
     if (iArr == NULL)
     {
@@ -61,7 +57,7 @@ int main()
         }
     }
 
-    printf("Matrix\n");
+    printf("\nMatrix\n");
     for (i = 0; i < iRow; i++)
     {
         for (j = 0; j < iCol; j++)
@@ -72,15 +68,7 @@ int main()
     }
 
     // Usage
-    bRet = IsIdentity(iArr, iRow, iCol);
-    if (bRet == TRUE)
-    {
-        printf("\nEnterd Matrix is an Identity Matrix\n");
-    }
-    else
-    {
-        printf("\nEnterd Matrix is not an Identity Matrix\n");
-    }
+    Transpose(iArr, iRow, iCol);
 
     // Deallocation
     for (i = 0; i < iRow; i++)
@@ -88,26 +76,26 @@ int main()
         free(iArr[i]);
     }
     free(iArr);
+
     return (0);
 }
 
 /////////////////////////////////////////////////////////////
 //
-//  Name        :IsIdentity
+//  Name        :Transpose
 //  Input       :int[][], int, int
 //  Returns     :int
-//  Description :Checks whether entered matrix is Identity
-//               matrix or not
+//  Description :Displays transpose of a matrix
 //  Author      :Pranav Choudhary
 //  Date        :7 Oct 2020
 //
 /////////////////////////////////////////////////////////////
-BOOL IsIdentity(int *iArr[], int iRow, int iCol)
+void Transpose(int *iArr[], int iRow, int iCol)
 {
-    if (iArr == NULL)
+     if (iArr == NULL)
     {
         printf("Invalid Inputs\n");
-        return FALSE;
+        return;
     }
     if (iRow < 0)
         iRow = -iRow;
@@ -117,26 +105,48 @@ BOOL IsIdentity(int *iArr[], int iRow, int iCol)
     if (iRow != iCol)
     {
         printf("Number of Rows should match with number of Columns\n");
-        return FALSE;
+        return;
     }
 
     int i = 0, j = 0;
-    BOOL bFlag = TRUE;
-    for (i = 0; i < iRow && bFlag == TRUE; i < i++)
+    /* Way 1 
+    int **iArr2 = NULL;
+    iArr2 = (int **)malloc(sizeof(int *) * iRow);
+    if(iArr2 == NULL)
+    {
+        printf("Unable to allocate memory\n");
+        return;
+    }
+    for (i = 0; i < iRow; i++)
+    {
+        iArr2[i] = (int *)malloc(sizeof(int) * iCol);
+        if(iArr2[i] == NULL)
+        {
+            printf("Unable to allocate memory\n");
+            return;
+        }
+        for (j = 0; j < iCol; j++)
+        {
+            iArr2[i][j] = iArr[j][i];
+        }
+    }
+    */
+    //Display Transpose
+    printf("Transpose of matrix is\n");
+    for (i = 0; i < iRow; i++)
     {
         for (j = 0; j < iCol; j++)
         {
-            if ((i == j && iArr[i][j] != 1) || (i != j && iArr[i][j] != 0))
-            {
-                bFlag = FALSE;
-                break;
-            }
+            //printf("%-3d", iArr2[i][j]);
+            printf("%-3d", iArr[j][i]);
         }
+        printf("\n");
     }
 
-    if (bFlag == FALSE)
+    /* Deallocate
+    for (i = 0; i < iRow; i++)
     {
-        return FALSE;
+        free(iArr2[i]);
     }
-    return TRUE;
+    free(iArr2);*/
 }

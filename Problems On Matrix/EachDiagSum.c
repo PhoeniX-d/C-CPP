@@ -1,20 +1,14 @@
 /*
-*   Program to check whether matrix is Identity matrix(contains only 0's and 1's)
-*   or not
+*   Program to perform addition of the each diagonal els of matrix
 */
 #include <stdio.h>
 #include <stdlib.h>
-#define TRUE 1
-#define FALSE 0
-typedef int BOOL;
 
-BOOL IsIdentity(int **, int, int);
+int* EachDiagSum(int **, int, int);
 
 int main()
 {
-    // Code
-    int iRow = 0, iCol = 0, i = 0, j = 0;
-    BOOL bRet = FALSE;
+    int iRow = 0, iCol = 0, i = 0, j = 0, *iRet = NULL;
     int **iArr = NULL;
 
     printf("Enter the total number of rows in a Matrix\t:");
@@ -31,6 +25,13 @@ int main()
     if (iRow != iCol)
     {
         printf("Number of Rows should match with number of Columns\n");
+        return -1;
+    }
+
+    iRet = (int *)malloc(sizeof(int) * (iRow * 2 - 1));
+    if(iRet == NULL)
+    {
+        printf("Unable to allocate memory\n");
         return -1;
     }
     iArr = (int **)malloc(sizeof(int *) * iRow);
@@ -61,7 +62,7 @@ int main()
         }
     }
 
-    printf("Matrix\n");
+    printf("\nMatrix\n");
     for (i = 0; i < iRow; i++)
     {
         for (j = 0; j < iCol; j++)
@@ -72,14 +73,15 @@ int main()
     }
 
     // Usage
-    bRet = IsIdentity(iArr, iRow, iCol);
-    if (bRet == TRUE)
+    iRet = EachDiagSum(iArr, iRow, iCol);
+    printf("\nSummation of Each Diagonal elements of is:\n");
+    if(iRet == NULL)
     {
-        printf("\nEnterd Matrix is an Identity Matrix\n");
+        return -1;
     }
-    else
+    for (i = 0; i < (iRow * 2 - 1); i++)
     {
-        printf("\nEnterd Matrix is not an Identity Matrix\n");
+        printf("%-3d", iRet[i]);
     }
 
     // Deallocation
@@ -87,27 +89,28 @@ int main()
     {
         free(iArr[i]);
     }
+    free(iRet);
     free(iArr);
+
     return (0);
 }
 
-/////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
 //
-//  Name        :IsIdentity
+//  Name        :EachDiagSum
 //  Input       :int[][], int, int
-//  Returns     :int
-//  Description :Checks whether entered matrix is Identity
-//               matrix or not
+//  Returns     :int*
+//  Description :Returns addition of the each diagonal els of matrix
 //  Author      :Pranav Choudhary
 //  Date        :7 Oct 2020
 //
-/////////////////////////////////////////////////////////////
-BOOL IsIdentity(int *iArr[], int iRow, int iCol)
+////////////////////////////////////////////////////////////////////
+int* EachDiagSum(int *iArr[], int iRow, int iCol)
 {
     if (iArr == NULL)
     {
         printf("Invalid Inputs\n");
-        return FALSE;
+        return 0;
     }
     if (iRow < 0)
         iRow = -iRow;
@@ -117,26 +120,37 @@ BOOL IsIdentity(int *iArr[], int iRow, int iCol)
     if (iRow != iCol)
     {
         printf("Number of Rows should match with number of Columns\n");
-        return FALSE;
+        return NULL;
     }
 
-    int i = 0, j = 0;
-    BOOL bFlag = TRUE;
-    for (i = 0; i < iRow && bFlag == TRUE; i < i++)
+    int i = 0, j = 0, *iSum = NULL, s = 0, x = 0, y = 0;
+    iSum = (int *)malloc(sizeof(int) * (iRow * 2 - 1));
+    if(iSum == NULL)
     {
-        for (j = 0; j < iCol; j++)
+        printf("Unable to allocate memory\n");
+        return NULL;
+    }
+    for (i = 0; i < (iRow * 2 - 1); i++)
+    {
+        iSum[i] = 0;
+    }
+
+    /* Calculate Summation of diagonals of Lower trangular matrix */
+    for (i = iRow - 1, s = 0; i >= 0; i--, s++)
+    {
+        for (j = 0, x = i; j < iCol - i && x < iRow; j++, x++)
         {
-            if ((i == j && iArr[i][j] != 1) || (i != j && iArr[i][j] != 0))
-            {
-                bFlag = FALSE;
-                break;
-            }
+            iSum[s] = iSum[s] + iArr[x][j];
         }
     }
 
-    if (bFlag == FALSE)
+    /* Calculate Summation of digonals of Upper trangular matrix */
+    for (j = 1; j < iCol; j++, s++)
     {
-        return FALSE;
+        for (i = 0, y = j; i < iRow - j && y < iCol; i++, y++)
+        {
+            iSum[s] = iSum[s] + iArr[i][y];
+        }
     }
-    return TRUE;
+    return iSum;
 }

@@ -22,6 +22,12 @@ int main()
     if (iCol < 0)
         iCol = -iCol;
 
+    if (iRow != iCol)
+    {
+        printf("Number of Rows should match with number of Columns\n");
+        return -1;
+    }
+
     iArr = (int **)malloc(sizeof(int *) * iRow);
     if (iArr == NULL)
     {
@@ -94,6 +100,12 @@ int DiagSum(int *iArr[], int iRow, int iCol)
         iRow = -iRow;
     if (iCol < 0)
         iCol = -iCol;
+
+    if (iRow != iCol)
+    {
+        printf("Number of Rows should match with number of Columns\n");
+        return -1;
+    }
 
     int i = 0, j = 0, iSum = 0;
     for (i = 0; i < iRow; i < i++)

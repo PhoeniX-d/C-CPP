@@ -123,7 +123,7 @@ BOOL IsBinary(int *iArr[], int iRow, int iCol)
 
     int i = 0, j = 0;
     BOOL bFlag = TRUE;
-    for (i = 0; i < iRow; i < i++)
+    for (i = 0; i < iRow && bFlag == TRUE; i < i++)
     {
         for (j = 0; j < iCol; j++)
         {
@@ -134,10 +134,5 @@ BOOL IsBinary(int *iArr[], int iRow, int iCol)
             }
         }
     }
-
-    if (bFlag == FALSE)
-    {
-        return FALSE;
-    }
-    return TRUE;
+    return bFlag;
 }

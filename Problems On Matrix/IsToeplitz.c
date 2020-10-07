@@ -1,5 +1,5 @@
 /*
-*   Program to check whether matrix is Identity matrix(contains only 0's and 1's)
+*   Program to check whether matrix is Toeplitz matrix(contains maximum 0's than 1's)
 *   or not
 */
 #include <stdio.h>
@@ -8,7 +8,7 @@
 #define FALSE 0
 typedef int BOOL;
 
-BOOL IsIdentity(int **, int, int);
+BOOL IsToeplitz(int **, int, int);
 
 int main()
 {
@@ -33,6 +33,7 @@ int main()
         printf("Number of Rows should match with number of Columns\n");
         return -1;
     }
+
     iArr = (int **)malloc(sizeof(int *) * iRow);
     if (iArr == NULL)
     {
@@ -72,14 +73,14 @@ int main()
     }
 
     // Usage
-    bRet = IsIdentity(iArr, iRow, iCol);
+    bRet = IsToeplitz(iArr, iRow, iCol);
     if (bRet == TRUE)
     {
-        printf("\nEnterd Matrix is an Identity Matrix\n");
+        printf("\nEnterd Matrix is a Toeplitz Matrix\n");
     }
     else
     {
-        printf("\nEnterd Matrix is not an Identity Matrix\n");
+        printf("\nEnterd Matrix is not a Toeplitz Matrix\n");
     }
 
     // Deallocation
@@ -93,16 +94,16 @@ int main()
 
 /////////////////////////////////////////////////////////////
 //
-//  Name        :IsIdentity
+//  Name        :IsToeplitz
 //  Input       :int[][], int, int
 //  Returns     :int
-//  Description :Checks whether entered matrix is Identity
+//  Description :Checks whether entered matrix is Toeplitz
 //               matrix or not
 //  Author      :Pranav Choudhary
 //  Date        :7 Oct 2020
 //
 /////////////////////////////////////////////////////////////
-BOOL IsIdentity(int *iArr[], int iRow, int iCol)
+BOOL IsToeplitz(int *iArr[], int iRow, int iCol)
 {
     if (iArr == NULL)
     {
@@ -117,26 +118,22 @@ BOOL IsIdentity(int *iArr[], int iRow, int iCol)
     if (iRow != iCol)
     {
         printf("Number of Rows should match with number of Columns\n");
-        return FALSE;
+        return -1;
     }
 
     int i = 0, j = 0;
     BOOL bFlag = TRUE;
-    for (i = 0; i < iRow && bFlag == TRUE; i < i++)
+
+    for (i = 0; i < (iRow - 1) && bFlag == TRUE; i < i++)
     {
-        for (j = 0; j < iCol; j++)
+        for (j = 0; j < (iCol - 1); j++)
         {
-            if ((i == j && iArr[i][j] != 1) || (i != j && iArr[i][j] != 0))
+            if (iArr[i][j] != iArr[i + 1][j + 1])
             {
                 bFlag = FALSE;
                 break;
             }
         }
     }
-
-    if (bFlag == FALSE)
-    {
-        return FALSE;
-    }
-    return TRUE;
+    return bFlag;
 }

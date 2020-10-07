@@ -93,7 +93,7 @@ int main()
 //
 //  Name        :RowsSum
 //  Input       :int[][], int, int
-//  Returns     :int
+//  Returns     :int*
 //  Description :Adds each row of matrix seperately
 //  Author      :Pranav Choudhary
 //  Date        :7 Oct 2020

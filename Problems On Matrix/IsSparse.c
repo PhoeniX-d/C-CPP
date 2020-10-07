@@ -1,5 +1,5 @@
 /*
-*   Program to check whether matrix is Identity matrix(contains only 0's and 1's)
+*   Program to check whether matrix is Sparse matrix(contains maximum 0's than 1's)
 *   or not
 */
 #include <stdio.h>
@@ -8,7 +8,7 @@
 #define FALSE 0
 typedef int BOOL;
 
-BOOL IsIdentity(int **, int, int);
+BOOL IsSparse(int **, int, int);
 
 int main()
 {
@@ -28,11 +28,6 @@ int main()
     if (iCol < 0)
         iCol = -iCol;
 
-    if (iRow != iCol)
-    {
-        printf("Number of Rows should match with number of Columns\n");
-        return -1;
-    }
     iArr = (int **)malloc(sizeof(int *) * iRow);
     if (iArr == NULL)
     {
@@ -72,14 +67,14 @@ int main()
     }
 
     // Usage
-    bRet = IsIdentity(iArr, iRow, iCol);
+    bRet = IsSparse(iArr, iRow, iCol);
     if (bRet == TRUE)
     {
-        printf("\nEnterd Matrix is an Identity Matrix\n");
+        printf("\nEnterd Matrix is a Sparse Matrix\n");
     }
     else
     {
-        printf("\nEnterd Matrix is not an Identity Matrix\n");
+        printf("\nEnterd Matrix is not a Sparse Matrix\n");
     }
 
     // Deallocation
@@ -93,16 +88,16 @@ int main()
 
 /////////////////////////////////////////////////////////////
 //
-//  Name        :IsIdentity
+//  Name        :IsSparse
 //  Input       :int[][], int, int
 //  Returns     :int
-//  Description :Checks whether entered matrix is Identity
+//  Description :Checks whether entered matrix is Sparse
 //               matrix or not
 //  Author      :Pranav Choudhary
 //  Date        :7 Oct 2020
 //
 /////////////////////////////////////////////////////////////
-BOOL IsIdentity(int *iArr[], int iRow, int iCol)
+BOOL IsSparse(int *iArr[], int iRow, int iCol)
 {
     if (iArr == NULL)
     {
@@ -114,29 +109,25 @@ BOOL IsIdentity(int *iArr[], int iRow, int iCol)
     if (iCol < 0)
         iCol = -iCol;
 
-    if (iRow != iCol)
-    {
-        printf("Number of Rows should match with number of Columns\n");
-        return FALSE;
-    }
-
-    int i = 0, j = 0;
+    int i = 0, j = 0, iExp = 0, iRem = 0;
+    iExp = (iRow * iCol) / 2;
+    iRem = (iRow * iCol);
     BOOL bFlag = TRUE;
-    for (i = 0; i < iRow && bFlag == TRUE; i < i++)
+    for (i = 0; i < iRow && iExp >= 0 && iRem > iExp; i < i++)
     {
-        for (j = 0; j < iCol; j++)
+        for (j = 0; j < iCol && iExp >= 0 && iRem > iExp; j++)
         {
-            if ((i == j && iArr[i][j] != 1) || (i != j && iArr[i][j] != 0))
+            if (iArr[i][j] == 0)
             {
-                bFlag = FALSE;
-                break;
+                iExp = iExp - 1;
             }
+            iRem = iRem - 1;
         }
     }
 
-    if (bFlag == FALSE)
+    if (iExp == -1)
     {
-        return FALSE;
+        return TRUE;
     }
-    return TRUE;
+    return FALSE;
 }

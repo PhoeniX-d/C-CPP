@@ -1,20 +1,14 @@
 /*
-*   Program to check whether matrix is Identity matrix(contains only 0's and 1's)
-*   or not
+*   Write a program which accept matrix and reverse the contents of each row. 
 */
-#include <stdio.h>
-#include <stdlib.h>
-#define TRUE 1
-#define FALSE 0
-typedef int BOOL;
+#include<stdio.h>
+#include<stdlib.h>
 
-BOOL IsIdentity(int **, int, int);
+void ReverseRows(int*[], int, int);
 
 int main()
 {
-    // Code
     int iRow = 0, iCol = 0, i = 0, j = 0;
-    BOOL bRet = FALSE;
     int **iArr = NULL;
 
     printf("Enter the total number of rows in a Matrix\t:");
@@ -28,11 +22,6 @@ int main()
     if (iCol < 0)
         iCol = -iCol;
 
-    if (iRow != iCol)
-    {
-        printf("Number of Rows should match with number of Columns\n");
-        return -1;
-    }
     iArr = (int **)malloc(sizeof(int *) * iRow);
     if (iArr == NULL)
     {
@@ -61,7 +50,7 @@ int main()
         }
     }
 
-    printf("Matrix\n");
+    printf("\nMatrix\n");
     for (i = 0; i < iRow; i++)
     {
         for (j = 0; j < iCol; j++)
@@ -72,14 +61,16 @@ int main()
     }
 
     // Usage
-    bRet = IsIdentity(iArr, iRow, iCol);
-    if (bRet == TRUE)
+    ReverseRows(iArr, iRow, iCol);
+
+    printf("\nAfter reverse rows Matrix becomes:\n");
+    for (i = 0; i < iRow; i++)
     {
-        printf("\nEnterd Matrix is an Identity Matrix\n");
-    }
-    else
-    {
-        printf("\nEnterd Matrix is not an Identity Matrix\n");
+        for (j = 0; j < iCol; j++)
+        {
+            printf("%-3d", iArr[i][j]);
+        }
+        printf("\n");
     }
 
     // Deallocation
@@ -88,55 +79,40 @@ int main()
         free(iArr[i]);
     }
     free(iArr);
+
     return (0);
 }
 
 /////////////////////////////////////////////////////////////
 //
-//  Name        :IsIdentity
+//  Name        :ReverseRows
 //  Input       :int[][], int, int
 //  Returns     :int
-//  Description :Checks whether entered matrix is Identity
-//               matrix or not
+//  Description :Reverses the contents of each row
 //  Author      :Pranav Choudhary
 //  Date        :7 Oct 2020
 //
 /////////////////////////////////////////////////////////////
-BOOL IsIdentity(int *iArr[], int iRow, int iCol)
+void ReverseRows(int *iArr[], int iRow, int iCol)
 {
-    if (iArr == NULL)
+     if (iArr == NULL)
     {
         printf("Invalid Inputs\n");
-        return FALSE;
+        return;
     }
     if (iRow < 0)
         iRow = -iRow;
     if (iCol < 0)
         iCol = -iCol;
 
-    if (iRow != iCol)
+    int i = 0, j = 0, iTemp = 0;
+    for (i = 0; i < iRow; i++)
     {
-        printf("Number of Rows should match with number of Columns\n");
-        return FALSE;
-    }
-
-    int i = 0, j = 0;
-    BOOL bFlag = TRUE;
-    for (i = 0; i < iRow && bFlag == TRUE; i < i++)
-    {
-        for (j = 0; j < iCol; j++)
+        for (j = 0; j < iCol / 2; j++)
         {
-            if ((i == j && iArr[i][j] != 1) || (i != j && iArr[i][j] != 0))
-            {
-                bFlag = FALSE;
-                break;
-            }
+            iTemp = iArr[i][j];
+            iArr[i][j] = iArr[i][iCol - j - 1];
+            iArr[i][iCol - j - 1] = iTemp;
         }
     }
-
-    if (bFlag == FALSE)
-    {
-        return FALSE;
-    }
-    return TRUE;
 }
