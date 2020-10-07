@@ -1,5 +1,5 @@
 /*
-*   Program to perform seperate addition of the Matrix rows
+*   Program to swaps contents of consecutive rows of a Matrix
 */
 #include <stdio.h>
 #include <stdlib.h>
