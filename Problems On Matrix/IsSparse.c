@@ -1,5 +1,5 @@
 /*
-*   Program to check whether matrix is Sparse matrix(contains maximum 0's than 1's)
+*   Program to check whether matrix is Sparse matrix(contains maximum 0's than other numbers)
 *   or not
 */
 #include <stdio.h>
