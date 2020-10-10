@@ -124,7 +124,7 @@ int* EachDiagSum(int *iArr[], int iRow, int iCol)
     }
 
     int i = 0, j = 0, *iSum = NULL, s = 0, x = 0, y = 0;
-    iSum = (int *)malloc(sizeof(int) * (iRow * 2 - 1));
+    iSum = (int *)malloc(sizeof(int) * (iRow + iCol - 1));
     if(iSum == NULL)
     {
         printf("Unable to allocate memory\n");
