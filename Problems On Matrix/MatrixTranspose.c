@@ -23,12 +23,6 @@ int main()
     if (iCol < 0)
         iCol = -iCol;
 
-    if (iRow != iCol)
-    {
-        printf("Number of Rows should match with number of Columns\n");
-        return -1;
-    }
-
     iArr = (int **)malloc(sizeof(int *) * iRow);
     if (iArr == NULL)
     {
@@ -102,51 +96,47 @@ void Transpose(int *iArr[], int iRow, int iCol)
     if (iCol < 0)
         iCol = -iCol;
 
-    if (iRow != iCol)
-    {
-        printf("Number of Rows should match with number of Columns\n");
-        return;
-    }
-
-    int i = 0, j = 0;
-    /* Way 1 
+    int i = 0, j = 0, k = 0, l = 0;
+    /* Way 1  */
     int **iArr2 = NULL;
-    iArr2 = (int **)malloc(sizeof(int *) * iRow);
+    iArr2 = (int **)malloc(sizeof(int *) * iCol);
     if(iArr2 == NULL)
     {
         printf("Unable to allocate memory\n");
         return;
     }
-    for (i = 0; i < iRow; i++)
+    for (i = 0; i < iCol; i++)
     {
-        iArr2[i] = (int *)malloc(sizeof(int) * iCol);
+        iArr2[i] = (int *)malloc(sizeof(int) * iRow);
         if(iArr2[i] == NULL)
         {
             printf("Unable to allocate memory\n");
             return;
         }
-        for (j = 0; j < iCol; j++)
-        {
-            iArr2[i][j] = iArr[j][i];
-        }
     }
-    */
-    //Display Transpose
-    printf("Transpose of matrix is\n");
-    for (i = 0; i < iRow; i++)
+
+    for(i = 0, l = 0; i < iRow; i++, l++)
     {
-        for (j = 0; j < iCol; j++)
+    	for(j = 0, k = 0; j < iCol; k++, j++)
+    	{
+    		iArr2[k][l] = iArr[i][j];
+    	}
+    }
+
+    printf("\nTransposed Matrix:\n");
+    for (i = 0; i < iCol; i++)
+    {
+        for (j = 0; j < iRow; j++)
         {
-            //printf("%-3d", iArr2[i][j]);
             printf("%-3d", iArr[j][i]);
         }
         printf("\n");
     }
-
-    /* Deallocate
+    
+    /* Deallocate */
     for (i = 0; i < iRow; i++)
     {
         free(iArr2[i]);
     }
-    free(iArr2);*/
+    free(iArr2);
 }
