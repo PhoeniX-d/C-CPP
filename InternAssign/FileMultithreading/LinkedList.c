@@ -13,15 +13,16 @@
 int CountEls(PNODE First)
 {
     int iCnt = 0;
-    if (First == NULL)
+    if (NULL == First->npNext)
     {
-        printf("Linked List is NULL\n");
+        printf("Error code %d : Linked List is Empty occured in CountEls()\n", GetLastError());
         return iCnt;
     }
-    while (First != NULL)
+    PNODE pTemp = First->npNext;
+    while (pTemp != NULL)
     {
         iCnt++;
-        First = First->npNext;
+        pTemp = pTemp->npNext;
     }
     return iCnt;
 } // end of CountEls()
@@ -29,39 +30,38 @@ int CountEls(PNODE First)
 ////////////////////////////////////////////////////////////
 //
 //  Name        :InsertLast
-//  Input       :PPNODE, int
+//  Input       :PNODE, int
 //  Returns     :void
 //  Description :Insert element at last position
 //  Author      :Pranav Choudhary
 //  Date        :12 Oct 2020
 //
 ////////////////////////////////////////////////////////////
-void InsertLast(PPNODE First, PCHAR szBuffer)
+void InsertLast(PNODE First, PCHAR szBuffer)
 {
-    //printf("Inside InsertLast\n");
     PNODE newN = (PNODE)malloc(sizeof(NODE));
     if (newN == NULL)
     {
-        printf("Unable to allocate memory in InsertLast()\n");
+        printf("Error code %d : Memory Allocation Failed occured in InsertLast()\n", GetLastError());
         return;
     }
     newN->npNext = NULL;
     newN->szData = (PCHAR)malloc(sizeof(CHAR) * strlen(szBuffer) + 1);
     if (newN->szData == NULL)
     {
-        printf("Memory Allocation Failed");
+        printf("Error code %d : Memory Allocation Failed occured in InsertLast()\n", GetLastError());
         return;
     }
     memset(newN->szData, 0, strlen(szBuffer) + 1);
     strcpy(newN->szData, szBuffer);
 
-    if (*First == NULL)
+    if (NULL == First->npNext)
     {
-        *First = newN;
+        First->npNext = newN;
     }
     else
     {
-        PNODE nTemp = *First;
+        PNODE nTemp = First->npNext;
         while (nTemp->npNext != NULL)
         {
             nTemp = nTemp->npNext;
@@ -73,28 +73,31 @@ void InsertLast(PPNODE First, PCHAR szBuffer)
 ////////////////////////////////////////////////////////////
 //
 //  Name        :Deallocate
-//  Input       :PPNODE
+//  Input       :PNODE
 //  Returns     :void
 //  Description :Deallocates all nodes in linked list
 //  Author      :Pranav Choudhary
 //  Date        :12 Oct 2020
 //
 ////////////////////////////////////////////////////////////
-void Deallocate(PPNODE First)
+void Deallocate(PNODE First)
 {
     if (First == NULL)
     {
-        printf("Linked List is NULL\n");
+        printf("Error code %d : Linked List is Empty occured in Deallocate()\n", GetLastError());
         return;
     }
 
-    PNODE nTemp = NULL;
-    while (*First != NULL)
+    PNODE nTemp = First->npNext;
+    PNODE nTarget = NULL;
+    while (nTemp != NULL)
     {
-        nTemp = *First;
-        *First = nTemp->npNext;
-        free(nTemp);
+        nTarget = nTemp;
+        nTemp = nTarget->npNext;
+        free(nTarget);
     }
+    First->npNext = NULL;
+    First->szData = NULL;
 } // end of Deallocate()
 
 ////////////////////////////////////////////////////////////
@@ -109,43 +112,44 @@ void Deallocate(PPNODE First)
 ////////////////////////////////////////////////////////////
 void DisplayList(PNODE First)
 {
-    if (First == NULL)
+    if (NULL == First->npNext)
     {
-        printf("Linked List is NULL\n");
+        printf("Error code %d : Linked List is Empty occured in DisplayList()\n", GetLastError());
         return;
     }
-    while (First != NULL)
+    PNODE nTemp = First->npNext;
+    while (nTemp != NULL)
     {
-        printf("%s\n", First->szData);
-        First = First->npNext;
+        printf("%s\n", nTemp->szData);
+        nTemp = nTemp->npNext;
     }
 } // end of DisplayList()
 
 ////////////////////////////////////////////////////////////
 //
 //  Name        :InsertFirst
-//  Input       :PPNODE, int
+//  Input       :PNODE, int
 //  Returns     :void
 //  Description :Insert element at first position
 //  Author      :Pranav Choudhary
 //  Date        :12 Oct 2020
 //
 ////////////////////////////////////////////////////////////
-void InsertFirst(PPNODE First, PCHAR szBuffer)
+void InsertFirst(PNODE First, PCHAR szBuffer)
 {
     PNODE newN = NULL;
     newN = (PNODE)malloc(sizeof(NODE));
 
     if (NULL == newN)
     {
-        printf("Memory Allocation Failed");
+        printf("Error code %d : Memory Allocation Failed occured in InsertFirst()\n", GetLastError());
         return;
     }
 
     newN->szData = (PCHAR)malloc(sizeof(CHAR) * strlen(szBuffer) + 1);
     if (newN->szData == NULL)
     {
-        printf("Memory Allocation Failed");
+        printf("Error code %d : Memory Allocation Failed occured in InsertFirst()\n", GetLastError());
         return;
     }
     memset(newN->szData, 0, strlen(szBuffer) + 1);
@@ -153,38 +157,38 @@ void InsertFirst(PPNODE First, PCHAR szBuffer)
     newN->npNext = NULL;
 
     /* If Linked List is empty */
-    if (*First == NULL)
+    if (NULL == First->npNext)
     {
-        *First = newN;
+        First->npNext = newN;
     }
     else
     {
-        newN->npNext = *First;
-        *First = newN;
+        newN->npNext = First->npNext;
+        First->npNext = newN;
     }
 } // End of InsertFirst()
 
 ////////////////////////////////////////////////////////////
 //
 //  Name        :DeleteFirst
-//  Input       :PPNODE
+//  Input       :PNODE
 //  Returns     :void
 //  Description :Deletes element at first position
 //  Author      :Pranav Choudhary
 //  Date        :12 Oct 2020
 //
 ////////////////////////////////////////////////////////////
-void DeleteFirst(PPNODE First)
+void DeleteFirst(PNODE First)
 {
-    if (NULL == *First)
+    if (NULL == First->npNext)
     {
-        printf("Linked List is already empty\n");
+        printf("Error : Linked List is already empty occured inf DeleteFirst()\n");
         return;
     }
     else
     {
-        PNODE nTemp = *First;
-        *First = nTemp->npNext;
+        PNODE nTemp = First->npNext;
+        First->npNext = nTemp->npNext;
         free(nTemp);
     }
 } // End of DeleteFirst()
@@ -192,28 +196,29 @@ void DeleteFirst(PPNODE First)
 ////////////////////////////////////////////////////////////
 //
 //  Name        :DeleteLast
-//  Input       :PPNODE
+//  Input       :PNODE
 //  Returns     :void
 //  Description :deletes element at last position
 //  Author      :Pranav Choudhary
 //  Date        :12 Oct 2020
 //
 ////////////////////////////////////////////////////////////
-void DeleteLast(PPNODE First)
+void DeleteLast(PNODE First)
 {
-    if (*First == NULL)
+    if (NULL == First->npNext)
     {
-        printf("Linked List is Empty\n");
+        printf("Error : Linked List is Empty occured in DeleteLast\n");
         return;
     }
-    else if ((*First)->npNext == NULL)
+    else if ((First->npNext)->npNext == NULL)
     {
-        free(*First);
-        *First = NULL;
+        free(First->npNext);
+        First->npNext = NULL;
+        First->szData = NULL;
     }
     else
     {
-        PNODE nTemp = *First;
+        PNODE nTemp = First->npNext;
         while ((nTemp->npNext)->npNext != NULL)
         {
             nTemp = nTemp->npNext;
@@ -227,19 +232,19 @@ void DeleteLast(PPNODE First)
 ////////////////////////////////////////////////////////////
 //
 //  Name        :InsertAtPos
-//  Input       :PPNODE, int, int
+//  Input       :PNODE, int, int
 //  Returns     :void
 //  Description :Insert element at desired position
 //  Author      :Pranav Choudhary
 //  Date        :12 Oct 2020
 //
 ////////////////////////////////////////////////////////////
-void InsertAtPos(PPNODE First, PCHAR szBuffer, int iPos)
+void InsertAtPos(PNODE First, PCHAR szBuffer, int iPos)
 {
-    int iSize = CountEls(*First);
+    int iSize = CountEls(First);
     if (iPos > iSize + 1 || iPos < 1)
     {
-        printf("Invalid Position Entered\n");
+        printf("Error : Invalid Position Entered occured in InsertAtPos()\n");
     }
     else if (iPos == 1)
     {
@@ -252,19 +257,19 @@ void InsertAtPos(PPNODE First, PCHAR szBuffer, int iPos)
     else
     {
         PNODE newN = NULL;
-        PNODE nTemp = *First;
+        PNODE nTemp = First->npNext;
         int i = 0;
         newN = (PNODE)malloc(sizeof(NODE));
         if (NULL == newN)
         {
-            printf("Memory Allocation Failed");
+            printf("Error code %d : Memory Allocation Failed occured in InsertAtPos()\n", GetLastError());
             return;
         }
 
         newN->szData = (PCHAR)malloc(sizeof(CHAR) * strlen(szBuffer) + 1);
         if (newN->szData == NULL)
         {
-            printf("Memory Allocation Failed");
+            printf("Error code %d : Memory Allocation Failed occured in InsertAtPos()\n", GetLastError());
             return;
         }
 
@@ -284,19 +289,19 @@ void InsertAtPos(PPNODE First, PCHAR szBuffer, int iPos)
 ////////////////////////////////////////////////////////////
 //
 //  Name        :DeleteAtPos
-//  Input       :PPNODE, int
+//  Input       :PNODE, int
 //  Returns     :void
 //  Description :Deletes element from desired position
 //  Author      :Pranav Choudhary
 //  Date        :12 Oct 2020
 //
 ////////////////////////////////////////////////////////////
-void DeleteAtPos(PPNODE First, int iPos)
+void DeleteAtPos(PNODE First, int iPos)
 {
-    int iSize = CountEls(*First);
-    if (iPos > iSize || iPos < 1 || NULL == *First)
+    int iSize = CountEls(First);
+    if (iPos > iSize || iPos < 1 || NULL == First)
     {
-        printf("Invalid Position Entered or Linked list is empty\n");
+        printf("Error : Invalid Position Entered or Linked list is empty occured in DeleteAtPos()\n");
     }
     else if (iPos == 1)
     {
@@ -308,7 +313,7 @@ void DeleteAtPos(PPNODE First, int iPos)
     }
     else
     {
-        PNODE nTemp = *First;
+        PNODE nTemp = First->npNext;
         PNODE nTarget = NULL;
         int i = 0;
 

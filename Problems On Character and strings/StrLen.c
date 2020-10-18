@@ -38,7 +38,7 @@ int StrLen(const char *cSrc)
         return -1;
     }
     int iLen = 0;
-    char *cTemp = cSrc;
+    const char *cTemp = cSrc;
     while(*cTemp != '\0')
     {
         iLen++;
