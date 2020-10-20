@@ -1,43 +1,62 @@
 #include "LinkedList.h"
 
-CRITICAL_SECTION CriticalSection;
-DWORD WINAPI ThreadProc(LPVOID);
 typedef struct parameters
 {
-    NODE Head;
+    PNODE Head;
     HANDLE hFile;
     int i;
-} PARAM;
+} PARAM, * PPARAM;
+
+CRITICAL_SECTION CriticalSection;
+DWORD WINAPI ThreadProc(LPVOID);
 
 int main()
-{
+{   
     PARAM pr;
-    ZeroMemory((void *)&pr, sizeof(pr));
     int iCnt = 0;
-    HANDLE hThread[10] = {NULL};
+    HANDLE hThread[10] = { NULL };
     DWORD dwEvent = 0;
+    DWORD dwThreadEC = 0;
+
+    // code 
+    /* Cleans the structures memory */
+    ZeroMemory((void*)&pr, sizeof(pr));
+
+    InitializeHead(&(pr.Head));
 
     // Initialize the critical section one time only.
     InitializeCriticalSection(&CriticalSection);
 
+    // Get File handle
     pr.hFile = CreateFile(TEXT("FileGen.txt"), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
     if (pr.hFile == INVALID_HANDLE_VALUE)
     {
         printf("Error code %d : Unable to open file\n", GetLastError());
         return (-1);
     }
+
+    // Create Threads
     for (iCnt = 0; iCnt < 10; iCnt++)
     {
-        pr.i = iCnt;
-        //printf("Offset = %ld\n", pr.i);
-        hThread[iCnt] = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)ThreadProc, (LPVOID)&pr, 0, NULL);
+        PPARAM param = (PPARAM)malloc(sizeof(PARAM));
+        if (param == NULL)
+        {
+            printf("Error code %d : Unable to allocate memory in main\n", GetLastError());
+            return (1);
+        }
+        param->i = iCnt;
+        param->Head = pr.Head;
+        param->hFile = pr.hFile;
+
+        hThread[iCnt] = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)ThreadProc, (LPVOID)param, 0, NULL);
         if (hThread[iCnt] == NULL)
         {
             printf("Error Code %d : Unable to create thread\n", GetLastError());
             return (-1);
         }
-        //WaitForSingleObject(hThread[i], INFINITE);
     }
+
+    // Wait untill all finished
     dwEvent = WaitForMultipleObjects(10, hThread, TRUE, INFINITE);
     if (dwEvent == WAIT_FAILED)
     {
@@ -47,12 +66,19 @@ int main()
     // Close file HANDLE
     CloseHandle(pr.hFile);
 
+    SortList(pr.Head);
+
     // Display the linked list
-    DisplayList(&(pr.Head));
+    DisplayList((pr.Head));
 
     // Close hThread HANDLES
     for (iCnt = 0; iCnt < 10; iCnt++)
     {
+        if (GetExitCodeThread(hThread[iCnt], &dwThreadEC) == 0)
+        {
+            printf("Error code %d : while GetExitCodeThread()\n", GetLastError());
+            ExitThread(dwThreadEC);
+        }
         CloseHandle(hThread[iCnt]);
     }
 
@@ -60,11 +86,11 @@ int main()
     DeleteCriticalSection(&CriticalSection);
 
     // Display total number if nodes in a linked list
-    printf("Total nodes in List\t:%d\n", CountEls(&(pr.Head)));
-    
+    //printf("Total nodes in List\t:%d\n", CountEls((pr.Head)));
+
     // Deallocate whole linked list
-    Deallocate(&(pr.Head));
-    
+    Deallocate((pr.Head));
+    UninitializeHead(&(pr.Head));
     return (0);
 }
 
@@ -72,8 +98,7 @@ DWORD WINAPI ThreadProc(LPVOID lParam)
 {
     DWORD dwRead = 0;
     PCHAR szBuffer = (PCHAR)malloc(BLOCKSIZE + 1);
-    PARAM *param = (PARAM *)lParam;
-    static int i = 0;
+    PPARAM param = (PPARAM)lParam;
     if (szBuffer == NULL)
     {
         printf("Error code %d : Unable to allocate memory in ThreadProc\n", GetLastError());
@@ -84,16 +109,14 @@ DWORD WINAPI ThreadProc(LPVOID lParam)
     // Request ownership of the critical section.
     EnterCriticalSection(&CriticalSection);
 
-    if (SetFilePointer(param->hFile, i * BLOCKSIZE, NULL, FILE_BEGIN) == INVALID_SET_FILE_POINTER)
+    if (SetFilePointer(param->hFile, (param->i) * BLOCKSIZE, NULL, FILE_BEGIN) == INVALID_SET_FILE_POINTER)
     {
         printf("Error code : %d , Invalid set file pointer\n", GetLastError());
         LeaveCriticalSection(&CriticalSection);
         memset(szBuffer, 0, BLOCKSIZE);
         free(szBuffer);
-        ExitThread(0);
+        return (1);
     }
-   
-    i++;
 
     if (ReadFile(param->hFile, szBuffer, BLOCKSIZE, &dwRead, NULL) == FALSE)
     {
@@ -102,11 +125,11 @@ DWORD WINAPI ThreadProc(LPVOID lParam)
         LeaveCriticalSection(&CriticalSection);
         memset(szBuffer, 0, BLOCKSIZE);
         free(szBuffer);
-        ExitThread(0);
+        return (1);
     }
 
     // Add node to linked list
-    InsertLast(&(param->Head), szBuffer);
+    InsertLast(param->Head, szBuffer, param->i);
 
     // Release ownership of the critical section.
     LeaveCriticalSection(&CriticalSection);
