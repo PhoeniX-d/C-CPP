@@ -59,7 +59,6 @@ int WordCnt(const char *cStr)
             }
             iCnt++;
         }
-        cStr++; 
     }
     return iCnt;
 }
