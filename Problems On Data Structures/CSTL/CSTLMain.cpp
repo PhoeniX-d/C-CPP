@@ -17,8 +17,8 @@ int main()
 	GEN_QUEUE<double> qdobj;
 
 	//Objects of GEN_STACK Class
-	GEN_STACK<float> siobj;
-	GEN_STACK<char> scobj;
+	GEN_STACK<float> siobj(10);
+	GEN_STACK<char> scobj(5);
 
 	//Objects of GEN_PRI_QUEUE Class
 	GEN_PRI_QUEUE<int> pqiobj;
@@ -251,3 +251,5 @@ int main()
 	}
 	return 0;
 }
+
+/////////////////////////////////////////////// End of CSTLMain.cpp ///////////////////////////////////////

@@ -15,115 +15,80 @@
 
 #include "CSTL.h"
 
-///////////////////////////////////////////////////////////////////////
-//
-//	ClassName 		:GEN_SLLL
-//	Description		:This is class designed for Singly linear linked list
-//	Author			:Pranav Choudhary
-///////////////////////////////////////////////////////////////////////
+template <class T>
+bool operator==(GEN_SLLL<T> &op1, GEN_SLLL<T> &op2) //Compares Linked List For Equality
+{
+	struct node<T> *temp1 = op1.Head;
+	struct node<T> *temp2 = op2.Head;
 
-//Generic Class For Singly Linear Linked List
+	while ((temp1 != NULL) && (temp2 != NULL))
+	{
+		if (temp1->Data != temp2->Data)
+		{
+			break;
+		}
+		temp1 = temp1->Next;
+		temp2 = temp2->Next;
+	}
+	if ((temp1 == NULL) && (temp2 == NULL))
+	{
+		return TRUE;
+	}
+	else
+	{
+		return FALSE;
+	}
+}
 
 template <class T>
-class GEN_SLLL : protected Linked_List<T>
+bool operator>(GEN_SLLL<T> &op1, GEN_SLLL<T> &op2) //Check For Greater than
 {
-private:
-	struct node<T> *Head; //Start Pointer
-	struct node<T> *Tail; //End  Pointer
-	int size;
+	struct node<T> *temp1 = op1.Head;
+	struct node<T> *temp2 = op2.Head;
 
-public:
-	GEN_SLLL();
-	~GEN_SLLL();
-	void InsertFirst(T);
-	void InsertLast(T);
-	void InsertAtPos(T, int);
-	inline void Display();
-	inline void DisplayR();
-	inline int Count();
-	void DeleteFirst();
-	void DeleteLast();
-	void DeleteAtPos(int);
-	int Frequency(T);
-	int FirstOccurance(T);
-	int LastOccurance(T);
-	T Largest();
-	T Smallest();
-	void ReverseList();
-	void Concat(GEN_SLLL<T> &op1, GEN_SLLL<T> &op2);
-
-	friend bool operator==(GEN_SLLL<T> &op1, GEN_SLLL<T> &op2) //Compares Linked List For Equality
+	while ((temp1 != NULL) && (temp2 != NULL))
 	{
-		struct node<T> *temp1 = op1.Head;
-		struct node<T> *temp2 = op2.Head;
-
-		while ((temp1 != NULL) && (temp2 != NULL))
+		if ((temp1->Data) < (temp2->Data))
 		{
-			if (temp1->Data != temp2->Data)
-			{
-				break;
-			}
-			temp1 = temp1->Next;
-			temp2 = temp2->Next;
+			break;
 		}
-		if ((temp1 == NULL) && (temp2 == NULL))
-		{
-			return TRUE;
-		}
-		else
-		{
-			return FALSE;
-		}
+		temp1 = temp1->Next;
+		temp2 = temp2->Next;
 	}
-
-	friend bool operator>(GEN_SLLL<T> &op1, GEN_SLLL<T> &op2) //Check For Greater than
+	if ((temp1 == NULL) && (temp2 == NULL))
 	{
-		struct node<T> *temp1 = op1.Head;
-		struct node<T> *temp2 = op2.Head;
-
-		while ((temp1 != NULL) && (temp2 != NULL))
-		{
-			if ((temp1->Data) < (temp2->Data))
-			{
-				break;
-			}
-			temp1 = temp1->Next;
-			temp2 = temp2->Next;
-		}
-		if ((temp1 == NULL) && (temp2 == NULL))
-		{
-			return TRUE;
-		}
-		else
-		{
-			return FALSE;
-		}
+		return TRUE;
 	}
-
-	friend bool operator<(GEN_SLLL<T> &op1, GEN_SLLL<T> &op2) //Check for Less Than
+	else
 	{
-		struct node<T> *temp1 = op1.Head;
-		struct node<T> *temp2 = op2.Head;
-
-		while ((temp1 != NULL) && (temp2 != NULL))
-		{
-			if ((temp1->Data) > (temp2->Data))
-			{
-				break;
-			}
-			temp1 = temp1->Next;
-			temp2 = temp2->Next;
-		}
-		if ((temp1 == NULL) && (temp2 == NULL))
-		{
-			return TRUE;
-		}
-		else
-		{
-			return FALSE;
-		}
+		return FALSE;
 	}
-};
+}
+
+template <class T>
+bool operator<(GEN_SLLL<T> &op1, GEN_SLLL<T> &op2) //Check for Less Than
+{
+	struct node<T> *temp1 = op1.Head;
+	struct node<T> *temp2 = op2.Head;
+
+	while ((temp1 != NULL) && (temp2 != NULL))
+	{
+		if ((temp1->Data) > (temp2->Data))
+		{
+			break;
+		}
+		temp1 = temp1->Next;
+		temp2 = temp2->Next;
+	}
+	if ((temp1 == NULL) && (temp2 == NULL))
+	{
+		return TRUE;
+	}
+	else
+	{
+		return FALSE;
+	}
+}
 
 template <class T>
 GEN_SLLL<T>::GEN_SLLL() //CONSTRUCTOR
@@ -137,17 +102,17 @@ template <class T>
 GEN_SLLL<T>::~GEN_SLLL() //DESTRUCTOR
 {
 	printf("Inside Destructor");
-    if(Head != NULL)
-    {
-        struct node<T> *nTemp = NULL;
-        while(Head != NULL)
-        {
-            nTemp = Head;
-            Head = Head->Next;
-            delete nTemp;
-            size--;
-        }
-    }
+	if (Head != NULL)
+	{
+		struct node<T> *nTemp = NULL;
+		while (Head != NULL)
+		{
+			nTemp = Head;
+			Head = Head->Next;
+			delete nTemp;
+			size--;
+		}
+	}
 }
 
 template <class T>
@@ -487,135 +452,104 @@ void GEN_SLLL<T>::Concat(GEN_SLLL<T> &op1, GEN_SLLL<T> &op2) ////GENERIC FUNCTIO
 	}
 }
 
-///////////////////////////////////////////////////////////////////////
-//
-//	ClassName 		:GEN_SCLL
-//	Description		:This is class designed Singly Circular linked list
-//	Author			:Pranav Choudhary
-///////////////////////////////////////////////////////////////////////
 
 template <class T>
-class GEN_SCLL : protected Linked_List<T>
+bool operator==(GEN_SCLL<T> &op1, GEN_SCLL<T> &op2) //Compares Linked List For Equality
 {
-private:
-	struct node<T> *Head;
-	struct node<T> *Tail;
-	T size;
+	struct node<T> *temp1 = op1.Head;
+	struct node<T> *temp2 = op2.Head;
 
-public:
-	GEN_SCLL();
-	~GEN_SCLL();
-
-	void InsertFirst(T);
-	void InsertLast(T);
-	void InsertAtPos(T, int);
-	void DeleteFirst();
-	void DeleteLast();
-	void DeleteAtPos(int);
-	void Display();
-	int Frequency(T);
-	int FirstOccurance(T);
-	int LastOccurance(T);
-	T Largest();
-	T Smallest();
-	int Count();
-	void Concat(GEN_SCLL<T> &op1, GEN_SCLL<T> &op2);
-
-	friend bool operator==(GEN_SCLL<T> &op1, GEN_SCLL<T> &op2) //Compares Linked List For Equality
+	if ((temp1 == NULL) || (temp2 == NULL))
 	{
-		struct node<T> *temp1 = op1.Head;
-		struct node<T> *temp2 = op2.Head;
-
-		if ((temp1 == NULL) || (temp2 == NULL))
-		{
-			cout << "Can't Compare\n";
-			return FALSE;
-		}
-
-		do
-		{
-			if (temp1->Data != temp2->Data)
-			{
-				break;
-			}
-
-			temp1 = temp1->Next;
-			temp2 = temp2->Next;
-
-		} while ((temp1 != op1.Tail->Next) && (temp2 != op2.Tail->Next));
-
-		if ((temp1 == op1.Tail->Next) && (temp2 == op2.Tail->Next))
-		{
-			return TRUE;
-		}
-		else
-		{
-			return FALSE;
-		}
+		cout << "Can't Compare\n";
+		return FALSE;
 	}
 
-	friend bool operator>(GEN_SCLL<T> &op1, GEN_SCLL<T> &op2) //Check For Greater than
+	do
 	{
-		struct node<T> *temp1 = op1.Head;
-		struct node<T> *temp2 = op2.Head;
-
-		if ((temp1 == NULL) || (temp2 == NULL))
+		if (temp1->Data != temp2->Data)
 		{
-			cout << "Can't Compare\n";
-			return FALSE;
+			break;
 		}
 
-		do
-		{
-			if ((temp1->Data) < (temp2->Data))
-			{
-				break;
-			}
-			temp1 = temp1->Next;
-			temp2 = temp2->Next;
-		} while ((temp1 != op1.Tail->Next) && (temp2 != op2.Tail->Next));
+		temp1 = temp1->Next;
+		temp2 = temp2->Next;
 
-		if ((temp1 == NULL) && (temp2 == NULL))
-		{
-			return TRUE;
-		}
-		else
-		{
-			return FALSE;
-		}
+	} while ((temp1 != op1.Tail->Next) && (temp2 != op2.Tail->Next));
+
+	if ((temp1 == op1.Tail->Next) && (temp2 == op2.Tail->Next))
+	{
+		return TRUE;
+	}
+	else
+	{
+		return FALSE;
+	}
+}
+
+template <class T>
+bool operator>(GEN_SCLL<T> &op1, GEN_SCLL<T> &op2) //Check For Greater than
+{
+	struct node<T> *temp1 = op1.Head;
+	struct node<T> *temp2 = op2.Head;
+
+	if ((temp1 == NULL) || (temp2 == NULL))
+	{
+		cout << "Can't Compare\n";
+		return FALSE;
 	}
 
-	friend bool operator<(GEN_SCLL<T> &op1, GEN_SCLL<T> &op2) //Check for Less Than
+	do
 	{
-		struct node<T> *temp1 = op1.Head;
-		struct node<T> *temp2 = op2.Head;
-
-		if ((temp1 == NULL) || (temp2 == NULL))
+		if ((temp1->Data) < (temp2->Data))
 		{
-			cout << "Can't Compare\n";
-			return FALSE;
+			break;
 		}
+		temp1 = temp1->Next;
+		temp2 = temp2->Next;
+	} while ((temp1 != op1.Tail->Next) && (temp2 != op2.Tail->Next));
 
-		do
-		{
-			if ((temp1->Data) > (temp2->Data))
-			{
-				break;
-			}
-			temp1 = temp1->Next;
-			temp2 = temp2->Next;
-		} while ((temp1 != op1.Tail->Next) && (temp2 != op2.Tail->Next));
-
-		if ((temp1 == op1.Tail->Next) && (temp2 == op2.Tail->Next))
-		{
-			return TRUE;
-		}
-		else
-		{
-			return FALSE;
-		}
+	if ((temp1 == NULL) && (temp2 == NULL))
+	{
+		return TRUE;
 	}
-};
+	else
+	{
+		return FALSE;
+	}
+}
+
+template <class T>
+bool operator<(GEN_SCLL<T> &op1, GEN_SCLL<T> &op2) //Check for Less Than
+{
+	struct node<T> *temp1 = op1.Head;
+	struct node<T> *temp2 = op2.Head;
+
+	if ((temp1 == NULL) || (temp2 == NULL))
+	{
+		cout << "Can't Compare\n";
+		return FALSE;
+	}
+
+	do
+	{
+		if ((temp1->Data) > (temp2->Data))
+		{
+			break;
+		}
+		temp1 = temp1->Next;
+		temp2 = temp2->Next;
+	} while ((temp1 != op1.Tail->Next) && (temp2 != op2.Tail->Next));
+
+	if ((temp1 == op1.Tail->Next) && (temp2 == op2.Tail->Next))
+	{
+		return TRUE;
+	}
+	else
+	{
+		return FALSE;
+	}
+}
 
 template <class T>
 GEN_SCLL<T>::GEN_SCLL()
@@ -932,115 +866,81 @@ void GEN_SCLL<T>::Concat(GEN_SCLL<T> &op1, GEN_SCLL<T> &op2)
 
 	op1.size = op1.size + op2.size;
 }
-///////////////////////////////////////////////////////////////////////
-//
-//	ClassName 		:GEN_DLLL
-//	Description		:This is class designed for Doubly linear linked list
-//	Author			:Pranav Choudhary
-///////////////////////////////////////////////////////////////////////
-
-//Generic Class For Singly Circular Linked List
 
 template <class T>
-class GEN_DLLL : protected Linked_List<T>
+bool operator==(GEN_DLLL<T> &op1, GEN_DLLL<T> &op2) //Compares Linked List For Equality
 {
-private:
-	struct dnode<T> *Head;
-	struct dnode<T> *Tail;
-	int size;
+	struct dnode<T> *temp1 = op1.Head;
+	struct dnode<T> *temp2 = op2.Head;
 
-public:
-	GEN_DLLL();
-	~GEN_DLLL();
-
-	void InsertFirst(T);
-	void InsertLast(T);
-	void InsertAtPos(T, int);
-	void DeleteFirst();
-	void DeleteLast();
-	void DeleteAtPos(int);
-	inline void Display();
-	inline void DisplayB();
-	inline int Count();
-	int Frequency(T);
-	int FirstOccurance(T);
-	int LastOccurance(T);
-	T Largest();
-	T Smallest();
-	void Concat(GEN_DLLL<T> &op1, GEN_DLLL<T> &op2);
-
-	friend bool operator==(GEN_DLLL<T> &op1, GEN_DLLL<T> &op2) //Compares Linked List For Equality
+	while ((temp1 != NULL) && (temp2 != NULL))
 	{
-		struct dnode<T> *temp1 = op1.Head;
-		struct dnode<T> *temp2 = op2.Head;
-
-		while ((temp1 != NULL) && (temp2 != NULL))
+		if (temp1->Data != temp2->Data)
 		{
-			if (temp1->Data != temp2->Data)
-			{
-				break;
-			}
-			temp1 = temp1->Next;
-			temp2 = temp2->Next;
+			break;
 		}
-		if ((temp1 == NULL) && (temp2 == NULL))
-		{
-			return TRUE;
-		}
-		else
-		{
-			return FALSE;
-		}
+		temp1 = temp1->Next;
+		temp2 = temp2->Next;
 	}
-
-	friend bool operator>(GEN_DLLL<T> &op1, GEN_DLLL<T> &op2) //Check For Greater than
+	if ((temp1 == NULL) && (temp2 == NULL))
 	{
-		struct dnode<T> *temp1 = op1.Head;
-		struct dnode<T> *temp2 = op2.Head;
-
-		while ((temp1 != NULL) && (temp2 != NULL))
-		{
-			if ((temp1->Data) < (temp2->Data))
-			{
-				break;
-			}
-			temp1 = temp1->Next;
-			temp2 = temp2->Next;
-		}
-		if ((temp1 == NULL) && (temp2 == NULL))
-		{
-			return TRUE;
-		}
-		else
-		{
-			return FALSE;
-		}
+		return TRUE;
 	}
-
-	friend bool operator<(GEN_DLLL<T> &op1, GEN_DLLL<T> &op2) //Check for Less Than
+	else
 	{
-		struct dnode<T> *temp1 = op1.Head;
-		struct dnode<T> *temp2 = op2.Head;
-
-		while ((temp1 != NULL) && (temp2 != NULL))
-		{
-			if ((temp1->Data) > (temp2->Data))
-			{
-				break;
-			}
-			temp1 = temp1->Next;
-			temp2 = temp2->Next;
-		}
-		if ((temp1 == NULL) && (temp2 == NULL))
-		{
-			return TRUE;
-		}
-		else
-		{
-			return FALSE;
-		}
+		return FALSE;
 	}
-};
+}
+
+template <class T>
+bool operator>(GEN_DLLL<T> &op1, GEN_DLLL<T> &op2) //Check For Greater than
+{
+	struct dnode<T> *temp1 = op1.Head;
+	struct dnode<T> *temp2 = op2.Head;
+
+	while ((temp1 != NULL) && (temp2 != NULL))
+	{
+		if ((temp1->Data) < (temp2->Data))
+		{
+			break;
+		}
+		temp1 = temp1->Next;
+		temp2 = temp2->Next;
+	}
+	if ((temp1 == NULL) && (temp2 == NULL))
+	{
+		return TRUE;
+	}
+	else
+	{
+		return FALSE;
+	}
+}
+
+template <class T>
+bool operator<(GEN_DLLL<T> &op1, GEN_DLLL<T> &op2) //Check for Less Than
+{
+	struct dnode<T> *temp1 = op1.Head;
+	struct dnode<T> *temp2 = op2.Head;
+
+	while ((temp1 != NULL) && (temp2 != NULL))
+	{
+		if ((temp1->Data) > (temp2->Data))
+		{
+			break;
+		}
+		temp1 = temp1->Next;
+		temp2 = temp2->Next;
+	}
+	if ((temp1 == NULL) && (temp2 == NULL))
+	{
+		return TRUE;
+	}
+	else
+	{
+		return FALSE;
+	}
+}
 
 template <class T>
 GEN_DLLL<T>::GEN_DLLL()
@@ -1372,139 +1272,106 @@ void GEN_DLLL<T>::Concat(GEN_DLLL<T> &op1, GEN_DLLL<T> &op2)
 
 	op1.size = op1.size + op2.size;
 }
-///////////////////////////////////////////////////////////////////////
-//
-//	ClassName 		:GEN_DCLL
-//	Description		:This is class designed for Doubly Circular linked list
-//	Author			:Pranav Choudhary
-///////////////////////////////////////////////////////////////////////
-
-//Generic Class For Doubly Linear Linked List
 
 template <class T>
-class GEN_DCLL : protected Linked_List<T>
+bool operator==(GEN_DCLL<T> &op1, GEN_DCLL<T> &op2) //Compares Linked List For Equality
 {
-private:
-	struct dnode<T> *Head;
-	struct dnode<T> *Tail;
-	int size;
+	struct dnode<T> *temp1 = op1.Head;
+	struct dnode<T> *temp2 = op2.Head;
 
-public:
-	GEN_DCLL();
-	~GEN_DCLL();
-
-	void InsertFirst(T);
-	void InsertLast(T);
-	void InsertAtPos(T, int);
-	void DeleteFirst();
-	void DeleteLast();
-	void DeleteAtPos(int);
-	void Display();
-	void DisplayR();
-	int Count();
-	int Frequency(T);
-	int FirstOccurance(T);
-	int LastOccurance(T);
-	T Largest();
-	T Smallest();
-	void Concat(GEN_DCLL<T> &op1, GEN_DCLL<T> &op2);
-	friend bool operator==(GEN_DCLL<T> &op1, GEN_DCLL<T> &op2) //Compares Linked List For Equality
+	if ((temp1 == NULL) || (temp2 == NULL))
 	{
-		struct dnode<T> *temp1 = op1.Head;
-		struct dnode<T> *temp2 = op2.Head;
-
-		if ((temp1 == NULL) || (temp2 == NULL))
-		{
-			cout << "Can't Compare\n";
-			return FALSE;
-		}
-
-		do
-		{
-			if (temp1->Data != temp2->Data)
-			{
-				break;
-			}
-			temp1 = temp1->Next;
-			temp2 = temp2->Next;
-		} while ((temp1 != op1.Tail->Next) && (temp2 != op2.Tail->Next));
-
-		if ((temp1 == op1.Tail->Next) && (temp2 == op2.Tail->Next))
-		{
-			return TRUE;
-		}
-		else
-		{
-			return FALSE;
-		}
+		cout << "Can't Compare\n";
+		return FALSE;
 	}
 
-	friend bool operator>(GEN_DCLL<T> &op1, GEN_DCLL<T> &op2) //Check For Greater than
+	do
 	{
-		struct dnode<T> *temp1 = op1.Head;
-		struct dnode<T> *temp2 = op2.Head;
-
-		if ((temp1 == NULL) || (temp2 == NULL))
+		if (temp1->Data != temp2->Data)
 		{
-			cout << "Can't Compare\n";
-			return FALSE;
+			break;
 		}
+		temp1 = temp1->Next;
+		temp2 = temp2->Next;
+	} while ((temp1 != op1.Tail->Next) && (temp2 != op2.Tail->Next));
 
-		do
-		{
-			if ((temp1->Data) < (temp2->Data))
-			{
-				break;
-			}
+	if ((temp1 == op1.Tail->Next) && (temp2 == op2.Tail->Next))
+	{
+		return TRUE;
+	}
+	else
+	{
+		return FALSE;
+	}
+}
 
-			temp1 = temp1->Next;
-			temp2 = temp2->Next;
-		} while ((temp1 != op1.Tail->Next) && (temp2 != op2.Tail->Next));
+template <class T>
+bool operator>(GEN_DCLL<T> &op1, GEN_DCLL<T> &op2) //Check For Greater than
+{
+	struct dnode<T> *temp1 = op1.Head;
+	struct dnode<T> *temp2 = op2.Head;
 
-		cout << op1.Tail->Data;
-		cout << op1.Tail->Data;
-
-		if ((temp1 == op1.Tail->Next) && (temp2 == op2.Tail->Next))
-		{
-			return TRUE;
-		}
-		else
-		{
-			return FALSE;
-		}
+	if ((temp1 == NULL) || (temp2 == NULL))
+	{
+		cout << "Can't Compare\n";
+		return FALSE;
 	}
 
-	friend bool operator<(GEN_DCLL<T> &op1, GEN_DCLL<T> &op2) //Check for Less Than
+	do
 	{
-		struct dnode<T> *temp1 = op1.Head;
-		struct dnode<T> *temp2 = op2.Head;
-
-		if ((temp1 == NULL) || (temp2 == NULL))
+		if ((temp1->Data) < (temp2->Data))
 		{
-			cout << "Can't Compare\n";
-			return FALSE;
+			break;
 		}
 
-		do
-		{
-			if ((temp1->Data) > (temp2->Data))
-			{
-				break;
-			}
-			temp1 = temp1->Next;
-			temp2 = temp2->Next;
-		} while ((temp1 != op1.Tail->Next) && (temp2 != op2.Tail->Next));
+		temp1 = temp1->Next;
+		temp2 = temp2->Next;
+	} while ((temp1 != op1.Tail->Next) && (temp2 != op2.Tail->Next));
 
-		if ((temp1 == op1.Tail->Next) && (temp2 == op2.Tail->Next))
-		{
-			return TRUE;
-		}
-		else
-		{
-			return FALSE;
-		}
+	cout << op1.Tail->Data;
+	cout << op1.Tail->Data;
+
+	if ((temp1 == op1.Tail->Next) && (temp2 == op2.Tail->Next))
+	{
+		return TRUE;
 	}
-};
+	else
+	{
+		return FALSE;
+	}
+}
+
+template <class T>
+bool operator<(GEN_DCLL<T> &op1, GEN_DCLL<T> &op2) //Check for Less Than
+{
+	struct dnode<T> *temp1 = op1.Head;
+	struct dnode<T> *temp2 = op2.Head;
+
+	if ((temp1 == NULL) || (temp2 == NULL))
+	{
+		cout << "Can't Compare\n";
+		return FALSE;
+	}
+
+	do
+	{
+		if ((temp1->Data) > (temp2->Data))
+		{
+			break;
+		}
+		temp1 = temp1->Next;
+		temp2 = temp2->Next;
+	} while ((temp1 != op1.Tail->Next) && (temp2 != op2.Tail->Next));
+
+	if ((temp1 == op1.Tail->Next) && (temp2 == op2.Tail->Next))
+	{
+		return TRUE;
+	}
+	else
+	{
+		return FALSE;
+	}
+}
 
 template <class T>
 GEN_DCLL<T>::GEN_DCLL()
@@ -1856,102 +1723,6 @@ void GEN_DCLL<T>::Concat(GEN_DCLL<T> &op1, GEN_DCLL<T> &op2) ////GENERIC FUNCTIO
 	op1.size = op1.size + op2.size;
 }
 
-///////////////////////////////////////////////////////////////////////
-//
-//	ClassName 		:GEN_STACK
-//	Description		:This is class designed for Stack
-//	Author			:Pranav Choudhary
-///////////////////////////////////////////////////////////////////////
-
-//Generic Class For Stack
-
-template <typename T>
-class GEN_STACK
-{
-private:
-	struct snode<T> *Head;
-
-public:
-	GEN_STACK()
-	{
-		Head = NULL;
-	}
-	void Push(T tVal)
-	{
-		struct snode<T> *newn = NULL;
-		newn = new struct snode<T>;
-		newn->next = NULL;
-		newn->data = tVal;
-
-		if (Head == NULL)
-		{
-			Head = newn;
-		}
-		else
-		{
-			newn->next = Head;
-			Head = newn;
-		}
-	}
-	T Pop()
-	{
-		if (Head == NULL)
-		{
-			cout << "\nSTACK UnderFlow\n";
-			return (T)-1;
-		}
-		else
-		{
-			T temp = Head->data;
-			struct snode<T> *p = Head;
-			Head = Head->next;
-			delete p;
-			return temp;
-		}
-	}
-	void Display()
-	{
-		struct snode<T> *temp = Head;
-		while (temp != NULL)
-		{
-			cout << temp->data << "\t";
-			temp = temp->next;
-		}
-	}
-};
-
-///////////////////////////////////////////////////////////////////////
-//
-//	ClassName 		:GEN_QUEUE
-//	Description		:This is class designed for Queue
-//	Author			:Pranav Choudhary
-///////////////////////////////////////////////////////////////////////
-
-//Generic Class For Queue
-
-template <class T>
-struct Node
-{
-	T Data;
-	struct Node *Next;
-};
-
-template <class T>
-class GEN_QUEUE
-{
-private:
-	struct Node<T> *Head;
-	struct Node<T> *Tail;
-
-public:
-	GEN_QUEUE();
-	~GEN_QUEUE();
-	void Enqueue(T);
-	T Dequeue();
-	void Display();
-	int Count();
-};
-
 template <class T>
 GEN_QUEUE<T>::GEN_QUEUE()
 {
@@ -2043,32 +1814,6 @@ int GEN_QUEUE<T>::Count()
 	}
 	return iCnt;
 }
-
-//////////////////////////////////////////////////////////////
-//
-//	ClassName 		:GEN_PRI_QUEUE
-//	Description		:This is class designed for priority queue
-//	Author			:Pranav Choudhary
-//////////////////////////////////////////////////////////////
-
-//Generic Class For Priority Queue
-
-template <class T>
-class GEN_PRI_QUEUE
-{
-private:
-	struct qnode<T> *Front;
-	struct qnode<T> *Rear;
-	int size;
-
-public:
-	GEN_PRI_QUEUE();
-	~GEN_PRI_QUEUE();
-	void Enqueue(T, int);
-	T Dequeue();
-	void Display();
-	int Count();
-};
 
 template <class T>
 GEN_PRI_QUEUE<T>::GEN_PRI_QUEUE()
@@ -2204,47 +1949,156 @@ int GEN_PRI_QUEUE<T>::Count()
 {
 	return size;
 }
-
-///////////////////////////////////////////////////////////////////
-//	ClassName 		:GEN_TREE
-//	Description		:This is class designed for Binary Search Tree
-//	Author			:Pranav Choudhary
-///////////////////////////////////////////////////////////////////
-
-template <class T>
-class GEN_TREE
+ ////////////////////////////////////////////////////////////
+//
+//  Name        :GEN_STACK
+//  Input       :int
+//  Returns     :   -
+//  Description :constructor
+//  Author      :Pranav Choudhary
+//  Date        :6 Sept 2020
+//
+////////////////////////////////////////////////////////////
+template<class T>
+GEN_STACK<T>::GEN_STACK(int iNum) 
 {
-private:
-	struct tnode<T> *Head;
+    this->iSize = iNum;
+    this->iTop = -1;
+    this->Arr = new T[this->iSize];
+}// end of constructor
 
-	void Insert(struct tnode<T> **, T);
-	void Inorder(struct tnode<T> *);
-	void Preorder(struct tnode<T> *);
-	void Postorder(struct tnode<T> *);
-	int Count(struct tnode<T> *);
-	bool Search(struct tnode<T> *, T);
-	void DeleteGEN_TREE(struct tnode<T> *);
-	int CountLeaf(struct tnode<T> *);
-	int CountNonLeaf(struct tnode<T> *);
-	int Level(struct tnode<T> *, T);
-	T Minimum(struct tnode<T> *);
-	T Maximum(struct tnode<T> *);
+////////////////////////////////////////////////////////////
+//
+//  Name        :~GEN_STACK
+//  Input       :   -
+//  Returns     :   -
+//  Description :destructor
+//  Author      :Pranav Choudhary
+//  Date        :6 Sept 2020
+//
+////////////////////////////////////////////////////////////
+template<class T>
+GEN_STACK<T>::~GEN_STACK()
+{
+   delete[] Arr;
+}// end of destructor
 
-public:
-	GEN_TREE();
-	void Insert(T);
-	void Inorder();
-	void Preorder();
-	void Postorder();
-	int Count();
-	bool Search(T);
-	void DeleteGEN_TREE();
-	int CountLeaf();
-	int CountNonLeaf();
-	int Level(T);
-	T Minimum();
-	T Maximum();
-};
+////////////////////////////////////////////////////////////
+//
+//  Name        :IsEmpty
+//  Input       :void
+//  Returns     :bool
+//  Description :Check whether stack is empty or not
+//  Author      :Pranav Choudhary
+//  Date        :6 Sept 2020
+//
+////////////////////////////////////////////////////////////
+template<class T>
+bool GEN_STACK<T>::IsEmpty()
+{
+    if(this->iTop == -1)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }    
+}// end of IsEmpty
+
+////////////////////////////////////////////////////////////
+//
+//  Name        :IsFull
+//  Input       :void
+//  Returns     :bool
+//  Description :Check whether stack is full or not
+//  Author      :Pranav Choudhary
+//  Date        :6 Sept 2020
+//
+////////////////////////////////////////////////////////////
+template<class T>
+bool GEN_STACK<T>::IsFull()
+{
+    if(this->iTop == iSize)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }    
+}// end of IsFull
+
+////////////////////////////////////////////////////////////
+//
+//  Name        :Display
+//  Input       :void
+//  Returns     :void
+//  Description :Displays stack elements
+//  Author      :Pranav Choudhary
+//  Date        :6 Sept 2020
+//
+////////////////////////////////////////////////////////////
+template<class T>
+void GEN_STACK<T>::Display()
+{
+    if(IsEmpty())
+    {
+        cout << "Cannot display stack is empty!!\n";
+        return;
+    }
+    int i = 0;
+    cout << "Top--->";
+    for(i = this->iSize -1; i >= 0; i--)
+    {
+        cout << "\t| " << this->Arr[i] << " |" << endl;
+    }
+}// end of Display
+
+////////////////////////////////////////////////////////////
+//
+//  Name        :Push
+//  Input       :int
+//  Returns     :void
+//  Description :Push els in stack
+//  Author      :Pranav Choudhary
+//  Date        :6 Sept 2020
+//
+////////////////////////////////////////////////////////////
+template<class T>
+void GEN_STACK<T>::Push(T tData)
+{
+    if(IsFull())
+    {
+        cout << "Stack is Full\n";
+        return;
+    }
+    this->iTop++;
+    this->Arr[iTop] = tData;
+}// end of Push
+
+////////////////////////////////////////////////////////////
+//
+//  Name        :Pop
+//  Input       :void
+//  Returns     :int
+//  Description :Pop els from stack
+//  Author      :Pranav Choudhary
+//  Date        :6 Sept 2020
+//
+////////////////////////////////////////////////////////////
+template<class T>
+T GEN_STACK<T>::Pop()
+{
+    if(IsEmpty())
+    {
+        cout << "Stack is Empty\n";
+        return T(-1);
+    }
+    T tData = 0;
+    tData = this->Arr[iTop--];
+    return tData;
+}// end of Push
 
 template <class T>
 GEN_TREE<T>::GEN_TREE()
