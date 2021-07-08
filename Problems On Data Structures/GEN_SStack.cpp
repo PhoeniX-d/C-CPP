@@ -7,6 +7,14 @@
 
 using namespace std;
 
+/*
+// Specialization of Library files
+template class SStack<char>;
+template class SStack<int>;
+template class SStack<float>;
+template class SStack<double>;
+*/
+
 /* class SStack */
 template<class T>
 class SStack
